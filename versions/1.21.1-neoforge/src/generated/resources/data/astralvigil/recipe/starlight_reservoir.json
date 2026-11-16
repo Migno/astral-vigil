@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "P": {
+      "tag": "c:glass_blocks"
+    },
+    "S": {
+      "tag": "astralvigil:astral_shards"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PSP",
+    "GPG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:starlight_reservoir"
+  }
+}

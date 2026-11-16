@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "tag": "c:nuggets/gold"
+    },
+    "P": {
+      "tag": "c:glass_panes"
+    },
+    "S": {
+      "tag": "astralvigil:astral_shards"
+    }
+  },
+  "pattern": [
+    "NPN",
+    "PSP",
+    "NPN"
+  ],
+  "result": {
+    "count": 2,
+    "id": "astralvigil:lens"
+  }
+}

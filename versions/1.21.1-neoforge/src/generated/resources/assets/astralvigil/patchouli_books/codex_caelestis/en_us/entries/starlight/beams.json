@@ -1,0 +1,22 @@
+{
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:lens",
+  "name": "Lenses and Mirrors",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Beams travel up to sixteen blocks and pass through glass. A $(item)Lens$() carries a beam straight on without loss; a $(item)Mirror$() catches beams from any side and turns them towards its face, losing a little light.$(br2)Use either with an empty hand to rotate it; sneak to rotate back."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:lens",
+      "text": ""
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:mirror",
+      "text": ""
+    }
+  ],
+  "sortnum": 1
+}

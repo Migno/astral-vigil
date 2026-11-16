@@ -6,6 +6,7 @@ import media.hofferbert.astralvigil.config.AVServerConfig;
 import media.hofferbert.astralvigil.gametest.GameTestRegistration;
 import media.hofferbert.astralvigil.network.AVNetwork;
 import media.hofferbert.astralvigil.registry.AVAttachments;
+import media.hofferbert.astralvigil.registry.AVBlockEntities;
 import media.hofferbert.astralvigil.registry.AVBlocks;
 import media.hofferbert.astralvigil.registry.AVCreativeTabs;
 import media.hofferbert.astralvigil.registry.AVItems;
@@ -35,6 +36,7 @@ public final class AstralVigil {
         AVItems.ITEMS.register(modBus);
         AVCreativeTabs.TABS.register(modBus);
         AVAttachments.ATTACHMENTS.register(modBus);
+        AVBlockEntities.BLOCK_ENTITIES.register(modBus);
         AVNetwork.register(modBus);
 
         StarfallManager.register();

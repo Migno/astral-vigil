@@ -1,0 +1,424 @@
+{
+  "textures": {
+    "astral_gold": "astralvigil:block/astral_gold",
+    "prism_crystal": "astralvigil:block/prism_crystal",
+    "particle": "astralvigil:block/prism_crystal"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        2,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "crystal",
+      "from": [
+        4.46,
+        2,
+        4.46
+      ],
+      "to": [
+        11.54,
+        13,
+        11.54
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            4.46,
+            3,
+            11.54,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "east": {
+          "uv": [
+            4.46,
+            3,
+            11.54,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "south": {
+          "uv": [
+            4.46,
+            3,
+            11.54,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "west": {
+          "uv": [
+            4.46,
+            3,
+            11.54,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "up": {
+          "uv": [
+            4.46,
+            4.46,
+            11.54,
+            11.54
+          ],
+          "texture": "#prism_crystal"
+        },
+        "down": {
+          "uv": [
+            4.46,
+            4.46,
+            11.54,
+            11.54
+          ],
+          "texture": "#prism_crystal"
+        }
+      }
+    },
+    {
+      "name": "crystal_back",
+      "from": [
+        3.05,
+        2,
+        8
+      ],
+      "to": [
+        12.95,
+        12,
+        12.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.05,
+            4,
+            12.95,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "east": {
+          "uv": [
+            3.5,
+            4,
+            8,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "south": {
+          "uv": [
+            3.05,
+            4,
+            12.95,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "west": {
+          "uv": [
+            8,
+            4,
+            12.5,
+            14
+          ],
+          "texture": "#prism_crystal"
+        },
+        "up": {
+          "uv": [
+            3.05,
+            8,
+            12.95,
+            12.5
+          ],
+          "texture": "#prism_crystal"
+        },
+        "down": {
+          "uv": [
+            3.05,
+            3.5,
+            12.95,
+            8
+          ],
+          "texture": "#prism_crystal"
+        }
+      }
+    },
+    {
+      "name": "crystal_cap",
+      "from": [
+        6.5,
+        13,
+        6.5
+      ],
+      "to": [
+        9.5,
+        14.5,
+        9.5
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          8,
+          14,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            6.5,
+            1.5,
+            9.5,
+            3
+          ],
+          "texture": "#prism_crystal"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            1.5,
+            9.5,
+            3
+          ],
+          "texture": "#prism_crystal"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            1.5,
+            9.5,
+            3
+          ],
+          "texture": "#prism_crystal"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            1.5,
+            9.5,
+            3
+          ],
+          "texture": "#prism_crystal"
+        },
+        "up": {
+          "uv": [
+            6.5,
+            6.5,
+            9.5,
+            9.5
+          ],
+          "texture": "#prism_crystal"
+        },
+        "down": {
+          "uv": [
+            6.5,
+            6.5,
+            9.5,
+            9.5
+          ],
+          "texture": "#prism_crystal"
+        }
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  }
+}

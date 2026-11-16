@@ -26,6 +26,11 @@ public final class AVItems {
 
     public static final DeferredItem<BlockItem> FALLEN_STAR = ITEMS.registerSimpleBlockItem(AVBlocks.FALLEN_STAR);
     public static final DeferredItem<BlockItem> METEORIC_STONE = ITEMS.registerSimpleBlockItem(AVBlocks.METEORIC_STONE);
+    public static final DeferredItem<BlockItem> STARLIGHT_COLLECTOR = ITEMS.registerSimpleBlockItem(AVBlocks.STARLIGHT_COLLECTOR);
+    public static final DeferredItem<BlockItem> LENS = ITEMS.registerSimpleBlockItem(AVBlocks.LENS);
+    public static final DeferredItem<BlockItem> MIRROR = ITEMS.registerSimpleBlockItem(AVBlocks.MIRROR);
+    public static final DeferredItem<BlockItem> PRISM = ITEMS.registerSimpleBlockItem(AVBlocks.PRISM);
+    public static final DeferredItem<BlockItem> STARLIGHT_RESERVOIR = ITEMS.registerSimpleBlockItem(AVBlocks.STARLIGHT_RESERVOIR);
 
     private AVItems() {}
 

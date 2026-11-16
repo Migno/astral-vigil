@@ -77,13 +77,21 @@ public final class CodexContent {
                     "astralvigil:codex_caelestis",
                     2),
             new Category(
+                    "starlight",
+                    "Starlight",
+                    "Sternenlicht",
+                    "Gather the light of the night sky and bend it to your will.",
+                    "Sammle das Licht des Nachthimmels und beuge es deinem Willen.",
+                    "astralvigil:starlight_collector",
+                    2),
+            new Category(
                     "constellations",
                     "Constellations",
                     "Sternbilder",
                     "The Watchers' signs, written in stars.",
                     "Die Zeichen der Wächter, in Sterne geschrieben.",
                     "astralvigil:star_chart",
-                    3));
+                    4));
 
     public static final List<Entry> ENTRIES = List.of(
             // ---------------------------------------------------------------- the rift
@@ -149,6 +157,28 @@ public final class CodexContent {
                     new Text(
                             "$(l)Not a light.$() The dark between the stars: sculk, obsidian, the deep places and the restless dead. The Void listens. Study it – but remember who else is listening.",
                             "$(l)Kein Licht.$() Die Dunkelheit zwischen den Sternen: Sculk, Obsidian, die tiefen Orte und die ruhelosen Toten. Die Leere lauscht. Erforsche sie – doch vergiss nicht, wer sonst noch lauscht."))),
+            // ---------------------------------------------------------------- starlight
+            new Entry("collector", "starlight", "Starlight Collector", "Sternenlichtsammler", "astralvigil:starlight_collector", 0, null, List.of(
+                    new Text(
+                            "Starlight only falls under the open sky – strongest at midnight, under a full moon, on a clear night. A $(item)Starlight Collector$() drinks it in and sends it out of its front as a visible beam.$(br2)Rain halves the light; storms nearly drown it.",
+                            "Sternenlicht fällt nur unter offenem Himmel – am stärksten um Mitternacht, bei Vollmond, in klarer Nacht. Ein $(item)Sternenlichtsammler$() trinkt es und sendet es als sichtbaren Strahl aus seiner Front.$(br2)Regen halbiert das Licht; Gewitter ertränken es fast."),
+                    new Crafting("astralvigil:starlight_collector", "", ""))),
+            new Entry("beams", "starlight", "Lenses and Mirrors", "Linsen und Spiegel", "astralvigil:lens", 1, null, List.of(
+                    new Text(
+                            "Beams travel up to sixteen blocks and pass through glass. A $(item)Lens$() carries a beam straight on without loss; a $(item)Mirror$() catches beams from any side and turns them towards its face, losing a little light.$(br2)Use either with an empty hand to rotate it; sneak to rotate back.",
+                            "Strahlen reichen bis zu sechzehn Blöcke weit und durchdringen Glas. Eine $(item)Linse$() führt einen Strahl verlustfrei geradeaus weiter; ein $(item)Spiegel$() fängt Strahlen aus jeder Richtung und lenkt sie zu seiner Front – mit ein wenig Verlust.$(br2)Mit leerer Hand benutzen, um sie zu drehen; schleichend dreht man zurück."),
+                    new Crafting("astralvigil:lens", "", ""),
+                    new Crafting("astralvigil:mirror", "", ""))),
+            new Entry("prism", "starlight", "The Prism", "Das Prisma", "astralvigil:prism", 2, "research/first_scan", List.of(
+                    new Text(
+                            "Pure starlight is all lights at once. A $(item)Prism$() parts it: $(l)Stella$() leaves its front, $(l)Sol$() its left and $(l)Luna$() its right side. Some light is lost in the parting.$(br2)Many rituals will ask for one hue alone.",
+                            "Reines Sternenlicht ist alle Lichter zugleich. Ein $(item)Prisma$() scheidet es: $(l)Stella$() verlässt seine Front, $(l)Sol$() die linke und $(l)Luna$() die rechte Seite. Beim Scheiden geht etwas Licht verloren.$(br2)Viele Rituale verlangen nach einer einzigen Färbung."),
+                    new Crafting("astralvigil:prism", "", ""))),
+            new Entry("reservoir", "starlight", "Starlight Reservoir", "Sternenlichtspeicher", "astralvigil:starlight_reservoir", 3, null, List.of(
+                    new Text(
+                            "A $(item)Starlight Reservoir$() keeps every hue apart and safe until it is needed. A comparator reads how full it is.",
+                            "Ein $(item)Sternenlichtspeicher$() hält jede Färbung getrennt und sicher, bis sie gebraucht wird. Ein Komparator liest seinen Füllstand."),
+                    new Crafting("astralvigil:starlight_reservoir", "", ""))),
             // ---------------------------------------------------------------- constellations
             new Entry("constellations", "constellations", "Signs in the Sky", "Zeichen am Himmel", "astralvigil:star_chart", 0, null, List.of(
                     new Text(

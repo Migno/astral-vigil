@@ -67,6 +67,23 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   packmakers ask; Phase 6 Star Anchors consume the learned set.
 - **Compat mods pinned by Modrinth version id.** Resolving by version number picked Fabric jars (JEI, Patchouli).
 
+## 2026-11-17 – Phase 3
+
+- **Push-based network, once per second.** Every device re-traces its beams (≤ `beamRange` lookups) and pushes into
+  the device it hits every 20 ticks. Simpler and more robust than a cached graph with block-change listeners (vanilla
+  block changes fire no events), still O(devices × range) per second and nothing per tick. Clients only get a block
+  update when beams or amounts change.
+- **Tinted buffers.** Starlight carries a tint (pure, Sol, Luna, Stella); all tints share one capacity. Void light is
+  reserved for the Eclipse.
+- **One device block class** (`StarlightDeviceBlock` + `Kind`) instead of five classes; codecs per kind.
+- **Beam visuals reuse the vanilla beacon beam helper** (rotated onto the axis, thinner, tinted) – looks vanilla,
+  works on both renderers (26.1 submit/render-state pipeline and 1.21.1 immediate mode).
+- **Jade data is client-side only** (synced block entity), so no server data provider is needed.
+- **Datagen and builds:** `runData` must run in its own Gradle invocation; a `mustRunAfter` would create a task cycle
+  (runData needs `classes`).
+- **Blockbench assets without plugin file access.** Models are read back via `execute_script`
+  (`Codecs.java_block.compile()`) and written by script; the owner answered Blockbench's file-permission prompt.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best

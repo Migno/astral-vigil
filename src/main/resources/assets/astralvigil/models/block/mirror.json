@@ -1,0 +1,806 @@
+{
+  "textures": {
+    "astral_gold": "astralvigil:block/astral_gold",
+    "mirror_plate": "astralvigil:block/mirror_plate",
+    "meteoric_stone": "astralvigil:block/meteoric_stone",
+    "particle": "astralvigil:block/astral_gold"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        3,
+        0,
+        4
+      ],
+      "to": [
+        13,
+        2,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            14,
+            13,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "east": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "south": {
+          "uv": [
+            3,
+            14,
+            13,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "west": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": "#meteoric_stone"
+        }
+      }
+    },
+    {
+      "name": "base_trim",
+      "from": [
+        4,
+        2,
+        5
+      ],
+      "to": [
+        12,
+        3,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            13,
+            12,
+            14
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            5,
+            13,
+            11,
+            14
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            4,
+            13,
+            12,
+            14
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            5,
+            13,
+            11,
+            14
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            4,
+            5,
+            12,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            4,
+            5,
+            12,
+            11
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "stand",
+      "from": [
+        7,
+        3,
+        7
+      ],
+      "to": [
+        9,
+        5,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            11,
+            9,
+            13
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            7,
+            11,
+            9,
+            13
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            7,
+            11,
+            9,
+            13
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            7,
+            11,
+            9,
+            13
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "backing",
+      "from": [
+        2,
+        4,
+        8
+      ],
+      "to": [
+        14,
+        16,
+        9.5
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          4,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            0,
+            14,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            0,
+            8,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            0,
+            14,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            8,
+            0,
+            9.5,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            8,
+            14,
+            9.5
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            6.5,
+            14,
+            8
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "plate",
+      "from": [
+        3,
+        5,
+        7
+      ],
+      "to": [
+        13,
+        15,
+        8
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          4,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            1,
+            13,
+            11
+          ],
+          "texture": "#mirror_plate"
+        },
+        "east": {
+          "uv": [
+            8,
+            1,
+            9,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            3,
+            1,
+            13,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            7,
+            1,
+            8,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            3,
+            7,
+            13,
+            8
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            3,
+            8,
+            13,
+            9
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "rim_top",
+      "from": [
+        2,
+        15,
+        6.5
+      ],
+      "to": [
+        14,
+        16,
+        8
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          4,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            0,
+            14,
+            1
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            8,
+            0,
+            9.5,
+            1
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            0,
+            14,
+            1
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            0,
+            8,
+            1
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            6.5,
+            14,
+            8
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            8,
+            14,
+            9.5
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "rim_bottom",
+      "from": [
+        2,
+        4,
+        6.5
+      ],
+      "to": [
+        14,
+        5,
+        8
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          4,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            11,
+            14,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            8,
+            11,
+            9.5,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            11,
+            14,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            11,
+            8,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            6.5,
+            14,
+            8
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            8,
+            14,
+            9.5
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "rim_west",
+      "from": [
+        2,
+        5,
+        6.5
+      ],
+      "to": [
+        3,
+        15,
+        8
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          4,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            1,
+            14,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            8,
+            1,
+            9.5,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            1,
+            3,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            1,
+            8,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            6.5,
+            3,
+            8
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            8,
+            3,
+            9.5
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "rim_east",
+      "from": [
+        13,
+        5,
+        6.5
+      ],
+      "to": [
+        14,
+        15,
+        8
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          4,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            1,
+            3,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            8,
+            1,
+            9.5,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            13,
+            1,
+            14,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            1,
+            8,
+            11
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            13,
+            6.5,
+            14,
+            8
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            13,
+            8,
+            14,
+            9.5
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  }
+}

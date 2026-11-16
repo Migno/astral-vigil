@@ -1,6 +1,11 @@
 {
   "values": [
     "astralvigil:fallen_star",
-    "astralvigil:meteoric_stone"
+    "astralvigil:meteoric_stone",
+    "astralvigil:starlight_collector",
+    "astralvigil:lens",
+    "astralvigil:mirror",
+    "astralvigil:prism",
+    "astralvigil:starlight_reservoir"
   ]
 }

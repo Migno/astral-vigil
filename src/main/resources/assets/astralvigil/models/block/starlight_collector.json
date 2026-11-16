@@ -1,0 +1,830 @@
+{
+  "textures": {
+    "astral_gold": "astralvigil:block/astral_gold",
+    "meteoric_stone": "astralvigil:block/meteoric_stone",
+    "astral_core": "astralvigil:block/astral_core",
+    "particle": "astralvigil:block/astral_gold"
+  },
+  "elements": [
+    {
+      "name": "plinth",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        4,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "east": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "south": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "west": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#meteoric_stone"
+        }
+      }
+    },
+    {
+      "name": "column",
+      "from": [
+        6,
+        4,
+        6
+      ],
+      "to": [
+        10,
+        10,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            6,
+            10,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            6,
+            6,
+            10,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            6,
+            6,
+            10,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            6,
+            6,
+            10,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "nozzle_arm",
+      "from": [
+        7,
+        7,
+        2
+      ],
+      "to": [
+        9,
+        9,
+        6
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            10,
+            7,
+            14,
+            9
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            2,
+            7,
+            6,
+            9
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            7,
+            2,
+            9,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            7,
+            10,
+            9,
+            14
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "nozzle",
+      "from": [
+        6,
+        6,
+        0
+      ],
+      "to": [
+        10,
+        10,
+        2
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#astral_core"
+        },
+        "east": {
+          "uv": [
+            14,
+            6,
+            16,
+            10
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            0,
+            6,
+            2,
+            10
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            6,
+            0,
+            10,
+            2
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            6,
+            14,
+            10,
+            16
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "dish",
+      "from": [
+        4,
+        10,
+        4
+      ],
+      "to": [
+        12,
+        11,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            5,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            4,
+            5,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            4,
+            5,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            4,
+            5,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "halo_n",
+      "from": [
+        2,
+        10,
+        2
+      ],
+      "to": [
+        14,
+        12,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            12,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            2,
+            4,
+            4,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            4
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            12,
+            14,
+            14
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "halo_s",
+      "from": [
+        2,
+        10,
+        12
+      ],
+      "to": [
+        14,
+        12,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            2,
+            4,
+            4,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            12,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            12,
+            14,
+            14
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            4
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "halo_w",
+      "from": [
+        2,
+        10,
+        4
+      ],
+      "to": [
+        4,
+        12,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            4,
+            4,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            2,
+            4,
+            4,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            4,
+            4,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            2,
+            4,
+            4,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            2,
+            4,
+            4,
+            12
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "halo_e",
+      "from": [
+        12,
+        10,
+        4
+      ],
+      "to": [
+        14,
+        12,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            4,
+            4,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "east": {
+          "uv": [
+            4,
+            4,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "south": {
+          "uv": [
+            12,
+            4,
+            14,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "west": {
+          "uv": [
+            4,
+            4,
+            12,
+            6
+          ],
+          "texture": "#astral_gold"
+        },
+        "up": {
+          "uv": [
+            12,
+            4,
+            14,
+            12
+          ],
+          "texture": "#astral_gold"
+        },
+        "down": {
+          "uv": [
+            12,
+            4,
+            14,
+            12
+          ],
+          "texture": "#astral_gold"
+        }
+      }
+    },
+    {
+      "name": "core",
+      "from": [
+        6,
+        11,
+        6
+      ],
+      "to": [
+        10,
+        15,
+        10
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          8,
+          13,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_core"
+        },
+        "east": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_core"
+        },
+        "south": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_core"
+        },
+        "west": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_core"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_core"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#astral_core"
+        }
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  }
+}

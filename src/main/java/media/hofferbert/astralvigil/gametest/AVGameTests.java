@@ -11,7 +11,13 @@ import media.hofferbert.astralvigil.research.Alignment;
 import media.hofferbert.astralvigil.research.AlignmentTags;
 import media.hofferbert.astralvigil.research.ResearchData;
 import media.hofferbert.astralvigil.research.ResearchManager;
+import media.hofferbert.astralvigil.starlight.Tint;
+import media.hofferbert.astralvigil.starlight.network.Devices;
+import media.hofferbert.astralvigil.starlight.network.StarlightBlockEntity;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import media.hofferbert.astralvigil.registry.AVBlocks;
 import media.hofferbert.astralvigil.registry.AVItems;
 import media.hofferbert.astralvigil.starfall.StarfallCrater;
@@ -45,9 +51,76 @@ public final class AVGameTests {
             new Def("starfall_lands", CRATER_FIELD, StarfallManager.FALL_TICKS + 60, true, AVGameTests::starfallLands),
             new Def("alignment_tags_loaded", PLATFORM, 40, false, AVGameTests::alignmentTagsLoaded),
             new Def("scan_block_grants_knowledge", PLATFORM, 40, false, AVGameTests::scanBlockGrantsKnowledge),
-            new Def("constellation_needs_attunement", PLATFORM, 40, false, AVGameTests::constellationNeedsAttunement));
+            new Def("constellation_needs_attunement", PLATFORM, 40, false, AVGameTests::constellationNeedsAttunement),
+            new Def("beam_fills_reservoir", CRATER_FIELD, 120, true, AVGameTests::beamFillsReservoir),
+            new Def("beam_blocked_by_stone", CRATER_FIELD, 80, true, h -> beamThrough(h, Blocks.STONE, false)),
+            new Def("beam_passes_glass", CRATER_FIELD, 120, true, h -> beamThrough(h, Blocks.GLASS, true)),
+            new Def("prism_splits_light", CRATER_FIELD, 160, true, AVGameTests::prismSplitsLight),
+            new Def("reservoir_feeds_lens", CRATER_FIELD, 140, true, AVGameTests::reservoirFeedsLens));
+
+    static void reservoirFeedsLens(GameTestHelper helper) {
+        Devices.Reservoir source = device(helper, GT.pos(1, 4, 6), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);
+        source.buffer().insert(Tint.STELLA, 300, false);
+        device(helper, GT.pos(2, 4, 6), AVBlocks.LENS.get(), Direction.EAST);
+        Devices.Reservoir target = device(helper, GT.pos(6, 4, 6), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);
+        helper.succeedWhen(() -> GT.check(helper, target.buffer().get(Tint.STELLA) > 0, "no Stella light arrived via the lens"));
+    }
 
     private AVGameTests() {}
+
+    private static <T extends StarlightBlockEntity> T device(GameTestHelper helper, BlockPos rel, Block block, Direction facing) {
+        BlockState state = block.defaultBlockState();
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            state = state.setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
+        } else if (state.hasProperty(BlockStateProperties.FACING)) {
+            state = state.setValue(BlockStateProperties.FACING, facing);
+        }
+        helper.setBlock(rel, state);
+        @SuppressWarnings("unchecked")
+        T be = (T) helper.getLevel().getBlockEntity(helper.absolutePos(rel));
+        GT.check(helper, be != null, "no block entity at " + rel);
+        return be;
+    }
+
+    private static Devices.Collector chargedCollector(GameTestHelper helper, BlockPos rel) {
+        Devices.Collector collector = device(helper, rel, AVBlocks.STARLIGHT_COLLECTOR.get(), Direction.EAST);
+        collector.buffer().insert(Tint.PURE, 300, false);
+        return collector;
+    }
+
+    static void beamFillsReservoir(GameTestHelper helper) {
+        chargedCollector(helper, GT.pos(1, 4, 6));
+        Devices.Reservoir reservoir = device(helper, GT.pos(5, 4, 6), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);
+        helper.succeedWhen(() -> GT.check(helper, reservoir.buffer().get(Tint.PURE) > 0, "reservoir still empty"));
+    }
+
+    static void beamThrough(GameTestHelper helper, Block between, boolean expectTransfer) {
+        chargedCollector(helper, GT.pos(1, 4, 6));
+        helper.setBlock(GT.pos(3, 4, 6), between);
+        Devices.Reservoir reservoir = device(helper, GT.pos(5, 4, 6), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);
+        if (expectTransfer) {
+            helper.succeedWhen(() -> GT.check(helper, reservoir.buffer().total() > 0, "beam did not pass " + between));
+        } else {
+            helper.runAfterDelay(60, () -> {
+                GT.check(helper, reservoir.buffer().total() == 0, "beam passed through " + between);
+                helper.succeed();
+            });
+        }
+    }
+
+    static void prismSplitsLight(GameTestHelper helper) {
+        chargedCollector(helper, GT.pos(1, 4, 6));
+        device(helper, GT.pos(4, 4, 6), AVBlocks.PRISM.get(), Direction.EAST);
+        Devices.Reservoir front = device(helper, GT.pos(7, 4, 6), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);
+        Devices.Reservoir left = device(helper, GT.pos(4, 4, 3), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);
+        Devices.Reservoir right = device(helper, GT.pos(4, 4, 9), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);
+        helper.succeedWhen(() -> {
+            GT.check(helper, front.buffer().get(Tint.STELLA) > 0, "no Stella light in front");
+            GT.check(helper, left.buffer().get(Tint.SOL) > 0, "no Sol light on the left");
+            GT.check(helper, right.buffer().get(Tint.LUNA) > 0, "no Luna light on the right");
+            GT.check(helper, front.buffer().get(Tint.PURE) == 0, "pure light leaked through the prism");
+        });
+    }
 
     static void alignmentTagsLoaded(GameTestHelper helper) {
         GT.check(helper, Blocks.GLOWSTONE.defaultBlockState().is(AlignmentTags.blocks(Alignment.SOL)), "glowstone not Sol");

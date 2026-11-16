@@ -32,8 +32,47 @@ public final class AVServerConfig {
     public static final ModConfigSpec.IntValue RESEARCH_POINTS_STRUCTURE;
     public static final ModConfigSpec.IntValue RESEARCH_SCAN_RANGE;
 
+    // Starlight network
+    public static final ModConfigSpec.IntValue COLLECTOR_RATE;
+    public static final ModConfigSpec.IntValue COLLECTOR_CAPACITY;
+    public static final ModConfigSpec.IntValue RELAY_CAPACITY;
+    public static final ModConfigSpec.IntValue RESERVOIR_CAPACITY;
+    public static final ModConfigSpec.IntValue BEAM_RANGE;
+    public static final ModConfigSpec.IntValue BEAM_THROUGHPUT;
+    public static final ModConfigSpec.DoubleValue MIRROR_LOSS;
+    public static final ModConfigSpec.DoubleValue PRISM_LOSS;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
+
+        b.comment("Starlight network: collectors, lenses, mirrors, prisms and reservoirs.")
+                .translation("astralvigil.configuration.starlight")
+                .push("starlight");
+        COLLECTOR_RATE = b.comment("Starlight a collector gathers per second at 100% starlight (midnight, full moon, clear sky).")
+                .translation("astralvigil.configuration.starlight.collector_rate")
+                .defineInRange("collectorRate", 8, 0, 10000);
+        COLLECTOR_CAPACITY = b.comment("Internal buffer of a collector.")
+                .translation("astralvigil.configuration.starlight.collector_capacity")
+                .defineInRange("collectorCapacity", 400, 1, 1_000_000);
+        RELAY_CAPACITY = b.comment("Internal buffer of lenses, mirrors and prisms.")
+                .translation("astralvigil.configuration.starlight.relay_capacity")
+                .defineInRange("relayCapacity", 200, 1, 1_000_000);
+        RESERVOIR_CAPACITY = b.comment("Capacity of a Starlight Reservoir.")
+                .translation("astralvigil.configuration.starlight.reservoir_capacity")
+                .defineInRange("reservoirCapacity", 20000, 1, 100_000_000);
+        BEAM_RANGE = b.comment("Maximum beam length in blocks.")
+                .translation("astralvigil.configuration.starlight.beam_range")
+                .defineInRange("beamRange", 16, 2, 64);
+        BEAM_THROUGHPUT = b.comment("Starlight a single beam carries per second.")
+                .translation("astralvigil.configuration.starlight.beam_throughput")
+                .defineInRange("beamThroughput", 64, 1, 1_000_000);
+        MIRROR_LOSS = b.comment("Fraction of starlight lost when a mirror turns a beam.")
+                .translation("astralvigil.configuration.starlight.mirror_loss")
+                .defineInRange("mirrorLoss", 0.05, 0.0, 1.0);
+        PRISM_LOSS = b.comment("Fraction of starlight lost when a prism splits a beam.")
+                .translation("astralvigil.configuration.starlight.prism_loss")
+                .defineInRange("prismLoss", 0.10, 0.0, 1.0);
+        b.pop();
 
         b.comment("Research: scanning blocks, creatures, biomes and structures with the Astrolabe.")
                 .translation("astralvigil.configuration.research")

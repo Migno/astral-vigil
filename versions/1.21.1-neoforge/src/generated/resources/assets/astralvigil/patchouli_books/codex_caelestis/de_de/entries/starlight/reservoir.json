@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:starlight_reservoir",
+  "name": "Sternenlichtspeicher",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ein $(item)Sternenlichtspeicher$() hält jede Färbung getrennt und sicher, bis sie gebraucht wird. Ein Komparator liest seinen Füllstand."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:starlight_reservoir",
+      "text": ""
+    }
+  ],
+  "sortnum": 3
+}

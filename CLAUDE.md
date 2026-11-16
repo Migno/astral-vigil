@@ -35,6 +35,8 @@ Versions live in `stonecutter.properties.toml` – verify against maven.neoforge
 .\gradlew.bat :1.21.1-neoforge:runClient -Pav.autojoin=true   # auto-create/join superflat test world
 .\gradlew.bat runGameTestServer              # all GameTests, both targets, exits
 .\gradlew.bat runData                        # datagen -> versions/<target>/src/generated/resources
+                                             #   run it as its OWN invocation before build/runGameTestServer
+                                             #   (same invocation may package stale generated resources)
 .\gradlew.bat :<target>:runServer            # headless dedicated server
 .\gradlew.bat :<target>:runCompatClient      # client + compat mods from Modrinth (see toml)
 python -I tools/dev/resolve_compat.py         # refresh compat mod version ids (paste into stonecutter.properties.toml)

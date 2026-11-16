@@ -4,6 +4,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import media.hofferbert.astralvigil.AstralVigil;
 import media.hofferbert.astralvigil.block.FallenStarBlock;
+import media.hofferbert.astralvigil.block.StarlightDeviceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -29,7 +30,18 @@ public final class AVBlocks {
             .requiresCorrectToolForDrops()
             .sound(SoundType.DEEPSLATE));
 
+    // Starlight network devices (models from Blockbench, see art/bbmodel/block)
+    public static final DeferredBlock<StarlightDeviceBlock> STARLIGHT_COLLECTOR = register("starlight_collector", StarlightDeviceBlock::collector, p -> device(p).lightLevel(s -> 7));
+    public static final DeferredBlock<StarlightDeviceBlock> LENS = register("lens", StarlightDeviceBlock::lens, p -> device(p).lightLevel(s -> 4));
+    public static final DeferredBlock<StarlightDeviceBlock> MIRROR = register("mirror", StarlightDeviceBlock::mirror, p -> device(p));
+    public static final DeferredBlock<StarlightDeviceBlock> PRISM = register("prism", StarlightDeviceBlock::prism, p -> device(p).lightLevel(s -> 6));
+    public static final DeferredBlock<StarlightDeviceBlock> STARLIGHT_RESERVOIR = register("starlight_reservoir", StarlightDeviceBlock::reservoir, p -> device(p).lightLevel(s -> 9));
+
     private AVBlocks() {}
+
+    private static BlockBehaviour.Properties device(BlockBehaviour.Properties p) {
+        return p.mapColor(MapColor.GOLD).strength(2.5f, 6.0f).sound(SoundType.AMETHYST).noOcclusion().requiresCorrectToolForDrops();
+    }
 
     static <B extends Block> DeferredBlock<B> register(
             String name, Function<BlockBehaviour.Properties, B> factory, UnaryOperator<BlockBehaviour.Properties> props) {

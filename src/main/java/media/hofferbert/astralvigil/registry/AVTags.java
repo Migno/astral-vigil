@@ -13,6 +13,8 @@ public final class AVTags {
     public static final class Blocks {
         /** Blocks a falling star never destroys (in addition to unbreakable blocks and block entities). */
         public static final TagKey<Block> STARFALL_IMMUNE = TagKey.create(Registries.BLOCK, AstralVigil.id("starfall_immune"));
+        /** Blocks starlight beams pass through (glass etc.). */
+        public static final TagKey<Block> BEAM_TRANSPARENT = TagKey.create(Registries.BLOCK, AstralVigil.id("beam_transparent"));
 
         private Blocks() {}
     }
@@ -24,6 +26,8 @@ public final class AVTags {
         public static final TagKey<Item> CHART_PAPER = TagKey.create(Registries.ITEM, AstralVigil.id("chart_paper"));
         /** Books accepted by the Codex Caelestis recipe. */
         public static final TagKey<Item> CODEX_BOOKS = TagKey.create(Registries.ITEM, AstralVigil.id("codex_books"));
+
+        public static final TagKey<Item> METEORIC_STONES = TagKey.create(Registries.ITEM, AstralVigil.id("meteoric_stones"));
 
         public static final TagKey<Item> GEMS_ASTRAL = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "gems/astral"));
 

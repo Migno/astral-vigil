@@ -47,6 +47,21 @@ on purpose (it is an exploration tool).
 Only the **first** scan of each subject counts, so research cannot be farmed. Quill (Ilyra) needs two attunements
 (Luna + Stella) – the chronicler's sign is the reward for broad research.
 
+## Starlight network (`[starlight]`)
+
+| Key | Default | Why |
+|---|---|---|
+| `collectorRate` | 8 /s at 100 % | A full-moon midnight collector fills a reservoir (20 000) in ~40 min; a typical night with average moon yields ~1 500–2 500 per collector. Several collectors and patience are the progression, not a single block. |
+| `collectorCapacity` | 400 | Smooths out short interruptions. |
+| `relayCapacity` | 200 | Lenses/mirrors/prisms are pipes, not storage. |
+| `reservoirCapacity` | 20 000 | Roughly ten mid-tier altar crafts. |
+| `beamRange` | 16 | Forces relays for long distances – building the beam network is part of the fun. |
+| `beamThroughput` | 64 /s | Well above collector output; only matters when emptying reservoirs. |
+| `mirrorLoss` | 5 % | Turning light costs a little. |
+| `prismLoss` | 10 % | Splitting is the expensive step; aligned light is worth more. |
+
+Devices work once per second (not every tick), so even large networks stay cheap.
+
 ## Starlight formula
 
 `intensity = night(t) × moon(phase) × weather`, 0 without sky access.

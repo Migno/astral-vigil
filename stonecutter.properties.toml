@@ -17,6 +17,8 @@ deps.neoforge = "21.1.266"
 deps.parchment_mc = "1.21.1"
 deps.parchment = "2024.11.17"
 deps.geckolib = "4.9.3"
+# compileOnly integrations (Modrinth version ids)
+deps.jade = "eYz2YBGT"
 # Compat instance (runCompatClient) – comma separated Modrinth slug:<version id>.
 # Regenerate with: python -I tools/dev/resolve_compat.py (ids avoid Fabric jars of multi-loader releases)
 compat.mods = "emi:5sIPA1To,jade:eYz2YBGT,curios:yohfFbgD,patchouli:BIogJv2D,sodium:uMOpc5uV,iris:KduFYu4t,placebo:B5zbSVlT,apothic-attributes:64fZbLnj,apothic-enchanting:JAQJkLJ1,apothic-spawners:pWfxcfO2,apotheosis:veL1ccTb,rhino:SqkDvOLG,better-advanced-tooltips:uPFbnD32,architectury-api:xGfBrBzj,kubejs:GDXCpKlp,geckolib:Grwn5rUB"
@@ -29,5 +31,6 @@ deps.neoforge = "26.1.2.126"
 deps.parchment_mc = ""
 deps.parchment = ""
 deps.geckolib = "5.5.2"
+deps.jade = "Pr1h4azo"
 # EMI has no 26.1.2 build yet -> JEI on this target
 compat.mods = "mezzconfig:DbkwO49N,jei:60HrmNPh,jade:Pr1h4azo,curios:dRnRThvD,patchouli:2CsnFLom,sodium:zg4YQ9EL,iris:qE5Y7GrZ,placebo:c4uzJQYp,apothic-attributes:lLLTcZXk,apothic-enchanting:5yksP3X6,apothic-spawners:4tD6MEQ3,apotheosis:EXaIH7Xm,rhino:SqkDvOLG,better-advanced-tooltips:DKhR2dA5,architectury-api:5Bae8CM6,kubejs:5yNEdyfc,geckolib:xfVfPcoC"

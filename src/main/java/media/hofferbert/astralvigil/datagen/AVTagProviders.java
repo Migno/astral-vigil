@@ -39,7 +39,10 @@ public final class AVTagProviders {
 
         @Override
         protected void addTags(HolderLookup.Provider registries) {
-            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(AVBlocks.FALLEN_STAR.get(), AVBlocks.METEORIC_STONE.get());
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                    AVBlocks.FALLEN_STAR.get(), AVBlocks.METEORIC_STONE.get(), AVBlocks.STARLIGHT_COLLECTOR.get(),
+                    AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get());
+            tag(AVTags.Blocks.BEAM_TRANSPARENT).addTag(Tags.Blocks.GLASS_BLOCKS).addTag(Tags.Blocks.GLASS_PANES);
             tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.FALLEN_STAR.get());
             tag(BlockTags.NEEDS_STONE_TOOL).add(AVBlocks.METEORIC_STONE.get());
             tag(AVTags.Blocks.STARFALL_IMMUNE).addTag(BlockTags.FEATURES_CANNOT_REPLACE);
@@ -84,6 +87,7 @@ public final class AVTagProviders {
             tag(AVTags.Items.ASTRAL_SHARDS).add(AVItems.ASTRAL_SHARD.get());
             tag(AVTags.Items.GEMS_ASTRAL).add(AVItems.ASTRAL_SHARD.get());
             tag(Tags.Items.GEMS).addTag(AVTags.Items.GEMS_ASTRAL);
+            tag(AVTags.Items.METEORIC_STONES).add(AVItems.METEORIC_STONE.get());
             tag(AVTags.Items.CHART_PAPER).add(net.minecraft.world.item.Items.PAPER);
             tag(AVTags.Items.CODEX_BOOKS).add(net.minecraft.world.item.Items.BOOK);
         }

@@ -51,6 +51,9 @@ dependencies {
     // BlockPilot: AI/scripted in-game testing. Dev runs only (localRuntime is not published).
     localRuntime("dev.blockpilot:blockpilot:${sc.properties["deps.blockpilot"]}:${sc.current.version}-neoforge")
 
+    // Optional integrations: compile against the API, never shipped or required
+    compileOnly("maven.modrinth:jade:${sc.properties["deps.jade"]}")
+
     sc.properties["compat.mods"].split(',').map(String::trim).filter(String::isNotEmpty).forEach {
         val (slug, ver) = it.split(':', limit = 2)
         compatMods("maven.modrinth:$slug:$ver")

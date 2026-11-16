@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:starlight_collector",
+  "name": "Starlight Collector",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Starlight only falls under the open sky – strongest at midnight, under a full moon, on a clear night. A $(item)Starlight Collector$() drinks it in and sends it out of its front as a visible beam.$(br2)Rain halves the light; storms nearly drown it."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:starlight_collector",
+      "text": ""
+    }
+  ],
+  "sortnum": 0
+}

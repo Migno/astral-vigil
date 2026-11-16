@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "astralvigil:block/starlight_collector",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astralvigil:block/starlight_collector"
+    },
+    "facing=south": {
+      "model": "astralvigil:block/starlight_collector",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astralvigil:block/starlight_collector",
+      "y": 270
+    }
+  }
+}

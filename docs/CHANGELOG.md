@@ -4,6 +4,17 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 3 – Energy
+- **Starlight network:** Starlight Collector (gathers under the open sky, scaled by the starlight formula), Lens
+  (lossless straight relay), Mirror (turns beams from any side, small loss), Prism (splits pure light into Stella /
+  Sol / Luna), Starlight Reservoir (tinted storage, comparator output, feeds touching devices).
+- Visible tinted beams (vanilla beacon beam, rotated and thinned) – client-side renderer on both targets; beams pass
+  through `#astralvigil:beam_transparent` (glass, panes) and stop at other blocks.
+- Devices rotate with an empty hand (sneak = backwards); placement aims away from the player.
+- **Jade plugin** (optional): stored starlight per tint, collector rate, aim direction.
+- Blockbench models for all five devices; codex category "Starlight" (en/de); recipes via tags.
+- Tests: StarlightBuffer JUnit; GameTests for beam transfer, blocking vs. glass, prism split, reservoir feeding.
+
 ### Phase 2 – Research
 - **Celestial alignments** Sol, Luna, Stella, Void – fully tag-driven (`#astralvigil:alignment/<name>` for blocks,
   entity types, biomes and structures) with sensible vanilla defaults.

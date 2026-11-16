@@ -1,0 +1,18 @@
+{
+  "advancement": "astralvigil:research/first_scan",
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:prism",
+  "name": "Das Prisma",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Reines Sternenlicht ist alle Lichter zugleich. Ein $(item)Prisma$() scheidet es: $(l)Stella$() verlässt seine Front, $(l)Sol$() die linke und $(l)Luna$() die rechte Seite. Beim Scheiden geht etwas Licht verloren.$(br2)Viele Rituale verlangen nach einer einzigen Färbung."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:prism",
+      "text": ""
+    }
+  ],
+  "sortnum": 2
+}

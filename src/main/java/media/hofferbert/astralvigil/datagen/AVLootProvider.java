@@ -36,6 +36,11 @@ public class AVLootProvider extends BlockLootSubProvider {
                                         .apply(ApplyBonusCount.addOreBonusCount(
                                                 enchantments.getOrThrow(Enchantments.FORTUNE))))));
         dropSelf(AVBlocks.METEORIC_STONE.get());
+        dropSelf(AVBlocks.STARLIGHT_COLLECTOR.get());
+        dropSelf(AVBlocks.LENS.get());
+        dropSelf(AVBlocks.MIRROR.get());
+        dropSelf(AVBlocks.PRISM.get());
+        dropSelf(AVBlocks.STARLIGHT_RESERVOIR.get());
     }
 
     @Override

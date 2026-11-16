@@ -203,6 +203,37 @@ public final class AVLang {
         add("advancements.astralvigil.constellation_quill.title", "The Quill", "Die Feder");
         add("advancements.astralvigil.constellation_quill.description", "Learn Ilyra's constellation", "Erlerne Ilyras Sternbild");
 
+        // Phase 3 – starlight network
+        add("block.astralvigil.starlight_collector", "Starlight Collector", "Sternenlichtsammler");
+        add("block.astralvigil.starlight_collector.desc", "Drinks starlight under the open night sky.", "Trinkt Sternenlicht unter offenem Nachthimmel.");
+        add("block.astralvigil.lens", "Lens", "Linse");
+        add("block.astralvigil.lens.desc", "Carries a beam straight on. Use to rotate.", "Führt einen Strahl geradeaus weiter. Benutzen zum Drehen.");
+        add("block.astralvigil.mirror", "Mirror", "Spiegel");
+        add("block.astralvigil.mirror.desc", "Turns beams from any side towards its face.", "Lenkt Strahlen aus jeder Richtung zu seiner Front.");
+        add("block.astralvigil.prism", "Prism", "Prisma");
+        add("block.astralvigil.prism.desc", "Splits pure starlight into Sol, Luna and Stella.", "Spaltet reines Sternenlicht in Sol, Luna und Stella.");
+        add("block.astralvigil.starlight_reservoir", "Starlight Reservoir", "Sternenlichtspeicher");
+        add("block.astralvigil.starlight_reservoir.desc", "Holds starlight of every hue.", "Bewahrt Sternenlicht jeder Färbung.");
+        add("tint.astralvigil.pure", "Pure", "Rein");
+        add("tint.astralvigil.sol", "Sol", "Sol");
+        add("tint.astralvigil.luna", "Luna", "Luna");
+        add("tint.astralvigil.stella", "Stella", "Stella");
+        add("jade.astralvigil.starlight", "Starlight: %s / %s", "Sternenlicht: %s / %s");
+        add("jade.astralvigil.gathering", "Gathering: %s/s", "Sammelt: %s/s");
+        add("jade.astralvigil.aim", "Aimed: %s", "Ausrichtung: %s");
+        add("config.jade.plugin_astralvigil.starlight", "Astral Vigil Starlight", "Astral Vigil Sternenlicht");
+        add("direction.astralvigil.up", "up", "oben");
+        add("direction.astralvigil.down", "down", "unten");
+        add("astralvigil.configuration.starlight", "Starlight Network", "Sternenlicht-Netz");
+        add("astralvigil.configuration.starlight.collector_rate", "Collector Rate", "Sammelrate");
+        add("astralvigil.configuration.starlight.collector_capacity", "Collector Capacity", "Sammler-Kapazität");
+        add("astralvigil.configuration.starlight.relay_capacity", "Relay Capacity", "Relais-Kapazität");
+        add("astralvigil.configuration.starlight.reservoir_capacity", "Reservoir Capacity", "Speicher-Kapazität");
+        add("astralvigil.configuration.starlight.beam_range", "Beam Range", "Strahlreichweite");
+        add("astralvigil.configuration.starlight.beam_throughput", "Beam Throughput", "Strahldurchsatz");
+        add("astralvigil.configuration.starlight.mirror_loss", "Mirror Loss", "Spiegelverlust");
+        add("astralvigil.configuration.starlight.prism_loss", "Prism Loss", "Prismenverlust");
+
         // Config screen
         add("astralvigil.configuration.title", "Astral Vigil Configuration", "Astral Vigil – Einstellungen");
         add("astralvigil.configuration.section.astralvigil.server.toml", "Server Settings", "Server-Einstellungen");

@@ -1,0 +1,22 @@
+{
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:lens",
+  "name": "Linsen und Spiegel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Strahlen reichen bis zu sechzehn Blöcke weit und durchdringen Glas. Eine $(item)Linse$() führt einen Strahl verlustfrei geradeaus weiter; ein $(item)Spiegel$() fängt Strahlen aus jeder Richtung und lenkt sie zu seiner Front – mit ein wenig Verlust.$(br2)Mit leerer Hand benutzen, um sie zu drehen; schleichend dreht man zurück."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:lens",
+      "text": ""
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:mirror",
+      "text": ""
+    }
+  ],
+  "sortnum": 1
+}

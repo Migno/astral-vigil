@@ -23,6 +23,11 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.CODEX_CAELESTIS.get());
                 output.accept(AVItems.FALLEN_STAR.get());
                 output.accept(AVItems.METEORIC_STONE.get());
+                output.accept(AVItems.STARLIGHT_COLLECTOR.get());
+                output.accept(AVItems.LENS.get());
+                output.accept(AVItems.MIRROR.get());
+                output.accept(AVItems.PRISM.get());
+                output.accept(AVItems.STARLIGHT_RESERVOIR.get());
             })
             .build());
 
