@@ -76,7 +76,7 @@ Emissive layers need a vanilla-RenderType fallback (GeckoLib emissivity is broke
 - **BlockPilot** 1.3.1 (GitHub release jars via ivy repo, `localRuntime` only, never in release jar).
   After the first client start the launcher is `run/<target>/client/blockpilot/blockpilot.cmd`;
   registered as MCP `blockpilot-121` / `blockpilot-261`. CLI: `blockpilot.cmd --wait-ready 300 "status"`.
-  Screenshots into docs: `.	oolsp-shot.ps1 -Target 26.1-neoforge -Phase phase1 -Name foo -Before "<script>"`.
+  Screenshots into docs: `.	oolsbp-shot.ps1 -Target 26.1-neoforge -Phase phase1 -Name foo -Before "<script>"`.
   `prepareDevOptions` writes `pauseOnLostFocus:false` before every client run.
 - Decompiled MC/NeoForge sources: `versions/<target>/build/moddev/artifacts/*-sources.jar` and the
   NeoForge sources jar in the Gradle cache – grep them instead of guessing APIs.
