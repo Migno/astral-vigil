@@ -1,0 +1,37 @@
+# Gradle
+.gradle/
+.kotlin/
+build/
+out/
+bin/
+classes/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+*.launch
+
+# Dev run directories (client/server/gametest/compat/atm)
+run/
+runs/
+
+# Datagen cache
+**/src/generated/resources/.cache/
+
+# OS / JVM
+*.DS_Store
+Thumbs.db
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
+
+# Local-only
+/astral-vigil-claude-code-prompt.md
+.claude/settings.local.json
