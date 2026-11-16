@@ -24,8 +24,39 @@ public final class AVServerConfig {
     public static final ModConfigSpec.IntValue ASTROLABE_COOLDOWN;
     public static final ModConfigSpec.IntValue ASTROLABE_TRACK_RANGE;
 
+    // Research
+    public static final ModConfigSpec.IntValue RESEARCH_ATTUNEMENT;
+    public static final ModConfigSpec.IntValue RESEARCH_POINTS_BLOCK;
+    public static final ModConfigSpec.IntValue RESEARCH_POINTS_ENTITY;
+    public static final ModConfigSpec.IntValue RESEARCH_POINTS_BIOME;
+    public static final ModConfigSpec.IntValue RESEARCH_POINTS_STRUCTURE;
+    public static final ModConfigSpec.IntValue RESEARCH_SCAN_RANGE;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
+
+        b.comment("Research: scanning blocks, creatures, biomes and structures with the Astrolabe.")
+                .translation("astralvigil.configuration.research")
+                .push("research");
+        RESEARCH_ATTUNEMENT = b.comment("Knowledge points needed to become attuned to an alignment.")
+                .translation("astralvigil.configuration.research.attunement")
+                .defineInRange("attunementThreshold", 12, 1, 1000);
+        RESEARCH_POINTS_BLOCK = b.comment("Knowledge for the first scan of a block type.")
+                .translation("astralvigil.configuration.research.points_block")
+                .defineInRange("pointsBlock", 1, 0, 100);
+        RESEARCH_POINTS_ENTITY = b.comment("Knowledge for the first scan of a creature type.")
+                .translation("astralvigil.configuration.research.points_entity")
+                .defineInRange("pointsEntity", 2, 0, 100);
+        RESEARCH_POINTS_BIOME = b.comment("Knowledge for the first scan of a biome (under the open sky).")
+                .translation("astralvigil.configuration.research.points_biome")
+                .defineInRange("pointsBiome", 2, 0, 100);
+        RESEARCH_POINTS_STRUCTURE = b.comment("Knowledge for the first scan inside a structure.")
+                .translation("astralvigil.configuration.research.points_structure")
+                .defineInRange("pointsStructure", 4, 0, 100);
+        RESEARCH_SCAN_RANGE = b.comment("Reach of the Astrolabe when scanning blocks.")
+                .translation("astralvigil.configuration.research.scan_range")
+                .defineInRange("scanRange", 16, 4, 64);
+        b.pop();
 
         b.comment("Starfall: rare night-time meteor events that leave a small crater with a Fallen Star.")
                 .translation("astralvigil.configuration.starfall")

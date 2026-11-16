@@ -1,9 +1,17 @@
 package media.hofferbert.astralvigil.gametest;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import media.hofferbert.astralvigil.AstralVigil;
 import media.hofferbert.astralvigil.compat.Celestial;
+import media.hofferbert.astralvigil.config.AVServerConfig;
+import media.hofferbert.astralvigil.registry.AVAttachments;
+import media.hofferbert.astralvigil.research.Alignment;
+import media.hofferbert.astralvigil.research.AlignmentTags;
+import media.hofferbert.astralvigil.research.ResearchData;
+import media.hofferbert.astralvigil.research.ResearchManager;
+import net.minecraft.server.level.ServerPlayer;
 import media.hofferbert.astralvigil.registry.AVBlocks;
 import media.hofferbert.astralvigil.registry.AVItems;
 import media.hofferbert.astralvigil.starfall.StarfallCrater;
@@ -34,9 +42,49 @@ public final class AVGameTests {
             new Def("fallen_star_drops_shards", PLATFORM, 40, false, AVGameTests::fallenStarDropsShards),
             new Def("no_starlight_under_roof", PLATFORM, 40, false, AVGameTests::noStarlightUnderRoof),
             new Def("starfall_crater", CRATER_FIELD, 40, true, AVGameTests::starfallCrater),
-            new Def("starfall_lands", CRATER_FIELD, StarfallManager.FALL_TICKS + 60, true, AVGameTests::starfallLands));
+            new Def("starfall_lands", CRATER_FIELD, StarfallManager.FALL_TICKS + 60, true, AVGameTests::starfallLands),
+            new Def("alignment_tags_loaded", PLATFORM, 40, false, AVGameTests::alignmentTagsLoaded),
+            new Def("scan_block_grants_knowledge", PLATFORM, 40, false, AVGameTests::scanBlockGrantsKnowledge),
+            new Def("constellation_needs_attunement", PLATFORM, 40, false, AVGameTests::constellationNeedsAttunement));
 
     private AVGameTests() {}
+
+    static void alignmentTagsLoaded(GameTestHelper helper) {
+        GT.check(helper, Blocks.GLOWSTONE.defaultBlockState().is(AlignmentTags.blocks(Alignment.SOL)), "glowstone not Sol");
+        GT.check(helper, Blocks.SCULK.defaultBlockState().is(AlignmentTags.blocks(Alignment.VOID)), "sculk not Void");
+        GT.check(
+                helper,
+                AVBlocks.FALLEN_STAR.get().defaultBlockState().is(AlignmentTags.blocks(Alignment.STELLA)),
+                "fallen star not Stella");
+        helper.succeed();
+    }
+
+    static void scanBlockGrantsKnowledge(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        player.setData(AVAttachments.RESEARCH, ResearchData.EMPTY);
+        BlockPos rel = GT.pos(2, 1, 2);
+        helper.setBlock(rel, Blocks.GLOWSTONE);
+        ResearchManager.scanBlock(player, helper.absolutePos(rel));
+        ResearchData data = ResearchManager.get(player);
+        int points = AVServerConfig.RESEARCH_POINTS_BLOCK.get();
+        GT.check(helper, data.hasScanned("block/minecraft:glowstone"), "glowstone not recorded");
+        GT.check(helper, data.knowledge(Alignment.SOL) == points, "expected " + points + " Sol, got " + data.knowledge(Alignment.SOL));
+        ResearchManager.scanBlock(player, helper.absolutePos(rel)); // rescan gives nothing
+        GT.check(helper, ResearchManager.get(player).knowledge(Alignment.SOL) == points, "rescan granted knowledge");
+        helper.succeed();
+    }
+
+    static void constellationNeedsAttunement(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        player.setData(AVAttachments.RESEARCH, ResearchData.EMPTY);
+        ResearchManager.solveConstellation(player, "halo");
+        GT.check(helper, !ResearchManager.get(player).hasConstellation("halo"), "halo learned without attunement");
+        int threshold = AVServerConfig.RESEARCH_ATTUNEMENT.get();
+        player.setData(AVAttachments.RESEARCH, ResearchData.EMPTY.withScan("test/sol", Set.of(Alignment.SOL), threshold));
+        ResearchManager.solveConstellation(player, "halo");
+        GT.check(helper, ResearchManager.get(player).hasConstellation("halo"), "halo not learned after attunement");
+        helper.succeed();
+    }
 
     static void modLoaded(GameTestHelper helper) {
         GT.check(helper, ModList.get().isLoaded(AstralVigil.MOD_ID), "Astral Vigil is not loaded");

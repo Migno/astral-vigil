@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:constellations",
+  "icon": "astralvigil:star_chart",
+  "name": "Zeichen am Himmel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Jeder Wächter hinterließ ein Zeichen am Himmel. Erlerne sie auf deiner $(item)Sternkarte$(). Eines Tages wirst du sie unten nachbauen, Stein um Stein – und der Himmel wird antworten."
+    }
+  ],
+  "sortnum": 0
+}

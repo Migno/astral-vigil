@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_crescent",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:snow_block",
+  "name": "Die Sichel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vaels Bogen, fünf Sterne, gekrümmt wie eine gespannte Sehne."
+    }
+  ],
+  "sortnum": 2
+}

@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_quill",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:feather",
+  "name": "Die Feder",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mein eigenes Zeichen. Ein langer Kiel und eine gefiederte Spitze – es zeigt sich nur jenen, die Mond und Sterne zugleich lesen."
+    }
+  ],
+  "sortnum": 4
+}

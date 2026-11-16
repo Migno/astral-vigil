@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/attuned_sol",
+  "category": "astralvigil:alignments",
+  "icon": "minecraft:sunflower",
+  "name": "Sol",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Solennes Licht.$() Hitze, Gold und Honig; Wüsten, Savannen und die brennenden Lande in der Tiefe. Sol begünstigt jene, die bei Tag kämpfen und die ruhelosen Toten zur Ruhe betten."
+    }
+  ],
+  "sortnum": 1
+}

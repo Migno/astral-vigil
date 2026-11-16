@@ -29,6 +29,8 @@ public class AVModelProvider extends ModelProvider {
 
         itemModels.generateFlatItem(AVItems.ASTRAL_SHARD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.ASTROLABE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.STAR_CHART.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.CODEX_CAELESTIS.get(), ModelTemplates.FLAT_ITEM);
     }
 }
 //?} else {
@@ -56,6 +58,8 @@ public class AVModelProvider extends ModelProvider {
         protected void registerModels() {
             basicItem(AVItems.ASTRAL_SHARD.get());
             basicItem(AVItems.ASTROLABE.get());
+            basicItem(AVItems.STAR_CHART.get());
+            basicItem(AVItems.CODEX_CAELESTIS.get());
         }
     }
 }

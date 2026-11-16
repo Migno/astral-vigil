@@ -4,6 +4,8 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import media.hofferbert.astralvigil.AstralVigil;
 import media.hofferbert.astralvigil.item.AstrolabeItem;
+import media.hofferbert.astralvigil.item.CodexItem;
+import media.hofferbert.astralvigil.item.StarChartItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -17,6 +19,10 @@ public final class AVItems {
             register("astral_shard", Item::new, p -> p.rarity(Rarity.UNCOMMON));
     public static final DeferredItem<AstrolabeItem> ASTROLABE =
             register("astrolabe", AstrolabeItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<StarChartItem> STAR_CHART =
+            register("star_chart", StarChartItem::new, p -> p.stacksTo(1));
+    public static final DeferredItem<CodexItem> CODEX_CAELESTIS =
+            register("codex_caelestis", CodexItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
 
     public static final DeferredItem<BlockItem> FALLEN_STAR = ITEMS.registerSimpleBlockItem(AVBlocks.FALLEN_STAR);
     public static final DeferredItem<BlockItem> METEORIC_STONE = ITEMS.registerSimpleBlockItem(AVBlocks.METEORIC_STONE);

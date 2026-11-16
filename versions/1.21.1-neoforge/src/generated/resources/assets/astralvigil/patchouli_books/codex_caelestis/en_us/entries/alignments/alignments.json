@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:alignments",
+  "icon": "astralvigil:codex_caelestis",
+  "name": "The Four Lights",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Every stone, creature, land and ruin leans towards an alignment: $(l)Sol$(), $(l)Luna$(), $(l)Stella$() – or the $(l)Void$().$(br2)Scanning something new grants knowledge of its alignment. Gather enough and you become $(l)attuned$(): new pages and constellations open to you."
+    }
+  ],
+  "sortnum": 0
+}

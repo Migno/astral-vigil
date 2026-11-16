@@ -33,6 +33,20 @@ events and cannot be automated.
 **Recipe:** 4× `#c:ingots/gold` + 1× `#astralvigil:astral_shards` + 1× `#c:ingots/copper` – first use of the shard, cheap
 on purpose (it is an exploration tool).
 
+## Research (`[research]`)
+
+| Key | Default | Why |
+|---|---|---|
+| `attunementThreshold` | 12 | Roughly 4–8 new discoveries of one alignment (e.g. 3 biomes + 2 creatures + a few blocks) – an evening of exploring, not a grind. |
+| `pointsBlock` | 1 | Blocks are plentiful and found without travelling. |
+| `pointsEntity` | 2 | Creatures require finding and approaching. |
+| `pointsBiome` | 2 | Requires travel and open sky. |
+| `pointsStructure` | 4 | Rare, often dangerous. |
+| `scanRange` | 16 | Reserved for ranged scanning; current scans use vanilla reach. |
+
+Only the **first** scan of each subject counts, so research cannot be farmed. Quill (Ilyra) needs two attunements
+(Luna + Stella) – the chronicler's sign is the reward for broad research.
+
 ## Starlight formula
 
 `intensity = night(t) × moon(phase) × weather`, 0 without sky access.

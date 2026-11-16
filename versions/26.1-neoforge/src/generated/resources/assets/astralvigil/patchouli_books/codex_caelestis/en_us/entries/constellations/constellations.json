@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:constellations",
+  "icon": "astralvigil:star_chart",
+  "name": "Signs in the Sky",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Each Watcher left a sign in the sky. Learn them on your $(item)Star Chart$(). One day you will build them below, stone by stone – and the sky will answer."
+    }
+  ],
+  "sortnum": 0
+}

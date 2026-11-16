@@ -1,0 +1,22 @@
+{
+  "category": "astralvigil:the_rift",
+  "icon": "astralvigil:fallen_star",
+  "name": "Sternenfall",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In klaren Nächten fallen Sterne. Du siehst den Streif am Himmel und hörst den Einschlag; die Chronik vermerkt, in welcher Richtung er niederging.$(br2)Bei $(l)Vollmond$() verliert der Himmel häufiger Sterne."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:fallen_star",
+      "text": "Jeder Einschlag hinterlässt einen kleinen Krater, ausgekleidet mit $(item)Meteorgestein$(), und in seinem Herzen einen $(item)Gefallenen Stern$(). Brich ihn mit einer Eisenspitzhacke, um $(item)Astralsplitter$() zu lösen."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_shard",
+      "text": "Astralsplitter summen noch immer vor Sternenlicht. Aus ihnen erwächst alles in dieser Chronik."
+    }
+  ],
+  "sortnum": 1
+}

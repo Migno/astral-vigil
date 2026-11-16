@@ -11,20 +11,24 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import media.hofferbert.astralvigil.research.ResearchManager;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-//? if >=26.1 {
-import net.minecraft.world.InteractionResult;
-//?} else {
+//? if <26.1 {
 /*import net.minecraft.world.InteractionResultHolder;
 *///?}
 
 /**
  * The Astrolabe reads the sky: starlight intensity, moon phase, sky access – and it hums towards recently fallen
- * stars. Later phases extend it with alignment scans.
+ * stars. Used on a block or creature it scans its celestial alignment; used into the air it also scans the
+ * surrounding biome or structure.
  */
 public class AstrolabeItem extends Item {
     static final String[] MOON_PHASES = {
@@ -42,6 +46,9 @@ public class AstrolabeItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (level instanceof ServerLevel serverLevel) {
             read(serverLevel, player, stack);
+            if (player instanceof ServerPlayer sp) {
+                ResearchManager.scanSurroundings(sp);
+            }
         }
         return InteractionResult.SUCCESS;
     }
@@ -51,10 +58,31 @@ public class AstrolabeItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (level instanceof ServerLevel serverLevel) {
             read(serverLevel, player, stack);
+            if (player instanceof ServerPlayer sp) {
+                ResearchManager.scanSurroundings(sp);
+            }
         }
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
     *///?}
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        if (context.getPlayer() instanceof ServerPlayer player) {
+            ResearchManager.scanBlock(player, context.getClickedPos());
+            PlayerCompat.cooldown(player, context.getItemInHand(), AVServerConfig.ASTROLABE_COOLDOWN.get());
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+        if (player instanceof ServerPlayer sp) {
+            ResearchManager.scanEntity(sp, target);
+            PlayerCompat.cooldown(player, stack, AVServerConfig.ASTROLABE_COOLDOWN.get());
+        }
+        return InteractionResult.SUCCESS;
+    }
 
     /** Server side: builds and sends the reading. */
     public static void read(ServerLevel level, Player player, ItemStack stack) {

@@ -26,7 +26,11 @@ public final class AstralVigilClient {
     /** Flavour line under every Astral Vigil item that has a {@code <descriptionId>.desc} key. */
     private static void onTooltip(ItemTooltipEvent event) {
         Item item = event.getItemStack().getItem();
-        if (item == AVItems.ASTRAL_SHARD.get() || item == AVItems.ASTROLABE.get() || item == AVItems.FALLEN_STAR.get()) {
+        if (item == AVItems.ASTRAL_SHARD.get()
+                || item == AVItems.ASTROLABE.get()
+                || item == AVItems.FALLEN_STAR.get()
+                || item == AVItems.STAR_CHART.get()
+                || item == AVItems.CODEX_CAELESTIS.get()) {
             event.getToolTip()
                     .add(1, Component.translatable(item.getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }

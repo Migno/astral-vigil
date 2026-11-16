@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:enderman",
+    "minecraft:endermite",
+    "minecraft:warden",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:zombie",
+    "minecraft:skeleton",
+    "minecraft:husk",
+    "minecraft:stray",
+    "minecraft:vex",
+    "minecraft:evoker"
+  ]
+}

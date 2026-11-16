@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:instruments",
+  "icon": "astralvigil:star_chart",
+  "name": "Die Sternkarte",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:star_chart",
+      "text": "Pergament, das sich an den Himmel erinnert."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sobald du auf eine Ausrichtung eingestimmt bist, zeigt sich ihr Sternbild auf der Karte. Klicke einen Stern, dann einen weiteren, um eine Linie zu ziehen; ein erneuter Klick löscht sie.$(br2)Hüte dich vor verirrten Sternen – nicht jedes Licht gehört zum Zeichen."
+    }
+  ],
+  "sortnum": 1
+}

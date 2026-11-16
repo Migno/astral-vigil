@@ -1,0 +1,27 @@
+{
+  "parent": "astralvigil:research/first_scan",
+  "criteria": {
+    "research": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.constellation_crescent.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:snow_block"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.constellation_crescent.title"
+    }
+  },
+  "requirements": [
+    [
+      "research"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

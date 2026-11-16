@@ -19,6 +19,8 @@ public final class AVCreativeTabs {
             .displayItems((params, output) -> {
                 output.accept(AVItems.ASTRAL_SHARD.get());
                 output.accept(AVItems.ASTROLABE.get());
+                output.accept(AVItems.STAR_CHART.get());
+                output.accept(AVItems.CODEX_CAELESTIS.get());
                 output.accept(AVItems.FALLEN_STAR.get());
                 output.accept(AVItems.METEORIC_STONE.get());
             })

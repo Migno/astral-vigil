@@ -4,6 +4,22 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 2 – Research
+- **Celestial alignments** Sol, Luna, Stella, Void – fully tag-driven (`#astralvigil:alignment/<name>` for blocks,
+  entity types, biomes and structures) with sensible vanilla defaults.
+- **Scanning** with the Astrolabe: blocks (use on block), creatures (use on entity), biome or structure (use into
+  the air). First scans grant alignment knowledge; reaching the threshold attunes the player.
+- **Research data** as a persistent, death-surviving player attachment, synced to its owner.
+- **Star Chart** item + minigame screen: connect the stars of revealed constellations (Halo, Crescent, Anvil, Quill)
+  while avoiding decoy stars; server re-validates.
+- **Codex Caelestis** (Patchouli, optional): generated book with four categories, entries unlock with research
+  advancements; full en_us + de_de content.
+- Research advancements (first scan, four attunements, four constellations).
+- `/astralvigil research <alignment> <points>` and `/astralvigil research reset`.
+- Compat instance now pins Modrinth **version ids** (`tools/dev/resolve_compat.py`) – version numbers resolved to
+  Fabric jars for multi-loader releases. Compat client (26.1) verified: JEI, Jade, Curios, Patchouli, Sodium, Iris,
+  Apotheosis, KubeJS, GeckoLib load together with Astral Vigil.
+
 ### Phase 1 – Foundation
 - Registries: Astral Shard, Astrolabe, Fallen Star, Meteoric Stone; creative tab "Astral Vigil".
 - **Starfall:** at night stars may fall near players (server-config driven, full-moon bonus, per-player cooldown);

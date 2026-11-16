@@ -37,6 +37,7 @@ Versions live in `stonecutter.properties.toml` – verify against maven.neoforge
 .\gradlew.bat runData                        # datagen -> versions/<target>/src/generated/resources
 .\gradlew.bat :<target>:runServer            # headless dedicated server
 .\gradlew.bat :<target>:runCompatClient      # client + compat mods from Modrinth (see toml)
+python -I tools/dev/resolve_compat.py         # refresh compat mod version ids (paste into stonecutter.properties.toml)
 .\gradlew.bat spotlessApply                  # whitespace hygiene (spotlessCheck in CI); no code formatter – it breaks //? comments
 .\gradlew.bat "Set active project to 1.21.1-neoforge"  # switch src/ to another target (switch back before committing!)
 ```
@@ -58,6 +59,10 @@ Run dirs: `run/<target>/{client,server,gametest,data,compat}` (git-ignored).
 - Performance: beams/particles client-side; server only recomputes graphs on change.
 - GameTests: add a `Def` to `gametest/AVGameTests.ALL`; structures in
   `src/main/resources/data/astralvigil/structure/gametest/*.nbt`.
+- Research: alignments via `#astralvigil:alignment/<sol|luna|stella|void>` tags; player state in the
+  `astralvigil:research` attachment; milestones are advancements (`research/*`) granted in `ResearchManager`.
+- Codex: edit `datagen/CodexContent.java` (en + de), never the generated Patchouli JSON.
+- Debug: `/astralvigil starfall [here]`, `/astralvigil research <alignment> <points>|reset`.
 - Commits: Conventional Commits, no AI attribution lines.
 
 ## Art rules

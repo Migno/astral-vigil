@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:instruments",
+  "icon": "astralvigil:astrolabe",
+  "name": "Das Astrolabium",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:astrolabe",
+      "text": "Dein erstes Instrument."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Benutze$() es gen Himmel, um Sternenlicht, Mondphase und freie Sicht zu lesen. Es summt zudem in Richtung kürzlich gefallener Sterne.$(br2)$(l)Benutze es an einem Block oder Geschöpf$(), um dessen himmlische Ausrichtung zu ergründen. Unter freiem Himmel liest es das Biom – oder das Bauwerk, in dem du stehst."
+    }
+  ],
+  "sortnum": 0
+}

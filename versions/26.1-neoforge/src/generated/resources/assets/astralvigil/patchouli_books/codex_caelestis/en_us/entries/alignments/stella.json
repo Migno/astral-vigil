@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/attuned_stella",
+  "category": "astralvigil:alignments",
+  "icon": "minecraft:amethyst_cluster",
+  "name": "Stella",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Orrin's forge-light.$() Amethyst, end stone and all that fell from above; high peaks closest to the sky. Stella belongs to builders, smiths and those who arrange the stars themselves."
+    }
+  ],
+  "sortnum": 3
+}

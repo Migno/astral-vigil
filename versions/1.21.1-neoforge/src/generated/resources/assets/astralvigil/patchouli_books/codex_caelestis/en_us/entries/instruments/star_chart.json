@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:instruments",
+  "icon": "astralvigil:star_chart",
+  "name": "The Star Chart",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:star_chart",
+      "text": "Vellum that remembers the sky."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Once you are attuned to an alignment, its constellation reveals itself on the chart. Click a star, then another to draw a line; click a line again to erase it.$(br2)Beware the stray stars – not every light belongs to the sign."
+    }
+  ],
+  "sortnum": 1
+}

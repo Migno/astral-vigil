@@ -10,10 +10,18 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import media.hofferbert.astralvigil.research.Alignment;
+import media.hofferbert.astralvigil.research.Constellation;
+import media.hofferbert.astralvigil.research.Constellations;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 //? if >=26.1 {
+import net.minecraft.advancements.criterion.ImpossibleTrigger;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 //?} else {
-/*import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+/*import net.minecraft.advancements.critereon.ImpossibleTrigger;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 *///?}
 
 /** Advancement tree "Astral Vigil". */
@@ -55,7 +63,7 @@ public class AVAdvancements implements AdvancementSubProvider {
                 .addCriterion("has_astral_shard", InventoryChangeTrigger.TriggerInstance.hasItems(AVItems.ASTRAL_SHARD.get()))
                 .save(out, "astralvigil:starstruck");
 
-        Advancement.Builder.advancement()
+        AdvancementHolder heavens = Advancement.Builder.advancement()
                 .parent(starstruck)
                 .display(
                         AVItems.ASTROLABE.get(),
@@ -68,6 +76,27 @@ public class AVAdvancements implements AdvancementSubProvider {
                         false)
                 .addCriterion("has_astrolabe", InventoryChangeTrigger.TriggerInstance.hasItems(AVItems.ASTROLABE.get()))
                 .save(out, "astralvigil:read_the_heavens");
+
+        // Research advancements: granted from code (impossible criterion "research").
+        AdvancementHolder firstScan = research(out, heavens, "first_scan", AVItems.ASTROLABE.get(), AdvancementType.TASK);
+        ItemLike[] icons = {Items.SUNFLOWER, Items.SNOW_BLOCK, Items.AMETHYST_CLUSTER, Items.CRYING_OBSIDIAN};
+        for (Alignment a : Alignment.values()) {
+            research(out, firstScan, "attuned_" + a.id(), icons[a.ordinal()], AdvancementType.GOAL);
+        }
+        ItemLike[] cIcons = {Items.SUNFLOWER, Items.SNOW_BLOCK, Items.ANVIL, Items.FEATHER};
+        int i = 0;
+        for (Constellation c : Constellations.all()) {
+            research(out, firstScan, "constellation_" + c.id(), cIcons[i++ % cIcons.length], AdvancementType.CHALLENGE);
+        }
+    }
+
+    private static AdvancementHolder research(
+            Consumer<AdvancementHolder> out, AdvancementHolder parent, String id, ItemLike icon, AdvancementType type) {
+        return Advancement.Builder.advancement()
+                .parent(parent)
+                .display(icon, title(id), description(id), null, type, true, type != AdvancementType.TASK, false)
+                .addCriterion("research", CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
+                .save(out, "astralvigil:research/" + id);
     }
 
     private static Component title(String id) {

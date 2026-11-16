@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_anvil",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:anvil",
+  "name": "Der Amboss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Orrins Amboss: eine breite Bahn, eine schmale Taille, ein fester Fuß. Jeder Stern, den er je schmiedete, wurde darauf geschlagen."
+    }
+  ],
+  "sortnum": 3
+}

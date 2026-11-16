@@ -96,6 +96,10 @@ neoForge {
         register("compatClient") {
             client()
             gameDirectory = runRoot.dir("compat").asFile
+            if (providers.gradleProperty("av.autojoin").map(String::toBoolean).getOrElse(false)) {
+                systemProperty("blockpilot.autojoin", "astralvigil-compat")
+                systemProperty("blockpilot.autocreate", "flat")
+            }
         }
         register("server") {
             server()

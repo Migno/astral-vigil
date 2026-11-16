@@ -1,0 +1,27 @@
+{
+  "parent": "astralvigil:read_the_heavens",
+  "criteria": {
+    "research": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.astralvigil.first_scan.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "astralvigil:astrolabe"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.first_scan.title"
+    }
+  },
+  "requirements": [
+    [
+      "research"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "astralvigil:codex_books"
+    },
+    "G": {
+      "tag": "c:nuggets/gold"
+    },
+    "S": {
+      "tag": "astralvigil:astral_shards"
+    }
+  },
+  "pattern": [
+    " G ",
+    "SBS",
+    " G "
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:codex_caelestis"
+  }
+}

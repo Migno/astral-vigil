@@ -30,8 +30,11 @@ public final class AVDataGen {
 
         gen.addProvider(true, new AVModelProvider(out));
         common(gen, out, lookup);
-        gen.addProvider(true, new AVTagProviders.Blocks(out, lookup));
-        gen.addProvider(true, new AVTagProviders.Items(out, lookup));
+        gen.addProvider(true, new AVTagProviders.BlockTagProvider(out, lookup));
+        gen.addProvider(true, new AVTagProviders.ItemTagProvider(out, lookup));
+        gen.addProvider(true, new AVAlignmentTags.Entities(out, lookup));
+        gen.addProvider(true, new AVAlignmentTags.BiomeAlignments(out, lookup));
+        gen.addProvider(true, new AVAlignmentTags.Structures(out, lookup));
     }
     //?} else {
     /*public static void gather(GatherDataEvent event) {
@@ -43,8 +46,11 @@ public final class AVDataGen {
         gen.addProvider(event.includeClient(), new AVModelProvider.BlockStates(out, efh));
         gen.addProvider(event.includeClient(), new AVModelProvider.ItemModels(out, efh));
         common(gen, out, lookup);
-        var blockTags = gen.addProvider(event.includeServer(), new AVTagProviders.Blocks(out, lookup, efh));
-        gen.addProvider(event.includeServer(), new AVTagProviders.Items(out, lookup, blockTags.contentsGetter(), efh));
+        var blockTags = gen.addProvider(event.includeServer(), new AVTagProviders.BlockTagProvider(out, lookup, efh));
+        gen.addProvider(event.includeServer(), new AVTagProviders.ItemTagProvider(out, lookup, blockTags.contentsGetter(), efh));
+        gen.addProvider(event.includeServer(), new AVAlignmentTags.Entities(out, lookup, efh));
+        gen.addProvider(event.includeServer(), new AVAlignmentTags.BiomeAlignments(out, lookup, efh));
+        gen.addProvider(event.includeServer(), new AVAlignmentTags.Structures(out, lookup, efh));
     }
     *///?}
 
@@ -60,6 +66,7 @@ public final class AVDataGen {
                         lookup));
         gen.addProvider(true, AVRecipeProvider.create(out, lookup));
         gen.addProvider(true, new AdvancementProvider(out, lookup, List.of(new AVAdvancements())));
+        gen.addProvider(true, new AVCodexProvider(out));
         AstralVigil.LOGGER.info("Astral Vigil data providers registered");
     }
 }

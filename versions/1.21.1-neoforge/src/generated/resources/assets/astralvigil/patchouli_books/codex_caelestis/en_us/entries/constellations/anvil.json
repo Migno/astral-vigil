@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_anvil",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:anvil",
+  "name": "The Anvil",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Orrin's anvil: a broad face, a narrow waist, a steady foot. Every star he ever forged was struck upon it."
+    }
+  ],
+  "sortnum": 3
+}

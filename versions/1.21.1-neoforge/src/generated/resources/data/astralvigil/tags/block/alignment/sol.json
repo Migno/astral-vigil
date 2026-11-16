@@ -1,0 +1,16 @@
+{
+  "values": [
+    "minecraft:glowstone",
+    "minecraft:shroomlight",
+    "minecraft:sunflower",
+    "minecraft:gold_block",
+    "minecraft:raw_gold_block",
+    "minecraft:magma_block",
+    "minecraft:honey_block",
+    "minecraft:honeycomb_block",
+    "minecraft:torchflower",
+    "minecraft:campfire",
+    "minecraft:sand",
+    "minecraft:red_sand"
+  ]
+}

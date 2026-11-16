@@ -1,7 +1,14 @@
 package media.hofferbert.astralvigil.command;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import java.util.Arrays;
 import media.hofferbert.astralvigil.AstralVigil;
+import media.hofferbert.astralvigil.research.Alignment;
+import media.hofferbert.astralvigil.research.ResearchManager;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.server.level.ServerPlayer;
 import media.hofferbert.astralvigil.starfall.StarfallManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -29,7 +36,36 @@ public final class AVCommands {
                 *///?}
                 .then(Commands.literal("starfall")
                         .executes(ctx -> starfallNear(ctx.getSource()))
-                        .then(Commands.literal("here").executes(ctx -> starfallHere(ctx.getSource())))));
+                        .then(Commands.literal("here").executes(ctx -> starfallHere(ctx.getSource()))))
+                .then(Commands.literal("research")
+                        .then(Commands.literal("reset").executes(ctx -> {
+                            ServerPlayer player = ctx.getSource().getPlayerOrException();
+                            ResearchManager.reset(player);
+                            ctx.getSource().sendSuccess(() -> Component.translatable("commands.astralvigil.research.reset"), true);
+                            return 1;
+                        }))
+                        .then(Commands.argument("alignment", StringArgumentType.word())
+                                .suggests((ctx, b) -> SharedSuggestionProvider.suggest(
+                                        Arrays.stream(Alignment.values()).map(Alignment::id), b))
+                                .then(Commands.argument("points", IntegerArgumentType.integer(1, 1000))
+                                        .executes(ctx -> {
+                                            ServerPlayer player = ctx.getSource().getPlayerOrException();
+                                            Alignment a = Alignment.byId(StringArgumentType.getString(ctx, "alignment"))
+                                                    .orElse(null);
+                                            if (a == null) {
+                                                ctx.getSource().sendFailure(Component.literal("Unknown alignment"));
+                                                return 0;
+                                            }
+                                            int points = IntegerArgumentType.getInteger(ctx, "points");
+                                            ResearchManager.grant(player, a, points);
+                                            ctx.getSource().sendSuccess(
+                                                    () -> Component.translatable(
+                                                            "commands.astralvigil.research.granted",
+                                                            points,
+                                                            Component.translatable(a.translationKey())),
+                                                    true);
+                                            return 1;
+                                        })))));
     }
 
     private static int starfallNear(CommandSourceStack source) {

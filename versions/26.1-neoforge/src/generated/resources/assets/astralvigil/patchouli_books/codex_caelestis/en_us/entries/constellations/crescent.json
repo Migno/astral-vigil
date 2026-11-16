@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_crescent",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:snow_block",
+  "name": "The Crescent",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vael's arc, five stars bent like a drawn bow."
+    }
+  ],
+  "sortnum": 2
+}

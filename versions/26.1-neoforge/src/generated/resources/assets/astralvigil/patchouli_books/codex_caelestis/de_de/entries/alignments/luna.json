@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/attuned_luna",
+  "category": "astralvigil:alignments",
+  "icon": "minecraft:snow_block",
+  "name": "Luna",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Vaels Licht.$() Schnee, Eis und stilles Wasser; Wölfe und Füchse, die unter ihr jagen. Luna belohnt Geduld, die nächtliche Jagd und den einen, präzisen Treffer."
+    }
+  ],
+  "sortnum": 2
+}

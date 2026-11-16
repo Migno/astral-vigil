@@ -1,0 +1,26 @@
+{
+  "parent": "astralvigil:research/first_scan",
+  "criteria": {
+    "research": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.attuned_luna.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:snow_block"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.attuned_luna.title"
+    }
+  },
+  "requirements": [
+    [
+      "research"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

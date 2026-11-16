@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "tag": "c:nuggets/gold"
+    },
+    "P": {
+      "tag": "astralvigil:chart_paper"
+    },
+    "S": {
+      "tag": "astralvigil:astral_shards"
+    }
+  },
+  "pattern": [
+    " G ",
+    "PSP",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:star_chart"
+  }
+}

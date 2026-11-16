@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:alignments",
+  "icon": "astralvigil:codex_caelestis",
+  "name": "Die vier Lichter",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Jeder Stein, jedes Geschöpf, jedes Land und jede Ruine neigt sich einer Ausrichtung zu: $(l)Sol$(), $(l)Luna$(), $(l)Stella$() – oder der $(l)Leere$().$(br2)Etwas Neues zu ergründen schenkt Wissen über seine Ausrichtung. Sammle genug, und du wirst $(l)eingestimmt$(): Neue Seiten und Sternbilder öffnen sich dir."
+    }
+  ],
+  "sortnum": 0
+}

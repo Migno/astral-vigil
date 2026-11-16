@@ -1,0 +1,13 @@
+{
+  "category": "astralvigil:instruments",
+  "icon": "astralvigil:codex_caelestis",
+  "name": "Codex Caelestis",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:codex_caelestis",
+      "text": "Du liest ihn gerade."
+    }
+  ],
+  "sortnum": 2
+}

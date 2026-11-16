@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/attuned_luna",
+  "category": "astralvigil:alignments",
+  "icon": "minecraft:snow_block",
+  "name": "Luna",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Vael's light.$() Snow, ice and still water; wolves and foxes that hunt beneath her. Luna rewards patience, the night hunt and the single precise strike."
+    }
+  ],
+  "sortnum": 2
+}

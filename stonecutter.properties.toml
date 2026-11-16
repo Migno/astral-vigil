@@ -17,8 +17,9 @@ deps.neoforge = "21.1.266"
 deps.parchment_mc = "1.21.1"
 deps.parchment = "2024.11.17"
 deps.geckolib = "4.9.3"
-# Compat instance (runCompatClient) – comma separated Modrinth slug:version
-compat.mods = "emi:1.1.24+1.21.1+neoforge,jade:15.10.6+neoforge,curios:9.5.1+1.21.1,patchouli:1.21.1-93-neoforge,sodium:mc1.21.1-0.8.13-neoforge,iris:1.8.14-beta.1+1.21.1-neoforge,placebo:1.21.1-9.9.4,apothic-attributes:1.21.1-2.11.0,apothic-enchanting:1.21.1-1.6.4,apothic-spawners:1.21.1-1.4.0,apotheosis:1.21.1-8.9.0,rhino:2101.2.8-build.91+Rhino-1.21,better-advanced-tooltips:2101.1.0-build.5,architectury-api:13.0.12+neoforge,kubejs:2101.7.2-build.381"
+# Compat instance (runCompatClient) – comma separated Modrinth slug:<version id>.
+# Regenerate with: python -I tools/dev/resolve_compat.py (ids avoid Fabric jars of multi-loader releases)
+compat.mods = "emi:5sIPA1To,jade:eYz2YBGT,curios:yohfFbgD,patchouli:BIogJv2D,sodium:uMOpc5uV,iris:KduFYu4t,placebo:B5zbSVlT,apothic-attributes:64fZbLnj,apothic-enchanting:JAQJkLJ1,apothic-spawners:pWfxcfO2,apotheosis:veL1ccTb,rhino:SqkDvOLG,better-advanced-tooltips:uPFbnD32,architectury-api:xGfBrBzj,kubejs:GDXCpKlp,geckolib:Grwn5rUB"
 
 ["26.1-neoforge"]
 mod.mc_compat = "[26.1.2]"
@@ -29,4 +30,4 @@ deps.parchment_mc = ""
 deps.parchment = ""
 deps.geckolib = "5.5.2"
 # EMI has no 26.1.2 build yet -> JEI on this target
-compat.mods = "mezzconfig:0.7.1,jei:29.53.0.115,jade:26.1.12+neoforge,curios:15.0.0+26.1.2,patchouli:26.1-94-beta,sodium:mc26.1.2-0.9.2-neoforge,iris:1.11.4+26.1-neoforge,placebo:26.1.2-10.0.2,apothic-attributes:26.1.2-3.1.0,apothic-enchanting:26.1.2-2.1.0,apothic-spawners:26.1.2-2.0.1,apotheosis:26.1.2-9.1.0,rhino:2101.2.8-build.91+Rhino-1.21,better-advanced-tooltips:2601.1.0-build.11,architectury-api:20.1.18+neoforge,kubejs:26.1.2-8.0.8+neoforge"
+compat.mods = "mezzconfig:DbkwO49N,jei:60HrmNPh,jade:Pr1h4azo,curios:dRnRThvD,patchouli:2CsnFLom,sodium:zg4YQ9EL,iris:qE5Y7GrZ,placebo:c4uzJQYp,apothic-attributes:lLLTcZXk,apothic-enchanting:5yksP3X6,apothic-spawners:4tD6MEQ3,apotheosis:EXaIH7Xm,rhino:SqkDvOLG,better-advanced-tooltips:DKhR2dA5,architectury-api:5Bae8CM6,kubejs:5yNEdyfc,geckolib:xfVfPcoC"

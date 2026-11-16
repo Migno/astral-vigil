@@ -37,6 +37,24 @@ public class AVRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
+        shaped(RecipeCategory.TOOLS, AVItems.STAR_CHART.get())
+                .define('G', Tags.Items.NUGGETS_GOLD)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('P', AVTags.Items.CHART_PAPER)
+                .pattern(" G ")
+                .pattern("PSP")
+                .pattern(" P ")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
+        shaped(RecipeCategory.MISC, AVItems.CODEX_CAELESTIS.get())
+                .define('G', Tags.Items.NUGGETS_GOLD)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('B', AVTags.Items.CODEX_BOOKS)
+                .pattern(" G ")
+                .pattern("SBS")
+                .pattern(" G ")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
         shaped(RecipeCategory.TOOLS, AVItems.ASTROLABE.get())
                 .define('G', Tags.Items.INGOTS_GOLD)
                 .define('S', AVTags.Items.ASTRAL_SHARDS)
@@ -58,6 +76,24 @@ public class AVRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, AVItems.STAR_CHART.get())
+                .define('G', Tags.Items.NUGGETS_GOLD)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('P', AVTags.Items.CHART_PAPER)
+                .pattern(" G ")
+                .pattern("PSP")
+                .pattern(" P ")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AVItems.CODEX_CAELESTIS.get())
+                .define('G', Tags.Items.NUGGETS_GOLD)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('B', AVTags.Items.CODEX_BOOKS)
+                .pattern(" G ")
+                .pattern("SBS")
+                .pattern(" G ")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, AVItems.ASTROLABE.get())
                 .define('G', Tags.Items.INGOTS_GOLD)
                 .define('S', AVTags.Items.ASTRAL_SHARDS)

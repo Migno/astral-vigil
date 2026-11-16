@@ -1,0 +1,27 @@
+{
+  "parent": "astralvigil:research/first_scan",
+  "criteria": {
+    "research": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.attuned_sol.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:sunflower"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.attuned_sol.title"
+    }
+  },
+  "requirements": [
+    [
+      "research"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

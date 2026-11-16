@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_halo",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:sunflower",
+  "name": "Der Heiligenschein",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Solennes Ring: sechs Sterne um einen unbeleuchteten Kern. Der Kern gehört nicht zum Zeichen – dort stünde die Sonne."
+    }
+  ],
+  "sortnum": 1
+}
