@@ -1,0 +1,33 @@
+{
+  "parent": "astralvigil:starstruck",
+  "criteria": {
+    "has_astrolabe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:astrolabe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.read_the_heavens.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "astralvigil:astrolabe"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.read_the_heavens.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_astrolabe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

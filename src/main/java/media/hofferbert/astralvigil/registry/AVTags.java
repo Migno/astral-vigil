@@ -1,0 +1,27 @@
+package media.hofferbert.astralvigil.registry;
+
+import media.hofferbert.astralvigil.AstralVigil;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+
+public final class AVTags {
+    private AVTags() {}
+
+    public static final class Blocks {
+        /** Blocks a falling star never destroys (in addition to unbreakable blocks and block entities). */
+        public static final TagKey<Block> STARFALL_IMMUNE = TagKey.create(Registries.BLOCK, AstralVigil.id("starfall_immune"));
+
+        private Blocks() {}
+    }
+
+    public static final class Items {
+        public static final TagKey<Item> ASTRAL_SHARDS = TagKey.create(Registries.ITEM, AstralVigil.id("astral_shards"));
+        /** Convention tag so packmakers/KubeJS can swap in other gems. */
+        public static final TagKey<Item> GEMS_ASTRAL = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "gems/astral"));
+
+        private Items() {}
+    }
+}

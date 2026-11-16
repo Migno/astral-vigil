@@ -1,10 +1,18 @@
 package media.hofferbert.astralvigil;
 
+import media.hofferbert.astralvigil.command.AVCommands;
+import media.hofferbert.astralvigil.config.AVClientConfig;
+import media.hofferbert.astralvigil.config.AVServerConfig;
 import media.hofferbert.astralvigil.gametest.GameTestRegistration;
+import media.hofferbert.astralvigil.registry.AVBlocks;
+import media.hofferbert.astralvigil.registry.AVCreativeTabs;
+import media.hofferbert.astralvigil.registry.AVItems;
+import media.hofferbert.astralvigil.starfall.StarfallManager;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +25,16 @@ public final class AstralVigil {
 
     public AstralVigil(IEventBus modBus, ModContainer container) {
         LOGGER.info("Astral Vigil {} initialising for Minecraft {}", VERSION, MINECRAFT);
+
+        container.registerConfig(ModConfig.Type.SERVER, AVServerConfig.SPEC);
+        container.registerConfig(ModConfig.Type.CLIENT, AVClientConfig.SPEC);
+
+        AVBlocks.BLOCKS.register(modBus);
+        AVItems.ITEMS.register(modBus);
+        AVCreativeTabs.TABS.register(modBus);
+
+        StarfallManager.register();
+        AVCommands.register();
         GameTestRegistration.register(modBus);
     }
 

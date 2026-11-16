@@ -33,6 +33,23 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   lot. Not applied automatically – owner can run (admin PowerShell):
   `Add-MpPreference -ExclusionPath "D:\dev\minecraft\Astral Vigil","$env:USERPROFILE\.gradle"`
 
+## 2026-11-16 – Phase 1
+
+- **Starfall without an entity.** The falling star is a server-tracked animation (position lerp + particle packets)
+  instead of a custom entity. Avoids a version-specific entity renderer (26.1 render-state pipeline vs 1.21.1) and
+  save/load edge cases; a star in flight is simply dropped on server stop. Custom client-side particles follow in
+  Phase 5.
+- **Recent impacts are kept in memory** (16 per dimension) for the Astrolabe – not persisted, they are a hint, not
+  progression state.
+- **Translations live in one table** (`datagen/AVLang`) with English and German side by side, so a key cannot exist in
+  only one language; the JUnit test additionally checks the generated files and placeholder counts.
+- **Tooltips via `ItemTooltipEvent`** instead of `appendHoverText` (signature differs between targets).
+- **GameTest positions via `GT.pos()`**: 1.21.1 puts relative y=0 at the structure block, 26.1 at the structure origin.
+- **Datagen classes are client-only** (26.1 model providers live in `net.minecraft.client.data`), registered from the
+  client entry point so a dedicated server never loads them.
+- Textures: three extra in-between shades were allowed (deep crystal blue `#1C5C8A`, rock mid `#2C2942`, rock light
+  `#3D3959`); every texture stays at ≤ 8 colours.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best

@@ -1,0 +1,33 @@
+{
+  "parent": "astralvigil:root",
+  "criteria": {
+    "has_astral_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:astral_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.starstruck.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "astralvigil:astral_shard"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.starstruck.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_astral_shard"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

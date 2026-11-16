@@ -5,7 +5,7 @@ Every phase ends with: build of both targets ✅ · GameTests ✅ · in-game scr
 | Phase | Scope | Status |
 |---|---|---|
 | 0 – Setup | Repo, Stonecutter + ModDevGradle for both targets, CI, CLAUDE.md, Blockbench MCP + BlockPilot, empty mod boots in both clients | in progress |
-| 1 – Foundation | Registries, creative tab, Astral Shard, Astrolabe, Starfall event, lang en/de, first textures via Blockbench MCP, GameTests | – |
+| 1 – Foundation | Registries, creative tab, Astral Shard, Astrolabe, Starfall event, lang en/de, first textures via Blockbench MCP, GameTests | ✅ done |
 | 2 – Research | Alignment system (Sol/Luna/Stella/Void), scans, Codex Caelestis (Patchouli), star-chart screen | – |
 | 3 – Energy | Starlight storage, lenses/mirrors/prisms, beam renderer, Jade plugin | – |
 | 4 – Crafting | Convergence Altar + Astral Forge, EMI/JEI plugins, tag-based recipes | – |

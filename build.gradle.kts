@@ -58,6 +58,7 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("com.google.code.gson:gson:2.11.0") // pure JUnit tests do not see the Minecraft classpath
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
