@@ -1,0 +1,42 @@
+{
+  "parent": "astralvigil:read_the_heavens",
+  "criteria": {
+    "full_set": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:lunar_helmet"
+          },
+          {
+            "items": "astralvigil:lunar_chestplate"
+          },
+          {
+            "items": "astralvigil:lunar_leggings"
+          },
+          {
+            "items": "astralvigil:lunar_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.armor_lunar.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "astralvigil:lunar_chestplate"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.armor_lunar.title"
+    }
+  },
+  "requirements": [
+    [
+      "full_set"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

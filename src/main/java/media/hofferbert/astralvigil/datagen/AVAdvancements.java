@@ -116,6 +116,17 @@ public class AVAdvancements implements AdvancementSubProvider {
                         AdvancementType.TASK, true, true, false)
                 .addCriterion("has_feather", InventoryChangeTrigger.TriggerInstance.hasItems(AVItems.SERAPH_FEATHER.get()))
                 .save(out, "astralvigil:endgame/seraph_wings");
+        for (var set : media.hofferbert.astralvigil.armor.ArmorSet.values()) {
+            var pieces = media.hofferbert.astralvigil.armor.ArmorSets.pieces(set);
+            Advancement.Builder.advancement()
+                    .parent(heavens)
+                    .display(pieces.get(1).get(), title("armor_" + set.id()), description("armor_" + set.id()), null,
+                            set == media.hofferbert.astralvigil.armor.ArmorSet.SERAPH ? AdvancementType.GOAL : AdvancementType.TASK,
+                            true, true, false)
+                    .addCriterion("full_set", InventoryChangeTrigger.TriggerInstance.hasItems(
+                            pieces.get(0).get(), pieces.get(1).get(), pieces.get(2).get(), pieces.get(3).get()))
+                    .save(out, "astralvigil:armor/" + set.id());
+        }
         ItemLike[] icons = {Items.SUNFLOWER, Items.SNOW_BLOCK, Items.AMETHYST_CLUSTER, Items.CRYING_OBSIDIAN};
         for (Alignment a : Alignment.values()) {
             research(out, firstScan, "attuned_" + a.id(), icons[a.ordinal()], AdvancementType.GOAL);

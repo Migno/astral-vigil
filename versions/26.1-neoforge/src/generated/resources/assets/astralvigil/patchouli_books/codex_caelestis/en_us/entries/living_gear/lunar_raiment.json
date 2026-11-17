@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:lunar_helmet",
+  "name": "Lunar Raiment",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vael's raiment of midnight cloth and Moonsilver: a crescent circlet, a mantle embroidered with stars and three small moons that circle behind you.$(br2)Worn whole, it grants $(l)Night Vision$() and $(l)Speed$() after dusk, and halves the bite of every fall."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:lunar_chestplate",
+      "text": "Lunar Mantle. Catalyst: an iron chestplate; offerings: four Moonsilver ingots, wool and a phantom membrane; 800 Luna light. The other pieces ask for wool, phantom membranes and feathers."
+    }
+  ],
+  "sortnum": 6
+}

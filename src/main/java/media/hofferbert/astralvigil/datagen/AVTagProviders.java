@@ -113,10 +113,13 @@ public final class AVTagProviders {
             tag(ItemTags.DURABILITY_ENCHANTABLE).add(
                     AVItems.HALO_EDGE.get(), AVItems.DAWNBREAKER.get(), AVItems.CRESCENT.get(), AVItems.TIDECALLER.get(),
                     AVItems.STARLIGHT_AEGIS.get());
-            tag(ItemTags.HEAD_ARMOR).add(AVItems.SERAPH_HELMET.get());
-            tag(ItemTags.CHEST_ARMOR).add(AVItems.SERAPH_CHESTPLATE.get());
-            tag(ItemTags.LEG_ARMOR).add(AVItems.SERAPH_LEGGINGS.get());
-            tag(ItemTags.FOOT_ARMOR).add(AVItems.SERAPH_BOOTS.get());
+            for (var set : media.hofferbert.astralvigil.armor.ArmorSet.values()) {
+                var pieces = media.hofferbert.astralvigil.armor.ArmorSets.pieces(set);
+                tag(ItemTags.HEAD_ARMOR).add(pieces.get(0).get());
+                tag(ItemTags.CHEST_ARMOR).add(pieces.get(1).get());
+                tag(ItemTags.LEG_ARMOR).add(pieces.get(2).get());
+                tag(ItemTags.FOOT_ARMOR).add(pieces.get(3).get());
+            }
             tag(Tags.Items.TOOLS_SHIELD).add(AVItems.STARLIGHT_AEGIS.get());
             tag(Tags.Items.TOOLS_BOW).add(AVItems.CRESCENT.get());
             tag(Tags.Items.TOOLS_CROSSBOW).add(AVItems.TIDECALLER.get());

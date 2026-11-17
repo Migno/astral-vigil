@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:solar_helmet",
+  "name": "Sonnenornat",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Solennes eigene Rüstung: flammengoldener Sonnenstahl, eine Strahlenkrone und eine langsam kreisende Sonnenscheibe auf dem Rücken.$(br2)Vollständig getragen schützt sie dich vor $(l)Feuer und Lava$() und verleiht dir $(l)Stärke$(), solange die Sonne steht. Jedes Teil entsteht am Konvergenzaltar unter Sol-Licht, mit einem Eisenteil als Katalysator."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:solar_chestplate",
+      "text": "Sonnenküraß. Katalysator: ein Eisenbrustpanzer; Gaben: vier Sonnenstahlbarren und zwei Lohenruten; 800 Sol-Licht. Diadem und Stiefel verlangen Glowstone und Lohenruten, die Schöße Glowstone."
+    }
+  ],
+  "sortnum": 5
+}

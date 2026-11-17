@@ -114,7 +114,7 @@ final class Showcase {
         forge.buffer().insert(Tint.SOL, 2000, false);
     }
 
-    /** Armour stands wearing the Seraph set with the living weapons. */
+    /** Armour stands wearing the three celestial sets with the living weapons. */
     private static void armory(ServerLevel level, BlockPos o) {
         floor(level, o, 1, -3, 4, 3, Blocks.SMOOTH_QUARTZ);
         ItemStack[][] hands = {
@@ -135,12 +135,13 @@ final class Showcase {
             stand.setYRot(90f);
             stand.setYBodyRot(90f);
             stand.setYHeadRot(90f);
-            if (i != 2) {
-                stand.setItemSlot(EquipmentSlot.HEAD, new ItemStack(AVItems.SERAPH_HELMET.get()));
+            // left: Solar Regalia, centre: Seraph Plate, right: Lunar Raiment
+            var set = new media.hofferbert.astralvigil.armor.ArmorSet[] {
+                media.hofferbert.astralvigil.armor.ArmorSet.SOLAR, media.hofferbert.astralvigil.armor.ArmorSet.SERAPH,
+                media.hofferbert.astralvigil.armor.ArmorSet.LUNAR}[i];
+            for (EquipmentSlot slot : media.hofferbert.astralvigil.armor.ArmorSets.SLOTS) {
+                stand.setItemSlot(slot, new ItemStack(media.hofferbert.astralvigil.armor.ArmorSets.piece(set, slot)));
             }
-            stand.setItemSlot(EquipmentSlot.CHEST, new ItemStack(AVItems.SERAPH_CHESTPLATE.get()));
-            stand.setItemSlot(EquipmentSlot.LEGS, new ItemStack(AVItems.SERAPH_LEGGINGS.get()));
-            stand.setItemSlot(EquipmentSlot.FEET, new ItemStack(AVItems.SERAPH_BOOTS.get()));
             stand.setItemSlot(EquipmentSlot.MAINHAND, hands[i][0]);
             stand.setItemSlot(EquipmentSlot.OFFHAND, hands[i][1]);
             stand.setShowArms(true);

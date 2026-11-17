@@ -290,6 +290,59 @@ public final class AVLang {
         add("item.astralvigil.seraph_chestplate", "Seraph Breastplate", "Seraphenbrustpanzer");
         add("item.astralvigil.seraph_leggings", "Seraph Greaves", "Seraphenbeinschienen");
         add("item.astralvigil.seraph_boots", "Seraph Sabatons", "Seraphenstiefel");
+        add("item.astralvigil.solar_helmet", "Solar Diadem", "Sonnendiadem");
+        add("item.astralvigil.solar_chestplate", "Solar Cuirass", "Sonnenküraß");
+        add("item.astralvigil.solar_leggings", "Solar Tassets", "Sonnenschöße");
+        add("item.astralvigil.solar_boots", "Solar Sabatons", "Sonnenstiefel");
+        add("item.astralvigil.lunar_helmet", "Lunar Cowl", "Mondhaube");
+        add("item.astralvigil.lunar_chestplate", "Lunar Mantle", "Mondmantel");
+        add("item.astralvigil.lunar_leggings", "Lunar Robe", "Mondgewand");
+        add("item.astralvigil.lunar_boots", "Lunar Greaves", "Mondbeinschienen");
+
+        // Celestial armour sets + set bonuses
+        add("armor.astralvigil.set.seraph", "Seraph Plate", "Seraphenrüstung");
+        add("armor.astralvigil.set.solar", "Solar Regalia", "Sonnenornat");
+        add("armor.astralvigil.set.lunar", "Lunar Raiment", "Mondgewandung");
+        add("armor.astralvigil.set_bonus", "Set Bonus · %s (%s/4)", "Setbonus · %s (%s/4)");
+        add("armor.astralvigil.requires", "(%s)", "(%s)");
+        add("armor.astralvigil.bonus.fire_ward", "Fire Ward: immune to fire and lava",
+                "Flammenwehr: immun gegen Feuer und Lava");
+        add("armor.astralvigil.bonus.solar_might", "Solar Might: Strength %s by day",
+                "Sonnenmacht: Stärke %s bei Tag");
+        add("armor.astralvigil.bonus.moonsight", "Moonsight: Night Vision at night",
+                "Mondblick: Nachtsicht bei Nacht");
+        add("armor.astralvigil.bonus.moonstride", "Moonstride: Speed %s at night",
+                "Mondschritt: Tempo %s bei Nacht");
+        add("armor.astralvigil.bonus.moonfall", "Moonfall: %s%% less fall damage",
+                "Mondfall: %s%% weniger Fallschaden");
+        add("armor.astralvigil.bonus.starlight_mending", "Starlight Mending: heals under the night sky, drawing on the plate's charge",
+                "Sternenheilung: heilt unter dem Nachthimmel und zehrt dabei von der Ladung der Rüstung");
+        add("armor.astralvigil.bonus.seraph_glide", "Seraph Glide: sneak in mid-air to glide",
+                "Seraphenflug: schleiche in der Luft, um zu gleiten");
+        add("armor.astralvigil.bonus.glide_burst", "Glide Burst: beginning a glide flings you forward (%s charge)",
+                "Schwingenstoß: der Beginn eines Gleitflugs schleudert dich voran (%s Ladung)");
+        add("armor.astralvigil.bonus.featherfall", "Featherfall: no fall damage",
+                "Federfall: kein Fallschaden");
+        add("astralvigil.configuration.armor", "Armour Set Bonuses", "Rüstungs-Setboni");
+        add("astralvigil.configuration.armor.solar_fire_ward", "Solar: Fire Ward", "Sonne: Flammenwehr");
+        add("astralvigil.configuration.armor.solar_strength", "Solar: Strength Level by Day", "Sonne: Stärke-Stufe bei Tag");
+        add("astralvigil.configuration.armor.lunar_night_vision", "Lunar: Night Vision", "Mond: Nachtsicht");
+        add("astralvigil.configuration.armor.lunar_speed", "Lunar: Speed Level at Night", "Mond: Tempo-Stufe bei Nacht");
+        add("astralvigil.configuration.armor.lunar_fall_reduction", "Lunar: Fall Damage Reduction", "Mond: Fallschaden-Minderung");
+        add("astralvigil.configuration.armor.seraph_mending_amount", "Seraph: Mending per Pulse", "Seraph: Heilung je Puls");
+        add("astralvigil.configuration.armor.seraph_mending_cost", "Seraph: Mending Charge Cost", "Seraph: Ladungskosten der Heilung");
+        add("astralvigil.configuration.armor.seraph_burst_cost", "Seraph: Glide Burst Charge Cost", "Seraph: Ladungskosten des Schwingenstoßes");
+        add("astralvigil.configuration.armor.seraph_burst_cooldown", "Seraph: Glide Burst Cooldown (ticks)", "Seraph: Abklingzeit des Schwingenstoßes (Ticks)");
+        add("astralvigil.configuration.armor.seraph_burst_strength", "Seraph: Glide Burst Strength", "Seraph: Stärke des Schwingenstoßes");
+        add("advancements.astralvigil.armor_seraph.title", "Clad in Wings", "In Schwingen gehüllt");
+        add("advancements.astralvigil.armor_seraph.description", "Wear the full Seraph Plate",
+                "Trage die vollständige Seraphenrüstung");
+        add("advancements.astralvigil.armor_solar.title", "Crowned by Dawn", "Von der Morgenröte gekrönt");
+        add("advancements.astralvigil.armor_solar.description", "Wear the full Solar Regalia",
+                "Trage das vollständige Sonnenornat");
+        add("advancements.astralvigil.armor_lunar.title", "Draped in Moonlight", "In Mondlicht gehüllt");
+        add("advancements.astralvigil.armor_lunar.description", "Wear the full Lunar Raiment",
+                "Trage die vollständige Mondgewandung");
         add("gear.astralvigil.level.0", "Dormant", "Schlummernd");
         add("gear.astralvigil.level.1", "Awakened", "Erwacht");
         add("gear.astralvigil.level.2", "Ascended", "Aufgestiegen");

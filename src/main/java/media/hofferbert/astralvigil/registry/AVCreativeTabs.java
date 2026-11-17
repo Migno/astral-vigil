@@ -45,6 +45,14 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.SERAPH_CHESTPLATE.get());
                 output.accept(AVItems.SERAPH_LEGGINGS.get());
                 output.accept(AVItems.SERAPH_BOOTS.get());
+                output.accept(AVItems.SOLAR_HELMET.get());
+                output.accept(AVItems.SOLAR_CHESTPLATE.get());
+                output.accept(AVItems.SOLAR_LEGGINGS.get());
+                output.accept(AVItems.SOLAR_BOOTS.get());
+                output.accept(AVItems.LUNAR_HELMET.get());
+                output.accept(AVItems.LUNAR_CHESTPLATE.get());
+                output.accept(AVItems.LUNAR_LEGGINGS.get());
+                output.accept(AVItems.LUNAR_BOOTS.get());
                 AVItems.SIGILS.values().forEach(s -> output.accept(s.get()));
                 output.accept(AVItems.STAR_ANCHOR.get());
                 output.accept(AVItems.VOID_CRYSTAL.get());

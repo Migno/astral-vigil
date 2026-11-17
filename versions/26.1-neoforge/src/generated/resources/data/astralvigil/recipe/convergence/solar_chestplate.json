@@ -1,0 +1,19 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "sol",
+  "center": "minecraft:iron_chestplate",
+  "ingredients": [
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:rods/blaze",
+    "#c:rods/blaze"
+  ],
+  "result": {
+    "id": "astralvigil:solar_chestplate"
+  },
+  "starlight": 800,
+  "time": 200,
+  "tint": "sol"
+}

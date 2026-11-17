@@ -1,0 +1,34 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "luna",
+  "center": {
+    "item": "minecraft:iron_chestplate"
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:lunar_chestplate"
+  },
+  "starlight": 800,
+  "time": 200,
+  "tint": "luna"
+}

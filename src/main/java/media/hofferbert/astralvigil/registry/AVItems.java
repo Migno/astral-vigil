@@ -90,6 +90,23 @@ public final class AVItems {
             AVItems.<Item>register("seraph_leggings", Item::new, p -> p.humanoidArmor(AVMaterials.SERAPH, ArmorType.LEGGINGS).rarity(Rarity.RARE));
     public static final DeferredItem<Item> SERAPH_BOOTS =
             AVItems.<Item>register("seraph_boots", Item::new, p -> p.humanoidArmor(AVMaterials.SERAPH, ArmorType.BOOTS).rarity(Rarity.RARE));
+    // Celestial armour sets (mid tier): Solar Regalia (Sunsteel, Solenne) and Lunar Raiment (Moonsilver, Vael)
+    public static final DeferredItem<Item> SOLAR_HELMET = AVItems.<Item>register("solar_helmet", Item::new,
+            p -> p.humanoidArmor(AVMaterials.SOLAR, ArmorType.HELMET).rarity(Rarity.UNCOMMON).fireResistant());
+    public static final DeferredItem<Item> SOLAR_CHESTPLATE = AVItems.<Item>register("solar_chestplate", Item::new,
+            p -> p.humanoidArmor(AVMaterials.SOLAR, ArmorType.CHESTPLATE).rarity(Rarity.UNCOMMON).fireResistant());
+    public static final DeferredItem<Item> SOLAR_LEGGINGS = AVItems.<Item>register("solar_leggings", Item::new,
+            p -> p.humanoidArmor(AVMaterials.SOLAR, ArmorType.LEGGINGS).rarity(Rarity.UNCOMMON).fireResistant());
+    public static final DeferredItem<Item> SOLAR_BOOTS = AVItems.<Item>register("solar_boots", Item::new,
+            p -> p.humanoidArmor(AVMaterials.SOLAR, ArmorType.BOOTS).rarity(Rarity.UNCOMMON).fireResistant());
+    public static final DeferredItem<Item> LUNAR_HELMET = AVItems.<Item>register("lunar_helmet", Item::new,
+            p -> p.humanoidArmor(AVMaterials.LUNAR, ArmorType.HELMET).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> LUNAR_CHESTPLATE = AVItems.<Item>register("lunar_chestplate", Item::new,
+            p -> p.humanoidArmor(AVMaterials.LUNAR, ArmorType.CHESTPLATE).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> LUNAR_LEGGINGS = AVItems.<Item>register("lunar_leggings", Item::new,
+            p -> p.humanoidArmor(AVMaterials.LUNAR, ArmorType.LEGGINGS).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> LUNAR_BOOTS = AVItems.<Item>register("lunar_boots", Item::new,
+            p -> p.humanoidArmor(AVMaterials.LUNAR, ArmorType.BOOTS).rarity(Rarity.UNCOMMON));
     //?} else {
     /*public static final DeferredItem<Item> HALO_EDGE = AVItems.<Item>register("halo_edge",
             p -> new SwordItem(AVMaterials.SUNSTEEL, p),
@@ -103,10 +120,26 @@ public final class AVItems {
     public static final DeferredItem<Item> SERAPH_CHESTPLATE = armor("seraph_chestplate", ArmorItem.Type.CHESTPLATE);
     public static final DeferredItem<Item> SERAPH_LEGGINGS = armor("seraph_leggings", ArmorItem.Type.LEGGINGS);
     public static final DeferredItem<Item> SERAPH_BOOTS = armor("seraph_boots", ArmorItem.Type.BOOTS);
+    public static final DeferredItem<Item> SOLAR_HELMET = armor("solar_helmet", AVMaterials.SOLAR, ArmorItem.Type.HELMET, AVMaterials.SOLAR_DURABILITY_FACTOR, true);
+    public static final DeferredItem<Item> SOLAR_CHESTPLATE = armor("solar_chestplate", AVMaterials.SOLAR, ArmorItem.Type.CHESTPLATE, AVMaterials.SOLAR_DURABILITY_FACTOR, true);
+    public static final DeferredItem<Item> SOLAR_LEGGINGS = armor("solar_leggings", AVMaterials.SOLAR, ArmorItem.Type.LEGGINGS, AVMaterials.SOLAR_DURABILITY_FACTOR, true);
+    public static final DeferredItem<Item> SOLAR_BOOTS = armor("solar_boots", AVMaterials.SOLAR, ArmorItem.Type.BOOTS, AVMaterials.SOLAR_DURABILITY_FACTOR, true);
+    public static final DeferredItem<Item> LUNAR_HELMET = armor("lunar_helmet", AVMaterials.LUNAR, ArmorItem.Type.HELMET, AVMaterials.LUNAR_DURABILITY_FACTOR, false);
+    public static final DeferredItem<Item> LUNAR_CHESTPLATE = armor("lunar_chestplate", AVMaterials.LUNAR, ArmorItem.Type.CHESTPLATE, AVMaterials.LUNAR_DURABILITY_FACTOR, false);
+    public static final DeferredItem<Item> LUNAR_LEGGINGS = armor("lunar_leggings", AVMaterials.LUNAR, ArmorItem.Type.LEGGINGS, AVMaterials.LUNAR_DURABILITY_FACTOR, false);
+    public static final DeferredItem<Item> LUNAR_BOOTS = armor("lunar_boots", AVMaterials.LUNAR, ArmorItem.Type.BOOTS, AVMaterials.LUNAR_DURABILITY_FACTOR, false);
 
     private static DeferredItem<Item> armor(String name, ArmorItem.Type type) {
         return AVItems.<Item>register(name, p -> new ArmorItem(AVMaterials.SERAPH, type, p),
                 p -> p.durability(type.getDurability(AVMaterials.SERAPH_DURABILITY_FACTOR)).rarity(Rarity.RARE));
+    }
+
+    private static DeferredItem<Item> armor(String name, net.minecraft.core.Holder<net.minecraft.world.item.ArmorMaterial> material,
+            ArmorItem.Type type, int factor, boolean fireResistant) {
+        return AVItems.<Item>register(name, p -> new ArmorItem(material, type, p), p -> {
+            Item.Properties props = p.durability(type.getDurability(factor)).rarity(Rarity.UNCOMMON);
+            return fireResistant ? props.fireResistant() : props;
+        });
     }
     *///?}
     public static final DeferredItem<Item> CRESCENT = AVItems.<Item>register(

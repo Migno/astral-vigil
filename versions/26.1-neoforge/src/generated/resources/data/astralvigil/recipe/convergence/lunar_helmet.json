@@ -1,0 +1,17 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "luna",
+  "center": "minecraft:iron_helmet",
+  "ingredients": [
+    "#c:ingots/moonsilver",
+    "#c:ingots/moonsilver",
+    "#minecraft:wool",
+    "#minecraft:wool"
+  ],
+  "result": {
+    "id": "astralvigil:lunar_helmet"
+  },
+  "starlight": 500,
+  "time": 200,
+  "tint": "luna"
+}

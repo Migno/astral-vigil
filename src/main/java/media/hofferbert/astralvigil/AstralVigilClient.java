@@ -31,6 +31,8 @@ public final class AstralVigilClient {
         GearClient.register(modBus);
         media.hofferbert.astralvigil.client.SeraphWings.register(modBus);
         media.hofferbert.astralvigil.client.cosmetics.CosmeticsClient.register(modBus);
+        media.hofferbert.astralvigil.client.armor.ArmorOrnaments.register(modBus);
+        media.hofferbert.astralvigil.client.armor.ArmorTooltip.register();
         NeoForge.EVENT_BUS.addListener(AstralVigilClient::onTooltip);
     }
 
