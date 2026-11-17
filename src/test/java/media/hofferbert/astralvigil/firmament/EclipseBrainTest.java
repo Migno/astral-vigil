@@ -19,6 +19,7 @@ import media.hofferbert.astralvigil.eclipse.EclipseBrain;
 import media.hofferbert.astralvigil.eclipse.EclipseMove;
 import media.hofferbert.astralvigil.eclipse.EclipseMove.Stage;
 import media.hofferbert.astralvigil.eclipse.EclipsePhase;
+import media.hofferbert.astralvigil.eclipse.EclipseWeapon;
 import org.junit.jupiter.api.Test;
 
 class EclipseBrainTest {
@@ -155,6 +156,56 @@ class EclipseBrainTest {
         for (String n : new String[] {"idle", "idle_shielded", "idle_total", "idle_enraged", "death"}) {
             assertTrue(anims.has(n), "missing animation " + n);
         }
+    }
+
+    /** Every summoned weapon is hidden at rest and materialises / dissolves exactly when EclipseWeapon plays its burst. */
+    @Test
+    void weaponsMatchAnimations() throws IOException {
+        JsonObject anims = JsonParser.parseString(Files.readString(animationFile())).getAsJsonObject().getAsJsonObject("animations");
+        for (EclipseWeapon w : EclipseWeapon.values()) {
+            for (String idle : new String[] {"idle", "idle_shielded", "idle_total", "idle_enraged"}) {
+                assertEquals(0.0, scaleAt(anims, idle, w.bone(), 0), 1e-6, w + " visible in " + idle);
+            }
+            String appear = w.move().animation(w.appearStage());
+            double t = w.appearTick() / 20.0;
+            assertEquals(0.0, scaleAt(anims, appear, w.bone(), t), 1e-6, w + " already formed at " + appear);
+            assertTrue(scaleAt(anims, appear, w.bone(), t + 0.2) > 0.9, w + " does not form in " + appear);
+            String vanish = w.move().animation(w.vanishStage());
+            double v = w.vanishTick() / 20.0;
+            assertTrue(scaleAt(anims, vanish, w.bone(), v) > 0.9, w + " gone before it dissolves in " + vanish);
+            JsonObject clip = anims.getAsJsonObject(vanish);
+            assertEquals(0.0, scaleAt(anims, vanish, w.bone(), clip.get("animation_length").getAsDouble()), 1e-6, w + " not gone after " + vanish);
+        }
+    }
+
+    /** Uniform scale of a bone at time t (keyframes interpolated linearly - enough to check visibility). */
+    private static double scaleAt(JsonObject anims, String clip, String bone, double t) {
+        JsonObject bones = anims.getAsJsonObject(clip).getAsJsonObject("bones");
+        assertTrue(bones.has(bone) && bones.getAsJsonObject(bone).has("scale"), clip + " does not drive " + bone);
+        var scale = bones.getAsJsonObject(bone).get("scale");
+        if (scale.isJsonArray()) {
+            return scale.getAsJsonArray().get(0).getAsDouble();
+        }
+        double prevT = -1;
+        double prevV = 0;
+        List<double[]> keys = new ArrayList<>();
+        for (var e : scale.getAsJsonObject().entrySet()) {
+            var val = e.getValue();
+            var vec = val.isJsonArray() ? val.getAsJsonArray() : val.getAsJsonObject().getAsJsonArray("vector");
+            keys.add(new double[] {Double.parseDouble(e.getKey()), vec.get(0).getAsDouble()});
+        }
+        keys.sort((a, b) -> Double.compare(a[0], b[0]));
+        for (double[] k : keys) {
+            if (k[0] >= t - 1e-6) {
+                if (prevT < 0 || Math.abs(k[0] - t) < 1e-6) {
+                    return k[1];
+                }
+                return prevV + (k[1] - prevV) * (t - prevT) / (k[0] - prevT);
+            }
+            prevT = k[0];
+            prevV = k[1];
+        }
+        return prevV;
     }
 
     private static Path animationFile() {
