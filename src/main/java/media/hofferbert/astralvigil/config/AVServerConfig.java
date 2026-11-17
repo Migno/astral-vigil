@@ -411,7 +411,7 @@ public final class AVServerConfig {
                 .defineInRange("checkIntervalTicks", 1200, 100, 72000);
         STARFALL_CHANCE = b.comment("Chance per roll that a star falls near a player.")
                 .translation("astralvigil.configuration.starfall.chance")
-                .defineInRange("chancePerRoll", 0.035, 0.0, 1.0);
+                .defineInRange("chancePerRoll", 0.06, 0.0, 1.0);
         STARFALL_FULL_MOON_MULTIPLIER = b.comment("Chance multiplier during a full moon.")
                 .translation("astralvigil.configuration.starfall.full_moon_multiplier")
                 .defineInRange("fullMoonMultiplier", 2.0, 1.0, 10.0);

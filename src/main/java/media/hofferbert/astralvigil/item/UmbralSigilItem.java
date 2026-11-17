@@ -42,7 +42,7 @@ public class UmbralSigilItem extends Item {
             return false;
         }
         for (Watcher w : Watcher.values()) {
-            if (!player.getInventory().contains(new ItemStack(AVItems.MARKS.get(w).get()))) {
+            if (!media.hofferbert.astralvigil.firmament.TrialManager.hasMark(player, w)) {
                 player.sendSystemMessage(Component.translatable("message.astralvigil.umbral.marks").withStyle(ChatFormatting.DARK_PURPLE));
                 return false;
             }

@@ -35,6 +35,9 @@ public final class RealmBuilder {
         StructureTemplate template = level.getStructureManager()
                 .get(AstralVigil.id("realm/" + realm.id()))
                 .orElseThrow(() -> new IllegalStateException("Missing realm template " + realm.id()));
+        if (realm == Realm.FIRMAMENT) {
+            clearSky(level, realm.pad());
+        }
         BlockPos origin = realm.pad().offset(-Realm.ANCHOR, -Realm.FLOOR_Y, -Realm.ANCHOR);
         template.placeInWorld(level, origin, origin, new StructurePlaceSettings(), level.getRandom(), Block.UPDATE_CLIENTS);
         if (realm.watcher() != null) {
@@ -43,6 +46,29 @@ public final class RealmBuilder {
         }
         floaters(level, realm);
         AstralVigil.LOGGER.info("Firmament: realm {} built in {} ms", realm.id(), (System.nanoTime() - start) / 1_000_000);
+    }
+
+    /**
+     * The wilds grow their own floating islands; the shrine needs open sky around it. Carves a flattened sphere of air
+     * (the shrine's own island and halo come with the template) so the groves frame the shrine instead of burying it.
+     */
+    static void clearSky(ServerLevel level, BlockPos centre) {
+        int r = 34;
+        BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
+        for (int dx = -r; dx <= r; dx++) {
+            for (int dz = -r; dz <= r; dz++) {
+                for (int dy = -18; dy <= 44; dy++) {
+                    double ny = dy < 0 ? dy / 18.0 : dy / 44.0;
+                    if ((dx * dx + dz * dz) / (double) (r * r) + ny * ny > 1.0) {
+                        continue;
+                    }
+                    p.set(centre.getX() + dx, centre.getY() + dy, centre.getZ() + dz);
+                    if (!level.getBlockState(p).isAir()) {
+                        level.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    }
+                }
+            }
+        }
     }
 
     public static GateKind gateOf(Watcher w) {

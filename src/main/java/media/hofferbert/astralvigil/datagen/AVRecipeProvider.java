@@ -83,7 +83,7 @@ public class AVRecipeProvider extends RecipeProvider {
         gate(media.hofferbert.astralvigil.firmament.GateKind.ASTRAL, AVTags.Items.INGOTS_STARMETAL, AVTags.Items.METEORIC_STONES);
         gate(media.hofferbert.astralvigil.firmament.GateKind.SOLAR, AVTags.Items.INGOTS_SUNSTEEL, Tags.Items.STORAGE_BLOCKS_GOLD);
         gate(media.hofferbert.astralvigil.firmament.GateKind.LUNAR, AVTags.Items.INGOTS_MOONSILVER, Tags.Items.GEMS_QUARTZ);
-        gate(media.hofferbert.astralvigil.firmament.GateKind.PRISM, AVTags.Items.INGOTS_STARMETAL, Tags.Items.STORAGE_BLOCKS_DIAMOND);
+        gate(media.hofferbert.astralvigil.firmament.GateKind.PRISM, AVTags.Items.INGOTS_STARMETAL, Tags.Items.GEMS_DIAMOND);
         gate(media.hofferbert.astralvigil.firmament.GateKind.ARCHIVE, Tags.Items.GEMS_AMETHYST, Tags.Items.BOOKSHELVES);
         gate(media.hofferbert.astralvigil.firmament.GateKind.UMBRAL, Tags.Items.OBSIDIANS_CRYING, Tags.Items.OBSIDIANS_NORMAL);
         shaped(RecipeCategory.MISC, AVItems.PEDESTAL.get(), 2)
@@ -220,7 +220,7 @@ public class AVRecipeProvider extends RecipeProvider {
         gate(output, media.hofferbert.astralvigil.firmament.GateKind.ASTRAL, AVTags.Items.INGOTS_STARMETAL, AVTags.Items.METEORIC_STONES);
         gate(output, media.hofferbert.astralvigil.firmament.GateKind.SOLAR, AVTags.Items.INGOTS_SUNSTEEL, Tags.Items.STORAGE_BLOCKS_GOLD);
         gate(output, media.hofferbert.astralvigil.firmament.GateKind.LUNAR, AVTags.Items.INGOTS_MOONSILVER, Tags.Items.GEMS_QUARTZ);
-        gate(output, media.hofferbert.astralvigil.firmament.GateKind.PRISM, AVTags.Items.INGOTS_STARMETAL, Tags.Items.STORAGE_BLOCKS_DIAMOND);
+        gate(output, media.hofferbert.astralvigil.firmament.GateKind.PRISM, AVTags.Items.INGOTS_STARMETAL, Tags.Items.GEMS_DIAMOND);
         gate(output, media.hofferbert.astralvigil.firmament.GateKind.ARCHIVE, Tags.Items.GEMS_AMETHYST, Tags.Items.BOOKSHELVES);
         gate(output, media.hofferbert.astralvigil.firmament.GateKind.UMBRAL, Tags.Items.OBSIDIANS_CRYING, Tags.Items.OBSIDIANS_NORMAL);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AVItems.STAR_ANCHOR.get(), 2)
@@ -445,6 +445,10 @@ public class AVRecipeProvider extends RecipeProvider {
         forge(output, "moonsilver_ingot", res(AVItems.MOONSILVER_INGOT.get(), 1), Tint.LUNA, 120, 100,
                 ing(Tags.Items.INGOTS_IRON), ing(AVTags.Items.ASTRAL_SHARDS), ing(Tags.Items.GEMS_QUARTZ));
 
+        // a guaranteed source of Void Shards (Void Crystals also need a high Eclipse Gaze or may be switched off)
+        forge(output, "void_shard", res(AVItems.VOID_SHARD.get(), 2), Tint.STELLA, 300, 160,
+                ing(Tags.Items.OBSIDIANS_CRYING), ing(AVTags.Items.ASTRAL_SHARDS), ing(Tags.Items.GEMS_AMETHYST));
+
         convergence(output, "astral_core", res(AVItems.ASTRAL_CORE.get(), 1), ing(Tags.Items.GEMS_DIAMOND),
                 Tint.PURE, 1000, 200, Optional.of(Alignment.STELLA),
                 ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_SUNSTEEL),
@@ -525,8 +529,8 @@ public class AVRecipeProvider extends RecipeProvider {
                 ing(Tags.Items.FEATHERS), ing(Tags.Items.FEATHERS));
         convergence(output, "umbral_sigil", res(AVItems.UMBRAL_SIGIL.get(), 1), Ingredient.of(AVItems.VOID_SHARD.get()),
                 Tint.STELLA, 3000, 400, Optional.empty(),
-                Ingredient.of(AVItems.ASTRAL_CORE.get()), Ingredient.of(media.hofferbert.astralvigil.registry.AVBlocks.VOID_CRYSTAL.get()),
-                Ingredient.of(media.hofferbert.astralvigil.registry.AVBlocks.VOID_CRYSTAL.get()), ing(Tags.Items.OBSIDIANS), ing(Tags.Items.OBSIDIANS),
+                Ingredient.of(AVItems.ASTRAL_CORE.get()), Ingredient.of(AVItems.VOID_SHARD.get()),
+                Ingredient.of(AVItems.VOID_SHARD.get()), ing(Tags.Items.OBSIDIANS), ing(Tags.Items.OBSIDIANS),
                 Ingredient.of(Items.ECHO_SHARD));
         convergence(output, "halo_of_dawn", res(AVItems.HALO_OF_DAWN.get(), 1), Ingredient.of(AVItems.ECLIPSE_HEART.get()),
                 Tint.PURE, 5000, 600, Optional.of(Alignment.SOL),

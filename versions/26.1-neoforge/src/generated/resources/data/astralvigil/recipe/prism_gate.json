@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "I": "#c:ingots/starmetal",
-    "M": "#c:storage_blocks/diamond",
+    "M": "#c:gems/diamond",
     "S": "#astralvigil:astral_shards"
   },
   "pattern": [

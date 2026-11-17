@@ -111,6 +111,23 @@ public final class Firmament {
         return new Target(dest, Vec3.atBottomCenterOf(realm.arrival()), realm);
     }
 
+    /** Debug/admin: builds a realm if needed and sends the player straight to its arrival shrine. */
+    public static boolean visit(ServerPlayer player, Realm realm) {
+        Target t = target(player, realm.gate());
+        if (t == null || t.realm() == null) {
+            // already in a realm: target() leads home; go to the requested realm directly instead
+            ServerLevel dest = player.level().getServer().getLevel(realm.level());
+            if (dest == null) {
+                return false;
+            }
+            RealmBuilder.ensureBuilt(dest, realm);
+            t = new Target(dest, Vec3.atBottomCenterOf(realm.arrival()), realm);
+        }
+        teleport(player, t.level(), t.pos());
+        arrived(player, t);
+        return true;
+    }
+
     private static BlockPos worldSpawn(ServerLevel level) {
         //? if >=26.1 {
         BlockPos p = level.getRespawnData().pos();

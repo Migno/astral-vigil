@@ -77,7 +77,9 @@ public class AscensionKeyItem extends Item {
 
     static boolean carriesAllMarks(Player player) {
         for (Watcher w : Watcher.values()) {
-            if (!player.getInventory().contains(new net.minecraft.world.item.ItemStack(media.hofferbert.astralvigil.registry.AVItems.MARKS.get(w).get()))) {
+            // a Mark once earned counts forever (advancement), even if the item was lost
+            if (player instanceof net.minecraft.server.level.ServerPlayer sp ? !media.hofferbert.astralvigil.firmament.TrialManager.hasMark(sp, w)
+                    : !player.getInventory().contains(new net.minecraft.world.item.ItemStack(media.hofferbert.astralvigil.registry.AVItems.MARKS.get(w).get()))) {
                 return false;
             }
         }

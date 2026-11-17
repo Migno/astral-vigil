@@ -458,16 +458,34 @@ def endless_library(w, cz):
                                                                          'slot_4_occupied': 'false', 'slot_5_occupied': 'true'}))
                     elif (gx * 7 + gz * 3) % 23 == 0 and bx == 0 and bz == 0:
                         w.put(x, roof_y - 1, cz + z, 'minecraft:soul_lantern', hanging='true', waterlogged='false')
-                    w.put(x, roof_y, cz + z, 'starwood_planks' if (gx + gz) % 2 else 'gilded_starwood')
+                    w.put(x, roof_y, cz + z, 'gilded_starwood' if gx % 6 == 0 or gz % 6 == 0 else 'starwood_planks')
     ec = 2 * mid + 1
     gx0, gz0 = o + 2 * ec, cz + o + 2 * ec
     w.put(gx0, 1, gz0, 'trial_goal', watcher='ilyra')
     for dx, dz in ((-2, -2), (3, -2), (-2, 3), (3, 3)):
         w.put(gx0 + dx, 1, gz0 + dz, 'minecraft:lectern', facing='north', has_book='false', powered='false')
-    # a skylight of nebula glass over the reading room
-    for dx in range(-2, 4):
-        for dz in range(-2, 4):
-            w.put(gx0 + dx, roof_y, gz0 + dz, 'nebula_glass')
+    # a dome of halo glass and marble ribs over the reading room, crowned with a lamp
+    for dx in range(-7, 9):
+        for dz in range(-7, 9):
+            for dy in range(0, 9):
+                d = math.sqrt((dx - 0.5) ** 2 + (dz - 0.5) ** 2 + (dy * 1.1) ** 2)
+                if 6.6 < d <= 7.6:
+                    rib = abs(dx - 0.5) < 1 or abs(dz - 0.5) < 1 or dy == 0
+                    w.put(gx0 + dx, roof_y + dy, gz0 + dz, 'celestial_bricks' if rib else 'halo_glass')
+                elif d <= 6.6 and dy == 0:
+                    w.put(gx0 + dx, roof_y, gz0 + dz, 'nebula_glass')
+    w.put(gx0, roof_y + 8, gz0, 'astral_lamp')
+    w.put(gx0, roof_y + 9, gz0, 'star_lantern', hanging='false', waterlogged='false')
+    # four corner towers with lamps
+    for sx in (o - 1, o + 2 * g):
+        for sz in (o - 1, o + 2 * g):
+            for dy in range(1, 13):
+                for ddx in (-1, 0, 1):
+                    for ddz in (-1, 0, 1):
+                        w.put(sx + ddx, dy, cz + sz + ddz, 'celestial_pillar' if (ddx, ddz) == (0, 0) else 'celestial_bricks',
+                              **({'axis': 'y'} if (ddx, ddz) == (0, 0) else {}))
+            w.put(sx, 13, cz + sz, 'astral_lamp')
+            w.put(sx, 14, cz + sz, 'star_lantern', hanging='false', waterlogged='false')
     # entrance arch
     ex, ez = o + 2 * (2 * mid + 1), cz + o + 2 * (g - 1) + 2
     for dy in range(1, 6):
@@ -475,38 +493,6 @@ def endless_library(w, cz):
         w.put(ex + 2, dy, ez, 'celestial_pillar', axis='y')
     for dx in range(-1, 3):
         w.put(ex + dx, 6, ez, 'chiseled_celestial_marble')
-
-
-def umbral_arena(w, cz):
-    """The Eclipse's arena: umbral stone, rings of crying obsidian, eight cover pillars, the seal on the dais."""
-    rnd = random.Random(61)
-    trial_island(w, cz, 34, lambda: 'umbral_stone' if rnd.random() < 0.75 else 'umbral_bricks', 'umbral_stone',
-                 lambda i: 'umbral_lamp' if i % 12 == 0 else 'umbral_brick_wall', 61)
-    for x in range(-34, 35):
-        for z in range(-34, 35):
-            d = math.hypot(x, z)
-            if d <= 33 and int(d) % 6 == 0:
-                w.put(x, 0, cz + z, 'minecraft:crying_obsidian' if int(d) % 12 == 0 else 'umbral_bricks')
-    for i in range(8):
-        a = i * math.pi / 4 + math.pi / 8
-        px, pz = round(math.cos(a) * 22), round(math.sin(a) * 22)
-        h = 9 + (i % 3)
-        for dx in (-1, 0, 1):
-            for dz in (-1, 0, 1):
-                corner = abs(dx) + abs(dz) == 2
-                w.column(px + dx, cz + pz + dz, 1, h - (2 if corner else 0), 'umbral_bricks' if not corner else 'minecraft:obsidian')
-        w.put(px, h, cz + pz, 'chiseled_umbral_bricks')
-        w.put(px, h + 1, cz + pz, 'umbral_lamp')
-    for x in range(-5, 6):
-        for z in range(-5, 6):
-            w.put(x, 1, cz + z, 'umbral_bricks' if max(abs(x), abs(z)) < 5 else 'umbral_brick_stairs',
-                  **({} if max(abs(x), abs(z)) < 5 else
-                     {'facing': 'south' if z == -5 else 'north' if z == 5 else 'east' if x == -5 else 'west',
-                      'half': 'bottom', 'shape': 'straight', 'waterlogged': 'false'}))
-    w.put(0, 2, cz, 'eclipse_seal')
-    for dx, dz in ((-4, -4), (4, -4), (-4, 4), (4, 4)):
-        w.column(dx, cz + dz, 2, 6, 'nebula_glass')
-        w.put(dx, 6, cz + dz, 'umbral_lamp')
 
 
 # ------------------------------------------------------------------ realms

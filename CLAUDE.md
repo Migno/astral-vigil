@@ -66,7 +66,7 @@ Run dirs: `run/<target>/{client,server,gametest,data,compat}` (git-ignored).
 - Codex: edit `datagen/CodexContent.java` (en + de), never the generated Patchouli JSON.
 - Debug: `/astralvigil starfall [here]`, `/astralvigil research <alignment> <points>|reset`,
   `/astralvigil starlight <pos> <tint> <amount>`, `/astralvigil cosmetic <id>|clear`,
-  `/astralvigil showcase network|ritual|forge|armory` (film-ready scene east of you); `/place structure astralvigil:fallen_observatory`.
+  `/astralvigil showcase network|ritual|forge|armory` (film-ready scene east of you), `/astralvigil realm <id>` (build + visit a realm); `/place structure astralvigil:fallen_observatory`.
 - Structures: regenerate templates with `python -I tools/dev/gen_observatory.py` / `gen_firmament.py`; worldgen
   (incl. the Firmament `LEVEL_STEM`) in `worldgen/AVWorldgen`. Firmament hub, trial islands (240 out) and the Umbral Throne (520 west) are built on first arrival (`SanctumBuilder`);
   reach them through gate frames lit with the Ascension Key, one gate kind per destination (`GateKind`,

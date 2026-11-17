@@ -5,11 +5,11 @@
 **Catch falling stars. Bend starlight. Build the gates to the sky – and face the Watchers in their trials.**
 
 Astral Vigil is a NeoForge progression mod about starlight. It starts with a meteor crashing into your world on a clear
-night and ends far above the clouds in the **Firmament**: a floating sky dimension of trial islands that you can only
-reach through gates you build yourself. Guarded by four towering Watchers, and haunted by their fallen fifth sibling,
-the Eclipse.
+night and ends far above the clouds in the **Firmament**: six realms of the sky, each behind a gate you build
+yourself – an eternal dawn, a moonlit midnight, a forge among the stars, an endless archive and the broken cathedral
+of the Eclipse, the fallen fifth Watcher.
 
-![The Sun Spire, Solenne's trial](docs/screenshots/shaders/26.1-neoforge-03-sun-spire.png)
+![The Umbral Cathedral, where the Eclipse waits](docs/screenshots/realms/26.1-neoforge-02-cathedral-nave.png)
 
 | Minecraft | Loader | Java | Requires | Status |
 |---|---|---|---|---|
@@ -29,9 +29,15 @@ the Eclipse.
   offerings fly and something answers.
 - **Gear that grows with you.** Six pieces of living gear awaken through your deeds, take socketed Sigils and unlock
   starlight-powered abilities. Top tier is on par with Netherite, never above it.
-- **A dimension you have to earn.** Six kinds of gates, each one built and lit by hand, each leading to its own
-  challenge: a hundred-block climb, an archery trial under attack, a puzzle of light, a lightless library maze – and
-  the throne of the Eclipse.
+- **Realms you have to earn.** Six kinds of gates, each built and lit by hand, each opening onto a realm of its own
+  with its own sky: a hundred-block climb at eternal dawn, an archery trial under a full moon, a puzzle of light in
+  deep space, a lightless library maze – and the broken cathedral of the Eclipse. Blocks drift in the air around you.
+- **A boss that fights like one.** The Eclipse has 36 animations and nine telegraphed moves across three phases: a
+  pylon shield, a sweeping ray, a Nova you must hide from, and windows to strike it in melee.
+- **Armour that looks the part.** Seraph Plate, Solar Regalia and Lunar Raiment with glowing seams and 3D halos,
+  wings, sun discs and mantles – and full-set bonuses.
+- **Build with the sky.** Over fifty craftable blocks: glowing starwood, celestial marble, sunstone, moonstone, umbral
+  stone, lamps, lanterns and stained glass of nebula and eclipse.
 - **Made for modpacks.** Every balance value is in the server config, every recipe uses `c:` tags, worldgen is a
   datapack. Optional JEI, EMI, Jade, Patchouli and KubeJS support. Built with All the Mods 10 and 11 in mind.
 - **Fully playable in English and German.**
@@ -42,14 +48,13 @@ the Eclipse.
 
 | | |
 |---|---|
-| ![Six gates, six destinations](docs/screenshots/shaders/26.1-neoforge-01-six-gates.png) | ![An Astral Gate, lit](docs/screenshots/shaders/26.1-neoforge-02-astral-gate-closeup.png) |
+| ![The Umbral Cathedral from above](docs/screenshots/realms/26.1-neoforge-01-umbral-cathedral.png) | ![The Eclipse](docs/screenshots/realms/26.1-neoforge-03-the-eclipse.png) |
+| ![The Sunspire at eternal dawn](docs/screenshots/realms/26.1-neoforge-04-sunspire.png) | ![The Moonwell](docs/screenshots/realms/26.1-neoforge-05-moonwell.png) |
+| ![Vael's Moon Arena](docs/screenshots/realms/26.1-neoforge-06-moon-arena.png) | ![The Starforge and its orrery](docs/screenshots/realms/26.1-neoforge-07-starforge.png) |
+| ![The Endless Archive](docs/screenshots/realms/26.1-neoforge-08-endless-archive.png) | ![Under the archive dome](docs/screenshots/realms/26.1-neoforge-09-archive-dome.png) |
+| ![Seraph Plate in the nave](docs/screenshots/realms/26.1-neoforge-11-seraph-plate-in-the-nave.png) | ![The Firmament shrine](docs/screenshots/realms/26.1-neoforge-10-firmament-shrine.png) |
 | ![Vael, Watcher of the Moon](docs/screenshots/shaders/26.1-neoforge-12-watcher-vael.png) | ![Orrin, Watcher of the Forge](docs/screenshots/shaders/26.1-neoforge-13-watcher-orrin.png) |
-| ![Arriving at the Sun Spire](docs/screenshots/shaders/26.1-neoforge-04-solar-arrival.png) | ![Vael's Moon Arena](docs/screenshots/shaders/26.1-neoforge-06-moon-arena.png) |
-| ![Orrin's Prism Observatory](docs/screenshots/shaders/26.1-neoforge-07-prism-observatory.png) | ![Ilyra's Endless Library](docs/screenshots/shaders/26.1-neoforge-08-endless-library.png) |
-| ![Inside the Endless Library](docs/screenshots/shaders/26.1-neoforge-09-library-inside.png) | ![The Umbral Throne](docs/screenshots/shaders/26.1-neoforge-10-umbral-throne.png) |
 | ![A starlight network](docs/screenshots/shaders/26.1-neoforge-17-starlight-network.png) | ![A convergence ritual](docs/screenshots/shaders/26.1-neoforge-18-convergence-ritual.png) |
-| ![A Fallen Observatory](docs/screenshots/shaders/26.1-neoforge-19-fallen-observatory.png) | ![Seraph gear](docs/screenshots/shaders/26.1-neoforge-20-seraph-armory.png) |
-| ![The Firmament hub](docs/screenshots/shaders/26.1-neoforge-16-firmament-hub.png) | ![Ilyra, Watcher of Memory](docs/screenshots/shaders/26.1-neoforge-14-watcher-ilyra.png) |
 
 More in [`docs/screenshots/`](docs/screenshots/).
 
@@ -71,19 +76,22 @@ More in [`docs/screenshots/`](docs/screenshots/).
 7. **The gates.** Forge the **Ascension Key**, build a gate frame and set the key into it. The frame decides where it
    leads:
 
-   | Gate | Leads to | The challenge |
+   | Gate | Realm | The challenge |
    |---|---|---|
-   | Astral Gate | the Firmament hub | low gravity, floating islands, the sky above the clouds |
-   | Solar Gate | Solenne's **Sun Spire** | a 100-block climb on single pads; gold pads are checkpoints, magma burns |
-   | Lunar Gate | Vael's **Moon Arena** | ten moon targets, four on distant islets, while Eclipse Echoes keep rising |
-   | Prism Gate | Orrin's **Prism Observatory** | three halls of mirrors; all three receptors must glow at once |
-   | Archive Gate | Ilyra's **Endless Library** | a dark, roofed maze, 70 × 70 blocks |
-   | Umbral Gate | the **Umbral Throne** | opens only for one who carries all four Watchers' Marks |
+   | Astral Gate | **The Firmament** – moonlit sky islands | low gravity, starwood groves to harvest |
+   | Solar Gate | **The Sunspire** – eternal dawn | Solenne's 100-block climb on single pads; every gold pad must be reached, magma burns |
+   | Lunar Gate | **The Moonwell** – full-moon midnight | Vael's ten moon targets, four on distant islets, while Eclipse Echoes keep rising |
+   | Prism Gate | **The Starforge** – deep space | Orrin's three halls of mirrors; all three receptors must glow at once |
+   | Archive Gate | **The Endless Archive** – starless dark | Ilyra's roofed maze, 70 × 70 blocks |
+   | Umbral Gate | **The Umbral Cathedral** – the Eclipse's sky | opens only for one who has earned all four Watchers' Marks |
 
-8. **The Watchers.** Solenne, Vael, Orrin and Ilyra – floating six-winged seraphs, three times your size – wait beside
-   their trials. Each trial earns a **Mark** and the Watcher's favour, and cools its rival.
-9. **The Eclipse.** On the Umbral Throne, an **Umbral Sigil** calls down the fallen fifth Watcher: a three-phase boss
-   with telegraphed Void Lances, Echo waves and Umbral Novas you can only survive behind cover. Its heart becomes the
+   Trial realms are sacred: no digging, no building, no ender pearls. Fall, and the sky sets you back on the shrine.
+
+8. **The Watchers.** Solenne, Vael, Orrin and Ilyra – floating six-winged seraphs, three times your size – wait at the
+   way into their trials. Each trial earns a **Mark** and the Watcher's favour, and cools its rival.
+9. **The Eclipse.** In the Umbral Cathedral, an **Umbral Sigil** calls down the fallen fifth Watcher: three phases –
+   *Fallen Light*, *Shattered Halo* (break its four pylons) and *Total Eclipse* – with telegraphed sweeps, lances,
+   falling stars, a shadow dive, a sweeping ray and an Umbral Nova you survive only behind cover. Its heart becomes the
    **Halo of Dawn**; its feathers bind **Seraph Wings** to you.
 
 ## Compatibility
@@ -130,7 +138,7 @@ erwacht.*
 
 Astral Vigil ist ein Fortschritts-Mod für NeoForge rund um Sternenlicht. Er beginnt mit einem Meteor, der in einer
 klaren Nacht in deine Welt stürzt, und endet hoch über den Wolken im **Firmament**: einer schwebenden
-Himmelsdimension voller Prüfungsinseln, die du nur durch selbst gebaute Tore erreichst. Behütet von vier
+Welt aus sechs Himmelsreichen, die du nur durch selbst gebaute Tore erreichst. Behütet von vier
 gewaltigen Wächtern – und heimgesucht von ihrem gefallenen fünften Geschwister, der Finsternis. Für Minecraft 1.21.1
 und 26.1.2, vollständig auf Deutsch spielbar.
 
@@ -154,14 +162,15 @@ und 26.1.2, vollständig auf Deutsch spielbar.
 
 | Tor | Führt zu | Die Herausforderung |
 |---|---|---|
-| Astraltor | Mitte des Firmaments | geringe Schwerkraft, schwebende Inseln über den Wolken |
-| Sonnentor | Solennes **Sonnenspitze** | 100 Blöcke Aufstieg auf einzelnen Stufen; goldene Stufen sind Rastpunkte |
-| Mondtor | Vaels **Mondarena** | zehn Mondzielscheiben, vier davon auf fernen Inselchen, während Echos angreifen |
-| Prismentor | Orrins **Prismenobservatorium** | drei Spiegelhallen; alle drei Empfänger müssen zugleich leuchten |
-| Archivtor | Ilyras **Endlose Bibliothek** | ein dunkles, überdachtes Labyrinth, 70 × 70 Blöcke |
-| Umbraltor | der **Umbralthron** | öffnet sich nur dem, der alle vier Zeichen der Wächter trägt |
+| Astraltor | **Das Firmament** – mondhelle Himmelsinseln | geringe Schwerkraft, Sternholzhaine |
+| Sonnentor | **Die Sonnenspitze** – ewige Morgenröte | Solennes Aufstieg über 100 Blöcke; jede goldene Stufe muss erreicht werden |
+| Mondtor | **Der Mondbrunnen** – Vollmond um Mitternacht | Vaels zehn Mondzielscheiben, während Echos angreifen |
+| Prismentor | **Die Sternenschmiede** – tiefes All | Orrins drei Spiegelhallen; alle drei Empfänger müssen zugleich leuchten |
+| Archivtor | **Das Endlose Archiv** – sternloses Dunkel | Ilyras überdachtes Labyrinth, 70 × 70 Blöcke |
+| Umbraltor | **Die Umbrale Kathedrale** – der Himmel der Finsternis | öffnet sich nur dem, der alle vier Zeichen der Wächter errungen hat |
 
-Auf dem Umbralthron ruft ein **Umbrales Siegel** die Finsternis herab: ein Bosskampf in drei Phasen. Ihr Herz wird
+In der Umbralen Kathedrale ruft ein **Umbrales Siegel** die Finsternis herab: ein Bosskampf in drei Phasen mit
+Pylonenschild, Strahl und Nova, mit 36 Animationen und angekündigten Angriffen. Ihr Herz wird
 zum **Heiligenschein der Morgenröte**, ihre Federn binden dir **Seraphsflügel**.
 
 ### Lizenz

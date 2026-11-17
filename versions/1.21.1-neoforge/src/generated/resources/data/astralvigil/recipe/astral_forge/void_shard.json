@@ -1,0 +1,21 @@
+{
+  "type": "astralvigil:astral_forge",
+  "ingredients": [
+    {
+      "tag": "c:obsidians/crying"
+    },
+    {
+      "tag": "astralvigil:astral_shards"
+    },
+    {
+      "tag": "c:gems/amethyst"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "astralvigil:void_shard"
+  },
+  "starlight": 300,
+  "time": 160,
+  "tint": "stella"
+}

@@ -4,6 +4,50 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### The realms of the Firmament (no more hub)
+- Every gate now opens onto a **realm of its own** – a separate dimension with a fixed sky, fog, ambient particles
+  and a handcrafted template (`tools/dev/gen_realms.py`), built on the first visit:
+  **The Firmament** wilds (Astral Gate; starwood groves, moonlit), **The Sunspire** (eternal dawn, a vast sun ring),
+  **The Moonwell** (full-moon midnight, a giant crescent, silver groves), **The Starforge** (deep space, a golden
+  orrery, crystal spires), **The Endless Archive** (dark, bookshelf towers, a glass dome over the reading room) and
+  **The Umbral Cathedral** (End sky, a broken cathedral with a pillar nave, vault ribs, lancet windows and a rose
+  window, the throne in the apse, a shattered halo above).
+- Animated floating blocks drift and turn in every realm (vanilla block displays, server-targeted, client-interpolated).
+- A realm title card on arrival. Trial realms are sacred ground: no digging, no building, ender pearls fizzle, no
+  elytra on the Sun Spire. Return gates and shrines can't be broken anywhere. Falling players **and dropped items**
+  are caught and set back on the arrival shrine. The Sun Spire's crown counts only after all four gold pads.
+- `/astralvigil realm <id>` builds and visits a realm (admin).
+
+### Celestial masonry: 51 new building blocks
+- **Starwood** (a tree of the Firmament): logs, wood, stripped variants, planks, stairs, slab, fence, gate, door,
+  trapdoor, button, pressure plate, glowing leaves, sapling, gilded starwood.
+- **Celestial Marble** (+ stairs/slab/wall, bricks + stairs/slab/wall, chiseled, pillar, gilded, cracked),
+  **Sunstone** and **Moonstone** (+ brick sets), **Umbral Stone** (+ brick set, chiseled, cracked, pillar).
+- Lights and glass: Astral, Sunstone, Moonstone and Umbral lamps, Star Lantern, Constellation Tiles, Halo Glass,
+  Nebula Glass, Eclipse Glass. Everything craftable (tag inputs, stonecutter variants, smelting for cracked bricks);
+  own creative tab.
+
+### The Eclipse reborn
+- New model (216 cubes, six tattered wings, black-sun corona, cracked halo) with 36 animations and a glow layer.
+- A real boss: one move at a time with wind-up/strike/recovery, synced to the client, telegraphs drawn client-side.
+  Umbral Sweep, Void Lance, Falling Stars, Echoes, Shadow Dive, Eclipse Ray, Umbral Nova, Blink, Umbral Grasp.
+- Phases: *Fallen Light*, *Shattered Halo* (four Umbral Pylons shield it), *Total Eclipse* (darkness, cover walls,
+  enrage below 10 %). Grounded windows for melee, entrance, leash and reset, health scales with players, no phase
+  skipping, loot for every participant on the dais, Umbral Sigil refunded on Peaceful.
+- New entity `astralvigil:umbral_pylon`; `[eclipse]` config section.
+
+### Celestial armour
+- **Solar Regalia** (Sunsteel) and **Lunar Raiment** (Moonsilver) join a reworked **Seraph Plate**: new textures,
+  glowing seams and 3D ornaments (halos, crests, wings, sun disc, crescent circlet, mantle) on players and armour
+  stands; Seraph ornaments grow with awakening. Full-set bonuses with tooltips (`[armor]`), three advancements,
+  Codex entries.
+
+### Game-loop fixes (from a full audit)
+- Marks count by advancement: a lost Mark no longer locks the Umbral Gate or the summon; Marks resist fire.
+- Guaranteed Void Shards: Astral Forge recipe (crying obsidian + Astral Shard + amethyst → 2). The Umbral Sigil takes
+  Void Shards instead of silk-touched Void Crystals.
+- Prism Gate corners: diamonds instead of diamond blocks. Starfall `chancePerRoll` 0.035 → 0.06.
+
 ### Presentation
 - README rewritten for GitHub: pitch, shader gallery (Complementary Reimagined), gate table, journey.
 - The Firmament has its own biome (meadow features, no precipitation): no more snow piling up on the trial islands.

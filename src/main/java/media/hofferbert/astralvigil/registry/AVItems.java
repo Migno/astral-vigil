@@ -187,7 +187,7 @@ public final class AVItems {
         Map<media.hofferbert.astralvigil.firmament.Watcher, DeferredItem<Item>> map =
                 new EnumMap<>(media.hofferbert.astralvigil.firmament.Watcher.class);
         for (var w : media.hofferbert.astralvigil.firmament.Watcher.values()) {
-            map.put(w, register("mark_of_" + w.id(), Item::new, p -> p.stacksTo(1).rarity(Rarity.EPIC)));
+            map.put(w, register("mark_of_" + w.id(), Item::new, p -> p.stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
         }
         return map;
     }

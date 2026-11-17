@@ -244,3 +244,22 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best
   for packmakers/addons, matches ecosystem), assets under **CC BY-NC-SA 4.0** or ARR to protect the
   art. Alternative: LGPL-3.0 for code (forks must stay open).
+
+## Phase 10 – realms, masonry, Eclipse, armour (2026-11-17)
+
+- **One dimension per gate, no hub.** The owner disliked the hub; each challenge lives in its own realm with a fixed
+  atmosphere (26.1: fixed environment attributes and empty timelines; 1.21.1: fixed day time plus biome effects).
+  Trial realms are void (flat generator without layers); the wilds keep vanilla floating-islands terrain with a carved
+  hollow around the shrine. One template per realm; its anchor (128, 48, 128) is the arrival pad.
+- **Floating blocks are vanilla block displays** driven through an access transformer: the server re-targets each
+  pose every 40 ticks and clients interpolate. Smooth, cheap, shader-safe, no renderer code for two versions.
+- **Trial realms are protected** (break/place cancelled, pearls fizzle, no elytra on the Sun Spire). This removes the
+  pillar, pearl and dig cheese the audit found without special cases per trial.
+- **Building blocks are data-driven** (`AVBuilding` entries plus vanilla `BlockFamily`), so datagen walks one list.
+  Wood sounds and door/gate behaviour reuse the cherry set types.
+- **Eclipse**: move state machine with synced move and stage, telegraphs drawn client-side; pylons are entities;
+  phase-3 cover is vanilla crying obsidian tracked in the Eclipse's save data. 500 HP instead of 400 (shield phase).
+- **Armour ornaments** use vanilla model parts with stateless animation and an `eyes` glow pass (works with the
+  deferred 26.1 renderer and without GeckoLib emissives). Mid-tier sets are crafted at the Convergence Altar.
+  `art/bbmodel/armor/seraph_layer_*` are stale; the assets now come from `gen_armor.py`.
+- **Marks count by advancement** for the Umbral Gate and the summon, so a lost Mark cannot soft-lock the endgame.

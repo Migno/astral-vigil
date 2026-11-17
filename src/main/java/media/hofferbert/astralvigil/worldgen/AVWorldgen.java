@@ -124,7 +124,7 @@ public final class AVWorldgen {
     static Sky sky(Realm realm) {
         return switch (realm) {
             // a moonlit night above the starwood groves
-            case FIRMAMENT -> new Sky(18000, false, 0x0B0A1E, 0x1A1840, 0x3F76E4, 180f, 0.9f, 0, 0, 7f, 0.4f, 0.05f,
+            case FIRMAMENT -> new Sky(18000, false, 0x0B0A1E, 0x1E2A5A, 0x3F76E4, 180f, 0.9f, 0, 0, 10f, 0.6f, 0.12f,
                     net.minecraft.core.particles.ParticleTypes.END_ROD, 0.0008f);
             // eternal dawn: the sun on the rim of the world, golden haze
             case SUNSPIRE -> new Sky(23300, false, 0x78A0E8, 0xF2B46B, 0xF2C94C, 262f, 0.12f, 0, 0xE9F2A04F, 13f, 0.9f, 0.05f,

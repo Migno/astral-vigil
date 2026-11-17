@@ -12,7 +12,7 @@ Guard rails:
 | Key | Default | Why |
 |---|---|---|
 | `checkIntervalTicks` | 1200 (1 min) | Cheap: one roll per player per minute, only at night. |
-| `chancePerRoll` | 0.035 | A Minecraft night has ~8 rolls → ≈ 25 % chance per night per player, ≈ 45 % under a full moon. A star every 2–4 nights feels like an event, not a farm. |
+| `chancePerRoll` | 0.06 | ~8 rolls a night → ≈ 40 % per night per player, ≈ 65 % under a full moon. Raised from 0.035 after the game-loop audit: gear, key and six gate kinds need about a star every other night. |
 | `fullMoonMultiplier` | 2.0 | Makes the full moon (1 night in 8) noticeably special. |
 | `playerCooldownTicks` | 24000 (1 day) | Hard cap: at most one star per player per day, even when lucky. AFK farms gain nothing. |
 | `minDistance` / `maxDistance` | 24 / 64 | Visible in the sky, close enough to walk to, far enough not to hit the player's base by design. |
@@ -160,3 +160,24 @@ Stella light, Void materials, echo shard) keeps repeat kills a real investment. 
 - `night`: smoothstep from dusk (12 500) to midnight (18 000) and back to dawn (23 500).
 - `moon`: full moon 1.0 … new moon 0.5 (linear).
 - `weather`: clear 1.0, rain 0.5, thunder 0.25.
+
+## Eclipse (`[eclipse]`, reworked in phase 10)
+
+| Key | Default | Why |
+|---|---|---|
+| `health` / `healthPerExtraPlayer` | 500 / +50 % | The fight now has a shield phase and pauses; 500 keeps it at roughly 4–6 minutes for one netherite-tier player. |
+| `armor` | 10 | Top-tier weapons still bite. |
+| damage keys | Sweep 14, Lance 14 + Wither, Stars 12, Dive 16 + shockwave 8, Ray 10, Nova 18, Grasp 6 | Every big hit is telegraphed and avoidable; full Seraph Plate survives two mistakes, not three. |
+| `enrageThreshold` | 0.1 | ×1.25 damage, ×0.7 tempo; wind-ups are never shortened. |
+| `vulnerableDamageMultiplier` | 1.3 | Grounded and stagger windows reward melee. |
+| `pylonCount` / `pylonHealth` / `pylonHealPerSecond` | 4 / 40 / 1.0 | Ignoring the pylons costs health, but the phase never turns into a slog. |
+| `leashRadius` / `resetRange` / `resetSeconds` | 40 / 64 / 30 | It never drifts over the void; abandoned fights reset fully. |
+| feathers | 3–5 per participant | Everyone who fought gets their own reward. |
+
+## Armour sets (`[armor]`)
+
+| Set | Defence | Bonus | Why |
+|---|---|---|---|
+| Solar Regalia | 18, toughness 2 | Fire Resistance; Strength I by day (`solarStrength`) | Below diamond (20) to pay for the bonus. |
+| Lunar Raiment | 17, toughness 1.5 | Night Vision and Speed I at night; −50 % fall damage | A mobility set for night hunters. |
+| Seraph Plate | ≈ netherite | Starlight Mending (2 charge per 1 HP every 2 s under an open night sky), Glide Burst (25 charge, 8 s cooldown), no fall damage when ascended | Net-positive only under a clear night sky. |

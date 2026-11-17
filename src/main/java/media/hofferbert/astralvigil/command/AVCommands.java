@@ -68,6 +68,21 @@ public final class AVCommands {
                                                         BlockPosArgument.getLoadedBlockPos(ctx, "pos"),
                                                         StringArgumentType.getString(ctx, "tint"),
                                                         IntegerArgumentType.getInteger(ctx, "amount")))))))
+                .then(Commands.literal("realm")
+                        .then(Commands.argument("realm", StringArgumentType.word())
+                                .suggests((ctx, b) -> SharedSuggestionProvider.suggest(java.util.Arrays.stream(
+                                        media.hofferbert.astralvigil.firmament.Realm.values()).map(media.hofferbert.astralvigil.firmament.Realm::id), b))
+                                .executes(ctx -> {
+                                    String id = StringArgumentType.getString(ctx, "realm");
+                                    var player = ctx.getSource().getPlayerOrException();
+                                    for (var realm : media.hofferbert.astralvigil.firmament.Realm.values()) {
+                                        if (realm.id().equals(id)) {
+                                            return media.hofferbert.astralvigil.firmament.Firmament.visit(player, realm) ? 1 : 0;
+                                        }
+                                    }
+                                    ctx.getSource().sendFailure(Component.literal("Unknown realm " + id));
+                                    return 0;
+                                })))
                 .then(Commands.literal("showcase")
                         .then(Commands.argument("scene", StringArgumentType.word())
                                 .suggests((ctx, b) -> SharedSuggestionProvider.suggest(Showcase.SCENES, b))

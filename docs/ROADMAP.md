@@ -14,6 +14,7 @@ Every phase ends with: build of both targets ✅ · GameTests ✅ · in-game scr
 | 7 – Firmament | Dimension, four sanctums + Watcher entities, favour system, GeckoLib setup (Seraph wing cosmetic moved to Phase 8) | ✅ done |
 | 8 – Endgame | Eclipse boss (3 phases), Eclipse Echoes, Seraph wing cosmetic, final advancements, balance pass | ✅ done |
 | 9 – Release readiness | Compat instances + ATM10/ATM11 smoke tests, profiling, README en/de, Modrinth/CurseForge drafts (not published) | ✅ done except the ATM pack smoke tests (need the server packs) and the license decision |
+| 10 – Ascension | One void realm per gate (no hub) with handcrafted scenery and the Umbral Cathedral, 51 building blocks, Eclipse boss rework, Solar/Lunar/Seraph armour, game-loop fixes | ✅ done |
 
 ## Game concept (short)
 
