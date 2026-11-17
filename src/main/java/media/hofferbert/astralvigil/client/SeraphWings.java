@@ -129,15 +129,18 @@ public final class SeraphWings {
         return parts;
     }
 
-    /** Idle (folded, breathing) blended into the glide by {@code glide}, with the burst clip layered on top. */
-    static void pose(ModelPart[] parts, float ageInTicks, float glide, float burst) {
+    /**
+     * Idle (folded, breathing; developer wings rest half-open with a slow beat instead) blended into the glide by
+     * {@code glide}, with the burst clip layered on top.
+     */
+    static void pose(ModelPart[] parts, float ageInTicks, float glide, float burst, boolean display) {
         float t = ageInTicks / 20f;
         float weight = burst < 0f ? 0f
                 : Math.min(Math.min(1f, burst / BURST_FADE_IN), (SeraphWingsRig.BURST.length() - burst) / BURST_FADE_OUT);
         float[] a = new float[3];
         float[] b = new float[3];
         for (int i = 0; i < parts.length; i++) {
-            SeraphWingsRig.IDLE.sample(i, t, a);
+            (display ? SeraphWingsRig.DISPLAY : SeraphWingsRig.IDLE).sample(i, t, a);
             if (glide > 0f) {
                 SeraphWingsRig.GLIDE.sample(i, t, b);
                 lerp(a, b, glide);
@@ -192,7 +195,7 @@ public final class SeraphWings {
             super.setupAnim(state);
             Float glide = state.getRenderData(GLIDE);
             Float burst = state.getRenderData(BURST);
-            pose(wings, state.ageInTicks, glide == null ? 0f : glide, burst == null ? -1f : burst);
+            pose(wings, state.ageInTicks, glide == null ? 0f : glide, burst == null ? -1f : burst, state.getRenderData(COSMETIC) != null);
         }
     }
 
@@ -251,7 +254,7 @@ public final class SeraphWings {
                 return;
             }
             body.copyFrom(getParentModel().body);
-            pose(wings, ageInTicks, glideBlend(player, ageInTicks, gliding(player)), burstTime(player, ageInTicks));
+            pose(wings, ageInTicks, glideBlend(player, ageInTicks, gliding(player)), burstTime(player, ageInTicks), cosmetic(player) != null);
             var cosmetic = cosmetic(player);
             body.render(poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(texture(cosmetic))), light, OverlayTexture.NO_OVERLAY);
             if (cosmetic != null) {

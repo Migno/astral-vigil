@@ -123,6 +123,8 @@ def wing_pose(yaw, roll, mid=(0, 0), tip=(0, 0), fan=0):
 
 FOLD = dict(yaw=-32, roll=-6, mid=(-38, -8), tip=(-26, -10), fan=-10)
 GLIDE = dict(yaw=4, roll=-6, mid=(2, 2), tip=(0, -4), fan=10)
+# developer wing cosmetics rest half-open and raised, so they read from every angle
+DISPLAY = dict(yaw=0, roll=0, mid=(2, 6), tip=(0, 6), fan=12)
 
 
 def looped(length, base, amps, period, lags):
@@ -140,6 +142,12 @@ def looped(length, base, amps, period, lags):
 def idle():
     return looped(8, FOLD, {"": (1.5, 2.5), "_mid": (2, 3), "_tip": (2, 4), "_fan": (0, -3)}, 4,
                   {"": 0, "_mid": 0.3, "_tip": 0.6, "_fan": 0.9})
+
+
+def display():
+    """Developer wings at rest: half-spread and raised, a slow majestic beat with the tips trailing."""
+    return looped(6, DISPLAY, {"": (2.5, 7), "_mid": (3, 8), "_tip": (3, 11), "_fan": (0, -6)}, 3,
+                  {"": 0, "_mid": 0.18, "_tip": 0.36, "_fan": 0.5})
 
 
 def glide():
@@ -164,7 +172,7 @@ def burst():
 
 
 def animations():
-    return {"idle": idle(), "glide": glide(), "burst": burst()}
+    return {"idle": idle(), "display": display(), "glide": glide(), "burst": burst()}
 
 
 # ------------------------------------------------------------------ Java rig
@@ -252,7 +260,7 @@ def preview(out_dir):
              json.load(open(os.path.join(ASSETS, "animations", "entity", "seraph_wings.animation.json")))["animations"].items()}
     tex = png.read(os.path.join(ASSETS, "textures", "entity", "seraph_wings.png"))[2]
     tex = tex + [[(90, 110, 150, 255)] * TW for _ in range(40)]  # stand-in body texture below the atlas
-    poses = [("rest", None, 0), ("idle", "idle", 1), ("glide", "glide", 0.3), ("burst-up", "burst", 0.12),
+    poses = [("rest", None, 0), ("idle", "idle", 1), ("display", "display", 0.6), ("glide", "glide", 0.3), ("burst-up", "burst", 0.12),
              ("burst-down", "burst", 0.3), ("burst-over", "burst", 0.62)]
     img = gp.sheet(geo, tex, None, anims, poses, [0, 90, 180, 35], 6)
     png.write(os.path.join(out_dir, "seraph_wings.png"), img)
