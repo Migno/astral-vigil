@@ -8,8 +8,10 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 - Every gate now opens onto a **realm of its own** – a separate dimension with a fixed sky, fog, ambient particles
   and a handcrafted template (`tools/dev/gen_realms.py`), built on the first visit:
   **The Firmament** wilds (Astral Gate; starwood groves, moonlit), **The Sunspire** (eternal dawn, a vast sun ring),
-  **The Moonwell** (full-moon midnight, a giant crescent, silver groves), **The Starforge** (deep space, a golden
-  orrery, crystal spires), **The Endless Archive** (dark, bookshelf towers, a glass dome over the reading room) and
+  **The Moonwell** (full-moon midnight, a giant crescent, silver groves), **The Starforge** (deep space: a crystal-vaulted forge hall
+  over the mirror bays, a rose window, the Great Forge anvil under a captured star in an armillary, nebulae, an asteroid
+  belt, ringed moons), **The Endless Archive** (a grand library around the maze: clerestory, mansard roof, ribbed dome,
+  round towers, a portico; floating bookshelf stacks with rope bridges, giant books, an inkwell and quill) and
   **The Umbral Cathedral** (End sky, a broken cathedral with a pillar nave, vault ribs, lancet windows and a rose
   window, the throne in the apse, a shattered halo above).
 - Animated floating blocks drift and turn in every realm (vanilla block displays, server-targeted, client-interpolated).

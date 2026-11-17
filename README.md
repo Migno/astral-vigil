@@ -50,8 +50,8 @@ of the Eclipse, the fallen fifth Watcher.
 |---|---|
 | ![The Umbral Cathedral from above](docs/screenshots/realms/26.1-neoforge-01-umbral-cathedral.png) | ![The Eclipse](docs/screenshots/realms/26.1-neoforge-03-the-eclipse.png) |
 | ![The Sunspire at eternal dawn](docs/screenshots/realms/26.1-neoforge-04-sunspire.png) | ![The Moonwell](docs/screenshots/realms/26.1-neoforge-05-moonwell.png) |
-| ![Vael's Moon Arena](docs/screenshots/realms/26.1-neoforge-06-moon-arena.png) | ![The Starforge and its orrery](docs/screenshots/realms/26.1-neoforge-07-starforge.png) |
-| ![The Endless Archive](docs/screenshots/realms/26.1-neoforge-08-endless-archive.png) | ![Under the archive dome](docs/screenshots/realms/26.1-neoforge-09-archive-dome.png) |
+| ![Vael's Moon Arena](docs/screenshots/realms/26.1-neoforge-06-moon-arena.png) | ![The Starforge, its crystal vault and captured star](docs/screenshots/realms/26.1-neoforge-07-starforge.png) |
+| ![The Endless Archive](docs/screenshots/realms/26.1-neoforge-08-endless-archive.png) | ![The library portico](docs/screenshots/realms/26.1-neoforge-09-archive-portico.png) |
 | ![Seraph Plate in the nave](docs/screenshots/realms/26.1-neoforge-11-seraph-plate-in-the-nave.png) | ![The Firmament shrine](docs/screenshots/realms/26.1-neoforge-10-firmament-shrine.png) |
 | ![Vael, Watcher of the Moon](docs/screenshots/shaders/26.1-neoforge-12-watcher-vael.png) | ![Orrin, Watcher of the Forge](docs/screenshots/shaders/26.1-neoforge-13-watcher-orrin.png) |
 | ![A starlight network](docs/screenshots/shaders/26.1-neoforge-17-starlight-network.png) | ![A convergence ritual](docs/screenshots/shaders/26.1-neoforge-18-convergence-ritual.png) |

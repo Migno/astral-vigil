@@ -18,8 +18,8 @@ public enum Realm {
     FIRMAMENT(GateKind.ASTRAL, "firmament", 150, 0, 0),
     SUNSPIRE(GateKind.SOLAR, "sunspire", 80, 31, 14),
     MOONWELL(GateKind.LUNAR, "moonwell", 100, 43, 26),
-    STARFORGE(GateKind.PRISM, "starforge", 100, 39, 22),
-    ARCHIVE(GateKind.ARCHIVE, "archive", 100, 54, 37),
+    STARFORGE(GateKind.PRISM, "starforge", 100, 50, 32),
+    ARCHIVE(GateKind.ARCHIVE, "archive", 100, 63, 44),
     UMBRAL_THRONE(GateKind.UMBRAL, "umbral_throne", 100, 51, 38);
 
     /** Template anchor: the pad centre sits at (ANCHOR, FLOOR_Y, ANCHOR) inside every realm template. */

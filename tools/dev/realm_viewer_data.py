@@ -107,10 +107,11 @@ def avg(path_or_bytes, bright=False):
 
 def mod_texture(name):
     cands = [name, name + '_side', name + '_top']
-    for suf, rep in (('_stairs', ''), ('_slab', ''), ('_wall', '')):
+    for suf in ('_stairs', '_slab', '_wall', '_fence_gate', '_fence', '_button', '_pressure_plate', '_door', '_trapdoor'):
         if name.endswith(suf):
             base = name[: -len(suf)]
-            cands = [base, base.replace('brick', 'bricks'), base + 's'] + cands
+            cands = [base, base.replace('brick', 'bricks'), base + 's', base + '_planks'] + cands
+            break
     if name in ('starwood', 'stripped_starwood'):
         cands.insert(0, name + '_log')
     if name.endswith('_portal') or name == 'celestial_portal':

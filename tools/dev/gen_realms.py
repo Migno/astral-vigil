@@ -11,8 +11,8 @@ at (ANCHOR, FLOOR_Y, ANCHOR) of the template; RealmBuilder places it accordingly
     firmament       150     -               (the wild sky of starwood groves; noise islands around the shrine)
     sunspire         80     (0, 0, -31)     Solenne's Sun Spire
     moonwell        100     (0, 0, -43)     Vael's Moon Arena
-    starforge       100     (0, 0, -39)     Orrin's Prism Observatory
-    archive         100     (0, 0, -54)     Ilyra's Endless Library
+    starforge       100     (0, 0, -50)     Orrin's forge-observatory (crystal vault, Great Forge, nebulae)
+    archive         100     (0, 0, -63)     Ilyra's grand library (maze inside, dome, towers, portico)
     umbral_throne   100     (0, 0, -51)     the Umbral Throne
 """
 import gzip
@@ -374,10 +374,85 @@ def moon_arena(w, cz):
                 w.put(x, 0, cz + z, 'moonstone_bricks')
 
 
-def prism_observatory(w, cz):
-    """Orrin: three bays, each font -> prism -> mirrors (turned wrong) -> receptor. All three must glow together."""
-    trial_island(w, cz, 22, 'constellation_tiles', 'celestial_marble', lambda i: 'astral_lamp' if i % 9 == 0 else 'celestial_bricks', 41)
-    y = 1
+# ------------------------------------------------------------------ shared building helpers
+
+def box(w, x0, y0, z0, x1, y1, z1, block, soft=False, **props):
+    for x in range(min(x0, x1), max(x0, x1) + 1):
+        for y in range(min(y0, y1), max(y0, y1) + 1):
+            for z in range(min(z0, z1), max(z0, z1) + 1):
+                (w.soft if soft else w.put)(x, y, z, block, **props)
+
+
+def stair(w, x, y, z, block, facing, half='bottom'):
+    w.put(x, y, z, block, facing=facing, half=half, shape='straight', waterlogged='false')
+
+
+def line(w, a, b, block, step=0.5, soft=True, **props):
+    (ax, ay, az), (bx, by, bz) = a, b
+    n = max(1, int(math.dist(a, b) / step))
+    for i in range(n + 1):
+        t = i / n
+        p = (round(ax + (bx - ax) * t), round(ay + (by - ay) * t), round(az + (bz - az) * t))
+        (w.soft if soft else w.put)(*p, block, **props)
+
+
+def sag_bridge(w, a, b, deck, rail, sag=4):
+    """A hanging rope bridge between two points: a slab deck sagging in the middle, fence posts along both sides."""
+    (ax, ay, az), (bx, by, bz) = a, b
+    n = int(max(abs(bx - ax), abs(bz - az)))
+    for i in range(n + 1):
+        t = i / n
+        x = round(ax + (bx - ax) * t)
+        z = round(az + (bz - az) * t)
+        y = round(ay + (by - ay) * t - sag * 4 * t * (1 - t))
+        w.soft(x, y, z, deck, type='bottom', waterlogged='false')
+        if i % 3 == 0:
+            side = (1, 0) if abs(bz - az) > abs(bx - ax) else (0, 1)
+            for s in (-1, 1):
+                w.soft(x + side[0] * s, y + 1, z + side[1] * s, rail, north='false', south='false', east='false', west='false',
+                       waterlogged='false')
+
+
+def noise3(x, y, z, seed):
+    h = (x * 374761393 + y * 668265263 + z * 2147483647 + seed * 1274126177) & 0xFFFFFFFF
+    h = ((h ^ (h >> 13)) * 1274126177) & 0xFFFFFFFF
+    return ((h ^ (h >> 16)) & 0xFFFF) / 65535.0
+
+
+def nebula(w, cx, cy, cz, rx, ry, rz, cols, seed, density=0.035):
+    """A cloud of stained glass that thins out towards its edge, salted with starry end rods."""
+    for x in range(int(cx - rx), int(cx + rx) + 1):
+        for y in range(int(cy - ry), int(cy + ry) + 1):
+            for z in range(int(cz - rz), int(cz + rz) + 1):
+                e = ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 + ((z - cz) / rz) ** 2
+                if e > 1:
+                    continue
+                swirl = math.sin(x * 0.13 + seed) + math.sin(y * 0.21 + z * 0.09 + seed * 2)
+                d = density * (1 - e) * (1.2 + 0.6 * swirl)
+                r = noise3(x, y, z, seed)
+                if r < d:
+                    w.soft(x, y, z, cols[int(noise3(x, z, y, seed + 1) * len(cols)) % len(cols)])
+                elif r > 0.9993:
+                    w.soft(x, y, z, 'minecraft:end_rod', facing='up')
+
+
+def rock(w, cx, cy, cz, r, rnd, body, veins=(), vein_chance=0.08):
+    """A lumpy asteroid."""
+    bumps = [(rnd.uniform(-r, r), rnd.uniform(-r, r), rnd.uniform(-r, r), rnd.uniform(r * 0.4, r * 0.8)) for _ in range(4)]
+    for x in range(int(cx - r * 1.6), int(cx + r * 1.6) + 1):
+        for y in range(int(cy - r * 1.6), int(cy + r * 1.6) + 1):
+            for z in range(int(cz - r * 1.6), int(cz + r * 1.6) + 1):
+                inside = math.dist((x, y, z), (cx, cy, cz)) <= r
+                for bx, by, bz, br in bumps:
+                    inside = inside or math.dist((x, y, z), (cx + bx, cy + by, cz + bz)) <= br
+                if inside:
+                    w.put(x, y, z, rnd.choice(veins) if veins and rnd.random() < vein_chance else body)
+
+
+# ------------------------------------------------------------------ Orrin: the Starforge
+
+def prism_puzzle(w, cz, y=1):
+    """The trial itself (unchanged mechanics): three bays, font -> prism -> mirrors (turned wrong) -> receptor."""
     wall = 'celestial_bricks'
 
     def wall_line(x0, x1, z, h=5):
@@ -411,8 +486,170 @@ def prism_observatory(w, cz):
     bay(12, [(-7, 0, 12, 'up'), (-7, 0, 17, 'west'), (3, 0, 17, 'down')], (3, 0, 12), [(-2, 0, 12), (-1, 0, 12), (0, 0, 12)])
 
 
-def endless_library(w, cz):
-    """Ilyra: a roofed, dim bookshelf maze (2-block corridors), the goal in the reading room at its heart."""
+def starforge_hall(w, cz):
+    """Orrin's forge-observatory: a crystal barrel vault on gilded ribs over the three mirror bays, a closed west apse
+    with a rose window, an open colonnade to the east and the Great Forge on its plaza."""
+    rnd = random.Random(401)
+    X0, X1, Z = -24, 18, 24
+    # the island: a broad disc for the hall, a second terrace for the plaza
+    island(w, -3, 0, cz, 32, 'celestial_marble', 'celestial_marble', 'umbral_stone', depth=20, wobble=0.04, seed=402)
+    island(w, 33, 0, cz, 17, 'celestial_marble', 'celestial_marble', 'umbral_stone', depth=14, wobble=0.05, seed=403)
+    # hall floor: constellation tiles framed in gold
+    for x in range(X0, X1 + 1):
+        for z in range(-Z, Z + 1):
+            edge = x in (X0, X1) or abs(z) == Z
+            w.put(x, 0, cz + z, 'gilded_celestial_bricks' if edge else 'constellation_tiles' if (x + z) % 9 else 'astral_lamp')
+    # outer walls: pilasters, a gilded band, tall halo-glass slits
+    for x in range(X0, X1 + 1):
+        for side in (-1, 1):
+            z = cz + side * Z
+            pil = (x - X0) % 6 == 0
+            for y in range(1, 9):
+                if pil:
+                    w.put(x, y, z, 'celestial_pillar', axis='y')
+                elif y == 4:
+                    w.put(x, y, z, 'gilded_celestial_bricks')
+                elif 2 <= y <= 7 and (x - X0) % 6 in (2, 3, 4):
+                    w.put(x, y, z, 'halo_glass')
+                else:
+                    w.put(x, y, z, 'celestial_bricks')
+            w.put(x, 9, z, 'gilded_celestial_bricks')
+    # the crystal vault: a half-cylinder along x, ribs every six blocks
+    R = Z
+    for x in range(X0, X1 + 1):
+        rib = (x - X0) % 6 == 0
+        for i in range(181):
+            a = math.pi * i / 180
+            zz, yy = round(math.cos(a) * R), round(math.sin(a) * R * 0.85) + 9
+            if rib:
+                w.put(x, yy, cz + zz, 'minecraft:gold_block' if i % 30 else 'astral_lamp')
+            else:
+                w.soft(x, yy, cz + zz, 'halo_glass' if (x + i // 15) % 5 else 'nebula_glass')
+    # west apse wall under the vault, with a rose window
+    for z in range(-Z, Z + 1):
+        top = round(math.sqrt(max(0, R * R - z * z)) * 0.85) + 9
+        for y in range(1, top + 1):
+            r = math.hypot(z, y - 16)
+            a = math.atan2(y - 16, z)
+            if r <= 9:
+                tracery = r > 8.2 or r < 1.6 or abs(math.sin(a * 4)) < 0.16 or 4.5 < r < 5.2
+                w.put(X0, y, cz + z, 'minecraft:gold_block' if tracery and r > 1.6 else 'astral_lamp' if r <= 1.6
+                      else ('nebula_glass' if r < 4.5 else 'halo_glass'))
+            else:
+                w.put(X0, y, cz + z, 'celestial_bricks' if (y + z) % 11 else 'chiseled_celestial_marble')
+    # east colonnade and a great gilded arch where the vault opens onto the plaza
+    for z in range(-Z, Z + 1, 4):
+        w.column(X1, cz + z, 1, 9, 'celestial_pillar', axis='y')
+        w.put(X1, 9, cz + z, 'chiseled_celestial_marble')
+    ring(w, X1 + 1, 9, cz, R, (1, 0, 0), lambda i, t: None if math.sin(t * 2 * math.pi) < -0.02 else
+         ('astral_lamp' if i % 20 == 0 else 'minecraft:gold_block'), 0.5)
+    # south door in the outer wall: a cloister walk links the bridge to the plaza
+    for dx in (-1, 0, 1):
+        for y in range(1, 6):
+            w.clear(dx, y, cz + Z)
+    for dx in (-2, 2):
+        w.column(dx, cz + Z + 1, 1, 7, 'celestial_pillar', axis='y')
+    for dx in range(-2, 3):
+        w.put(dx, 7, cz + Z + 1, 'chiseled_celestial_marble' if dx == 0 else 'gilded_celestial_bricks')
+    # hanging star lanterns along the vault ribs
+    for x in range(X0 + 6, X1, 6):
+        for z in (-12, 0, 12):
+            w.put(x, 26 if z == 0 else 23, cz + z, 'star_lantern', hanging='true', waterlogged='false')
+            line(w, (x, 27 if z == 0 else 24, cz + z), (x, 30 if z == 0 else 28, cz + z), 'minecraft:end_rod', soft=True, facing='up')
+
+    # ---- the plaza and the Great Forge
+    px = 33
+    for x in range(px - 13, px + 14):
+        for z in range(-13, 14):
+            d = math.hypot(x - px, z)
+            if d > 13.5:
+                continue
+            a = math.atan2(z, x - px)
+            ray = abs(math.sin(a * 6)) < 0.18
+            w.put(x, 0, cz + z, 'sunstone_lamp' if d < 3 else 'minecraft:gold_block' if ray and d > 4 else
+                  'sunstone' if int(d) % 4 == 0 else 'celestial_marble')
+    # the anvil
+    for x in range(px - 4, px + 5):
+        for z in range(-2, 3):
+            w.put(x, 1, cz + z, 'umbral_bricks')
+    for x in range(px - 2, px + 3):
+        for z in range(-1, 2):
+            for y in (2, 3):
+                w.put(x, y, cz + z, 'umbral_bricks')
+    for x in range(px - 6, px + 6):
+        for z in range(-2, 3):
+            for y in (4, 5):
+                w.put(x, y, cz + z, 'minecraft:obsidian' if y == 4 else 'umbral_bricks')
+    for i, x in enumerate(range(px + 6, px + 10)):   # the horn
+        for z in range(-1 + (1 if i > 1 else 0), 2 - (1 if i > 1 else 0)):
+            w.put(x, 5, cz + z, 'umbral_bricks')
+        if i < 2:
+            w.put(x, 4, cz, 'umbral_bricks')
+    for x in range(px - 2, px + 3):   # a glowing starmetal ingot on the face
+        w.put(x, 6, cz, 'astral_lamp')
+        w.put(x, 6, cz + (1 if x % 2 else -1), 'minecraft:gold_block')
+    # four obelisks at the plaza's corners, light tethers to the captured star
+    star = (px, 24, cz)
+    for dx, dz in ((-10, -10), (10, -10), (-10, 10), (10, 10)):
+        ox, oz = px + dx, cz + dz
+        box(w, ox - 1, 1, oz - 1, ox + 1, 2, oz + 1, 'celestial_bricks')
+        w.column(ox, oz, 3, 15, 'celestial_pillar', axis='y')
+        w.put(ox, 15, oz, 'chiseled_celestial_marble')
+        w.put(ox, 16, oz, 'astral_lamp')
+        line(w, (ox, 17, oz), star, 'minecraft:end_rod', step=0.6, facing='up')
+    # the captured star inside a turning armillary
+    sphere(w, *star, 4.6, lambda: 'astral_lamp' if rnd.random() < 0.75 else 'sunstone_lamp')
+    for radius, normal in ((7, (0, 1, 0.25)), (8.5, (1, 0.2, 0)), (10, (0.3, 0.4, 1))):
+        ring(w, *star, radius, normal, lambda i, t: 'astral_lamp' if i % 18 == 0 else 'minecraft:gold_block', 0.0)
+    # forge furnaces along the plaza edge
+    for k in range(-1, 2):
+        fx, fz = px + 12, cz + k * 7
+        box(w, fx, 1, fz - 1, fx + 2, 3, fz + 1, 'umbral_bricks')
+        w.put(fx, 2, fz, 'minecraft:magma_block')
+        w.column(fx + 1, fz, 4, 9, 'umbral_brick_wall', up='true', north='none', south='none', east='none', west='none', waterlogged='false')
+        w.put(fx + 1, 9, fz, 'umbral_lamp')
+
+
+def starforge_scenery(w, cz):
+    rnd = random.Random(410)
+    # three nebulae far out in the dark
+    nebula(w, -88, 40, cz - 40, 32, 22, 28, ('minecraft:purple_stained_glass', 'minecraft:magenta_stained_glass', 'minecraft:blue_stained_glass'), 1)
+    nebula(w, 92, 55, cz + 20, 28, 26, 34, ('minecraft:blue_stained_glass', 'minecraft:light_blue_stained_glass', 'minecraft:cyan_stained_glass'), 2)
+    nebula(w, 10, 78, cz - 48, 40, 18, 20, ('minecraft:magenta_stained_glass', 'minecraft:pink_stained_glass', 'minecraft:purple_stained_glass'), 3)
+    # an asteroid belt, some rocks mined from little starwood scaffolds
+    for k in range(46):
+        a = k / 46 * 2 * math.pi + rnd.uniform(-0.05, 0.05)
+        d = rnd.uniform(60, 76)
+        x, z, y = round(math.cos(a) * d) + 6, round(math.sin(a) * d) + cz + 8, round(rnd.uniform(-14, 14) + math.sin(a * 2) * 8)
+        r = rnd.uniform(1.6, 4.2)
+        rock(w, x, y, z, r, rnd, 'umbral_stone', ('minecraft:amethyst_block', 'astral_lamp', 'meteoric_stone'))
+        if k % 7 == 0:
+            top = y + int(r) + 1
+            box(w, x - 2, top, z - 2, x + 2, top, z + 2, 'starwood_planks')
+            for dx, dz in ((-2, -2), (2, -2), (-2, 2), (2, 2)):
+                w.column(x + dx, z + dz, top + 1, top + 3, 'starwood_fence', north='false', south='false', east='false', west='false',
+                         waterlogged='false')
+            w.put(x, top + 1, z, 'star_lantern', hanging='false', waterlogged='false')
+    # two ringed moons
+    for (mx, my, mz, r, body, ringb, normal) in ((-60, 30, cz + 55, 7, 'moonstone', 'halo_glass', (0.2, 1, 0.4)),
+                                                 (70, 10, cz - 52, 5.5, 'sunstone', 'minecraft:gold_block', (-0.3, 1, 0.2))):
+        sphere(w, mx, my, mz, r, lambda: body if rnd.random() < 0.85 else body + '_lamp')
+        ring(w, mx, my, mz, r * 1.9, normal, lambda i, t: ringb if i % 3 else None, 1.0)
+    # drifting forge fragments: broken anvils and ingots
+    for k in range(10):
+        a = rnd.uniform(0, 6.28)
+        d = rnd.uniform(40, 60)
+        x, z, y = round(math.cos(a) * d), round(math.sin(a) * d) + cz, rnd.randint(-6, 26)
+        if x > 10 and abs(z - cz) < 20:
+            continue
+        box(w, x - 1, y, z - 1, x + 1, y, z + 1, 'umbral_bricks')
+        w.put(x, y + 1, z, 'minecraft:gold_block' if k % 2 else 'astral_lamp')
+
+
+# ------------------------------------------------------------------ Ilyra: the Endless Archive
+
+def library_maze(w, cz, o):
+    """The trial itself (unchanged mechanics): a 2-block-corridor bookshelf maze, the goal in the reading room."""
     n = 17
     rnd = random.Random(52)
     g = 2 * n + 1
@@ -432,30 +669,24 @@ def endless_library(w, cz):
         walls[2 * nx + 1][2 * nz + 1] = False
         seen.add((nx, nz))
         stack.append((nx, nz))
-    walls[2 * mid + 1][g - 1] = False          # entrance on the +z side (towards the arrival pad)
+    walls[2 * mid + 1][g - 1] = False
     for gx in range(g):
         for gz in range(g):
             if abs(gx - (2 * mid + 1)) <= 1 and abs(gz - (2 * mid + 1)) <= 1:
                 walls[gx][gz] = False
-    o = -g                                       # 2 blocks per grid line, centred on x = 0 / z = cz
     roof_y = 5
-    island(w, 0, 0, cz, 37, 'constellation_tiles', 'celestial_marble', depth=14, wobble=0.04, seed=51)
-    for x in range(o - 1, o + 2 * g + 1):
-        for z in range(o - 1, o + 2 * g + 1):
-            w.put(x, 0, cz + z, 'starwood_planks' if (x + z) % 7 else 'constellation_tiles')
-            for yy in range(-3, 0):
-                w.put(x, yy, cz + z, 'celestial_marble')
     for gx in range(g):
         for gz in range(g):
             for bx in range(2):
                 for bz in range(2):
                     x, z = o + 2 * gx + bx, o + 2 * gz + bz
+                    w.put(x, 0, cz + z, 'starwood_planks' if (gx + gz) % 2 else 'constellation_tiles')
                     if walls[gx][gz]:
                         for yy in range(1, roof_y):
-                            w.put(x, yy, cz + z, 'minecraft:bookshelf' if yy != 1 or (x + z) % 5 else 'minecraft:chiseled_bookshelf',
-                                  **({} if yy != 1 or (x + z) % 5 else {'facing': 'south', 'slot_0_occupied': 'true', 'slot_1_occupied': 'false',
-                                                                         'slot_2_occupied': 'true', 'slot_3_occupied': 'true',
-                                                                         'slot_4_occupied': 'false', 'slot_5_occupied': 'true'}))
+                            chis = yy == 2 and (x * 3 + z) % 7 == 0
+                            w.put(x, yy, cz + z, 'minecraft:chiseled_bookshelf' if chis else 'minecraft:bookshelf',
+                                  **({'facing': 'south', 'slot_0_occupied': 'true', 'slot_1_occupied': 'false', 'slot_2_occupied': 'true',
+                                      'slot_3_occupied': 'true', 'slot_4_occupied': 'false', 'slot_5_occupied': 'true'} if chis else {}))
                     elif (gx * 7 + gz * 3) % 23 == 0 and bx == 0 and bz == 0:
                         w.put(x, roof_y - 1, cz + z, 'minecraft:soul_lantern', hanging='true', waterlogged='false')
                     w.put(x, roof_y, cz + z, 'gilded_starwood' if gx % 6 == 0 or gz % 6 == 0 else 'starwood_planks')
@@ -464,35 +695,267 @@ def endless_library(w, cz):
     w.put(gx0, 1, gz0, 'trial_goal', watcher='ilyra')
     for dx, dz in ((-2, -2), (3, -2), (-2, 3), (3, 3)):
         w.put(gx0 + dx, 1, gz0 + dz, 'minecraft:lectern', facing='north', has_book='false', powered='false')
-    # a dome of halo glass and marble ribs over the reading room, crowned with a lamp
-    for dx in range(-7, 9):
-        for dz in range(-7, 9):
-            for dy in range(0, 9):
-                d = math.sqrt((dx - 0.5) ** 2 + (dz - 0.5) ** 2 + (dy * 1.1) ** 2)
-                if 6.6 < d <= 7.6:
-                    rib = abs(dx - 0.5) < 1 or abs(dz - 0.5) < 1 or dy == 0
-                    w.put(gx0 + dx, roof_y + dy, gz0 + dz, 'celestial_bricks' if rib else 'halo_glass')
-                elif d <= 6.6 and dy == 0:
-                    w.put(gx0 + dx, roof_y, gz0 + dz, 'nebula_glass')
-    w.put(gx0, roof_y + 8, gz0, 'astral_lamp')
-    w.put(gx0, roof_y + 9, gz0, 'star_lantern', hanging='false', waterlogged='false')
-    # four corner towers with lamps
-    for sx in (o - 1, o + 2 * g):
-        for sz in (o - 1, o + 2 * g):
-            for dy in range(1, 13):
-                for ddx in (-1, 0, 1):
-                    for ddz in (-1, 0, 1):
-                        w.put(sx + ddx, dy, cz + sz + ddz, 'celestial_pillar' if (ddx, ddz) == (0, 0) else 'celestial_bricks',
-                              **({'axis': 'y'} if (ddx, ddz) == (0, 0) else {}))
-            w.put(sx, 13, cz + sz, 'astral_lamp')
-            w.put(sx, 14, cz + sz, 'star_lantern', hanging='false', waterlogged='false')
-    # entrance arch
-    ex, ez = o + 2 * (2 * mid + 1), cz + o + 2 * (g - 1) + 2
-    for dy in range(1, 6):
-        w.put(ex - 1, dy, ez, 'celestial_pillar', axis='y')
-        w.put(ex + 2, dy, ez, 'celestial_pillar', axis='y')
+    for dx in range(-2, 4):   # the reading room opens up into the dome
+        for dz in range(-2, 4):
+            w.put(gx0 + dx, roof_y, gz0 + dz, 'nebula_glass')
+    return (gx0, gz0), (o + 2 * (2 * mid + 1), cz + o + 2 * g)
+
+
+def library_hall(w, cz, rnd):
+    """Ilyra's grand library around the maze: marble walls with a clerestory of arched windows, a mansard roof with a
+    terrace, a ribbed dome over the reading room, four round corner towers and a columned portico facing the shrine."""
+    H = 37
+    # the platform: a rounded square with a tapering underside
+    for x in range(-44, 45):
+        for z in range(-44, 45):
+            if max(abs(x), abs(z)) > 44 or (abs(x) > 40 and abs(z) > 40 and math.hypot(abs(x) - 40, abs(z) - 40) > 4):
+                continue
+            w.put(x, 0, cz + z, 'celestial_marble' if (x + z) % 5 else 'celestial_bricks')
+            k = 1 - max(abs(x), abs(z)) / 45
+            for y in range(-int(4 + k * 22), 0):
+                w.put(x, y, cz + z, 'celestial_marble' if y > -3 else 'minecraft:calcite')
+    (rx, rz), (ex, ez) = library_maze(w, cz, -35)
+    # outer walls
+    for t in range(-H, H + 1):
+        for (x, z) in ((t, -H), (t, H), (-H, t), (H, t)):
+            bay = (t + H) % 6
+            for y in range(1, 15):
+                if bay == 0:
+                    b = 'celestial_pillar'
+                elif y in (5, 14):
+                    b = 'gilded_celestial_bricks'
+                elif 7 <= y <= 12 and bay in (2, 3, 4) and not (bay != 3 and y == 12):
+                    b = 'halo_glass'
+                else:
+                    b = 'celestial_marble' if y < 5 else 'celestial_bricks'
+                if b == 'celestial_pillar':
+                    w.put(x, y, cz + z, b, axis='y')
+                else:
+                    w.put(x, y, cz + z, b)
+    # the entrance through the south wall, in line with the maze's way in
     for dx in range(-1, 3):
-        w.put(ex + dx, 6, ez, 'chiseled_celestial_marble')
+        for y in range(1, 5):
+            w.clear(ex - 1 + dx, y, cz + H)
+    # mansard roof: steep starwood stairs up to a terrace, then the dome
+    for level in range(0, 10):
+        r = H + 1 - level
+        y = 15 + level
+        for t in range(-r, r + 1):
+            stair(w, t, y, cz - r, 'starwood_stairs', 'south')
+            stair(w, t, y, cz + r, 'starwood_stairs', 'north')
+            stair(w, -r, y, cz + t, 'starwood_stairs', 'east')
+            stair(w, r, y, cz + t, 'starwood_stairs', 'west')
+        for (x, z) in ((-r, -r), (r, -r), (-r, r), (r, r)):
+            w.put(x, y, cz + z, 'gilded_starwood')
+        if level % 3 == 1:   # dormer lamps
+            for t in range(-r + 4, r - 3, 8):
+                for (x, z) in ((t, -r - 1), (t, r + 1), (-r - 1, t), (r + 1, t)):
+                    w.soft(x, y, cz + z, 'astral_lamp')
+    T = H + 1 - 10
+    for x in range(-T, T + 1):
+        for z in range(-T, T + 1):
+            w.put(x, 25, cz + z, 'constellation_tiles' if (x + z) % 4 else 'celestial_marble')
+    for t in range(-T, T + 1, 2):
+        for (x, z) in ((t, -T), (t, T), (-T, t), (T, t)):
+            w.put(x, 26, cz + z, 'starwood_fence', north='false', south='false', east='false', west='false', waterlogged='false')
+    # the dome: drum with windows, ribbed shell, lantern on top
+    dx0, dz0 = rx + 0.5, rz + 0.5
+    for i in range(96):
+        a = i * 2 * math.pi / 96
+        x, z = round(dx0 + math.cos(a) * 13), round(dz0 + math.sin(a) * 13)
+        for y in range(26, 32):
+            w.put(x, y, z, 'halo_glass' if 27 <= y <= 30 and i % 8 not in (0, 1) else 'celestial_bricks')
+    for x in range(int(dx0) - 14, int(dx0) + 15):
+        for z in range(int(dz0) - 14, int(dz0) + 15):
+            for y in range(32, 46):
+                d = math.sqrt((x - dx0) ** 2 + (z - dz0) ** 2 + ((y - 32) * 1.0) ** 2)
+                if 12.2 < d <= 13.3:
+                    a = math.atan2(z - dz0, x - dx0)
+                    rib = abs(math.sin(a * 6)) < 0.14
+                    w.put(x, y, z, 'minecraft:gold_block' if rib else ('nebula_glass' if y > 39 else 'starwood_planks' if y < 35 else 'halo_glass'))
+    for y in range(45, 50):   # lantern
+        for x in range(int(dx0) - 1, int(dx0) + 2):
+            for z in range(int(dz0) - 1, int(dz0) + 2):
+                corner = abs(x - int(dx0)) == 1 and abs(z - int(dz0)) == 1
+                if corner or y in (45, 49):
+                    w.put(x, y, z, 'celestial_pillar' if corner and y not in (45, 49) else 'gilded_celestial_bricks',
+                          **({'axis': 'y'} if corner and y not in (45, 49) else {}))
+        w.put(int(dx0), 47, int(dz0), 'astral_lamp')
+    w.put(int(dx0), 50, int(dz0), 'minecraft:gold_block')
+    w.put(int(dx0), 51, int(dz0), 'star_lantern', hanging='false', waterlogged='false')
+    # four round corner towers with conical roofs
+    for sx in (-H, H):
+        for sz in (-H, H):
+            for y in range(1, 34):
+                for x in range(sx - 5, sx + 6):
+                    for z in range(sz - 5, sz + 6):
+                        d = math.hypot(x - sx, z - sz)
+                        if 3.6 < d <= 4.6:
+                            win = y % 8 in (3, 4, 5) and abs(math.sin(math.atan2(z - sz, x - sx) * 2)) < 0.3
+                            w.put(x, y, cz + z, 'halo_glass' if win else 'gilded_celestial_bricks' if y % 8 == 0 else 'celestial_bricks')
+                        elif d <= 3.6 and y in (1, 16, 33):
+                            w.put(x, y, cz + z, 'starwood_planks')
+            for k in range(0, 11):
+                r = 5.2 - k * 0.5
+                for i in range(int(2 * math.pi * max(r, 0.5) * 2) + 1):
+                    a = i / (2 * math.pi * max(r, 0.5) * 2) * 2 * math.pi
+                    w.put(round(sx + math.cos(a) * r), 34 + k, cz + round(sz + math.sin(a) * r), 'starwood_planks' if k % 3 else 'gilded_starwood')
+            w.column(sx, cz + sz, 45, 48, 'minecraft:gold_block')
+            w.put(sx, 48, cz + sz, 'astral_lamp')
+            w.put(sx, 15, cz + sz + (5 if sz > 0 else -5), 'star_lantern', hanging='false', waterlogged='false')
+    # the portico: steps, eight columns, an entablature and a pediment
+    pz = H + 1
+    for i in range(6):
+        for x in range(-13 + i // 2, 14 - i // 2):
+            w.put(x, 0, cz + pz + 6 - i, 'celestial_marble')
+            if i < 5:
+                stair(w, x, 0, cz + pz + 7 - i, 'celestial_marble_stairs', 'north')
+    for x in range(-12, 13):
+        for z in range(pz, pz + 6):
+            w.put(x, 0, cz + z, 'constellation_tiles' if (x + z) % 3 else 'celestial_marble')
+    for x in (-11, -8, -5, -2, 2, 5, 8, 11):
+        w.column(x, cz + pz + 4, 1, 12, 'celestial_pillar', axis='y')
+        w.put(x, 1, cz + pz + 4, 'chiseled_celestial_marble')
+        w.put(x, 12, cz + pz + 4, 'chiseled_celestial_marble')
+    for x in range(-12, 13):
+        for z in range(pz, pz + 6):
+            w.put(x, 13, cz + z, 'gilded_celestial_bricks' if z == pz + 5 else 'celestial_bricks')
+    for k in range(0, 8):   # pediment
+        for x in range(-12 + k * 2, 13 - k * 2):
+            w.put(x, 14 + k, cz + pz + 5, 'celestial_marble' if k < 7 else 'chiseled_celestial_marble')
+    w.put(0, 16, cz + pz + 6, 'astral_lamp')
+    for x in (-12, 12):
+        w.put(x, 1, cz + pz + 7, 'minecraft:lectern', facing='south', has_book='false', powered='false')
+        w.put(x, 1, cz + pz + 8, 'star_lantern', hanging='false', waterlogged='false')
+
+
+def archive_scenery(w, cz):
+    rnd = random.Random(520)
+    # floating stacks: tall bookshelf towers with balconies, joined by rope bridges
+    towers = []
+    for k in range(9):
+        a = k * 2 * math.pi / 9 + rnd.uniform(-0.15, 0.15)
+        d = rnd.uniform(62, 78)
+        x, z, y = round(math.cos(a) * d), max(-116, round(math.sin(a) * d) + cz), rnd.randint(-22, 2)
+        h = rnd.randint(22, 38)
+        towers.append((x, y, z, h))
+        island(w, x, y, z, 5.5, 'starwood_planks', 'celestial_marble', 'celestial_marble', depth=7, wobble=0.0, seed=530 + k)
+        for yy in range(1, h):
+            for dx in range(-3, 4):
+                for dz in range(-3, 4):
+                    edge = max(abs(dx), abs(dz))
+                    if edge == 3:
+                        corner = abs(dx) == 3 and abs(dz) == 3
+                        w.put(x + dx, y + yy, z + dz, 'gilded_starwood' if corner else 'minecraft:bookshelf' if yy % 7 else 'starwood_planks')
+            if yy % 7 == 0:   # balcony ring with railing and hanging lanterns
+                for dx in range(-4, 5):
+                    for dz in range(-4, 5):
+                        if max(abs(dx), abs(dz)) == 4:
+                            w.soft(x + dx, y + yy, z + dz, 'starwood_slab', type='top', waterlogged='false')
+                            w.soft(x + dx, y + yy + 1, z + dz, 'starwood_fence', north='false', south='false', east='false', west='false',
+                                   waterlogged='false')
+                w.soft(x + 4, y + yy - 1, z, 'star_lantern', hanging='true', waterlogged='false')
+                w.soft(x - 4, y + yy - 1, z, 'star_lantern', hanging='true', waterlogged='false')
+        box(w, x - 3, y + h, z - 3, x + 3, y + h, z + 3, 'gilded_starwood')
+        w.put(x, y + h + 1, z, 'astral_lamp')
+        for dx, dz in ((-2, -2), (2, -2), (-2, 2), (2, 2)):
+            w.put(x + dx, y + h + 1, z + dz, 'minecraft:purple_candle', candles='3', lit='true', waterlogged='false')
+    for i in range(len(towers)):
+        if i % 3 == 2:
+            continue
+        a, b = towers[i], towers[(i + 1) % len(towers)]
+        ya = a[1] + 7 * max(1, (a[3] // 7) - 1)
+        yb = b[1] + 7 * max(1, (b[3] // 7) - 1)
+        sag_bridge(w, (a[0], ya, a[2]), (b[0], yb, b[2]), 'starwood_slab', 'starwood_fence', sag=6)
+
+    # giant books: stacked and open, in leather colours with gilded spines and page edges
+    covers = ('minecraft:red_wool', 'minecraft:blue_wool', 'minecraft:green_wool', 'minecraft:purple_wool', 'minecraft:brown_wool')
+
+    def book(x, y, z, length, thick, width, cover, axis_x=True):
+        for i in range(length):
+            for j in range(thick):
+                for k in range(width):
+                    edge = i in (0, length - 1) or j in (0, thick - 1) or k == 0
+                    spine = k == 0
+                    bx, bz = (x + i, z + k) if axis_x else (x + k, z + i)
+                    b = ('minecraft:gold_block' if spine and i % 3 == 1 else cover) if edge else 'minecraft:white_wool'
+                    if not edge or (j not in (0, thick - 1) and k == width - 1):
+                        b = 'minecraft:white_wool'
+                    w.put(bx, y + j, bz, b)
+
+    for s in range(3):
+        a = rnd.uniform(0, 6.28)
+        d = rnd.uniform(52, 60)
+        x, z, y = round(math.cos(a) * d), round(math.sin(a) * d) + cz, rnd.randint(4, 18)
+        for level in range(rnd.randint(3, 5)):
+            l, wdt = rnd.randint(9, 13), rnd.randint(6, 8)
+            book(x - l // 2 + rnd.randint(-1, 1), y, z - wdt // 2 + rnd.randint(-1, 1), l, 2, wdt, rnd.choice(covers), rnd.random() < 0.5)
+            y += 2
+
+    def open_book(x, y, z, cover):
+        for half in (-1, 1):
+            for i in range(1, 12):
+                lift = round(i * 0.35)
+                for k in range(-6, 7):
+                    w.put(x + half * i, y + lift, z + k, cover if i == 11 or abs(k) == 6 else 'minecraft:white_wool')
+                    if i < 11 and abs(k) < 6 and (k % 2 == 0) and 2 < i < 10:
+                        w.put(x + half * i, y + lift, z + k, 'minecraft:light_gray_wool')
+            w.put(x, y, z, cover)
+        for k in range(-6, 7):
+            w.put(x, y - 1, z + k, 'minecraft:gold_block' if k % 3 == 0 else cover)
+
+    open_book(-58, 26, cz - 40, 'minecraft:blue_wool')
+    open_book(60, 34, cz + 10, 'minecraft:red_wool')
+    # the inkwell and a great quill
+    ix, iy, iz = 48, 2, cz - 46
+    island(w, ix, iy, iz, 7, 'celestial_marble', 'celestial_marble', depth=6, wobble=0.1, seed=560)
+    for y in range(iy + 1, iy + 7):
+        for x in range(ix - 3, ix + 4):
+            for z in range(iz - 3, iz + 4):
+                d = math.hypot(x - ix, z - iz)
+                if d <= 3.3 and (d > 2.2 or y == iy + 1):
+                    w.put(x, y, z, 'minecraft:black_concrete' if y < iy + 6 else 'minecraft:gold_block')
+                elif d <= 2.2 and y == iy + 5:
+                    w.put(x, y, z, 'minecraft:black_concrete_powder' if (x + z) % 2 else 'minecraft:black_concrete')
+    for i in range(30):   # the quill, leaning out of the well
+        t = i / 29
+        qx, qy, qz = ix - 1 + t * 10, iy + 5 + t * 26, iz + t * 6
+        vane = 0 if i < 4 else (2.5 if i < 24 else 2.5 * (29 - i) / 5)
+        w.put(round(qx), round(qy), round(qz), 'minecraft:gold_block' if i < 3 else 'minecraft:white_wool')
+        for v in range(1, int(vane) + 1):
+            w.put(round(qx - v * 0.7), round(qy + v * 0.3), round(qz + v * 0.7), 'minecraft:white_wool' if i % 4 else 'minecraft:light_gray_wool')
+            w.put(round(qx + v * 0.7), round(qy - v * 0.3), round(qz - v * 0.7), 'minecraft:white_wool')
+    # a whirl of pages spiralling around the library
+    for i in range(320):
+        t = i / 320
+        a = t * 6 * math.pi
+        r = 52 + 10 * math.sin(t * 9)
+        x, z, y = round(math.cos(a) * r), round(math.sin(a) * r) + cz, round(-6 + t * 54 + math.sin(t * 40) * 2)
+        if i % 2 == 0:
+            w.soft(x, y, z, 'minecraft:birch_slab', type='bottom', waterlogged='false')
+    debris(w, rnd, 14, 120, -30, 30, 'celestial_marble', 'minecraft:bookshelf', min_dist=95)
+
+
+def realm_starforge():
+    w = World(400)
+    cz = -50
+    pad(w, 'prism', 'celestial_bricks', 'astral_lamp', 'constellation_tiles', 'celestial_pillar')
+    bridge(w, -8, cz + 33, 'celestial_bricks', 'celestial_marble', 'star_lantern')
+    starforge_hall(w, cz)
+    prism_puzzle(w, cz)
+    starforge_scenery(w, cz)
+    return w
+
+
+def realm_archive():
+    w = World(500)
+    rnd = w.rnd
+    cz = -63
+    pad(w, 'archive', 'starwood_planks', 'gilded_starwood', 'constellation_tiles', 'starwood_log')
+    bridge(w, -8, cz + 46, 'celestial_marble', 'celestial_bricks', 'star_lantern')
+    library_hall(w, cz, rnd)
+    archive_scenery(w, cz)
+    return w
 
 
 # ------------------------------------------------------------------ realms
@@ -599,85 +1062,6 @@ def realm_moonwell():
                 w.put(x + px - 1, y, z + pz - 1, 'minecraft:water', level='0')
     clouds(w, -30, 120, rnd, block='minecraft:white_stained_glass', count=50)
     debris(w, rnd, 30, 110, -20, 50, 'moonstone', 'moonstone_lamp', min_dist=55)
-    return w
-
-
-def realm_starforge():
-    w = World(400)
-    rnd = w.rnd
-    cz = -39
-    pad(w, 'prism', 'celestial_bricks', 'astral_lamp', 'constellation_tiles', 'celestial_pillar')
-    bridge(w, -8, cz + 23, 'celestial_bricks', 'celestial_marble', 'star_lantern')
-    prism_observatory(w, cz)
-    # the orrery: a glowing core with tilted golden orbits and planets
-    ox, oy, oz = 0, 40, cz
-    sphere(w, ox, oy, oz, 4.5, lambda: 'astral_lamp' if rnd.random() < 0.6 else 'minecraft:gold_block')
-    for radius, normal, planet in ((12, (0.2, 1, 0), 'sunstone_lamp'), (19, (0.6, 1, 0.3), 'moonstone_lamp'),
-                                   (27, (-0.4, 1, 0.5), 'umbral_lamp')):
-        ring(w, ox, oy, oz, radius, normal, lambda i, t: 'minecraft:gold_block' if i % 4 else 'halo_glass', 0.0)
-        # planet sitting on its orbit
-        nx, ny, nz = normal
-        a = rnd.uniform(0, 6.28)
-        px, pz = ox + math.cos(a) * radius, oz + math.sin(a) * radius
-        py = oy - (nx * (px - ox) + nz * (pz - oz)) / ny
-        sphere(w, px, py, pz, 2.2, planet)
-    # crystal spires on shards of the old forge
-    for k in range(12):
-        a = rnd.uniform(0, 6.28)
-        d = rnd.uniform(36, 85)
-        x, z, y = round(math.cos(a) * d), round(math.sin(a) * d) + cz, rnd.randint(-20, 30)
-        r = rnd.uniform(3, 6)
-        island(w, x, y, z, r, 'celestial_marble', 'celestial_marble', 'umbral_stone', seed=k + 410)
-        for _ in range(rnd.randint(1, 3)):
-            spire_crystal(w, x + rnd.randint(-2, 2), y + 1, z + rnd.randint(-2, 2), rnd.randint(6, 14), rnd,
-                          'astral_lamp', rnd.choice(('nebula_glass', 'minecraft:amethyst_block', 'halo_glass')))
-    debris(w, rnd, 40, 120, -30, 70, 'minecraft:amethyst_block', 'nebula_glass', min_dist=45)
-    return w
-
-
-def realm_archive():
-    w = World(500)
-    rnd = w.rnd
-    cz = -54
-    pad(w, 'archive', 'starwood_planks', 'gilded_starwood', 'constellation_tiles', 'starwood_log')
-    bridge(w, -8, cz + 39, 'starwood_planks', 'starwood_log', 'minecraft:soul_lantern')
-    endless_library(w, cz)
-    # floating bookshelf towers with spiral starwood stairs and lamps on top
-    for k in range(10):
-        a = k * 2 * math.pi / 10 + rnd.uniform(-0.2, 0.2)
-        d = rnd.uniform(52, 78)
-        x, z, y = round(math.cos(a) * d), round(math.sin(a) * d) + cz, rnd.randint(-25, 5)
-        h = rnd.randint(14, 28)
-        r = 3.2
-        for yy in range(h):
-            for dx in range(-4, 5):
-                for dz in range(-4, 5):
-                    dd = math.hypot(dx, dz)
-                    if dd <= r:
-                        w.put(x + dx, y + yy, z + dz, 'minecraft:bookshelf' if yy % 6 else 'gilded_starwood')
-        for yy in range(h):  # spiral stair around the tower
-            ang = yy * 0.55
-            sx, sz = round(x + math.cos(ang) * 4.6), round(z + math.sin(ang) * 4.6)
-            w.soft(sx, y + yy, sz, 'starwood_slab', type='top', waterlogged='false')
-        island(w, x, y, z, 5, 'starwood_planks', 'celestial_marble', 'celestial_marble', depth=5, seed=k + 510)
-        w.put(x, y + h, z, 'astral_lamp')
-        w.put(x, y + h + 1, z, 'star_lantern', hanging='false', waterlogged='false')
-    # drifting pages and open books
-    for _ in range(70):
-        x, z, y = rnd.randint(-100, 100), rnd.randint(-110, 60), rnd.randint(-20, 40)
-        if math.hypot(x, z - cz) < 45 or math.hypot(x, z) < 14:
-            continue
-        w.soft(x, y, z, 'minecraft:birch_slab', type='bottom', waterlogged='false')
-        if rnd.random() < 0.3:
-            w.soft(x + 1, y + 1, z, 'minecraft:birch_slab', type='bottom', waterlogged='false')
-    for k in range(4):
-        bx, by, bz = rnd.choice((-1, 1)) * rnd.randint(30, 60), rnd.randint(10, 30), cz + rnd.randint(-60, 30)
-        for i in range(-6, 7):
-            for j in range(-4, 5):
-                tilt = abs(i) // 3
-                w.soft(bx + i, by + tilt, bz + j, 'minecraft:white_wool' if i != 0 else 'starwood_log', **({'axis': 'z'} if i == 0 else {}))
-                w.soft(bx + i, by + tilt - 1, bz + j, 'starwood_planks' if abs(i) == 6 or abs(j) == 4 else 'minecraft:white_wool')
-    debris(w, rnd, 18, 110, -30, 30, 'celestial_marble', 'minecraft:bookshelf', min_dist=50)
     return w
 
 
