@@ -123,6 +123,7 @@
   "astralvigil.configuration.starlight.relay_capacity": "Relay Capacity",
   "astralvigil.configuration.starlight.reservoir_capacity": "Reservoir Capacity",
   "astralvigil.configuration.title": "Astral Vigil Configuration",
+  "biome.astralvigil.firmament": "Firmament",
   "block.astralvigil.archive_gate": "Archive Gate",
   "block.astralvigil.archive_portal": "Archive Portal",
   "block.astralvigil.astral_forge": "Astral Forge",

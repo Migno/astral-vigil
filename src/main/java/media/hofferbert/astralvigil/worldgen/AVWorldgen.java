@@ -57,6 +57,7 @@ public final class AVWorldgen {
                 .add(Registries.STRUCTURE, AVWorldgen::structures)
                 .add(Registries.STRUCTURE_SET, AVWorldgen::sets)
                 .add(Registries.DIMENSION_TYPE, AVWorldgen::dimensionTypes)
+                .add(Registries.BIOME, AVWorldgen::biomes)
                 .add(Registries.LEVEL_STEM, AVWorldgen::dimensions);
     }
 
@@ -97,6 +98,29 @@ public final class AVWorldgen {
 
     public static final ResourceKey<net.minecraft.world.level.dimension.DimensionType> FIRMAMENT_TYPE =
             ResourceKey.create(Registries.DIMENSION_TYPE, AstralVigil.id("firmament"));
+    public static final ResourceKey<net.minecraft.world.level.biome.Biome> FIRMAMENT_BIOME =
+            ResourceKey.create(Registries.BIOME, AstralVigil.id("firmament"));
+
+    /**
+     * The Firmament's biome: vanilla meadow (flowers, grass, colours) but without precipitation - above the clouds it
+     * never rains, and at this altitude the meadow would otherwise snow onto every trial island.
+     */
+    static void biomes(BootstrapContext<net.minecraft.world.level.biome.Biome> ctx) {
+        var meadow = net.minecraft.data.worldgen.biome.OverworldBiomes.meadowOrCherryGrove(
+                ctx.lookup(Registries.PLACED_FEATURE), ctx.lookup(Registries.CONFIGURED_CARVER), false);
+        var builder = new net.minecraft.world.level.biome.Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .temperature(0.5f)
+                .downfall(0.8f)
+                .specialEffects(meadow.getSpecialEffects())
+                .mobSpawnSettings(meadow.getMobSettings())
+                .generationSettings(meadow.getGenerationSettings());
+        //? if >=26.1 {
+        builder.putAttributes(meadow.getAttributes());
+        //?}
+        ctx.register(FIRMAMENT_BIOME, builder.build());
+    }
+
     /** Build ceiling of the Firmament (the overworld's 320 is too low for the Sun Spire above the hub at y 290). */
     public static final int FIRMAMENT_TOP = 448;
 
@@ -141,7 +165,7 @@ public final class AVWorldgen {
         ctx.register(FIRMAMENT_STEM, new LevelStem(
                 ctx.lookup(Registries.DIMENSION_TYPE).getOrThrow(FIRMAMENT_TYPE),
                 new NoiseBasedChunkGenerator(
-                        new FixedBiomeSource(ctx.lookup(Registries.BIOME).getOrThrow(Biomes.MEADOW)),
+                        new FixedBiomeSource(ctx.lookup(Registries.BIOME).getOrThrow(FIRMAMENT_BIOME)),
                         ctx.lookup(Registries.NOISE_SETTINGS).getOrThrow(NoiseGeneratorSettings.FLOATING_ISLANDS))));
     }
 

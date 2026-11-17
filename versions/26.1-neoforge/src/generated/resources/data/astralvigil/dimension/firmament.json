@@ -4,7 +4,7 @@
     "type": "minecraft:noise",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "minecraft:meadow"
+      "biome": "astralvigil:firmament"
     },
     "settings": "minecraft:floating_islands"
   }

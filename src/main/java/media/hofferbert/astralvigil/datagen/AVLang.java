@@ -433,6 +433,7 @@ public final class AVLang {
         add("item.astralvigil.ascension_key", "Ascension Key", "Aufstiegsschlüssel");
         add("item.astralvigil.ascension_key.desc", "Set it into a finished gate frame. Each kind of gate opens onto a different place in the Firmament.",
                 "In einen vollendeten Torrahmen gesetzt. Jede Torart öffnet sich zu einem anderen Ort im Firmament.");
+        add("biome.astralvigil.firmament", "Firmament", "Firmament");
         add("block.astralvigil.astral_gate", "Astral Gate", "Astraltor");
         add("block.astralvigil.celestial_portal", "Celestial Portal", "Himmelsportal");
         add("block.astralvigil.solar_gate", "Solar Gate", "Sonnentor");

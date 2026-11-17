@@ -4,6 +4,10 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Presentation
+- README rewritten for GitHub: pitch, shader gallery (Complementary Reimagined), gate table, journey.
+- The Firmament has its own biome (meadow features, no precipitation): no more snow piling up on the trial islands.
+
 ### A gate for every challenge
 - Six gate kinds, each with its own frame block, portal colour and destination: **Astral** (hub), **Solar** (Sun
   Spire), **Lunar** (Moon Arena), **Prism** (Prism Observatory), **Archive** (Endless Library), **Umbral** (Umbral
