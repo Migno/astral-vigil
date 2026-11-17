@@ -58,7 +58,7 @@ ENTITIES = [
     ('watcher', 'Watchers', ['solenne', 'vael', 'orrin', 'ilyra'], 'watcher/{}', 'watcher/{}_glowmask'),
     ('eclipse', 'The Eclipse', ['eclipse'], 'eclipse/{}', 'eclipse/{}_glowmask'),
     ('umbral_pylon', 'Umbral Pylon', ['umbral_pylon'], 'eclipse/{}', 'eclipse/{}_glowmask'),
-    ('eclipse_echo', 'Eclipse Echo', ['eclipse_echo'], '{}', None),
+    ('eclipse_echo', 'Eclipse Echo', ['eclipse_echo'], '{}', 'eclipse/{}_glowmask'),
     ('seraph_wings', 'Seraph Wings', ['seraph_wings'], '{}', None),
 ]
 BLOCK_MODELS = ['convergence_altar', 'astral_forge', 'pedestal', 'starlight_collector', 'lens', 'mirror', 'prism',

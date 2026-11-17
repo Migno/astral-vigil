@@ -712,7 +712,7 @@ select.small { width: auto; padding: 4px 6px; font-size: 0.74rem; }
     const r = Math.max(size.x, size.y, size.z) * (scale || 1);
     floor.scale.setScalar(Math.max(size.x, size.z) * 0.9 + 4); floor.position.y = box.min.y - 0.02;
     M.controls.target.copy(c);
-    M.camera.position.copy(c).add(new THREE.Vector3(r * 0.9, r * 0.45, r * 1.25));
+    M.camera.position.copy(c).add(new THREE.Vector3(r * 0.9, r * 0.45, -r * 1.25));
     M.camera.near = r / 50; M.camera.far = r * 60; M.camera.updateProjectionMatrix(); M.controls.update();
   }
   M.resize = (w, h) => { M.camera.aspect = w / h; M.camera.updateProjectionMatrix(); };
