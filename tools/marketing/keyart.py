@@ -596,4 +596,5 @@ def main():
     print('KEYART_OK', OUT)
 
 
-main()
+if __name__ == '__main__' and os.path.basename(sys.argv[sys.argv.index('-P') + 1] if '-P' in sys.argv else '') == 'keyart.py':
+    main()

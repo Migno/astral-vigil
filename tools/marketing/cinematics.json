@@ -1,0 +1,746 @@
+{
+  "_comment": "Blender coordinates: x east, y north (into the trial), z up; the realm's arrival pad floor is at z 0..1. Models face +y at yaw 0.",
+  "shots": [
+    {
+      "id": "01-sunspire-dawn",
+      "realm": "sunspire",
+      "sky": {
+        "type": "nishita",
+        "sun_elevation": 7,
+        "sun_rotation": 0,
+        "strength": 0.25,
+        "dust": 3.0,
+        "sun_intensity": 0.35
+      },
+      "sun": {
+        "elevation": 7,
+        "rotation": 0,
+        "strength": 4.0,
+        "color": [
+          1.0,
+          0.78,
+          0.55
+        ],
+        "angle": 1.0
+      },
+      "fog": {
+        "color": [
+          1.0,
+          0.82,
+          0.62
+        ],
+        "density": 0.0012,
+        "anisotropy": 0.7
+      },
+      "clouds": {
+        "x": -160,
+        "y": -100,
+        "z": -40,
+        "extent": 220,
+        "threshold": 0.8,
+        "alpha": 0.85,
+        "color": [
+          1.0,
+          0.9,
+          0.82
+        ]
+      },
+      "floaters": {
+        "blocks": [
+          "sunstone",
+          "sunstone_lamp",
+          "gold_block",
+          "gilded_celestial_bricks"
+        ],
+        "count": 26,
+        "centre": [
+          0,
+          31,
+          6
+        ],
+        "spread": 26,
+        "height": 40
+      },
+      "entities": [
+        {
+          "kind": "watcher",
+          "name": "solenne",
+          "anim": "greet",
+          "time": 1.6,
+          "location": [
+            5,
+            10,
+            1.5
+          ],
+          "yaw": 210,
+          "scale": 1.4,
+          "glow": 3.5
+        },
+        {
+          "kind": "player",
+          "location": [
+            0.6,
+            6,
+            1
+          ],
+          "yaw": 0,
+          "pose": {
+            "head": [
+              -10,
+              0,
+              0
+            ],
+            "right_arm": [
+              -18,
+              0,
+              0
+            ],
+            "left_arm": [
+              20,
+              0,
+              0
+            ],
+            "right_leg": [
+              22,
+              0,
+              0
+            ],
+            "left_leg": [
+              -22,
+              0,
+              0
+            ]
+          },
+          "item": ""
+        }
+      ],
+      "camera": {
+        "location": [
+          -9,
+          -8,
+          4
+        ],
+        "target": [
+          3,
+          30,
+          22
+        ],
+        "lens": 20,
+        "focus": 18,
+        "fstop": 5.6
+      },
+      "exposure": -0.2
+    },
+    {
+      "id": "02-moonwell-midnight",
+      "realm": "moonwell",
+      "sky": {
+        "type": "night",
+        "horizon": [
+          0.05,
+          0.08,
+          0.2
+        ],
+        "zenith": [
+          0.005,
+          0.008,
+          0.03
+        ],
+        "star_density": 0.4,
+        "star_strength": 8,
+        "strength": 1.0
+      },
+      "sun": {
+        "elevation": 38,
+        "rotation": 160,
+        "strength": 1.2,
+        "color": [
+          0.62,
+          0.72,
+          1.0
+        ],
+        "angle": 1.5
+      },
+      "fog": {
+        "color": [
+          0.55,
+          0.65,
+          1.0
+        ],
+        "density": 0.0022,
+        "anisotropy": 0.5
+      },
+      "floaters": {
+        "blocks": [
+          "moonstone",
+          "moonstone_lamp",
+          "moonstone_bricks"
+        ],
+        "count": 30,
+        "centre": [
+          0,
+          43,
+          6
+        ],
+        "spread": 34,
+        "height": 30
+      },
+      "entities": [
+        {
+          "kind": "watcher",
+          "name": "vael",
+          "anim": "cast",
+          "time": 0.8,
+          "location": [
+            1,
+            22,
+            1.5
+          ],
+          "yaw": 200,
+          "scale": 1.4,
+          "glow": 4.0
+        },
+        {
+          "kind": "player",
+          "location": [
+            3,
+            22,
+            1
+          ],
+          "yaw": 10,
+          "pose": {
+            "head": [
+              -20,
+              0,
+              0
+            ],
+            "right_arm": [
+              100,
+              0,
+              10
+            ],
+            "left_arm": [
+              90,
+              0,
+              -20
+            ]
+          },
+          "item": "crescent"
+        }
+      ],
+      "lights": [
+        {
+          "type": "POINT",
+          "location": [
+            0,
+            118,
+            50
+          ],
+          "energy": 90000,
+          "color": [
+            0.75,
+            0.85,
+            1.0
+          ],
+          "size": 20
+        }
+      ],
+      "camera": {
+        "location": [
+          12,
+          8,
+          4
+        ],
+        "target": [
+          -4,
+          50,
+          20
+        ],
+        "lens": 20,
+        "focus": 20,
+        "fstop": 4.0
+      },
+      "exposure": 0.5
+    },
+    {
+      "id": "03-starforge",
+      "realm": "starforge",
+      "sky": {
+        "type": "night",
+        "horizon": [
+          0.04,
+          0.02,
+          0.08
+        ],
+        "zenith": [
+          0.003,
+          0.002,
+          0.01
+        ],
+        "star_density": 0.5,
+        "star_strength": 10,
+        "strength": 2.5
+      },
+      "fog": {
+        "color": [
+          0.7,
+          0.55,
+          1.0
+        ],
+        "density": 0.0025,
+        "anisotropy": 0.5
+      },
+      "floaters": {
+        "blocks": [
+          "amethyst_block",
+          "nebula_glass",
+          "astral_lamp"
+        ],
+        "count": 30,
+        "centre": [
+          0,
+          50,
+          4
+        ],
+        "spread": 40,
+        "height": 30
+      },
+      "entities": [
+        {
+          "kind": "watcher",
+          "name": "orrin",
+          "anim": "cast",
+          "time": 0.75,
+          "location": [
+            2,
+            10,
+            2
+          ],
+          "yaw": 150,
+          "scale": 1.4,
+          "glow": 4.0
+        }
+      ],
+      "lights": [
+        {
+          "type": "POINT",
+          "location": [
+            33,
+            50,
+            24
+          ],
+          "energy": 40000,
+          "color": [
+            0.75,
+            0.95,
+            1.0
+          ],
+          "size": 4
+        }
+      ],
+      "camera": {
+        "location": [
+          -34,
+          4,
+          16
+        ],
+        "target": [
+          14,
+          52,
+          18
+        ],
+        "lens": 20
+      },
+      "exposure": 1.1,
+      "sun": {
+        "elevation": 35,
+        "rotation": 140,
+        "strength": 1.2,
+        "color": [
+          0.62,
+          0.72,
+          1.0
+        ],
+        "angle": 1.5
+      }
+    },
+    {
+      "id": "04-endless-archive",
+      "realm": "archive",
+      "sky": {
+        "type": "night",
+        "horizon": [
+          0.06,
+          0.04,
+          0.09
+        ],
+        "zenith": [
+          0.004,
+          0.003,
+          0.012
+        ],
+        "star_density": 0.2,
+        "star_strength": 5,
+        "strength": 2.5
+      },
+      "sun": {
+        "elevation": 25,
+        "rotation": 230,
+        "strength": 1.2,
+        "color": [
+          0.75,
+          0.75,
+          1.0
+        ],
+        "angle": 2.0
+      },
+      "fog": {
+        "color": [
+          0.85,
+          0.7,
+          0.5
+        ],
+        "density": 0.003,
+        "anisotropy": 0.5
+      },
+      "floaters": {
+        "blocks": [
+          "bookshelf",
+          "chiseled_bookshelf",
+          "gilded_starwood"
+        ],
+        "count": 30,
+        "centre": [
+          0,
+          63,
+          20
+        ],
+        "spread": 55,
+        "height": 30
+      },
+      "entities": [
+        {
+          "kind": "watcher",
+          "name": "ilyra",
+          "anim": "bless",
+          "time": 2.0,
+          "location": [
+            -4,
+            12,
+            1.5
+          ],
+          "yaw": 180,
+          "scale": 1.4,
+          "glow": 4.0
+        },
+        {
+          "kind": "player",
+          "location": [
+            -3,
+            6,
+            1
+          ],
+          "yaw": 10,
+          "pose": {
+            "head": [
+              -25,
+              0,
+              0
+            ],
+            "right_arm": [
+              10,
+              0,
+              0
+            ],
+            "left_arm": [
+              -10,
+              0,
+              0
+            ]
+          },
+          "item": ""
+        }
+      ],
+      "lights": [
+        {
+          "type": "POINT",
+          "location": [
+            -1,
+            64,
+            52
+          ],
+          "energy": 12000,
+          "color": [
+            1.0,
+            0.85,
+            0.6
+          ],
+          "size": 3
+        }
+      ],
+      "camera": {
+        "location": [
+          -12,
+          -4,
+          5
+        ],
+        "target": [
+          -1,
+          40,
+          20
+        ],
+        "lens": 20,
+        "focus": 24,
+        "fstop": 5.6
+      },
+      "exposure": 1.4
+    },
+    {
+      "id": "05-firmament-grove",
+      "realm": "firmament",
+      "sky": {
+        "type": "night",
+        "horizon": [
+          0.08,
+          0.1,
+          0.26
+        ],
+        "zenith": [
+          0.01,
+          0.015,
+          0.05
+        ],
+        "star_density": 0.45,
+        "star_strength": 9,
+        "strength": 2.5
+      },
+      "sun": {
+        "elevation": 40,
+        "rotation": 120,
+        "strength": 1.2,
+        "color": [
+          0.65,
+          0.75,
+          1.0
+        ],
+        "angle": 1.0
+      },
+      "fog": {
+        "color": [
+          0.6,
+          0.7,
+          1.0
+        ],
+        "density": 0.003,
+        "anisotropy": 0.5
+      },
+      "floaters": {
+        "blocks": [
+          "celestial_marble",
+          "astral_lamp",
+          "starwood_leaves"
+        ],
+        "count": 30,
+        "centre": [
+          0,
+          0,
+          6
+        ],
+        "spread": 18,
+        "height": 24
+      },
+      "entities": [
+        {
+          "kind": "player",
+          "location": [
+            3,
+            -6,
+            1
+          ],
+          "yaw": 40,
+          "pose": {
+            "head": [
+              -30,
+              0,
+              0
+            ],
+            "right_arm": [
+              0,
+              0,
+              0
+            ],
+            "left_arm": [
+              0,
+              0,
+              0
+            ]
+          },
+          "item": ""
+        }
+      ],
+      "camera": {
+        "location": [
+          20,
+          -40,
+          16
+        ],
+        "target": [
+          0,
+          0,
+          9
+        ],
+        "lens": 28,
+        "focus": 44,
+        "fstop": 8
+      },
+      "exposure": 1.2999999999999998
+    },
+    {
+      "id": "06-the-eclipse",
+      "realm": "umbral-throne",
+      "sky": {
+        "type": "night",
+        "horizon": [
+          0.08,
+          0.02,
+          0.12
+        ],
+        "zenith": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "star_density": 0.15,
+        "star_strength": 4
+      },
+      "fog": {
+        "color": [
+          0.6,
+          0.4,
+          0.9
+        ],
+        "density": 0.005,
+        "anisotropy": 0.4
+      },
+      "floaters": {
+        "blocks": [
+          "umbral_bricks",
+          "cracked_umbral_bricks",
+          "umbral_lamp"
+        ],
+        "count": 50,
+        "centre": [
+          0,
+          51,
+          10
+        ],
+        "spread": 16,
+        "height": 20
+      },
+      "entities": [
+        {
+          "kind": "eclipse",
+          "anim": "nova_windup",
+          "time": 2.2,
+          "location": [
+            0,
+            58,
+            4
+          ],
+          "yaw": 180,
+          "scale": 2.0,
+          "glow": 10.0
+        },
+        {
+          "kind": "player",
+          "location": [
+            -1.2,
+            43,
+            1
+          ],
+          "yaw": 0,
+          "pose": {
+            "head": [
+              -18,
+              0,
+              0
+            ],
+            "right_arm": [
+              120,
+              0,
+              -10
+            ],
+            "left_arm": [
+              -25,
+              0,
+              20
+            ],
+            "right_leg": [
+              -14,
+              0,
+              0
+            ],
+            "left_leg": [
+              16,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "lights": [
+        {
+          "type": "POINT",
+          "location": [
+            0,
+            66,
+            16
+          ],
+          "energy": 40000,
+          "color": [
+            0.75,
+            0.45,
+            1.0
+          ],
+          "size": 4
+        },
+        {
+          "type": "AREA",
+          "location": [
+            0,
+            48,
+            14
+          ],
+          "energy": 4000,
+          "color": [
+            0.85,
+            0.7,
+            1.0
+          ],
+          "size": 8,
+          "target": [
+            0,
+            58,
+            9
+          ]
+        }
+      ],
+      "camera": {
+        "location": [
+          -3.5,
+          37,
+          1.7
+        ],
+        "target": [
+          0,
+          58,
+          9.5
+        ],
+        "lens": 24,
+        "focus": 21,
+        "fstop": 3.2
+      },
+      "exposure": 0.3
+    }
+  ]
+}
