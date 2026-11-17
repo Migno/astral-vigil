@@ -10,7 +10,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The fallen fifth Watcher fights in three phases. $(l)First$(): sweeping blows and the Void Lance – when it raises its arms, step sideways. $(l)Second$(): it splinters into Eclipse Echoes. $(l)Third$(): it blinks beside you and gathers an Umbral Nova; break its line of sight behind solid blocks."
+      "text": "The fallen fifth Watcher fights in three phases, and it names every great blow before it falls. $(l)Fallen Light$(): the Umbral Sweep rakes the ground before it, the Void Lance locks onto you - step sideways - and Falling Stars mark circles you must leave. After heavy blows it sinks to the ground: strike then."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Shattered Halo$(): four Umbral Pylons rise and shield it - destroy them all and it staggers. Echoes join, and the Shadow Dive marks a spot before it slams down; jump the shockwave. $(l)Total Eclipse$(): walls of crying obsidian rise. Hide behind them from the Umbral Nova, jump or hide from the sweeping Eclipse Ray. Near death it rages. Hiding forever or fleeing earns its Umbral Grasp."
     },
     {
       "type": "patchouli:spotlight",

@@ -74,6 +74,29 @@ public final class AVServerConfig {
     public static final ModConfigSpec.DoubleValue ECLIPSE_NOVA_DAMAGE;
     public static final ModConfigSpec.IntValue ECLIPSE_ECHOES_PER_WAVE;
     public static final ModConfigSpec.IntValue ECLIPSE_FEATHERS;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_HEALTH;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_HEALTH_PER_PLAYER;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_ARMOR;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_SWEEP_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_STAR_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_DIVE_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_SHOCKWAVE_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_BEAM_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_GRASP_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_ENRAGE_THRESHOLD;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_ENRAGE_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_ENRAGE_TEMPO;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_VULNERABLE_MULTIPLIER;
+    public static final ModConfigSpec.IntValue ECLIPSE_MOVE_GAP;
+    public static final ModConfigSpec.IntValue ECLIPSE_PYLON_COUNT;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_PYLON_HEALTH;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_PYLON_RADIUS;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_PYLON_HEAL;
+    public static final ModConfigSpec.IntValue ECLIPSE_COVER_PILLARS;
+    public static final ModConfigSpec.IntValue ECLIPSE_LEASH;
+    public static final ModConfigSpec.IntValue ECLIPSE_RESET_RANGE;
+    public static final ModConfigSpec.IntValue ECLIPSE_RESET_SECONDS;
+    public static final ModConfigSpec.IntValue ECLIPSE_CHEESE_SECONDS;
     public static final ModConfigSpec.DoubleValue HALO_COST_REDUCTION;
     public static final ModConfigSpec.DoubleValue HALO_GAZE_REDUCTION;
     public static final ModConfigSpec.BooleanValue COSMETICS_ENABLED;
@@ -97,6 +120,75 @@ public final class AVServerConfig {
         ECLIPSE_FEATHERS = b.comment("Minimum Seraph Feathers dropped (plus 0-2).")
                 .translation("astralvigil.configuration.eclipse.feathers")
                 .defineInRange("feathers", 3, 0, 64);
+        ECLIPSE_HEALTH = b.comment("Base maximum health of the Eclipse (BALANCE.md).")
+                .translation("astralvigil.configuration.eclipse.health")
+                .defineInRange("health", 500.0, 1.0, 100000.0);
+        ECLIPSE_HEALTH_PER_PLAYER = b.comment("Extra health fraction per additional player nearby when it is summoned (0.5 = +50 % each).")
+                .translation("astralvigil.configuration.eclipse.healthPerExtraPlayer")
+                .defineInRange("healthPerExtraPlayer", 0.5, 0.0, 10.0);
+        ECLIPSE_ARMOR = b.comment("Armour of the Eclipse.")
+                .translation("astralvigil.configuration.eclipse.armor")
+                .defineInRange("armor", 10.0, 0.0, 30.0);
+        ECLIPSE_SWEEP_DAMAGE = b.comment("Damage of the Umbral Sweep (melee arc in front, telegraphed).")
+                .translation("astralvigil.configuration.eclipse.sweepDamage")
+                .defineInRange("sweepDamage", 14.0, 0.0, 1000.0);
+        ECLIPSE_STAR_DAMAGE = b.comment("Damage of a Falling Star (marked circle on the ground).")
+                .translation("astralvigil.configuration.eclipse.starDamage")
+                .defineInRange("starDamage", 12.0, 0.0, 1000.0);
+        ECLIPSE_DIVE_DAMAGE = b.comment("Damage of the Shadow Dive impact (inside the marked circle).")
+                .translation("astralvigil.configuration.eclipse.diveDamage")
+                .defineInRange("diveDamage", 16.0, 0.0, 1000.0);
+        ECLIPSE_SHOCKWAVE_DAMAGE = b.comment("Damage of the dive shockwave (jump over it).")
+                .translation("astralvigil.configuration.eclipse.shockwaveDamage")
+                .defineInRange("shockwaveDamage", 8.0, 0.0, 1000.0);
+        ECLIPSE_BEAM_DAMAGE = b.comment("Damage per hit of the Eclipse Ray (phase 3; jump it or hide).")
+                .translation("astralvigil.configuration.eclipse.beamDamage")
+                .defineInRange("beamDamage", 10.0, 0.0, 1000.0);
+        ECLIPSE_GRASP_DAMAGE = b.comment("Damage of the Umbral Grasp (anti-cheese pull).")
+                .translation("astralvigil.configuration.eclipse.graspDamage")
+                .defineInRange("graspDamage", 6.0, 0.0, 1000.0);
+        ECLIPSE_ENRAGE_THRESHOLD = b.comment("Health fraction below which the Eclipse enrages (phase 3).")
+                .translation("astralvigil.configuration.eclipse.enrageThreshold")
+                .defineInRange("enrageThreshold", 0.1, 0.0, 0.33);
+        ECLIPSE_ENRAGE_DAMAGE = b.comment("Damage multiplier while enraged.")
+                .translation("astralvigil.configuration.eclipse.enrageDamageMultiplier")
+                .defineInRange("enrageDamageMultiplier", 1.25, 1.0, 5.0);
+        ECLIPSE_ENRAGE_TEMPO = b.comment("Multiplier on pauses and cooldowns while enraged (wind-ups are never shortened).")
+                .translation("astralvigil.configuration.eclipse.enrageTempo")
+                .defineInRange("enrageTempo", 0.7, 0.2, 1.0);
+        ECLIPSE_VULNERABLE_MULTIPLIER = b.comment("Damage taken multiplier while staggered or grounded (melee window).")
+                .translation("astralvigil.configuration.eclipse.vulnerableDamageMultiplier")
+                .defineInRange("vulnerableDamageMultiplier", 1.3, 1.0, 5.0);
+        ECLIPSE_MOVE_GAP = b.comment("Ticks between two moves (phase 3 and enrage shorten it).")
+                .translation("astralvigil.configuration.eclipse.moveGapTicks")
+                .defineInRange("moveGapTicks", 24, 6, 200);
+        ECLIPSE_PYLON_COUNT = b.comment("Umbral Pylons that shield the Eclipse in phase 2 (0 = no shield).")
+                .translation("astralvigil.configuration.eclipse.pylonCount")
+                .defineInRange("pylonCount", 4, 0, 8);
+        ECLIPSE_PYLON_HEALTH = b.comment("Health of one Umbral Pylon.")
+                .translation("astralvigil.configuration.eclipse.pylonHealth")
+                .defineInRange("pylonHealth", 40.0, 1.0, 1000.0);
+        ECLIPSE_PYLON_RADIUS = b.comment("Distance of the pylons from the Eclipse's spawn point.")
+                .translation("astralvigil.configuration.eclipse.pylonRadius")
+                .defineInRange("pylonRadius", 9.0, 3.0, 32.0);
+        ECLIPSE_PYLON_HEAL = b.comment("Health per second each standing pylon restores to the shielded Eclipse.")
+                .translation("astralvigil.configuration.eclipse.pylonHealPerSecond")
+                .defineInRange("pylonHealPerSecond", 1.0, 0.0, 100.0);
+        ECLIPSE_COVER_PILLARS = b.comment("Temporary cover walls raised at the start of phase 3 (removed after the fight).")
+                .translation("astralvigil.configuration.eclipse.coverPillars")
+                .defineInRange("coverPillars", 4, 0, 8);
+        ECLIPSE_LEASH = b.comment("The Eclipse never strays further than this from its spawn point; players beyond it may be dragged back.")
+                .translation("astralvigil.configuration.eclipse.leashRadius")
+                .defineInRange("leashRadius", 40, 12, 128);
+        ECLIPSE_RESET_RANGE = b.comment("If no player is within this range of the spawn point ...")
+                .translation("astralvigil.configuration.eclipse.resetRange")
+                .defineInRange("resetRange", 64, 16, 256);
+        ECLIPSE_RESET_SECONDS = b.comment("... for this many seconds, the fight resets (full heal, summons and temporary blocks removed).")
+                .translation("astralvigil.configuration.eclipse.resetSeconds")
+                .defineInRange("resetSeconds", 30, 5, 600);
+        ECLIPSE_CHEESE_SECONDS = b.comment("Seconds a target may hide out of sight or out of reach before the Umbral Grasp drags it back.")
+                .translation("astralvigil.configuration.eclipse.cheeseSeconds")
+                .defineInRange("cheeseSeconds", 8, 2, 120);
         HALO_COST_REDUCTION = b.comment("Halo of Dawn in the inventory: fraction of ability starlight cost saved.")
                 .translation("astralvigil.configuration.eclipse.halo_cost")
                 .defineInRange("haloCostReduction", 0.25, 0.0, 1.0);

@@ -46,10 +46,9 @@ public final class AstralVigilClient {
         // Watchers: shared GeckoLib rig, per-Watcher texture + emissive glowmask
         media.hofferbert.astralvigil.registry.AVEntities.WATCHERS.forEach((w, type) -> event.registerEntityRenderer(
                 type.get(), ctx -> media.hofferbert.astralvigil.client.WatcherRenderer.create(ctx, w)));
-        event.registerEntityRenderer(media.hofferbert.astralvigil.registry.AVEntities.ECLIPSE.get(), ctx -> new com.geckolib.renderer.GeoEntityRenderer<>(
-                ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.eclipse.EclipseEntity>(
-                                media.hofferbert.astralvigil.AstralVigil.id("eclipse"))
-                        .withAltTexture(media.hofferbert.astralvigil.AstralVigil.id("eclipse/eclipse"))));
+        // Eclipse + Umbral Pylon: generated rigs (tools/dev/gen_eclipse.py) with emissive glowmasks
+        event.registerEntityRenderer(media.hofferbert.astralvigil.registry.AVEntities.ECLIPSE.get(), media.hofferbert.astralvigil.client.EclipseRenderer::eclipse);
+        event.registerEntityRenderer(media.hofferbert.astralvigil.registry.AVEntities.UMBRAL_PYLON.get(), media.hofferbert.astralvigil.client.EclipseRenderer::pylon);
         event.registerEntityRenderer(media.hofferbert.astralvigil.registry.AVEntities.ECLIPSE_ECHO.get(), ctx -> new com.geckolib.renderer.GeoEntityRenderer<>(
                 ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.eclipse.EclipseEcho>(
                         media.hofferbert.astralvigil.AstralVigil.id("eclipse_echo"))));

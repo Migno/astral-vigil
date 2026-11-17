@@ -1,0 +1,31 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "idle": {
+   "loop": true,
+   "animation_length": 4,
+   "bones": {
+    "crystal": {
+     "rotation": [
+      "0",
+      "query.anim_time * 90",
+      "0"
+     ],
+     "position": [
+      "0",
+      "math.sin(query.anim_time * 90) * 1.2",
+      "0"
+     ]
+    },
+    "ring": {
+     "rotation": [
+      "0",
+      "query.anim_time * -60",
+      "0"
+     ]
+    }
+   }
+  }
+ },
+ "geckolib_format_version": 2
+}

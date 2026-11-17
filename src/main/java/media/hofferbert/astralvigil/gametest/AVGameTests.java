@@ -56,6 +56,10 @@ public final class AVGameTests {
             new Def("trial_grants_mark_and_favour", PLATFORM, 40, false, AVGameTests::trialGrantsMarkAndFavour),
             new Def("eclipse_phase_transition", PLATFORM, 60, true, AVGameTests::eclipsePhaseTransition),
             new Def("eclipse_drops_heart", PLATFORM, 40, true, AVGameTests::eclipseDropsHeart),
+            new Def("eclipse_no_phase_skip", PLATFORM, 160, true, AVGameTests::eclipseNoPhaseSkip),
+            new Def("eclipse_move_sync", PLATFORM, 120, true, AVGameTests::eclipseMoveSync),
+            new Def("eclipse_shield_pylons", PLATFORM, 220, true, AVGameTests::eclipseShieldPylons),
+            new Def("eclipse_reset_cleans_up", CRATER_FIELD, 220, true, AVGameTests::eclipseResetCleansUp),
             new Def("echo_expires", PLATFORM, 60, true, AVGameTests::echoExpires),
             new Def("eclipse_awards_advancement", PLATFORM, 40, false, AVGameTests::eclipseAwardsAdvancement),
             new Def("cosmetics_apply_sanitizes", PLATFORM, 40, false, AVGameTests::cosmeticsApplySanitizes),
@@ -201,6 +205,71 @@ public final class AVGameTests {
         helper.succeedWhen(() -> GT.check(helper, !helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
                         e.getBoundingBox().inflate(8), i -> i.getItem().is(AVItems.ECLIPSE_HEART.get())).isEmpty(),
                 "no Eclipse Heart dropped"));
+    }
+
+    static void eclipseNoPhaseSkip(GameTestHelper helper) {
+        var e = eclipse(helper);
+        helper.runAfterDelay(media.hofferbert.astralvigil.eclipse.EclipseMove.ENTRANCE.totalTicks() + 5, () -> {
+            media.hofferbert.astralvigil.eclipse.EclipseEntity.hurt(helper.getLevel(), e, helper.getLevel().damageSources().magic(), 100000f);
+            GT.check(helper, e.isAlive() && e.getHealth() > e.getMaxHealth() / 3f, "burst skipped phase 2: health " + e.getHealth());
+            helper.succeedWhen(() -> GT.check(helper, e.phase() == 2 && e.inTransition(), "phase " + e.phase()));
+        });
+    }
+
+    static void eclipseMoveSync(GameTestHelper helper) {
+        var e = eclipse(helper);
+        var lance = media.hofferbert.astralvigil.eclipse.EclipseMove.LANCE;
+        helper.runAfterDelay(5, () -> {
+            e.forceMove(lance);
+            GT.check(helper, e.currentMove() == lance && e.currentStage() == media.hofferbert.astralvigil.eclipse.EclipseMove.Stage.WINDUP,
+                    "not winding up: " + e.currentMove() + " " + e.currentStage());
+        });
+        helper.runAfterDelay(5 + lance.ticks(media.hofferbert.astralvigil.eclipse.EclipseMove.Stage.WINDUP) + 2, () -> GT.check(helper,
+                e.currentMove() == lance && e.currentStage() != media.hofferbert.astralvigil.eclipse.EclipseMove.Stage.WINDUP,
+                "wind-up did not end: " + e.currentMove() + " " + e.currentStage()));
+        helper.runAfterDelay(5 + lance.totalTicks() + 2, () -> {
+            GT.check(helper, e.currentMove() != lance, "lance never ended");
+            helper.succeed();
+        });
+    }
+
+    static void eclipseShieldPylons(GameTestHelper helper) {
+        var e = eclipse(helper);
+        helper.runAfterDelay(5, () -> e.setHealth(e.getMaxHealth() * 0.5f));
+        int raised = 5 + 2 + media.hofferbert.astralvigil.eclipse.EclipseMove.TRANSITION_2.totalTicks()
+                + media.hofferbert.astralvigil.eclipse.EclipseMove.SHIELD.totalTicks() + 10;
+        helper.runAfterDelay(raised, () -> {
+            var pylons = helper.getLevel().getEntitiesOfClass(media.hofferbert.astralvigil.eclipse.UmbralPylon.class, e.getBoundingBox().inflate(48),
+                    p -> p.ownedBy(e));
+            GT.check(helper, pylons.size() == AVServerConfig.ECLIPSE_PYLON_COUNT.get(), "pylons: " + pylons.size());
+            GT.check(helper, e.shielded() && e.isInvulnerable(), "not shielded");
+            pylons.forEach(net.minecraft.world.entity.Entity::discard);
+        });
+        helper.runAfterDelay(raised + 20, () -> {
+            GT.check(helper, !e.shielded() && e.currentMove() == media.hofferbert.astralvigil.eclipse.EclipseMove.STAGGER,
+                    "shield not broken: " + e.currentMove());
+            helper.succeed();
+        });
+    }
+
+    static void eclipseResetCleansUp(GameTestHelper helper) {
+        var e = media.hofferbert.astralvigil.eclipse.EclipseEntity.summon(helper.getLevel(),
+                net.minecraft.world.phys.Vec3.atBottomCenterOf(helper.absolutePos(GT.pos(6, 6, 6))));
+        GT.check(helper, e != null, "eclipse not summoned");
+        helper.runAfterDelay(5, () -> e.setHealth(e.getMaxHealth() * 0.2f));
+        helper.runAfterDelay(150, () -> {
+            GT.check(helper, e.phase() == 3, "phase " + e.phase());
+            var placed = e.temporaryBlocks();
+            GT.check(helper, !placed.isEmpty(), "no cover walls raised");
+            e.resetFight();
+            for (var p : placed) {
+                GT.check(helper, !helper.getLevel().getBlockState(p).is(Blocks.CRYING_OBSIDIAN), "cover left at " + p);
+            }
+            GT.check(helper, e.temporaryBlocks().isEmpty() && e.getHealth() == e.getMaxHealth() && e.phase() == 1, "not reset");
+            GT.check(helper, helper.getLevel().getEntitiesOfClass(media.hofferbert.astralvigil.eclipse.UmbralPylon.class,
+                    e.getBoundingBox().inflate(64), p -> p.ownedBy(e)).isEmpty(), "pylons left");
+            helper.succeed();
+        });
     }
 
     static void eclipseAwardsAdvancement(GameTestHelper helper) {
