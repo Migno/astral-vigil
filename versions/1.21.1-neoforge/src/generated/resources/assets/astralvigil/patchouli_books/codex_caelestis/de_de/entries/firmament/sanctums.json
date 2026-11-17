@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:trial_goal",
+  "name": "Die Heiligtümer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vier Brücken führen vom Landeplatz zu den vier Heiligtümern. Sprich mit einem Wächter, um seine Prüfung zu beginnen: Solennes Aufstieg (Osten), Vaels Jagd (Westen), Orrins Schmiede des Lichts (Süden) und Ilyras Bibliothek (Norden).$(br2)Jede bestandene Prüfung gewährt das $(l)Zeichen$() des Wächters und seine $(l)Gunst$() – doch rivalisierende Wächter kühlen ab: Solenne und Vael, Orrin und Ilyra."
+    }
+  ],
+  "sortnum": 1
+}

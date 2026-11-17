@@ -14,6 +14,12 @@ import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.FixedBiomeSource;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -49,7 +55,8 @@ public final class AVWorldgen {
         return new RegistrySetBuilder()
                 .add(Registries.TEMPLATE_POOL, AVWorldgen::pools)
                 .add(Registries.STRUCTURE, AVWorldgen::structures)
-                .add(Registries.STRUCTURE_SET, AVWorldgen::sets);
+                .add(Registries.STRUCTURE_SET, AVWorldgen::sets)
+                .add(Registries.LEVEL_STEM, AVWorldgen::dimensions);
     }
 
     static void pools(BootstrapContext<StructureTemplatePool> ctx) {
@@ -82,6 +89,21 @@ public final class AVWorldgen {
                 List.of(),
                 DimensionPadding.ZERO,
                 LiquidSettings.APPLY_WATERLOGGING));
+    }
+
+    public static final ResourceKey<LevelStem> FIRMAMENT_STEM =
+            ResourceKey.create(Registries.LEVEL_STEM, AstralVigil.id("firmament"));
+
+    /**
+     * The Firmament: vanilla floating-islands terrain under the overworld sky (stars at night), a single meadow biome.
+     * Reusing vanilla dimension type + noise settings keeps it identical on both targets.
+     */
+    static void dimensions(BootstrapContext<LevelStem> ctx) {
+        ctx.register(FIRMAMENT_STEM, new LevelStem(
+                ctx.lookup(Registries.DIMENSION_TYPE).getOrThrow(BuiltinDimensionTypes.OVERWORLD),
+                new NoiseBasedChunkGenerator(
+                        new FixedBiomeSource(ctx.lookup(Registries.BIOME).getOrThrow(Biomes.MEADOW)),
+                        ctx.lookup(Registries.NOISE_SETTINGS).getOrThrow(NoiseGeneratorSettings.FLOATING_ISLANDS))));
     }
 
     static void sets(BootstrapContext<StructureSet> ctx) {

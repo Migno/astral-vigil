@@ -41,6 +41,10 @@ public class AVModelProvider extends ModelProvider {
         blockModels.createTrivialCube(AVBlocks.METEORIC_STONE.get());
         blockModels.createTrivialCube(AVBlocks.CONSTELLATION_LOCK.get());
         blockModels.createTrivialCube(AVBlocks.VOID_CRYSTAL.get());
+        for (Block b : new Block[] {AVBlocks.FIRMAMENT_STONE.get(), AVBlocks.STARLIGHT_FONT.get(), AVBlocks.TRIAL_RECEPTOR.get(),
+            AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get()}) {
+            blockModels.createTrivialCube(b);
+        }
 
         // Device models are hand-built in Blockbench (art/bbmodel/block); only the block states are generated.
         facing(blockModels, AVBlocks.LENS.get(), BlockModelGenerators.ROTATION_FACING);
@@ -83,6 +87,8 @@ public class AVModelProvider extends ModelProvider {
         AVItems.SIGILS.values().forEach(s -> itemModels.generateFlatItem(s.get(), ModelTemplates.FLAT_ITEM));
         itemModels.generateFlatItem(AVItems.LORE_FRAGMENT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.VOID_SHARD.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.ASCENSION_KEY.get(), ModelTemplates.FLAT_ITEM);
+        AVItems.MARKS.values().forEach(m -> itemModels.generateFlatItem(m.get(), ModelTemplates.FLAT_ITEM));
     }
 
     private static void facing(BlockModelGenerators blockModels, Block block, PropertyDispatch<VariantMutator> rotation) {
@@ -106,6 +112,10 @@ public class AVModelProvider extends ModelProvider {
             simpleBlockWithItem(AVBlocks.METEORIC_STONE.get(), cubeAll(AVBlocks.METEORIC_STONE.get()));
             simpleBlockWithItem(AVBlocks.CONSTELLATION_LOCK.get(), cubeAll(AVBlocks.CONSTELLATION_LOCK.get()));
             simpleBlockWithItem(AVBlocks.VOID_CRYSTAL.get(), cubeAll(AVBlocks.VOID_CRYSTAL.get()));
+            for (Block b : new Block[] {AVBlocks.FIRMAMENT_STONE.get(), AVBlocks.STARLIGHT_FONT.get(), AVBlocks.TRIAL_RECEPTOR.get(),
+                AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get()}) {
+                simpleBlockWithItem(b, cubeAll(b));
+            }
 
             // Device models are hand-built in Blockbench; only block states + item parents are generated.
             facingAll(AVBlocks.LENS.get());
@@ -171,6 +181,8 @@ public class AVModelProvider extends ModelProvider {
             AVItems.SIGILS.values().forEach(s -> basicItem(s.get()));
             basicItem(AVItems.LORE_FRAGMENT.get());
             basicItem(AVItems.VOID_SHARD.get());
+            basicItem(AVItems.ASCENSION_KEY.get());
+            AVItems.MARKS.values().forEach(m -> basicItem(m.get()));
         }
 
         private String name(Item item) {

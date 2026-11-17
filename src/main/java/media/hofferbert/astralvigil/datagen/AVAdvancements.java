@@ -80,6 +80,19 @@ public class AVAdvancements implements AdvancementSubProvider {
         // Research advancements: granted from code (impossible criterion "research").
         AdvancementHolder firstScan = research(out, heavens, "first_scan", AVItems.ASTROLABE.get(), AdvancementType.TASK);
         lore(out, root);
+        AdvancementHolder ascend = Advancement.Builder.advancement()
+                .parent(heavens)
+                .display(AVItems.ASCENSION_KEY.get(), title("ascension"), description("ascension"), null, AdvancementType.GOAL, true, true, false)
+                .addCriterion("has_key", InventoryChangeTrigger.TriggerInstance.hasItems(AVItems.ASCENSION_KEY.get()))
+                .save(out, "astralvigil:firmament/ascension");
+        for (var w : media.hofferbert.astralvigil.firmament.Watcher.values()) {
+            Advancement.Builder.advancement()
+                    .parent(ascend)
+                    .display(AVItems.MARKS.get(w).get(), title("trial_" + w.id()), description("trial_" + w.id()), null,
+                            AdvancementType.CHALLENGE, true, true, false)
+                    .addCriterion("trial", CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
+                    .save(out, "astralvigil:firmament/trial_" + w.id());
+        }
         ItemLike[] icons = {Items.SUNFLOWER, Items.SNOW_BLOCK, Items.AMETHYST_CLUSTER, Items.CRYING_OBSIDIAN};
         for (Alignment a : Alignment.values()) {
             research(out, firstScan, "attuned_" + a.id(), icons[a.ordinal()], AdvancementType.GOAL);

@@ -51,6 +51,9 @@ dependencies {
     // BlockPilot: AI/scripted in-game testing. Dev runs only (localRuntime is not published).
     localRuntime("dev.blockpilot:blockpilot:${sc.properties["deps.blockpilot"]}:${sc.current.version}-neoforge")
 
+    // GeckoLib (required at runtime: Watchers, Eclipse, wing cosmetic)
+    implementation("maven.modrinth:geckolib:${sc.properties["deps.geckolib_id"]}")
+
     // Optional integrations: compile against the API, never shipped or required
     compileOnly("maven.modrinth:jade:${sc.properties["deps.jade"]}")
     compileOnly("maven.modrinth:jei:${sc.properties["deps.jei"]}")
@@ -159,6 +162,7 @@ tasks {
             "authors" to sc.properties["mod.authors"],
             "minecraft" to sc.properties["mod.mc_compat"],
             "neoforge" to sc.properties["deps.neoforge"],
+            "geckolib" to sc.properties["deps.geckolib_range"],
         )
         inputs.properties(props)
         filesMatching("META-INF/neoforge.mods.toml") { expand(props) }

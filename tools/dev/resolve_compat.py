@@ -13,10 +13,10 @@ UA = {"User-Agent": "astralvigil-dev-tools"}
 TARGETS = {
     "1.21.1-neoforge": ("1.21.1", ["emi", "jade", "curios", "patchouli", "sodium", "iris", "placebo",
                                    "apothic-attributes", "apothic-enchanting", "apothic-spawners", "apotheosis",
-                                   "rhino", "better-advanced-tooltips", "architectury-api", "kubejs", "geckolib"]),
+                                   "rhino", "better-advanced-tooltips", "architectury-api", "kubejs"]),
     "26.1-neoforge": ("26.1.2", ["mezzconfig", "jei", "jade", "curios", "patchouli", "sodium", "iris", "placebo",
                                  "apothic-attributes", "apothic-enchanting", "apothic-spawners", "apotheosis",
-                                 "rhino", "better-advanced-tooltips", "architectury-api", "kubejs", "geckolib"]),
+                                 "rhino", "better-advanced-tooltips", "architectury-api", "kubejs"]),
 }
 
 

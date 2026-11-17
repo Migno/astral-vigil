@@ -132,6 +132,13 @@ Quill – Luck + Hero of the Village.
 Fallen Observatories: random spread, spacing 42 / separation 14 chunks (rarer than villages). Vault loot: ingots,
 sigil blank, 10 % Astral Core; lore fragments 1–2 (open chest) and 2–3 (vault).
 
+## Firmament (Phase 7)
+
+Ascension Key: 2000 pure starlight + Starmetal, Sunsteel, Moonsilver, Void Shard, 2 feathers around an Astral Core,
+Stella research – late-midgame, after the first gear. Trials: 10 min to finish once started. Favour: +50 for a
+completed trial, −15 for the rival Watcher, clamped to −100 … 1000 (used by Phase 8). Low gravity: −50 % gravity,
++7 safe fall distance – generous so the parkour trial is about route-finding, not fall damage.
+
 ## Starlight formula
 
 `intensity = night(t) × moon(phase) × weather`, 0 without sky access.

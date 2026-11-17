@@ -159,6 +159,56 @@ public final class Devices {
         }
     }
 
+    /** Starlight Font: an endless source found in the Firmament (sanctum puzzles, landing beacon). */
+    public static class Font extends StarlightBlockEntity {
+        public Font(BlockPos pos, BlockState state) {
+            super(AVBlockEntities.STARLIGHT_FONT.get(), pos, state, 400);
+        }
+
+        @Override
+        protected void produce(ServerLevel level) {
+            buffer.insert(Tint.PURE, buffer.space(), false);
+        }
+
+        @Override
+        protected List<Output> outputs() {
+            return List.of(new Output(facing(), Tint.PURE));
+        }
+
+        @Override
+        protected boolean accepts(Tint tint, Direction travel) {
+            return false;
+        }
+    }
+
+    /** Trial Receptor: Orrin's beam puzzle is solved when Stella light reaches it. */
+    public static class Receptor extends StarlightBlockEntity {
+        public Receptor(BlockPos pos, BlockState state) {
+            super(AVBlockEntities.TRIAL_RECEPTOR.get(), pos, state, 100);
+        }
+
+        @Override
+        protected List<Output> outputs() {
+            return List.of();
+        }
+
+        @Override
+        protected boolean accepts(Tint tint, Direction travel) {
+            return tint == Tint.STELLA;
+        }
+
+        @Override
+        public int receive(Tint tint, int amount, Direction travel) {
+            int taken = super.receive(tint, amount, travel);
+            if (taken > 0 && level instanceof ServerLevel server) {
+                media.hofferbert.astralvigil.firmament.TrialManager.completeNear(
+                        server, worldPosition, media.hofferbert.astralvigil.firmament.Watcher.ORRIN, 24);
+                buffer.extract(Tint.STELLA, buffer.get(Tint.STELLA), false);
+            }
+            return taken;
+        }
+    }
+
     /** Star Anchor: a small starlight receiver used to lay out constellations for rituals. */
     public static class Anchor extends StarlightBlockEntity {
         private long readyAt;

@@ -133,6 +133,30 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - `/locate structure` is very slow in this dev setup even for vanilla villages; structure generation was verified with
   `/place structure` and GameTests instead.
 
+## 2026-11-17 – Phase 7
+
+- **GeckoLib is a hard dependency** (4.9.3 / 5.5.2), pinned by Modrinth version id and declared `required` in
+  `neoforge.mods.toml`. The 4.x→5.x root package move is a Stonecutter string replacement
+  (`software.bernie.geckolib` ↔ `com.geckolib`); remaining API differences (controller constructor, AnimatableManager
+  package) sit in `//?` blocks.
+- **One shared Watcher rig** (`watcher.geo.json` + `watcher.animation.json`, assets in both GeckoLib layouts:
+  `geo/`+`animations/` for 4.x, `geckolib/models|animations/` for 5.x) and one entity type per Watcher with its own
+  texture via `DefaultedEntityGeoModel#withAltTexture`. GeckoLib 5 resolves textures from the render state, so one
+  model instance per entity type is the simplest cross-version solution.
+- **Firmament = vanilla floating-islands noise + overworld dimension type** (datagen `LEVEL_STEM`), identical on both
+  targets. The sanctum hub is built once at y 290 – above the island terrain – from generated templates
+  (`tools/dev/gen_firmament.py`); the unbreakable Starlight Font at the landing marks "already built".
+- **Experimental-settings warning:** every datapack dimension makes vanilla flag the world as experimental. NeoForge
+  remembers the confirmation per world (`confirmedExperimentalSettings`), so players see it once – same as all
+  dimension mods; no mixin.
+- **Low gravity via transient attribute modifiers** (`gravity` −50 %, `safe_fall_distance` +7) applied while in the
+  dimension; falling below y −32 returns you to the landing.
+- **Trials are short, server-side and stateless in the world:** the active trial is two keys in persistent player
+  data (10 min timeout); completion is an advancement (`firmament/trial_<watcher>`) + Mark item + favour. Favour is a
+  synced player attachment (copy on death). Rivals: Solenne ↔ Vael, Orrin ↔ Ilyra.
+- **Seraph wing cosmetic moved to Phase 8:** it needs a GeckoLib player render layer, which Phase 8 builds anyway for
+  the Eclipse; doing it once keeps the version-specific layer code in one place.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best

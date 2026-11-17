@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:trial_goal",
+  "name": "The Sanctums",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Four bridges lead from the landing to the four sanctums. Speak to a Watcher to begin its trial: Solenne's climb (east), Vael's hunt (west), Orrin's forge of light (south) and Ilyra's library (north).$(br2)Each completed trial grants that Watcher's $(l)Mark$() and its $(l)favour$() – but rival Watchers grow cooler: Solenne and Vael, Orrin and Ilyra."
+    }
+  ],
+  "sortnum": 1
+}

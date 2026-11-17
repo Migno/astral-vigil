@@ -136,6 +136,21 @@ public final class AVItems {
             "lore_fragment", media.hofferbert.astralvigil.item.LoreFragmentItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final DeferredItem<Item> VOID_SHARD = register("void_shard", Item::new, p -> p.rarity(Rarity.UNCOMMON));
 
+    // Phase 7 – Firmament
+    public static final DeferredItem<BlockItem> FIRMAMENT_STONE = ITEMS.registerSimpleBlockItem(AVBlocks.FIRMAMENT_STONE);
+    public static final DeferredItem<Item> ASCENSION_KEY = AVItems.<Item>register(
+            "ascension_key", media.hofferbert.astralvigil.item.AscensionKeyItem::new, p -> p.stacksTo(1).rarity(Rarity.EPIC));
+    public static final Map<media.hofferbert.astralvigil.firmament.Watcher, DeferredItem<Item>> MARKS = marks();
+
+    private static Map<media.hofferbert.astralvigil.firmament.Watcher, DeferredItem<Item>> marks() {
+        Map<media.hofferbert.astralvigil.firmament.Watcher, DeferredItem<Item>> map =
+                new EnumMap<>(media.hofferbert.astralvigil.firmament.Watcher.class);
+        for (var w : media.hofferbert.astralvigil.firmament.Watcher.values()) {
+            map.put(w, register("mark_of_" + w.id(), Item::new, p -> p.stacksTo(1).rarity(Rarity.EPIC)));
+        }
+        return map;
+    }
+
     private AVItems() {}
 
     static <I extends Item> DeferredItem<I> register(

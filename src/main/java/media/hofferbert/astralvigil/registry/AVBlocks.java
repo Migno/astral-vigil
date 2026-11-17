@@ -7,6 +7,7 @@ import media.hofferbert.astralvigil.block.ConstellationLockBlock;
 import media.hofferbert.astralvigil.block.FallenStarBlock;
 import media.hofferbert.astralvigil.block.RitualBlock;
 import media.hofferbert.astralvigil.block.StarlightDeviceBlock;
+import media.hofferbert.astralvigil.block.TrialBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -50,6 +51,19 @@ public final class AVBlocks {
             .mapColor(MapColor.COLOR_BLUE).strength(-1.0f, 3_600_000.0f).noLootTable().lightLevel(s -> 3).sound(SoundType.DEEPSLATE_BRICKS));
     public static final DeferredBlock<Block> VOID_CRYSTAL = register("void_crystal", Block::new, p -> p
             .mapColor(MapColor.COLOR_PURPLE).strength(1.5f, 3.0f).requiresCorrectToolForDrops().lightLevel(s -> 4).sound(SoundType.AMETHYST));
+
+    // Phase 7 – Firmament
+    public static final DeferredBlock<Block> FIRMAMENT_STONE = register("firmament_stone", Block::new, p -> p
+            .mapColor(MapColor.QUARTZ).strength(1.5f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.CALCITE));
+    public static final DeferredBlock<StarlightDeviceBlock> STARLIGHT_FONT = register("starlight_font", StarlightDeviceBlock::font, p -> p
+            .mapColor(MapColor.DIAMOND).strength(-1.0f, 3_600_000.0f).noLootTable().lightLevel(s -> 15).sound(SoundType.AMETHYST));
+    public static final DeferredBlock<StarlightDeviceBlock> TRIAL_RECEPTOR = register("trial_receptor", StarlightDeviceBlock::receptor, p -> p
+            .mapColor(MapColor.COLOR_BLUE).strength(-1.0f, 3_600_000.0f).noLootTable().lightLevel(s -> 6).sound(SoundType.AMETHYST));
+    public static final DeferredBlock<TrialBlocks.Goal> TRIAL_GOAL = register("trial_goal", TrialBlocks.Goal::new, p -> p
+            .mapColor(MapColor.GOLD).strength(-1.0f, 3_600_000.0f).noLootTable().lightLevel(s -> 15).sound(SoundType.AMETHYST));
+    public static final DeferredBlock<TrialBlocks.MoonTarget> MOON_TARGET = register("moon_target", TrialBlocks.MoonTarget::new, p -> p
+            .mapColor(MapColor.SNOW).strength(-1.0f, 3_600_000.0f).noLootTable()
+            .lightLevel(s -> s.getValue(TrialBlocks.MoonTarget.LIT) ? 12 : 3).sound(SoundType.AMETHYST));
 
     private AVBlocks() {}
 

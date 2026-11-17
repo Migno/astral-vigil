@@ -40,6 +40,21 @@ public final class AVAttachments {
                     .sync(AVAttachments::syncToOwner, net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
                     .build());
 
+    /** Watcher favour (watcher id -> favour). Survives death; synced to the owner. */
+    public static final Supplier<AttachmentType<java.util.Map<String, Integer>>> FAVOUR = ATTACHMENTS.register(
+            "favour",
+            () -> AttachmentType.<java.util.Map<String, Integer>>builder(() -> java.util.Map.of())
+                    //? if >=26.1 {
+                    .serialize(com.mojang.serialization.Codec.unboundedMap(com.mojang.serialization.Codec.STRING, com.mojang.serialization.Codec.INT).fieldOf("favour"))
+                    //?} else {
+                    /*.serialize(com.mojang.serialization.Codec.unboundedMap(com.mojang.serialization.Codec.STRING, com.mojang.serialization.Codec.INT))
+                    *///?}
+                    .copyOnDeath()
+                    .sync(AVAttachments::syncToOwner, net.minecraft.network.codec.ByteBufCodecs.map(
+                            java.util.HashMap::new, net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8,
+                            net.minecraft.network.codec.ByteBufCodecs.VAR_INT).map(java.util.Map::copyOf, java.util.HashMap::new))
+                    .build());
+
     private AVAttachments() {}
 
     /** Only the owner needs their research; skip players without a negotiated channel (GameTest mock players). */

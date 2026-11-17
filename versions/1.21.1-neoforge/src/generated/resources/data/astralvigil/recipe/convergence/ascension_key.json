@@ -1,0 +1,33 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "stella",
+  "center": {
+    "item": "astralvigil:astral_core"
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/starmetal"
+    },
+    {
+      "tag": "c:ingots/sunsteel"
+    },
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "item": "astralvigil:void_shard"
+    },
+    {
+      "tag": "c:feathers"
+    },
+    {
+      "tag": "c:feathers"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:ascension_key"
+  },
+  "starlight": 2000,
+  "time": 300
+}

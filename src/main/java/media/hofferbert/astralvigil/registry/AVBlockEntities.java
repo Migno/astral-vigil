@@ -34,6 +34,11 @@ public final class AVBlockEntities {
     public static final Supplier<BlockEntityType<Devices.Anchor>> STAR_ANCHOR =
             register("star_anchor", Devices.Anchor::new, AVBlocks.STAR_ANCHOR);
 
+    public static final Supplier<BlockEntityType<Devices.Font>> STARLIGHT_FONT =
+            register("starlight_font", Devices.Font::new, AVBlocks.STARLIGHT_FONT);
+    public static final Supplier<BlockEntityType<Devices.Receptor>> TRIAL_RECEPTOR =
+            register("trial_receptor", Devices.Receptor::new, AVBlocks.TRIAL_RECEPTOR);
+
     private AVBlockEntities() {}
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(

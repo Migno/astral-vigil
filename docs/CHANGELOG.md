@@ -4,6 +4,20 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 7 – Firmament
+- **GeckoLib integration** on both targets (4.9.3 on 1.21.1, 5.5.2 on 26.1) – required dependency.
+- **The Firmament:** a sky dimension of floating islands with low gravity and soft landings, reached with the
+  **Ascension Key** (Convergence Altar, 2000 pure starlight, Stella research). Falling off the world returns you to
+  the landing.
+- **Four Watchers** (Solenne, Vael, Orrin, Ilyra) as animated GeckoLib entities (idle/cast/talk) in their sanctums,
+  connected to the landing by cloud-stone bridges.
+- **Trials:** Solenne's golden climb, Vael's six Moon Targets (archery), Orrin's beam puzzle (guide Stella light to a
+  Trial Receptor with mirrors), Ilyra's library maze. Each grants the Watcher's **Mark**, a challenge advancement and
+  **favour**; rival Watchers lose favour.
+- New blocks: Firmament Stone, Starlight Font (endless starlight source), Trial Receptor, Trial Beacon, Moon Target.
+- Codex category "The Firmament" (en/de); generator script `tools/dev/gen_firmament.py`.
+- JUnit for Watcher rivals; GameTests for the Firmament templates and trial rewards.
+
 ### Phase 6 – World
 - **Fallen Observatories:** ruined round observatories (datapack worldgen: structure, template pool, structure set,
   biome tag `#astralvigil:has_structure/fallen_observatory`) with a telescope, an open chest and a vault sealed by

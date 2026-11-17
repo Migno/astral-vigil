@@ -1,6 +1,10 @@
 {
   "values": [
     "#minecraft:features_cannot_replace",
-    "astralvigil:constellation_lock"
+    "astralvigil:constellation_lock",
+    "astralvigil:starlight_font",
+    "astralvigil:trial_receptor",
+    "astralvigil:trial_goal",
+    "astralvigil:moon_target"
   ]
 }

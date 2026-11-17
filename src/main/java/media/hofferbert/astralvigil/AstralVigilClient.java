@@ -40,6 +40,13 @@ public final class AstralVigilClient {
         event.registerBlockEntityRenderer(AVBlockEntities.PEDESTAL.get(), FloatingItemsRenderer::new);
         event.registerBlockEntityRenderer(AVBlockEntities.CONVERGENCE_ALTAR.get(), FloatingItemsRenderer::new);
         event.registerBlockEntityRenderer(AVBlockEntities.ASTRAL_FORGE.get(), FloatingItemsRenderer::new);
+        event.registerBlockEntityRenderer(AVBlockEntities.STARLIGHT_FONT.get(), ctx -> new StarlightBeamRenderer());
+        // Watchers: one GeckoLib model per Watcher id (geo/animation/texture share the id)
+        media.hofferbert.astralvigil.registry.AVEntities.WATCHERS.forEach((w, type) -> event.registerEntityRenderer(
+                type.get(), ctx -> new com.geckolib.renderer.GeoEntityRenderer<>(
+                        ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.firmament.WatcherEntity>(
+                                media.hofferbert.astralvigil.AstralVigil.id("watcher"))
+                                .withAltTexture(media.hofferbert.astralvigil.AstralVigil.id("watcher/" + w.id())))));
     }
 
     /** Flavour line under every Astral Vigil item that has a {@code <descriptionId>.desc} key. */
@@ -58,7 +65,8 @@ public final class AstralVigilClient {
                 || item == AVItems.PEDESTAL.get()
                 || item == AVItems.CONVERGENCE_ALTAR.get()
                 || item == AVItems.ASTRAL_FORGE.get()
-                || item == AVItems.STAR_ANCHOR.get()) {
+                || item == AVItems.STAR_ANCHOR.get()
+                || item == AVItems.ASCENSION_KEY.get()) {
             event.getToolTip()
                     .add(1, Component.translatable(item.getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }

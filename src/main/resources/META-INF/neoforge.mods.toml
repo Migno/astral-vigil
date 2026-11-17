@@ -23,6 +23,13 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${id}]]
+modId = "geckolib"
+type = "required"
+versionRange = "${geckolib}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${id}]]
 modId = "minecraft"
 type = "required"
 versionRange = "${minecraft}"

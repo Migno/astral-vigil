@@ -34,7 +34,9 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
         MIRROR(Facing.ALL, Devices.Mirror::new),
         PRISM(Facing.HORIZONTAL, Devices.Prism::new),
         RESERVOIR(Facing.NONE, Devices.Reservoir::new),
-        ANCHOR(Facing.NONE, Devices.Anchor::new);
+        ANCHOR(Facing.NONE, Devices.Anchor::new),
+        FONT(Facing.ALL, Devices.Font::new),
+        RECEPTOR(Facing.NONE, Devices.Receptor::new);
 
         final Facing facing;
         final BiFunction<BlockPos, BlockState, StarlightBlockEntity> factory;
@@ -58,6 +60,8 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
     public static final MapCodec<StarlightDeviceBlock> PRISM_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.PRISM));
     public static final MapCodec<StarlightDeviceBlock> RESERVOIR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.RESERVOIR));
     public static final MapCodec<StarlightDeviceBlock> ANCHOR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.ANCHOR));
+    public static final MapCodec<StarlightDeviceBlock> FONT_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.FONT));
+    public static final MapCodec<StarlightDeviceBlock> RECEPTOR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.RECEPTOR));
 
     /** Set before super() runs so createBlockStateDefinition knows the kind. */
     private static final ThreadLocal<Kind> CONSTRUCTING = new ThreadLocal<>();
@@ -98,6 +102,14 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
         return new StarlightDeviceBlock(p, Kind.PRISM);
     }
 
+    public static StarlightDeviceBlock font(Properties p) {
+        return new StarlightDeviceBlock(p, Kind.FONT);
+    }
+
+    public static StarlightDeviceBlock receptor(Properties p) {
+        return new StarlightDeviceBlock(p, Kind.RECEPTOR);
+    }
+
     public static StarlightDeviceBlock anchor(Properties p) {
         return new StarlightDeviceBlock(p, Kind.ANCHOR);
     }
@@ -119,6 +131,8 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
             case PRISM -> PRISM_CODEC;
             case RESERVOIR -> RESERVOIR_CODEC;
             case ANCHOR -> ANCHOR_CODEC;
+            case FONT -> FONT_CODEC;
+            case RECEPTOR -> RECEPTOR_CODEC;
         };
     }
 
@@ -154,7 +168,7 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
             }
             return InteractionResult.SUCCESS;
         }
-        if (kind.facing == Facing.NONE) {
+        if (kind.facing == Facing.NONE || kind == Kind.FONT) {
             return InteractionResult.PASS;
         }
         if (!level.isClientSide()) {

@@ -45,6 +45,7 @@ public class AVLootProvider extends BlockLootSubProvider {
         dropSelf(AVBlocks.CONVERGENCE_ALTAR.get());
         dropSelf(AVBlocks.ASTRAL_FORGE.get());
         dropSelf(AVBlocks.STAR_ANCHOR.get());
+        dropSelf(AVBlocks.FIRMAMENT_STONE.get());
         add(AVBlocks.VOID_CRYSTAL.get(), block -> createSilkTouchDispatchTable(
                 block,
                 applyExplosionDecay(block, LootItem.lootTableItem(AVItems.VOID_SHARD.get())
@@ -55,7 +56,11 @@ public class AVLootProvider extends BlockLootSubProvider {
     protected Iterable<Block> getKnownBlocks() {
         return AVBlocks.BLOCKS.getEntries().stream()
                 .map(h -> (Block) h.value())
-                .filter(b -> b != AVBlocks.CONSTELLATION_LOCK.get())
+                .filter(b -> b != AVBlocks.CONSTELLATION_LOCK.get()
+                        && b != AVBlocks.STARLIGHT_FONT.get()
+                        && b != AVBlocks.TRIAL_RECEPTOR.get()
+                        && b != AVBlocks.TRIAL_GOAL.get()
+                        && b != AVBlocks.MOON_TARGET.get())
                 .toList();
     }
 }

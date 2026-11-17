@@ -14,6 +14,10 @@ stonecutter parameters {
         string(current.parsed >= "1.21.11") {
             replace("ResourceLocation", "Identifier")
         }
+        // GeckoLib 5 (26.1) moved its root package
+        string(current.parsed >= "26.1") {
+            replace("software.bernie.geckolib", "com.geckolib")
+        }
     }
 }
 

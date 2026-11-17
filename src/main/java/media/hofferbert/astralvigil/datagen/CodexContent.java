@@ -109,6 +109,14 @@ public final class CodexContent {
                     "astralvigil:void_crystal",
                     5),
             new Category(
+                    "firmament",
+                    "The Firmament",
+                    "Das Firmament",
+                    "Above the clouds, the Watchers wait.",
+                    "Über den Wolken warten die Wächter.",
+                    "astralvigil:ascension_key",
+                    6),
+            new Category(
                     "chronicle",
                     "The Lost Chronicle",
                     "Die verlorene Chronik",
@@ -285,6 +293,18 @@ public final class CodexContent {
                     new Text(
                             "Ruined towers of dark stone dot the land. Their vaults are sealed with $(item)Constellation Locks$() – touch one after learning its sign and it dissolves. Pages of my lost chronicle wait inside.",
                             "Verfallene Türme aus dunklem Stein sind über das Land verstreut. Ihre Gewölbe sind mit $(item)Sternbildschlössern$() versiegelt – berühre eines, nachdem du sein Zeichen erlernt hast, und es löst sich auf. Darin warten Seiten meiner verlorenen Chronik."))),
+            // ---------------------------------------------------------------- firmament
+            new Entry("ascension", "firmament", "Ascension", "Aufstieg", "astralvigil:ascension_key", 0, null, List.of(
+                    new Spotlight("astralvigil:ascension_key",
+                            "Forged at the Convergence Altar: an Astral Core as catalyst; Starmetal, Sunsteel and Moonsilver, a Void Shard and two feathers as offerings; 2000 pure starlight. Use it to rise into the Firmament and again to return.",
+                            "Am Konvergenzaltar geschmiedet: ein Astralkern als Katalysator; Sternenstahl, Sonnenstahl, Mondsilber, ein Leerensplitter und zwei Federn als Gaben; 2000 reines Sternenlicht. Benutze ihn, um ins Firmament aufzusteigen, und erneut, um zurückzukehren."),
+                    new Text(
+                            "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and returns you to the landing.",
+                            "Das Firmament ist leicht: Du fällst langsam und landest sanft. Stürzt du von den Inseln, fängt dich der Himmel auf und bringt dich zum Landeplatz zurück."))),
+            new Entry("sanctums", "firmament", "The Sanctums", "Die Heiligtümer", "astralvigil:trial_goal", 1, null, List.of(
+                    new Text(
+                            "Four bridges lead from the landing to the four sanctums. Speak to a Watcher to begin its trial: Solenne's climb (east), Vael's hunt (west), Orrin's forge of light (south) and Ilyra's library (north).$(br2)Each completed trial grants that Watcher's $(l)Mark$() and its $(l)favour$() – but rival Watchers grow cooler: Solenne and Vael, Orrin and Ilyra.",
+                            "Vier Brücken führen vom Landeplatz zu den vier Heiligtümern. Sprich mit einem Wächter, um seine Prüfung zu beginnen: Solennes Aufstieg (Osten), Vaels Jagd (Westen), Orrins Schmiede des Lichts (Süden) und Ilyras Bibliothek (Norden).$(br2)Jede bestandene Prüfung gewährt das $(l)Zeichen$() des Wächters und seine $(l)Gunst$() – doch rivalisierende Wächter kühlen ab: Solenne und Vael, Orrin und Ilyra."))),
             // ---------------------------------------------------------------- constellations
             new Entry("constellations", "constellations", "Signs in the Sky", "Zeichen am Himmel", "astralvigil:star_chart", 0, null, List.of(
                     new Text(

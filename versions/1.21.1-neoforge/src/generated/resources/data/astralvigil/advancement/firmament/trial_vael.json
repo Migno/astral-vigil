@@ -1,0 +1,27 @@
+{
+  "parent": "astralvigil:firmament/ascension",
+  "criteria": {
+    "trial": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.trial_vael.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "astralvigil:mark_of_vael"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.trial_vael.title"
+    }
+  },
+  "requirements": [
+    [
+      "trial"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

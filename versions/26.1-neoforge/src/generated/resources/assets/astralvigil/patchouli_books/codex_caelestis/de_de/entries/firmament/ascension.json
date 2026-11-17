@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:ascension_key",
+  "name": "Aufstieg",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:ascension_key",
+      "text": "Am Konvergenzaltar geschmiedet: ein Astralkern als Katalysator; Sternenstahl, Sonnenstahl, Mondsilber, ein Leerensplitter und zwei Federn als Gaben; 2000 reines Sternenlicht. Benutze ihn, um ins Firmament aufzusteigen, und erneut, um zurückzukehren."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Das Firmament ist leicht: Du fällst langsam und landest sanft. Stürzt du von den Inseln, fängt dich der Himmel auf und bringt dich zum Landeplatz zurück."
+    }
+  ],
+  "sortnum": 0
+}

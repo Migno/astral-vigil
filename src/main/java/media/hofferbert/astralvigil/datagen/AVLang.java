@@ -379,6 +379,50 @@ public final class AVLang {
             add("lore.astralvigil.fragment_" + (i + 1) + ".text", p.en(), p.de());
         }
 
+        // Phase 7 – Firmament
+        add("block.astralvigil.firmament_stone", "Firmament Stone", "Firmamentstein");
+        add("block.astralvigil.starlight_font", "Starlight Font", "Sternenlichtquell");
+        add("block.astralvigil.trial_receptor", "Trial Receptor", "Prüfungsempfänger");
+        add("block.astralvigil.trial_goal", "Trial Beacon", "Prüfungsleuchte");
+        add("block.astralvigil.moon_target", "Moon Target", "Mondzielscheibe");
+        add("item.astralvigil.ascension_key", "Ascension Key", "Aufstiegsschlüssel");
+        add("item.astralvigil.ascension_key.desc", "Use to rise into the Firmament – and to return.", "Benutzen, um ins Firmament aufzusteigen – und zurückzukehren.");
+        add("dimension.astralvigil.firmament", "The Firmament", "Das Firmament");
+        add("message.astralvigil.firmament.arrive", "You rise above the clouds. The Watchers await in their sanctums.", "Du steigst über die Wolken. Die Wächter erwarten dich in ihren Heiligtümern.");
+        add("message.astralvigil.firmament.missing", "The Firmament is closed on this server.", "Das Firmament ist auf diesem Server verschlossen.");
+        add("message.astralvigil.watcher.favour", "%s regards you. Favour: %s", "%s betrachtet dich. Gunst: %s");
+        add("message.astralvigil.trial.complete", "%s accepts your trial and grants you their Mark.", "%s erkennt deine Prüfung an und gewährt dir sein Zeichen.");
+        add("message.astralvigil.trial.expired", "Your trial has lapsed. Speak to the Watcher again.", "Deine Prüfung ist verstrichen. Sprich erneut mit dem Wächter.");
+        String[][] watchers = {
+            {"solenne", "Solenne", "Solenne", "Mark of Solenne", "Zeichen Solennes",
+                "%s: \"Climb towards the sun, aspirant. Do not look down.\"", "%s: \"Steig der Sonne entgegen, Anwärter. Sieh nicht hinab.\"",
+                "Climb the golden steps and touch the Trial Beacon at the top.", "Erklimm die goldenen Stufen und berühre die Prüfungsleuchte an der Spitze.",
+                "Trial of Ascent", "Prüfung des Aufstiegs", "Reach the top of Solenne's sanctum", "Erreiche die Spitze von Solennes Heiligtum"},
+            {"vael", "Vael", "Vael", "Mark of Vael", "Zeichen Vaels",
+                "%s: \"Six moons. One breath each.\"", "%s: \"Sechs Monde. Ein Atemzug für jeden.\"",
+                "Light all six Moon Targets with your arrows.", "Entzünde alle sechs Mondzielscheiben mit deinen Pfeilen.",
+                "Trial of the Hunt", "Prüfung der Jagd", "Strike every Moon Target in Vael's sanctum", "Triff jede Mondzielscheibe in Vaels Heiligtum"},
+            {"orrin", "Orrin", "Orrin", "Mark of Orrin", "Zeichen Orrins",
+                "%s: \"Light is metal that has not yet been bent. Bend it.\"", "%s: \"Licht ist Metall, das noch nicht gebogen wurde. Biege es.\"",
+                "Turn the mirrors so that Stella light from the prism reaches the Trial Receptor.", "Drehe die Spiegel so, dass Stella-Licht aus dem Prisma den Prüfungsempfänger erreicht.",
+                "Trial of the Forge", "Prüfung der Schmiede", "Guide Stella light to Orrin's receptor", "Leite Stella-Licht zu Orrins Empfänger"},
+            {"ilyra", "Ilyra", "Ilyra", "Mark of Ilyra", "Zeichen Ilyras",
+                "%s: \"Every library is a labyrinth. Find the page I hid.\"", "%s: \"Jede Bibliothek ist ein Labyrinth. Finde die Seite, die ich versteckt habe.\"",
+                "Find the Trial Beacon in the heart of the library maze.", "Finde die Prüfungsleuchte im Herzen des Bibliothekslabyrinths.",
+                "Trial of Memory", "Prüfung der Erinnerung", "Find the heart of Ilyra's library", "Finde das Herz von Ilyras Bibliothek"}
+        };
+        for (String[] w : watchers) {
+            add("watcher.astralvigil." + w[0], w[1], w[2]);
+            add("entity.astralvigil." + w[0], w[1], w[2]);
+            add("item.astralvigil.mark_of_" + w[0], w[3], w[4]);
+            add("trial.astralvigil." + w[0] + ".intro", w[5], w[6]);
+            add("trial.astralvigil." + w[0] + ".hint", w[7], w[8]);
+            add("advancements.astralvigil.trial_" + w[0] + ".title", w[9], w[10]);
+            add("advancements.astralvigil.trial_" + w[0] + ".description", w[11], w[12]);
+        }
+        add("advancements.astralvigil.ascension.title", "Ascension", "Aufstieg");
+        add("advancements.astralvigil.ascension.description", "Forge an Ascension Key", "Schmiede einen Aufstiegsschlüssel");
+
         // Config screen
         add("astralvigil.configuration.title", "Astral Vigil Configuration", "Astral Vigil – Einstellungen");
         add("astralvigil.configuration.section.astralvigil.server.toml", "Server Settings", "Server-Einstellungen");

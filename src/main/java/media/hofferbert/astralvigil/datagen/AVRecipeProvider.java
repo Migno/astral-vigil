@@ -348,6 +348,11 @@ public class AVRecipeProvider extends RecipeProvider {
         sigil(output, Sigil.AEGIS, Tint.STELLA, ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
                 ing(Tags.Items.OBSIDIANS), ing(Tags.Items.OBSIDIANS));
 
+        convergence(output, "ascension_key", res(AVItems.ASCENSION_KEY.get(), 1), Ingredient.of(AVItems.ASTRAL_CORE.get()),
+                Tint.PURE, 2000, 300, Optional.of(Alignment.STELLA),
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_SUNSTEEL),
+                ing(AVTags.Items.INGOTS_MOONSILVER), Ingredient.of(AVItems.VOID_SHARD.get()),
+                ing(Tags.Items.FEATHERS), ing(Tags.Items.FEATHERS));
         convergence(output, "sigil_blank", res(AVItems.SIGIL_BLANK.get(), 2), ing(AVTags.Items.INGOTS_STARMETAL),
                 Tint.STELLA, 400, 120, Optional.of(Alignment.STELLA),
                 ing(Tags.Items.NUGGETS_GOLD), ing(Tags.Items.NUGGETS_GOLD),

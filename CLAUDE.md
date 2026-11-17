@@ -66,7 +66,10 @@ Run dirs: `run/<target>/{client,server,gametest,data,compat}` (git-ignored).
 - Codex: edit `datagen/CodexContent.java` (en + de), never the generated Patchouli JSON.
 - Debug: `/astralvigil starfall [here]`, `/astralvigil research <alignment> <points>|reset`,
   `/astralvigil starlight <pos> <tint> <amount>`; `/place structure astralvigil:fallen_observatory`.
-- Structures: regenerate templates with `python -I tools/dev/gen_observatory.py`; worldgen in `worldgen/AVWorldgen`.
+- Structures: regenerate templates with `python -I tools/dev/gen_observatory.py` / `gen_firmament.py`; worldgen
+  (incl. the Firmament `LEVEL_STEM`) in `worldgen/AVWorldgen`. Firmament hub is built on first arrival (`SanctumBuilder`).
+- GeckoLib: write code against `com.geckolib` (26.1, GeckoLib 5); the 1.21.1 package `software.bernie.geckolib` is swapped by
+  Stonecutter. Assets go in both layouts (`geo/`, `animations/` and `geckolib/models|animations/`).
 - Normal (non-flat) test world: `-Pav.autojoin=true -Pav.worldtype=normal`.
 - Commits: Conventional Commits, no AI attribution lines.
 

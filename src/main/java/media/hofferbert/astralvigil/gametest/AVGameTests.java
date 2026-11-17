@@ -52,6 +52,8 @@ public final class AVGameTests {
 
     public static final List<Def> ALL = List.of(
             new Def("mod_loaded", PLATFORM, 40, false, AVGameTests::modLoaded),
+            new Def("firmament_templates", PLATFORM, 40, false, AVGameTests::firmamentTemplates),
+            new Def("trial_grants_mark_and_favour", PLATFORM, 40, false, AVGameTests::trialGrantsMarkAndFavour),
             new Def("fallen_star_drops_shards", PLATFORM, 40, false, AVGameTests::fallenStarDropsShards),
             new Def("no_starlight_under_roof", PLATFORM, 40, false, AVGameTests::noStarlightUnderRoof),
             new Def("starfall_crater", CRATER_FIELD, 40, true, AVGameTests::starfallCrater),
@@ -123,6 +125,39 @@ public final class AVGameTests {
             GT.check(helper, template.isPresent(), "missing template " + sign);
             GT.check(helper, template.get().getSize().getX() == 17, "unexpected size " + template.get().getSize());
         }
+        helper.succeed();
+    }
+
+    static void firmamentTemplates(GameTestHelper helper) {
+        var manager = helper.getLevel().getStructureManager();
+        var settings = new net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings();
+        java.util.Map<String, net.minecraft.world.level.block.Block> key = java.util.Map.of(
+                "landing", media.hofferbert.astralvigil.registry.AVBlocks.STARLIGHT_FONT.get(),
+                "solenne", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(),
+                "vael", media.hofferbert.astralvigil.registry.AVBlocks.MOON_TARGET.get(),
+                "orrin", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_RECEPTOR.get(),
+                "ilyra", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get());
+        for (var e : key.entrySet()) {
+            var template = manager.get(AstralVigil.id("firmament/" + e.getKey()));
+            GT.check(helper, template.isPresent(), "missing template " + e.getKey());
+            int found = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, e.getValue()).size();
+            int expected = e.getKey().equals("vael") ? 6 : 1;
+            GT.check(helper, found == expected, e.getKey() + ": expected " + expected + " key blocks, found " + found);
+        }
+        helper.succeed();
+    }
+
+    static void trialGrantsMarkAndFavour(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        var w = media.hofferbert.astralvigil.firmament.Watcher.SOLENNE;
+        GT.check(helper, !media.hofferbert.astralvigil.firmament.TrialManager.complete(player, w), "completed without trial");
+        player.getPersistentData().putString("astralvigil_trial", w.id());
+        player.getPersistentData().putLong("astralvigil_trial_until", helper.getLevel().getGameTime() + 1000);
+        GT.check(helper, media.hofferbert.astralvigil.firmament.TrialManager.complete(player, w), "trial not completed");
+        GT.check(helper, player.getInventory().contains(new ItemStack(AVItems.MARKS.get(w).get())), "no mark");
+        GT.check(helper, media.hofferbert.astralvigil.firmament.TrialManager.favour(player, w) == 50, "favour");
+        GT.check(helper, media.hofferbert.astralvigil.firmament.TrialManager.favour(player, w.rival()) == -15, "rival favour");
+        GT.check(helper, media.hofferbert.astralvigil.firmament.TrialManager.activeTrial(player).isEmpty(), "trial not cleared");
         helper.succeed();
     }
 

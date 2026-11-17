@@ -50,6 +50,7 @@ public final class AstralVigil {
         *///?}
         AVBlockEntities.BLOCK_ENTITIES.register(modBus);
         AVRecipes.register(modBus);
+        media.hofferbert.astralvigil.registry.AVEntities.register(modBus);
         //? if >=26.1 {
         // 26.1 no longer syncs recipes to clients; JEI needs ours
         NeoForge.EVENT_BUS.addListener((OnDatapackSyncEvent e) -> e.sendRecipes(AVRecipes.CONVERGENCE.get(), AVRecipes.FORGE.get()));
@@ -59,6 +60,7 @@ public final class AstralVigil {
         StarfallManager.register();
         GearEvents.register();
         media.hofferbert.astralvigil.eclipse.GazeManager.register();
+        media.hofferbert.astralvigil.firmament.Firmament.register();
         AVCommands.register();
         GameTestRegistration.register(modBus);
     }

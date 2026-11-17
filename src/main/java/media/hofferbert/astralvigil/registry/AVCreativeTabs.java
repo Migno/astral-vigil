@@ -49,6 +49,9 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.STAR_ANCHOR.get());
                 output.accept(AVItems.VOID_CRYSTAL.get());
                 output.accept(AVItems.VOID_SHARD.get());
+                output.accept(AVItems.FIRMAMENT_STONE.get());
+                output.accept(AVItems.ASCENSION_KEY.get());
+                AVItems.MARKS.values().forEach(m -> output.accept(m.get()));
                 for (int i = 1; i <= 24; i++) {
                     var page = new net.minecraft.world.item.ItemStack(AVItems.LORE_FRAGMENT.get());
                     page.set(AVComponents.FRAGMENT.get(), i);

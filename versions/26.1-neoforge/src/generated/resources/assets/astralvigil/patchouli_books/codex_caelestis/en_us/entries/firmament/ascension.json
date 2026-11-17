@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:ascension_key",
+  "name": "Ascension",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:ascension_key",
+      "text": "Forged at the Convergence Altar: an Astral Core as catalyst; Starmetal, Sunsteel and Moonsilver, a Void Shard and two feathers as offerings; 2000 pure starlight. Use it to rise into the Firmament and again to return."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and returns you to the landing."
+    }
+  ],
+  "sortnum": 0
+}
