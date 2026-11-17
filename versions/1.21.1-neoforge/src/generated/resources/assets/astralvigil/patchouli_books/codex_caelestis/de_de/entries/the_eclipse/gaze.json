@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:the_eclipse",
+  "icon": "astralvigil:void_shard",
+  "name": "Der Blick der Finsternis",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Jede Fähigkeit, die du entfesselst, und jede Konvergenz, die du vollziehst, zieht den $(l)Blick der Finsternis$() auf dich. Dein Astrolabium zeigt, wie stark er auf dir ruht.$(br2)Zuerst flüstert sie nur. Dann schickt sie $(l)Echos$(), lässt den Boden um dich zu $(item)Leerenkristall$() erstarren und greift schließlich in Wogen der Dunkelheit hindurch."
+    }
+  ],
+  "sortnum": 0
+}

@@ -58,6 +58,7 @@ public final class AstralVigil {
 
         StarfallManager.register();
         GearEvents.register();
+        media.hofferbert.astralvigil.eclipse.GazeManager.register();
         AVCommands.register();
         GameTestRegistration.register(modBus);
     }

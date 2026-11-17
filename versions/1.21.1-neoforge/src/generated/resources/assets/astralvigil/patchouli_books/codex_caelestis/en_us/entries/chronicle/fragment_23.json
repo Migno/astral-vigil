@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_23",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "23. Seeker, Aspirant",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A seeker looks up. An aspirant climbs. I hope you climb."
+    }
+  ],
+  "sortnum": 22
+}

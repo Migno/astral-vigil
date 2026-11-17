@@ -31,6 +31,9 @@ public final class AVBlockEntities {
     public static final Supplier<BlockEntityType<AstralForgeBlockEntity>> ASTRAL_FORGE =
             register("astral_forge", AstralForgeBlockEntity::new, AVBlocks.ASTRAL_FORGE);
 
+    public static final Supplier<BlockEntityType<Devices.Anchor>> STAR_ANCHOR =
+            register("star_anchor", Devices.Anchor::new, AVBlocks.STAR_ANCHOR);
+
     private AVBlockEntities() {}
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(

@@ -33,7 +33,8 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
         LENS(Facing.ALL, Devices.Lens::new),
         MIRROR(Facing.ALL, Devices.Mirror::new),
         PRISM(Facing.HORIZONTAL, Devices.Prism::new),
-        RESERVOIR(Facing.NONE, Devices.Reservoir::new);
+        RESERVOIR(Facing.NONE, Devices.Reservoir::new),
+        ANCHOR(Facing.NONE, Devices.Anchor::new);
 
         final Facing facing;
         final BiFunction<BlockPos, BlockState, StarlightBlockEntity> factory;
@@ -56,6 +57,7 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
     public static final MapCodec<StarlightDeviceBlock> MIRROR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.MIRROR));
     public static final MapCodec<StarlightDeviceBlock> PRISM_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.PRISM));
     public static final MapCodec<StarlightDeviceBlock> RESERVOIR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.RESERVOIR));
+    public static final MapCodec<StarlightDeviceBlock> ANCHOR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.ANCHOR));
 
     /** Set before super() runs so createBlockStateDefinition knows the kind. */
     private static final ThreadLocal<Kind> CONSTRUCTING = new ThreadLocal<>();
@@ -96,6 +98,10 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
         return new StarlightDeviceBlock(p, Kind.PRISM);
     }
 
+    public static StarlightDeviceBlock anchor(Properties p) {
+        return new StarlightDeviceBlock(p, Kind.ANCHOR);
+    }
+
     public static StarlightDeviceBlock reservoir(Properties p) {
         return new StarlightDeviceBlock(p, Kind.RESERVOIR);
     }
@@ -112,6 +118,7 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
             case MIRROR -> MIRROR_CODEC;
             case PRISM -> PRISM_CODEC;
             case RESERVOIR -> RESERVOIR_CODEC;
+            case ANCHOR -> ANCHOR_CODEC;
         };
     }
 
@@ -140,6 +147,13 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (kind == Kind.ANCHOR) {
+            if (level instanceof net.minecraft.server.level.ServerLevel server
+                    && player instanceof net.minecraft.server.level.ServerPlayer sp) {
+                media.hofferbert.astralvigil.eclipse.AnchorRitual.tryActivate(server, pos, sp);
+            }
+            return InteractionResult.SUCCESS;
+        }
         if (kind.facing == Facing.NONE) {
             return InteractionResult.PASS;
         }

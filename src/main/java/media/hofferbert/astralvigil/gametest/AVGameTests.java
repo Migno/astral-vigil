@@ -69,7 +69,62 @@ public final class AVGameTests {
             new Def("altar_asymmetry_lowers_stability", CRATER_FIELD, 60, true, AVGameTests::altarAsymmetry),
             new Def("sigil_sockets_into_gear", PLATFORM, 40, false, AVGameTests::sigilSockets),
             new Def("undead_kill_by_day_is_a_deed", PLATFORM, 40, false, AVGameTests::undeadDeed),
-            new Def("whirl_hits_nearby_mobs", CRATER_FIELD, 40, true, AVGameTests::whirlHits));
+            new Def("whirl_hits_nearby_mobs", CRATER_FIELD, 40, true, AVGameTests::whirlHits),
+            new Def("anchor_ritual_eases_gaze", CRATER_FIELD, 40, true, AVGameTests::anchorRitual),
+            new Def("constellation_lock_needs_sign", PLATFORM, 40, false, AVGameTests::constellationLock),
+            new Def("observatory_templates_load", PLATFORM, 40, false, AVGameTests::observatoryTemplates));
+
+    static void anchorRitual(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        player.setData(AVAttachments.RESEARCH, ResearchData.EMPTY.withConstellation("halo"));
+        player.setData(AVAttachments.GAZE, 500);
+        BlockPos first = null;
+        for (var p : media.hofferbert.astralvigil.research.AnchorPatterns.PATTERNS.get("halo")) {
+            BlockPos rel = GT.pos(3 + p.x(), 4, 3 + p.z());
+            helper.setBlock(rel, AVBlocks.STAR_ANCHOR.get());
+            var anchor = (media.hofferbert.astralvigil.starlight.network.Devices.Anchor)
+                    helper.getLevel().getBlockEntity(helper.absolutePos(rel));
+            anchor.buffer().insert(Tint.PURE, 200, false);
+            if (first == null) {
+                first = helper.absolutePos(rel);
+            }
+        }
+        player.setPos(first.getX() + 0.5, first.getY(), first.getZ() + 0.5);
+        media.hofferbert.astralvigil.eclipse.AnchorRitual.tryActivate(helper.getLevel(), first, player);
+        int gaze = player.getData(AVAttachments.GAZE);
+        GT.check(helper, gaze < 500, "gaze not eased: " + gaze);
+        var a = (media.hofferbert.astralvigil.starlight.network.Devices.Anchor) helper.getLevel().getBlockEntity(first);
+        GT.check(helper, a.buffer().total() == 100, "anchor should have spent 100, holds " + a.buffer().total());
+        helper.succeed();
+    }
+
+    static void constellationLock(GameTestHelper helper) {
+        BlockPos rel = GT.pos(2, 1, 2);
+        helper.setBlock(rel, AVBlocks.CONSTELLATION_LOCK.get().defaultBlockState()
+                .setValue(media.hofferbert.astralvigil.block.ConstellationLockBlock.SIGN,
+                        media.hofferbert.astralvigil.block.ConstellationLockBlock.Sign.CRESCENT));
+        BlockPos abs = helper.absolutePos(rel);
+        var hit = new net.minecraft.world.phys.BlockHitResult(
+                net.minecraft.world.phys.Vec3.atCenterOf(abs), Direction.UP, abs, false);
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        player.setData(AVAttachments.RESEARCH, ResearchData.EMPTY);
+        helper.getLevel().getBlockState(abs).useWithoutItem(helper.getLevel(), player, hit);
+        GT.check(helper, helper.getLevel().getBlockState(abs).is(AVBlocks.CONSTELLATION_LOCK.get()), "lock opened without the sign");
+        player.setData(AVAttachments.RESEARCH, ResearchData.EMPTY.withConstellation("crescent"));
+        helper.getLevel().getBlockState(abs).useWithoutItem(helper.getLevel(), player, hit);
+        GT.check(helper, helper.getLevel().getBlockState(abs).isAir(), "lock did not open for a player who knows the sign");
+        helper.succeed();
+    }
+
+    static void observatoryTemplates(GameTestHelper helper) {
+        var manager = helper.getLevel().getStructureManager();
+        for (String sign : new String[] {"halo", "crescent", "anvil", "quill"}) {
+            var template = manager.get(AstralVigil.id("fallen_observatory/" + sign));
+            GT.check(helper, template.isPresent(), "missing template " + sign);
+            GT.check(helper, template.get().getSize().getX() == 17, "unexpected size " + template.get().getSize());
+        }
+        helper.succeed();
+    }
 
     static void sigilSockets(GameTestHelper helper) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();

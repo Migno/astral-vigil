@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_18",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "18. Leerenglas",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Wo ihr Blick zu lange ruht, vergisst die Welt, wie man Stein ist, und erinnert sich, wie man Nacht ist."
+    }
+  ],
+  "sortnum": 17
+}

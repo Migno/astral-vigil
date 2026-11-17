@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_11",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "11. Der Fall der Türme",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Die Türme fielen nicht durch Krieg. Sie fielen, weil die Wächter müde wurden, und ein müder Wächter sieht weg."
+    }
+  ],
+  "sortnum": 10
+}

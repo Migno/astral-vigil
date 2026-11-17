@@ -46,6 +46,14 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.SERAPH_LEGGINGS.get());
                 output.accept(AVItems.SERAPH_BOOTS.get());
                 AVItems.SIGILS.values().forEach(s -> output.accept(s.get()));
+                output.accept(AVItems.STAR_ANCHOR.get());
+                output.accept(AVItems.VOID_CRYSTAL.get());
+                output.accept(AVItems.VOID_SHARD.get());
+                for (int i = 1; i <= 24; i++) {
+                    var page = new net.minecraft.world.item.ItemStack(AVItems.LORE_FRAGMENT.get());
+                    page.set(AVComponents.FRAGMENT.get(), i);
+                    output.accept(page);
+                }
             })
             .build());
 

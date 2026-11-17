@@ -181,6 +181,9 @@ public class ConvergenceAltarBlockEntity extends StarlightBlockEntity implements
         duration = found.get().recipe().time();
         stability = computeStability(level, found.get().recipe().alignment());
         level.playSound(null, worldPosition, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 1.0f, 1.3f);
+        level.players().stream()
+                .filter(p -> p.blockPosition().closerThan(worldPosition, 8))
+                .forEach(p -> media.hofferbert.astralvigil.eclipse.GazeManager.add(p, AVServerConfig.GAZE_PER_RITUAL.get()));
         syncNow();
         return true;
     }

@@ -113,6 +113,25 @@ Awakened), no fall damage (Seraph, Ascended). Deeds: 25 → Awakened, 100 → As
 | Undertow | 25 | 8 s | Next arrow pulls the target |
 | Aegis | 40 | 20 s | Absorption II–III 10 s + Resistance I 5 s |
 
+## Eclipse Gaze (`[gaze]`) and rituals (`[ritual]`)
+
+| Key | Default | Why |
+|---|---|---|
+| `perAbilityCost` | 0.25 | A 40-charge ability adds 10 Gaze – heavy ability use reaches stage 1 after ~20 casts. |
+| `perRitual` | 15 | Convergence is powerful; a dozen rituals are noticed. |
+| stages | 200 / 400 / 600 / 800 | whispers → echoes (night) → crystallisation → surges |
+| `eventChance` | 0.15 × stage per 10 s | Stage 4 ≈ one event every ~17 s – pressure to perform a ritual. |
+| `starlightPerAnchor` | 100 | A six-anchor ritual costs 600 light – one good night of one collector. |
+| `gazeRelief` | 120 × scale | A scale-3 ritual clears one full stage and more. |
+| `baseSeconds` | 300 × scale | 5/10/15 minute blessings – timed, never permanent. |
+| `cooldownTicks` | 6000 | Five minutes per anchor; prevents blessing chains. |
+
+Blessings: Halo – Fire Resistance + Regeneration; Crescent – Night Vision + Speed; Anvil – Haste + Resistance;
+Quill – Luck + Hero of the Village.
+
+Fallen Observatories: random spread, spacing 42 / separation 14 chunks (rarer than villages). Vault loot: ingots,
+sigil blank, 10 % Astral Core; lore fragments 1–2 (open chest) and 2–3 (vault).
+
 ## Starlight formula
 
 `intensity = night(t) × moon(phase) × weather`, 0 without sky access.

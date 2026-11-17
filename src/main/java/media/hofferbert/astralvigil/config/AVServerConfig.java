@@ -59,8 +59,60 @@ public final class AVServerConfig {
     public static final ModConfigSpec.DoubleValue ABILITY_COST_MULTIPLIER;
     public static final ModConfigSpec.DoubleValue ABILITY_COOLDOWN_MULTIPLIER;
 
+    // Eclipse Gaze + rituals
+    public static final ModConfigSpec.BooleanValue GAZE_ENABLED;
+    public static final ModConfigSpec.IntValue GAZE_MAX;
+    public static final ModConfigSpec.DoubleValue GAZE_PER_ABILITY_COST;
+    public static final ModConfigSpec.IntValue GAZE_PER_RITUAL;
+    public static final ModConfigSpec.BooleanValue GAZE_CRYSTALLIZE_BLOCKS;
+    public static final ModConfigSpec.DoubleValue GAZE_EVENT_CHANCE;
+    public static final ModConfigSpec.IntValue RITUAL_STARLIGHT;
+    public static final ModConfigSpec.IntValue RITUAL_GAZE_RELIEF;
+    public static final ModConfigSpec.IntValue RITUAL_BASE_SECONDS;
+    public static final ModConfigSpec.IntValue RITUAL_COOLDOWN;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
+
+        b.comment("Eclipse Gaze: heavy use of celestial power draws the Eclipse's attention.")
+                .translation("astralvigil.configuration.gaze")
+                .push("gaze");
+        GAZE_ENABLED = b.comment("Enable Eclipse Gaze and its events.")
+                .translation("astralvigil.configuration.gaze.enabled")
+                .define("enabled", true);
+        GAZE_MAX = b.comment("Maximum Gaze.")
+                .translation("astralvigil.configuration.gaze.max")
+                .defineInRange("max", 1000, 100, 100_000);
+        GAZE_PER_ABILITY_COST = b.comment("Gaze gained per point of starlight charge spent on abilities.")
+                .translation("astralvigil.configuration.gaze.per_ability_cost")
+                .defineInRange("perAbilityCost", 0.25, 0.0, 100.0);
+        GAZE_PER_RITUAL = b.comment("Gaze gained per Convergence ritual.")
+                .translation("astralvigil.configuration.gaze.per_ritual")
+                .defineInRange("perRitual", 15, 0, 10_000);
+        GAZE_CRYSTALLIZE_BLOCKS = b.comment("At high Gaze, nearby stone may crystallise into Void Crystal (terrain change).")
+                .translation("astralvigil.configuration.gaze.crystallize")
+                .define("crystallizeBlocks", true);
+        GAZE_EVENT_CHANCE = b.comment("Chance per 10 s check that a Gaze event happens (scaled by Gaze stage).")
+                .translation("astralvigil.configuration.gaze.event_chance")
+                .defineInRange("eventChance", 0.15, 0.0, 1.0);
+        b.pop();
+
+        b.comment("Star Anchor rituals: lay out a learned constellation with Star Anchors.")
+                .translation("astralvigil.configuration.ritual")
+                .push("ritual");
+        RITUAL_STARLIGHT = b.comment("Starlight each anchor must hold (and spends) for a ritual.")
+                .translation("astralvigil.configuration.ritual.starlight")
+                .defineInRange("starlightPerAnchor", 100, 0, 100_000);
+        RITUAL_GAZE_RELIEF = b.comment("Gaze removed by a ritual, multiplied by the layout scale.")
+                .translation("astralvigil.configuration.ritual.gaze_relief")
+                .defineInRange("gazeRelief", 120, 0, 100_000);
+        RITUAL_BASE_SECONDS = b.comment("Blessing duration in seconds, multiplied by the layout scale.")
+                .translation("astralvigil.configuration.ritual.base_seconds")
+                .defineInRange("baseSeconds", 300, 1, 86_400);
+        RITUAL_COOLDOWN = b.comment("Ticks before the same anchor can lead another ritual.")
+                .translation("astralvigil.configuration.ritual.cooldown")
+                .defineInRange("cooldownTicks", 6000, 0, 1_000_000);
+        b.pop();
 
         b.comment("Living gear: starlight charge, sigil abilities.")
                 .translation("astralvigil.configuration.gear")

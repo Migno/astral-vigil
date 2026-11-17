@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:the_eclipse",
+  "icon": "astralvigil:constellation_lock",
+  "name": "Fallen Observatories",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ruined towers of dark stone dot the land. Their vaults are sealed with $(item)Constellation Locks$() – touch one after learning its sign and it dissolves. Pages of my lost chronicle wait inside."
+    }
+  ],
+  "sortnum": 2
+}

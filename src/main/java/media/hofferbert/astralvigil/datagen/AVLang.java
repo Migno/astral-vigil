@@ -334,6 +334,51 @@ public final class AVLang {
         add("astralvigil.configuration.gear.cost_multiplier", "Ability Cost Multiplier", "Multiplikator Fähigkeitskosten");
         add("astralvigil.configuration.gear.cooldown_multiplier", "Ability Cooldown Multiplier", "Multiplikator Abklingzeit");
 
+        // Phase 6 – world
+        add("block.astralvigil.star_anchor", "Star Anchor", "Sternenanker");
+        add("block.astralvigil.star_anchor.desc", "Lay out a learned constellation, fill with starlight, then touch an anchor.", "Lege ein erlerntes Sternbild aus, fülle es mit Sternenlicht und berühre dann einen Anker.");
+        add("block.astralvigil.constellation_lock", "Constellation Lock", "Sternbildschloss");
+        add("block.astralvigil.void_crystal", "Void Crystal", "Leerenkristall");
+        add("item.astralvigil.void_shard", "Void Shard", "Leerensplitter");
+        add("item.astralvigil.lore_fragment", "Lore Fragment", "Chronikfragment");
+        add("item.astralvigil.lore_fragment.numbered", "Lore Fragment %s/24", "Chronikfragment %s/24");
+        add("entity.astralvigil.eclipse_echo", "Eclipse Echo", "Echo der Finsternis");
+        add("message.astralvigil.lock.sealed", "The lock does not yield. It bears the sign of %s.", "Das Schloss gibt nicht nach. Es trägt das Zeichen %s.");
+        add("message.astralvigil.lock.opened", "You trace %s – the seal dissolves into light.", "Du ziehst %s nach – das Siegel löst sich in Licht auf.");
+        add("message.astralvigil.ritual.no_pattern", "These anchors form no constellation you have learned.", "Diese Anker bilden kein Sternbild, das du erlernt hast.");
+        add("message.astralvigil.ritual.no_sky", "An anchor cannot see the sky.", "Ein Anker kann den Himmel nicht sehen.");
+        add("message.astralvigil.ritual.no_light", "Every anchor needs %s starlight.", "Jeder Anker braucht %s Sternenlicht.");
+        add("message.astralvigil.ritual.resting", "The anchors are still resting.", "Die Anker ruhen noch.");
+        add("message.astralvigil.ritual.complete", "%s shines down on you. The Eclipse's gaze recedes.", "%s strahlt auf dich herab. Der Blick der Finsternis weicht zurück.");
+        add("message.astralvigil.astrolabe.gaze", "Eclipse Gaze: %s", "Blick der Finsternis: %s");
+        add("message.astralvigil.gaze.stage.1", "You feel watched from between the stars.", "Du fühlst dich von zwischen den Sternen beobachtet.");
+        add("message.astralvigil.gaze.stage.2", "The dark between the stars has noticed you.", "Die Dunkelheit zwischen den Sternen hat dich bemerkt.");
+        add("message.astralvigil.gaze.stage.3", "Where you walk, the world forgets the light.", "Wo du gehst, vergisst die Welt das Licht.");
+        add("message.astralvigil.gaze.stage.4", "The Eclipse is looking straight at you.", "Die Finsternis blickt dich unverwandt an.");
+        add("message.astralvigil.gaze.whisper.1", "…so bright… so close…", "…so hell… so nah…");
+        add("message.astralvigil.gaze.whisper.2", "…the binding is thin here…", "…die Bindung ist hier dünn…");
+        add("message.astralvigil.gaze.whisper.3", "…give the light back…", "…gib das Licht zurück…");
+        add("message.astralvigil.gaze.whisper.4", "…they abandoned you too…", "…sie haben auch dich verlassen…");
+        add("message.astralvigil.gaze.whisper.5", "…look up… look at me…", "…sieh auf… sieh mich an…");
+        add("message.astralvigil.gaze.surge", "The sun dims. Something reaches through.", "Die Sonne verblasst. Etwas greift hindurch.");
+        add("astralvigil.configuration.gaze", "Eclipse Gaze", "Blick der Finsternis");
+        add("astralvigil.configuration.gaze.enabled", "Enabled", "Aktiviert");
+        add("astralvigil.configuration.gaze.max", "Maximum", "Maximum");
+        add("astralvigil.configuration.gaze.per_ability_cost", "Gaze per Ability Charge", "Blick pro Fähigkeitsladung");
+        add("astralvigil.configuration.gaze.per_ritual", "Gaze per Convergence", "Blick pro Konvergenz");
+        add("astralvigil.configuration.gaze.crystallize", "Void Crystallisation", "Leerenkristallisierung");
+        add("astralvigil.configuration.gaze.event_chance", "Event Chance", "Ereignischance");
+        add("astralvigil.configuration.ritual", "Star Anchor Rituals", "Sternenanker-Rituale");
+        add("astralvigil.configuration.ritual.starlight", "Starlight per Anchor", "Sternenlicht pro Anker");
+        add("astralvigil.configuration.ritual.gaze_relief", "Gaze Relief", "Blick-Linderung");
+        add("astralvigil.configuration.ritual.base_seconds", "Blessing Duration (s)", "Segensdauer (s)");
+        add("astralvigil.configuration.ritual.cooldown", "Anchor Rest (ticks)", "Ankerruhe (Ticks)");
+        for (int i = 0; i < LoreContent.PAGES.size(); i++) {
+            LoreContent.Page p = LoreContent.PAGES.get(i);
+            add("lore.astralvigil.fragment_" + (i + 1) + ".title", p.titleEn(), p.titleDe());
+            add("lore.astralvigil.fragment_" + (i + 1) + ".text", p.en(), p.de());
+        }
+
         // Config screen
         add("astralvigil.configuration.title", "Astral Vigil Configuration", "Astral Vigil – Einstellungen");
         add("astralvigil.configuration.section.astralvigil.server.toml", "Server Settings", "Server-Einstellungen");

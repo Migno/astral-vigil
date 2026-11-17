@@ -64,7 +64,10 @@ Run dirs: `run/<target>/{client,server,gametest,data,compat}` (git-ignored).
 - Research: alignments via `#astralvigil:alignment/<sol|luna|stella|void>` tags; player state in the
   `astralvigil:research` attachment; milestones are advancements (`research/*`) granted in `ResearchManager`.
 - Codex: edit `datagen/CodexContent.java` (en + de), never the generated Patchouli JSON.
-- Debug: `/astralvigil starfall [here]`, `/astralvigil research <alignment> <points>|reset`.
+- Debug: `/astralvigil starfall [here]`, `/astralvigil research <alignment> <points>|reset`,
+  `/astralvigil starlight <pos> <tint> <amount>`; `/place structure astralvigil:fallen_observatory`.
+- Structures: regenerate templates with `python -I tools/dev/gen_observatory.py`; worldgen in `worldgen/AVWorldgen`.
+- Normal (non-flat) test world: `-Pav.autojoin=true -Pav.worldtype=normal`.
 - Commits: Conventional Commits, no AI attribution lines.
 
 ## Art rules

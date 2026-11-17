@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_3",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "3. Vael",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vael nahm die Nacht. Er ruft nicht. Er wartet, und wenn er schießt, verfehlt er nicht."
+    }
+  ],
+  "sortnum": 2
+}

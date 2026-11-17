@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:the_eclipse",
+  "icon": "astralvigil:star_anchor",
+  "name": "Star Anchors",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:star_anchor",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Place $(item)Star Anchors$() under the open sky in the shape of a constellation you have learned – the same shape as on your Star Chart, any rotation, mirrored or not, at one, two or three times the size. Fill every anchor with starlight, then touch one.$(br2)The ritual blesses everyone nearby and pushes the Gaze back. Larger layouts last longer and soothe more."
+    }
+  ],
+  "sortnum": 1
+}

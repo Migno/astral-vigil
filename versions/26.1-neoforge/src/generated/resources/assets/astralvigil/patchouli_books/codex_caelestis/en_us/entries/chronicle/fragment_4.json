@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_4",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "4. Orrin",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Orrin took the stars themselves and hammered them into their places. Every constellation still bears the marks of his anvil."
+    }
+  ],
+  "sortnum": 3
+}

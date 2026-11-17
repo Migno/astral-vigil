@@ -51,6 +51,15 @@ public class AVRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
+        shaped(RecipeCategory.MISC, AVItems.STAR_ANCHOR.get(), 2)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('G', Tags.Items.INGOTS_GOLD)
+                .define('M', AVTags.Items.METEORIC_STONES)
+                .pattern(" S ")
+                .pattern(" G ")
+                .pattern("MMM")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
         shaped(RecipeCategory.MISC, AVItems.PEDESTAL.get(), 2)
                 .define('G', Tags.Items.INGOTS_GOLD)
                 .define('M', AVTags.Items.METEORIC_STONES)
@@ -166,6 +175,15 @@ public class AVRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AVItems.STAR_ANCHOR.get(), 2)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('G', Tags.Items.INGOTS_GOLD)
+                .define('M', AVTags.Items.METEORIC_STONES)
+                .pattern(" S ")
+                .pattern(" G ")
+                .pattern("MMM")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AVItems.PEDESTAL.get(), 2)
                 .define('G', Tags.Items.INGOTS_GOLD)
                 .define('M', AVTags.Items.METEORIC_STONES)

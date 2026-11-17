@@ -101,6 +101,22 @@ public final class CodexContent {
                     "astralvigil:halo_edge",
                     4),
             new Category(
+                    "the_eclipse",
+                    "The Eclipse",
+                    "Die Finsternis",
+                    "The fifth light, and how to keep its gaze away.",
+                    "Das fünfte Licht, und wie man seinen Blick fernhält.",
+                    "astralvigil:void_crystal",
+                    5),
+            new Category(
+                    "chronicle",
+                    "The Lost Chronicle",
+                    "Die verlorene Chronik",
+                    "Pages of my old chronicle, scattered among the fallen observatories.",
+                    "Seiten meiner alten Chronik, verstreut in den gefallenen Observatorien.",
+                    "astralvigil:lore_fragment",
+                    7),
+            new Category(
                     "constellations",
                     "Constellations",
                     "Sternbilder",
@@ -109,7 +125,10 @@ public final class CodexContent {
                     "astralvigil:star_chart",
                     6));
 
-    public static final List<Entry> ENTRIES = List.of(
+
+    public static final List<Entry> ENTRIES;
+
+    private static final List<Entry> ENTRIES_BASE = List.of(
             // ---------------------------------------------------------------- the rift
             new Entry("watchers", "the_rift", "The Watchers", "Die Wächter", "astralvigil:astral_shard", 0, null, List.of(
                     new Text(
@@ -252,6 +271,20 @@ public final class CodexContent {
                     new Text(
                             "Sigils are cut from $(item)Sigil Blanks$() at the altar. $(l)Whirl$() and $(l)Shieldbreaker$() suit the axe, $(l)Dawn$() and $(l)Flash$() the sword, $(l)Precision$() and $(l)Undertow$() the bows, $(l)Aegis$() the shield and the Seraph Plate.",
                             "Siegel werden am Altar aus $(item)Siegelrohlingen$() geschnitten. $(l)Wirbel$() und $(l)Schildbrecher$() passen zur Axt, $(l)Morgenröte$() und $(l)Lichtblitz$() zum Schwert, $(l)Präzision$() und $(l)Sog$() zu den Bögen, $(l)Ägis$() zu Schild und Seraphenrüstung."))),
+            // ---------------------------------------------------------------- the eclipse
+            new Entry("gaze", "the_eclipse", "The Eclipse's Gaze", "Der Blick der Finsternis", "astralvigil:void_shard", 0, null, List.of(
+                    new Text(
+                            "Every ability you unleash and every convergence you perform draws the $(l)Eclipse's Gaze$(). Your Astrolabe shows how strongly it watches.$(br2)At first it only whispers. Then it sends $(l)Echoes$(), crystallises the ground around you into $(item)Void Crystal$(), and finally reaches through in surges of darkness.",
+                            "Jede Fähigkeit, die du entfesselst, und jede Konvergenz, die du vollziehst, zieht den $(l)Blick der Finsternis$() auf dich. Dein Astrolabium zeigt, wie stark er auf dir ruht.$(br2)Zuerst flüstert sie nur. Dann schickt sie $(l)Echos$(), lässt den Boden um dich zu $(item)Leerenkristall$() erstarren und greift schließlich in Wogen der Dunkelheit hindurch."))),
+            new Entry("star_anchors", "the_eclipse", "Star Anchors", "Sternenanker", "astralvigil:star_anchor", 1, null, List.of(
+                    new Crafting("astralvigil:star_anchor", "", ""),
+                    new Text(
+                            "Place $(item)Star Anchors$() under the open sky in the shape of a constellation you have learned – the same shape as on your Star Chart, any rotation, mirrored or not, at one, two or three times the size. Fill every anchor with starlight, then touch one.$(br2)The ritual blesses everyone nearby and pushes the Gaze back. Larger layouts last longer and soothe more.",
+                            "Setze $(item)Sternenanker$() unter offenem Himmel in der Form eines erlernten Sternbilds – dieselbe Form wie auf deiner Sternkarte, beliebig gedreht, gespiegelt oder nicht, in ein-, zwei- oder dreifacher Größe. Fülle jeden Anker mit Sternenlicht und berühre dann einen.$(br2)Das Ritual segnet alle in der Nähe und drängt den Blick zurück. Größere Anordnungen wirken länger und lindern mehr."))),
+            new Entry("observatories", "the_eclipse", "Fallen Observatories", "Gefallene Observatorien", "astralvigil:constellation_lock", 2, null, List.of(
+                    new Text(
+                            "Ruined towers of dark stone dot the land. Their vaults are sealed with $(item)Constellation Locks$() – touch one after learning its sign and it dissolves. Pages of my lost chronicle wait inside.",
+                            "Verfallene Türme aus dunklem Stein sind über das Land verstreut. Ihre Gewölbe sind mit $(item)Sternbildschlössern$() versiegelt – berühre eines, nachdem du sein Zeichen erlernt hast, und es löst sich auf. Darin warten Seiten meiner verlorenen Chronik."))),
             // ---------------------------------------------------------------- constellations
             new Entry("constellations", "constellations", "Signs in the Sky", "Zeichen am Himmel", "astralvigil:star_chart", 0, null, List.of(
                     new Text(
@@ -273,4 +306,15 @@ public final class CodexContent {
                     new Text(
                             "My own sign. A long shaft and a feathered tip – it only shows itself to those who read both moon and stars.",
                             "Mein eigenes Zeichen. Ein langer Kiel und eine gefiederte Spitze – es zeigt sich nur jenen, die Mond und Sterne zugleich lesen."))));
+
+    static {
+        // one Chronicle entry per lore fragment, unlocked by reading it
+        List<Entry> pages = new java.util.ArrayList<>(ENTRIES_BASE);
+        for (int i = 0; i < LoreContent.PAGES.size(); i++) {
+            LoreContent.Page p = LoreContent.PAGES.get(i);
+            pages.add(new Entry("fragment_" + (i + 1), "chronicle", (i + 1) + ". " + p.titleEn(), (i + 1) + ". " + p.titleDe(),
+                    "astralvigil:lore_fragment", i, "lore/fragment_" + (i + 1), List.of(new Text(p.en(), p.de()))));
+        }
+        ENTRIES = List.copyOf(pages);
+    }
 }

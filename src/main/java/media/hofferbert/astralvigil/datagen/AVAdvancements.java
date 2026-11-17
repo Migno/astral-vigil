@@ -79,6 +79,7 @@ public class AVAdvancements implements AdvancementSubProvider {
 
         // Research advancements: granted from code (impossible criterion "research").
         AdvancementHolder firstScan = research(out, heavens, "first_scan", AVItems.ASTROLABE.get(), AdvancementType.TASK);
+        lore(out, root);
         ItemLike[] icons = {Items.SUNFLOWER, Items.SNOW_BLOCK, Items.AMETHYST_CLUSTER, Items.CRYING_OBSIDIAN};
         for (Alignment a : Alignment.values()) {
             research(out, firstScan, "attuned_" + a.id(), icons[a.ordinal()], AdvancementType.GOAL);
@@ -87,6 +88,15 @@ public class AVAdvancements implements AdvancementSubProvider {
         int i = 0;
         for (Constellation c : Constellations.all()) {
             research(out, firstScan, "constellation_" + c.id(), cIcons[i++ % cIcons.length], AdvancementType.CHALLENGE);
+        }
+    }
+
+    static void lore(Consumer<AdvancementHolder> out, AdvancementHolder parent) {
+        for (int i = 1; i <= 24; i++) {
+            Advancement.Builder.advancement()
+                    .parent(parent)
+                    .addCriterion("read", CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
+                    .save(out, "astralvigil:lore/fragment_" + i);
         }
     }
 

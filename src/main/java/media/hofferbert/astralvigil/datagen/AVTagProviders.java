@@ -43,11 +43,13 @@ public final class AVTagProviders {
             tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                     AVBlocks.FALLEN_STAR.get(), AVBlocks.METEORIC_STONE.get(), AVBlocks.STARLIGHT_COLLECTOR.get(),
                     AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get(),
-                    AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get());
+                    AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get(),
+                    AVBlocks.STAR_ANCHOR.get(), AVBlocks.VOID_CRYSTAL.get());
+            tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.VOID_CRYSTAL.get());
             tag(AVTags.Blocks.BEAM_TRANSPARENT).addTag(Tags.Blocks.GLASS_BLOCKS).addTag(Tags.Blocks.GLASS_PANES);
             tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.FALLEN_STAR.get());
             tag(BlockTags.NEEDS_STONE_TOOL).add(AVBlocks.METEORIC_STONE.get());
-            tag(AVTags.Blocks.STARFALL_IMMUNE).addTag(BlockTags.FEATURES_CANNOT_REPLACE);
+            tag(AVTags.Blocks.STARFALL_IMMUNE).addTag(BlockTags.FEATURES_CANNOT_REPLACE).add(AVBlocks.CONSTELLATION_LOCK.get());
 
             // Celestial alignments (packmakers: extend via datapack/KubeJS)
             tag(AlignmentTags.blocks(Alignment.SOL))
@@ -65,7 +67,8 @@ public final class AVTagProviders {
             tag(AlignmentTags.blocks(Alignment.VOID))
                     .add(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN, Blocks.SCULK, Blocks.SCULK_CATALYST,
                             Blocks.SCULK_SHRIEKER, Blocks.SCULK_SENSOR, Blocks.REINFORCED_DEEPSLATE,
-                            Blocks.END_PORTAL_FRAME, Blocks.RESPAWN_ANCHOR, Blocks.SOUL_SAND, Blocks.SOUL_SOIL);
+                            Blocks.END_PORTAL_FRAME, Blocks.RESPAWN_ANCHOR, Blocks.SOUL_SAND, Blocks.SOUL_SOIL,
+                            AVBlocks.VOID_CRYSTAL.get());
         }
     }
 

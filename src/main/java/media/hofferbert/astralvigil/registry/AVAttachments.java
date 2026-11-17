@@ -27,6 +27,19 @@ public final class AVAttachments {
                     .sync(AVAttachments::syncToOwner, ResearchData.STREAM_CODEC)
                     .build());
 
+    /** Eclipse Gaze (0..max). Survives death; synced to the owner for the Astrolabe reading. */
+    public static final Supplier<AttachmentType<Integer>> GAZE = ATTACHMENTS.register(
+            "gaze",
+            () -> AttachmentType.builder(() -> 0)
+                    //? if >=26.1 {
+                    .serialize(com.mojang.serialization.Codec.INT.fieldOf("gaze"))
+                    //?} else {
+                    /*.serialize(com.mojang.serialization.Codec.INT)
+                    *///?}
+                    .copyOnDeath()
+                    .sync(AVAttachments::syncToOwner, net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                    .build());
+
     private AVAttachments() {}
 
     /** Only the owner needs their research; skip players without a negotiated channel (GameTest mock players). */

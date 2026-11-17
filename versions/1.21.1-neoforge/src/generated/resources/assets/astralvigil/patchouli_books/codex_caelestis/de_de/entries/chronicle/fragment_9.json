@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_9",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "9. Die Observatorien",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Wir lehrten die Menschen unten, mit uns den Himmel zu beobachten. Sie bauten Türme aus dunklem Stein und Linsen aus Glas, und eine Weile hielten sie die Wacht gut."
+    }
+  ],
+  "sortnum": 8
+}

@@ -94,8 +94,10 @@ neoForge {
             gameDirectory = runRoot.dir("client").asFile
             // Auto-join the superflat test world only when requested: -Pav.autojoin=true
             if (providers.gradleProperty("av.autojoin").map(String::toBoolean).getOrElse(false)) {
-                systemProperty("blockpilot.autojoin", "astralvigil-test")
-                systemProperty("blockpilot.autocreate", "flat")
+                // -Pav.worldtype=normal for worldgen checks (default: superflat)
+                val worldType = providers.gradleProperty("av.worldtype").getOrElse("flat")
+                systemProperty("blockpilot.autojoin", if (worldType == "flat") "astralvigil-test" else "astralvigil-$worldType")
+                systemProperty("blockpilot.autocreate", worldType)
             }
         }
         register("compatClient") {

@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_9",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "9. The Observatories",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "We taught the people below to watch the sky with us. They built towers of dark stone and lenses of glass, and for a while they kept the watch well."
+    }
+  ],
+  "sortnum": 8
+}

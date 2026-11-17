@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#c:is_plains",
+    "#c:is_desert",
+    "#c:is_savanna",
+    "#c:is_mountain",
+    "#c:is_badlands",
+    "#c:is_taiga",
+    "#c:is_snowy_plains"
+  ]
+}

@@ -44,10 +44,18 @@ public class AVLootProvider extends BlockLootSubProvider {
         dropSelf(AVBlocks.PEDESTAL.get());
         dropSelf(AVBlocks.CONVERGENCE_ALTAR.get());
         dropSelf(AVBlocks.ASTRAL_FORGE.get());
+        dropSelf(AVBlocks.STAR_ANCHOR.get());
+        add(AVBlocks.VOID_CRYSTAL.get(), block -> createSilkTouchDispatchTable(
+                block,
+                applyExplosionDecay(block, LootItem.lootTableItem(AVItems.VOID_SHARD.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f))))));
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return AVBlocks.BLOCKS.getEntries().stream().map(h -> (Block) h.value()).toList();
+        return AVBlocks.BLOCKS.getEntries().stream()
+                .map(h -> (Block) h.value())
+                .filter(b -> b != AVBlocks.CONSTELLATION_LOCK.get())
+                .toList();
     }
 }

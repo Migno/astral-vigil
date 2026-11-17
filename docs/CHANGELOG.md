@@ -4,6 +4,18 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 6 – World
+- **Fallen Observatories:** ruined round observatories (datapack worldgen: structure, template pool, structure set,
+  biome tag `#astralvigil:has_structure/fallen_observatory`) with a telescope, an open chest and a vault sealed by
+  **Constellation Locks** that dissolve for players who learned the sign (four variants).
+- **Lost Chronicle:** 24 lore fragments (en/de) in observatory loot; reading one unlocks its Codex page.
+- **Star Anchors:** lay out a learned constellation (any rotation, mirrored, scale 1–3), fill with starlight and
+  touch an anchor → timed Watcher blessing for nearby players, Gaze relief (scales with layout size).
+- **Eclipse Gaze:** abilities and convergence rituals raise it; stages bring whispers, Eclipse Echoes, Void Crystal
+  crystallisation and eclipse surges; only rituals lower it. All configurable / switchable.
+- Void Crystal + Void Shard, generator script `tools/dev/gen_observatory.py` for the templates.
+- JUnit for anchor pattern matching; GameTests for rituals, locks and templates.
+
 ### Phase 5 – Gear
 - **Living gear:** Halo Edge (sword) and Dawnbreaker (battle axe) of Sunsteel, Crescent (bow) and Tidecaller
   (crossbow) of Moonsilver, Starlight Aegis (shield) and Seraph Plate (armour) of Starmetal – forged at the

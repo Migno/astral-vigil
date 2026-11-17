@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_1",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "1. Before the Watch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Before there were Watchers there was only the sky, and the sky was not kind. We were five lights who chose to stand guard."
+    }
+  ],
+  "sortnum": 0
+}

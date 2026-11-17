@@ -119,6 +119,20 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - **Gear recipes upgrade vanilla gear** at the Convergence Altar (diamond sword → Halo Edge …): keeps enchanting
   progression meaningful and makes recipes easy to override with KubeJS.
 
+## 2026-11-17 – Phase 6
+
+- **Structures from generated templates.** The observatory NBT is produced by `tools/dev/gen_observatory.py`
+  (deterministic, versioned) rather than hand-built in a world; worldgen JSON comes from datagen
+  (`AVWorldgen` registry bootstrap). Packs disable it by overriding the structure set.
+- **Four template variants** (one per constellation lock) in one pool instead of a randomising processor – simple and
+  identical on both targets.
+- **Lore unlocks via advancements without display** – the Codex locks each Chronicle page on `lore/fragment_N`.
+- **Gaze lives in a player attachment** (synced to its owner). It only falls through rituals, as the brief asks;
+  every effect has a config switch (`crystallizeBlocks`, `enabled`).
+- **Eclipse Echoes are named, short-lived Vexes** until the Eclipse creatures exist (Phase 7/8).
+- `/locate structure` is very slow in this dev setup even for vanilla villages; structure generation was verified with
+  `/place structure` and GameTests instead.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best

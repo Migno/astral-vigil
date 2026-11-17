@@ -2,6 +2,8 @@ package media.hofferbert.astralvigil.datagen;
 
 import java.util.concurrent.CompletableFuture;
 import media.hofferbert.astralvigil.AstralVigil;
+import media.hofferbert.astralvigil.worldgen.AVWorldgen;
+import net.neoforged.neoforge.common.Tags;
 import media.hofferbert.astralvigil.research.Alignment;
 import media.hofferbert.astralvigil.research.AlignmentTags;
 import net.minecraft.core.HolderLookup;
@@ -74,6 +76,14 @@ public final class AVAlignmentTags {
             tag(AlignmentTags.biomes(Alignment.STELLA))
                     .add(Biomes.MEADOW, Biomes.CHERRY_GROVE, Biomes.JAGGED_PEAKS, Biomes.FROZEN_PEAKS, Biomes.STONY_PEAKS,
                             Biomes.THE_END, Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS, Biomes.SMALL_END_ISLANDS);
+            tag(AVWorldgen.HAS_FALLEN_OBSERVATORY)
+                    .addTag(Tags.Biomes.IS_PLAINS)
+                    .addTag(Tags.Biomes.IS_DESERT)
+                    .addTag(Tags.Biomes.IS_SAVANNA)
+                    .addTag(Tags.Biomes.IS_MOUNTAIN)
+                    .addTag(Tags.Biomes.IS_BADLANDS)
+                    .addTag(Tags.Biomes.IS_TAIGA)
+                    .addTag(Tags.Biomes.IS_SNOWY_PLAINS);
             tag(AlignmentTags.biomes(Alignment.VOID))
                     .add(Biomes.DEEP_DARK, Biomes.SOUL_SAND_VALLEY, Biomes.WARPED_FOREST, Biomes.THE_VOID,
                             Biomes.END_BARRENS, Biomes.DARK_FOREST);

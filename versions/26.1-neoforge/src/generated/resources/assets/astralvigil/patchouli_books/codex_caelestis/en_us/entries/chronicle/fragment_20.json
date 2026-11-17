@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_20",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "20. The Rift",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Something has torn the firmament. I have checked our binding a thousand times. It holds. So what tore the sky?"
+    }
+  ],
+  "sortnum": 19
+}

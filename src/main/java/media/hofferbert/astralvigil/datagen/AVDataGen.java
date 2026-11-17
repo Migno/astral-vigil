@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import media.hofferbert.astralvigil.AstralVigil;
+import media.hofferbert.astralvigil.worldgen.AVWorldgen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -30,6 +31,7 @@ public final class AVDataGen {
 
         gen.addProvider(true, new AVModelProvider(out));
         gen.addProvider(true, new AVEquipmentProvider(out));
+        worldgen(event);
         common(gen, out, lookup);
         gen.addProvider(true, new AVTagProviders.BlockTagProvider(out, lookup));
         gen.addProvider(true, new AVTagProviders.ItemTagProvider(out, lookup));
@@ -44,6 +46,7 @@ public final class AVDataGen {
         CompletableFuture<HolderLookup.Provider> lookup = event.getLookupProvider();
         ExistingFileHelper efh = event.getExistingFileHelper();
 
+        worldgen(event);
         gen.addProvider(event.includeClient(), new AVModelProvider.BlockStates(out, efh));
         gen.addProvider(event.includeClient(), new AVModelProvider.ItemModels(out, efh));
         common(gen, out, lookup);
@@ -55,6 +58,11 @@ public final class AVDataGen {
     }
     *///?}
 
+    /** Worldgen registries (structure, template pool, structure set) as datapack JSON. */
+    static void worldgen(GatherDataEvent event) {
+        event.createDatapackRegistryObjects(AVWorldgen.builder());
+    }
+
     private static void common(DataGenerator gen, PackOutput out, CompletableFuture<HolderLookup.Provider> lookup) {
         gen.addProvider(true, new AVLanguageProvider(out, "en_us"));
         gen.addProvider(true, new AVLanguageProvider(out, "de_de"));
@@ -63,7 +71,9 @@ public final class AVDataGen {
                 new LootTableProvider(
                         out,
                         Set.of(),
-                        List.of(new LootTableProvider.SubProviderEntry(AVLootProvider::new, LootContextParamSets.BLOCK)),
+                        List.of(
+                                new LootTableProvider.SubProviderEntry(AVLootProvider::new, LootContextParamSets.BLOCK),
+                                new LootTableProvider.SubProviderEntry(AVChestLoot::new, LootContextParamSets.CHEST)),
                         lookup));
         gen.addProvider(true, AVRecipeProvider.create(out, lookup));
         gen.addProvider(true, new AdvancementProvider(out, lookup, List.of(new AVAdvancements())));

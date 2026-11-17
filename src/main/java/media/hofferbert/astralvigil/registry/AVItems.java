@@ -128,6 +128,14 @@ public final class AVItems {
         return map;
     }
 
+    // Phase 6 – world
+    public static final DeferredItem<BlockItem> STAR_ANCHOR = ITEMS.registerSimpleBlockItem(AVBlocks.STAR_ANCHOR);
+    public static final DeferredItem<BlockItem> CONSTELLATION_LOCK = ITEMS.registerSimpleBlockItem(AVBlocks.CONSTELLATION_LOCK);
+    public static final DeferredItem<BlockItem> VOID_CRYSTAL = ITEMS.registerSimpleBlockItem(AVBlocks.VOID_CRYSTAL);
+    public static final DeferredItem<Item> LORE_FRAGMENT = AVItems.<Item>register(
+            "lore_fragment", media.hofferbert.astralvigil.item.LoreFragmentItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+    public static final DeferredItem<Item> VOID_SHARD = register("void_shard", Item::new, p -> p.rarity(Rarity.UNCOMMON));
+
     private AVItems() {}
 
     static <I extends Item> DeferredItem<I> register(

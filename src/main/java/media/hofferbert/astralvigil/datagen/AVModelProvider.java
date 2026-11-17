@@ -39,6 +39,8 @@ public class AVModelProvider extends ModelProvider {
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         blockModels.createTrivialCube(AVBlocks.FALLEN_STAR.get());
         blockModels.createTrivialCube(AVBlocks.METEORIC_STONE.get());
+        blockModels.createTrivialCube(AVBlocks.CONSTELLATION_LOCK.get());
+        blockModels.createTrivialCube(AVBlocks.VOID_CRYSTAL.get());
 
         // Device models are hand-built in Blockbench (art/bbmodel/block); only the block states are generated.
         facing(blockModels, AVBlocks.LENS.get(), BlockModelGenerators.ROTATION_FACING);
@@ -46,7 +48,8 @@ public class AVModelProvider extends ModelProvider {
         facing(blockModels, AVBlocks.STARLIGHT_COLLECTOR.get(), BlockModelGenerators.ROTATION_HORIZONTAL_FACING);
         facing(blockModels, AVBlocks.PRISM.get(), BlockModelGenerators.ROTATION_HORIZONTAL_FACING);
         for (Block b : new Block[] {
-            AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get()
+            AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get(),
+            AVBlocks.STAR_ANCHOR.get()
         }) {
             blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
                     b, BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(b))));
@@ -78,6 +81,8 @@ public class AVModelProvider extends ModelProvider {
         itemModels.generateFlatItem(AVItems.SERAPH_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.SERAPH_BOOTS.get(), ModelTemplates.FLAT_ITEM);
         AVItems.SIGILS.values().forEach(s -> itemModels.generateFlatItem(s.get(), ModelTemplates.FLAT_ITEM));
+        itemModels.generateFlatItem(AVItems.LORE_FRAGMENT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.VOID_SHARD.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private static void facing(BlockModelGenerators blockModels, Block block, PropertyDispatch<VariantMutator> rotation) {
@@ -99,16 +104,18 @@ public class AVModelProvider extends ModelProvider {
         protected void registerStatesAndModels() {
             simpleBlockWithItem(AVBlocks.FALLEN_STAR.get(), cubeAll(AVBlocks.FALLEN_STAR.get()));
             simpleBlockWithItem(AVBlocks.METEORIC_STONE.get(), cubeAll(AVBlocks.METEORIC_STONE.get()));
+            simpleBlockWithItem(AVBlocks.CONSTELLATION_LOCK.get(), cubeAll(AVBlocks.CONSTELLATION_LOCK.get()));
+            simpleBlockWithItem(AVBlocks.VOID_CRYSTAL.get(), cubeAll(AVBlocks.VOID_CRYSTAL.get()));
 
             // Device models are hand-built in Blockbench; only block states + item parents are generated.
             facingAll(AVBlocks.LENS.get());
             facingAll(AVBlocks.MIRROR.get());
             horizontalBlock(AVBlocks.STARLIGHT_COLLECTOR.get(), existing(AVBlocks.STARLIGHT_COLLECTOR.get()));
             horizontalBlock(AVBlocks.PRISM.get(), existing(AVBlocks.PRISM.get()));
-            for (Block b : new Block[] {AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get()}) {
+            for (Block b : new Block[] {AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get(), AVBlocks.STAR_ANCHOR.get()}) {
                 simpleBlock(b, existing(b));
             }
-            for (Block b : new Block[] {AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.STARLIGHT_COLLECTOR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get()}) {
+            for (Block b : new Block[] {AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.STARLIGHT_COLLECTOR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get(), AVBlocks.STAR_ANCHOR.get()}) {
                 simpleBlockItem(b, existing(b));
             }
         }
@@ -162,6 +169,8 @@ public class AVModelProvider extends ModelProvider {
             basicItem(AVItems.SERAPH_LEGGINGS.get());
             basicItem(AVItems.SERAPH_BOOTS.get());
             AVItems.SIGILS.values().forEach(s -> basicItem(s.get()));
+            basicItem(AVItems.LORE_FRAGMENT.get());
+            basicItem(AVItems.VOID_SHARD.get());
         }
 
         private String name(Item item) {

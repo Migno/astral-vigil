@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_12",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "12. Sternenlicht",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sternenlicht ist nicht das Licht der Sterne. Es ist das Licht, das die Sterne jenen zurückgeben, die sie ansehen."
+    }
+  ],
+  "sortnum": 11
+}

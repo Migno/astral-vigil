@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_6",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "6. The Fifth",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The fifth took the space between. We did not understand that the space between is hungry."
+    }
+  ],
+  "sortnum": 5
+}

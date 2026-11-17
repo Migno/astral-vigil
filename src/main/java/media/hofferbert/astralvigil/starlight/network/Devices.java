@@ -159,6 +159,52 @@ public final class Devices {
         }
     }
 
+    /** Star Anchor: a small starlight receiver used to lay out constellations for rituals. */
+    public static class Anchor extends StarlightBlockEntity {
+        private long readyAt;
+
+        public Anchor(BlockPos pos, BlockState state) {
+            super(AVBlockEntities.STAR_ANCHOR.get(), pos, state, 300);
+        }
+
+        @Override
+        protected int capacityFromConfig() {
+            return Math.max(AVServerConfig.RITUAL_STARLIGHT.get(), 300);
+        }
+
+        @Override
+        protected List<Output> outputs() {
+            return List.of();
+        }
+
+        @Override
+        protected boolean accepts(Tint tint, Direction travel) {
+            return true;
+        }
+
+        public long readyAt() {
+            return readyAt;
+        }
+
+        public void setReadyAt(long value) {
+            readyAt = value;
+        }
+
+        @Override
+        protected void writeExtra(media.hofferbert.astralvigil.compat.DataIO.Writer out) {
+            out.putString("ready_at", Long.toString(readyAt));
+        }
+
+        @Override
+        protected void readExtra(media.hofferbert.astralvigil.compat.DataIO.Reader in) {
+            try {
+                readyAt = Long.parseLong(in.getString("ready_at", "0"));
+            } catch (NumberFormatException e) {
+                readyAt = 0;
+            }
+        }
+    }
+
     /** Stores starlight of every tint. Altars and forges (Phase 4) draw from adjacent reservoirs. */
     public static class Reservoir extends StarlightBlockEntity {
         public Reservoir(BlockPos pos, BlockState state) {

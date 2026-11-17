@@ -229,6 +229,8 @@ public final class GearManager {
         }
         int cooldown = GearProgress.scaled(sigil.baseCooldown(), AVServerConfig.ABILITY_COOLDOWN_MULTIPLIER.get());
         set(gear, d.withCharge(d.charge() - cost).withCooldownUntil(now + cooldown));
+        media.hofferbert.astralvigil.eclipse.GazeManager.add(
+                player, (int) Math.round(cost * AVServerConfig.GAZE_PER_ABILITY_COST.get()));
         perform(level, player, sigil, d.level());
     }
 

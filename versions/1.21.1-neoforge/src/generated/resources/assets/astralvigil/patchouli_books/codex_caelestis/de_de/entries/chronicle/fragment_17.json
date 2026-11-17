@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_17",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "17. Echos",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Die Finsternis kann noch nicht hinüber. Sie schickt Echos – dünne, zornige Gestalten, die sich erinnern, einmal Licht gewesen zu sein."
+    }
+  ],
+  "sortnum": 16
+}

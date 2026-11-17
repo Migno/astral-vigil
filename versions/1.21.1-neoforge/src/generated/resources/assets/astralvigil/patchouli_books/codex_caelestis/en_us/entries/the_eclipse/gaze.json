@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:the_eclipse",
+  "icon": "astralvigil:void_shard",
+  "name": "The Eclipse's Gaze",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Every ability you unleash and every convergence you perform draws the $(l)Eclipse's Gaze$(). Your Astrolabe shows how strongly it watches.$(br2)At first it only whispers. Then it sends $(l)Echoes$(), crystallises the ground around you into $(item)Void Crystal$(), and finally reaches through in surges of darkness."
+    }
+  ],
+  "sortnum": 0
+}

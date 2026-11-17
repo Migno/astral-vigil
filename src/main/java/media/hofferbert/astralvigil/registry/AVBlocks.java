@@ -3,6 +3,7 @@ package media.hofferbert.astralvigil.registry;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import media.hofferbert.astralvigil.AstralVigil;
+import media.hofferbert.astralvigil.block.ConstellationLockBlock;
 import media.hofferbert.astralvigil.block.FallenStarBlock;
 import media.hofferbert.astralvigil.block.RitualBlock;
 import media.hofferbert.astralvigil.block.StarlightDeviceBlock;
@@ -42,6 +43,13 @@ public final class AVBlocks {
     public static final DeferredBlock<RitualBlock> PEDESTAL = register("pedestal", RitualBlock::pedestal, p -> ritual(p));
     public static final DeferredBlock<RitualBlock> CONVERGENCE_ALTAR = register("convergence_altar", RitualBlock::altar, p -> ritual(p).lightLevel(s -> 10));
     public static final DeferredBlock<RitualBlock> ASTRAL_FORGE = register("astral_forge", RitualBlock::forge, p -> ritual(p).lightLevel(s -> 8));
+
+    // Phase 6 – world
+    public static final DeferredBlock<StarlightDeviceBlock> STAR_ANCHOR = register("star_anchor", StarlightDeviceBlock::anchor, p -> device(p).lightLevel(s -> 5));
+    public static final DeferredBlock<ConstellationLockBlock> CONSTELLATION_LOCK = register("constellation_lock", ConstellationLockBlock::new, p -> p
+            .mapColor(MapColor.COLOR_BLUE).strength(-1.0f, 3_600_000.0f).noLootTable().lightLevel(s -> 3).sound(SoundType.DEEPSLATE_BRICKS));
+    public static final DeferredBlock<Block> VOID_CRYSTAL = register("void_crystal", Block::new, p -> p
+            .mapColor(MapColor.COLOR_PURPLE).strength(1.5f, 3.0f).requiresCorrectToolForDrops().lightLevel(s -> 4).sound(SoundType.AMETHYST));
 
     private AVBlocks() {}
 

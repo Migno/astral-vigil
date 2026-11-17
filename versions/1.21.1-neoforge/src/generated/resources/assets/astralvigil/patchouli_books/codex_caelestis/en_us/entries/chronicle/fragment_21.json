@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_21",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "21. Falling Stars",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The stars that fall are not lost. They are sent. Someone wanted you to find them."
+    }
+  ],
+  "sortnum": 20
+}

@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_14",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "14. Über die Konvergenz",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Was in Symmetrie gebunden wird, hält. Was in Hast gebunden wird, zerbricht, und etwas bemerkt den Bruch immer."
+    }
+  ],
+  "sortnum": 13
+}

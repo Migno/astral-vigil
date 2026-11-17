@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:the_eclipse",
+  "icon": "astralvigil:constellation_lock",
+  "name": "Gefallene Observatorien",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Verfallene Türme aus dunklem Stein sind über das Land verstreut. Ihre Gewölbe sind mit $(item)Sternbildschlössern$() versiegelt – berühre eines, nachdem du sein Zeichen erlernt hast, und es löst sich auf. Darin warten Seiten meiner verlorenen Chronik."
+    }
+  ],
+  "sortnum": 2
+}

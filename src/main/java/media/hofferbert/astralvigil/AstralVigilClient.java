@@ -57,7 +57,8 @@ public final class AstralVigilClient {
                 || item == AVItems.STARLIGHT_RESERVOIR.get()
                 || item == AVItems.PEDESTAL.get()
                 || item == AVItems.CONVERGENCE_ALTAR.get()
-                || item == AVItems.ASTRAL_FORGE.get()) {
+                || item == AVItems.ASTRAL_FORGE.get()
+                || item == AVItems.STAR_ANCHOR.get()) {
             event.getToolTip()
                     .add(1, Component.translatable(item.getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }

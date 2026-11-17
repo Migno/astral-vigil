@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_12",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "12. Starlight",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Starlight is not the light of the stars. It is the light the stars give back to those who look at them."
+    }
+  ],
+  "sortnum": 11
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "M": {
+      "tag": "astralvigil:meteoric_stones"
+    },
+    "S": {
+      "tag": "astralvigil:astral_shards"
+    }
+  },
+  "pattern": [
+    " S ",
+    " G ",
+    "MMM"
+  ],
+  "result": {
+    "count": 2,
+    "id": "astralvigil:star_anchor"
+  }
+}

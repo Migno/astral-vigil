@@ -100,6 +100,13 @@ public class AstrolabeItem extends Item {
                                 .withStyle(sky ? ChatFormatting.GREEN : ChatFormatting.GRAY))
                 .withStyle(ChatFormatting.GOLD);
         player.sendSystemMessage(reading);
+        if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+            int gaze = media.hofferbert.astralvigil.eclipse.GazeManager.get(sp);
+            if (gaze > 0) {
+                player.sendSystemMessage(Component.translatable("message.astralvigil.astrolabe.gaze", gaze)
+                        .withStyle(ChatFormatting.DARK_PURPLE));
+            }
+        }
 
         Component tracking = StarfallManager.nearestRecent(level, pos, AVServerConfig.ASTROLABE_TRACK_RANGE.get())
                 .map(star -> (Component) Component.translatable(

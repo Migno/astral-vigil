@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_22",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "22. Above",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Beyond the clouds lies the Firmament itself – islands of stone that forgot to fall. Our sanctums are there, waiting for an aspirant."
+    }
+  ],
+  "sortnum": 21
+}

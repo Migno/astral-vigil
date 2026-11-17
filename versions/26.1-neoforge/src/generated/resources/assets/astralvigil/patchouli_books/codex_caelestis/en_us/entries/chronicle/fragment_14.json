@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_14",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "14. On Convergence",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "What is bound in symmetry holds. What is bound in haste breaks, and something always notices the break."
+    }
+  ],
+  "sortnum": 13
+}
