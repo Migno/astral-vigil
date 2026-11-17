@@ -301,7 +301,7 @@ public final class CodexContent {
                     new Text(
                             "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and returns you to the landing.",
                             "Das Firmament ist leicht: Du fällst langsam und landest sanft. Stürzt du von den Inseln, fängt dich der Himmel auf und bringt dich zum Landeplatz zurück."))),
-            new Entry("sanctums", "firmament", "The Sanctums", "Die Heiligtümer", "astralvigil:trial_goal", 1, null, List.of(
+            new Entry("sanctums", "firmament", "The Sanctums", "Die Heiligtümer", "astralvigil:mark_of_solenne", 1, null, List.of(
                     new Text(
                             "Four bridges lead from the landing to the four sanctums. Speak to a Watcher to begin its trial: Solenne's climb (east), Vael's hunt (west), Orrin's forge of light (south) and Ilyra's library (north).$(br2)Each completed trial grants that Watcher's $(l)Mark$() and its $(l)favour$() – but rival Watchers grow cooler: Solenne and Vael, Orrin and Ilyra.",
                             "Vier Brücken führen vom Landeplatz zu den vier Heiligtümern. Sprich mit einem Wächter, um seine Prüfung zu beginnen: Solennes Aufstieg (Osten), Vaels Jagd (Westen), Orrins Schmiede des Lichts (Süden) und Ilyras Bibliothek (Norden).$(br2)Jede bestandene Prüfung gewährt das $(l)Zeichen$() des Wächters und seine $(l)Gunst$() – doch rivalisierende Wächter kühlen ab: Solenne und Vael, Orrin und Ilyra."))),

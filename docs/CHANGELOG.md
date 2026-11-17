@@ -4,6 +4,14 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 9 – Release readiness
+- README rewritten in English and German (journey, integrations, configuration, building).
+- Modrinth and CurseForge page drafts in `docs/publishing/` (not published).
+- Performance profile (26.1 compat instance with Sodium/Iris/JEI/Jade/Patchouli/Apotheosis/KubeJS, 32 collector
+  chains + Eclipse + Echoes): all Astral Vigil block entities together ≈ 0.06 ms/tick, renderers ≈ 0.02 ms/frame,
+  server 4.5 ms/tick average.
+- Compat check on both targets: no Astral Vigil errors; fixed a Codex icon pointing at an item-less block.
+
 ### Phase 8 – Endgame
 - **The Eclipse:** a three-phase GeckoLib boss (idle / attack / cast / phase transition / death animations) with a
   purple boss bar and darkened sky. Phase 1: sweeps and telegraphed Void Lances. Phase 2: Eclipse Echo waves.

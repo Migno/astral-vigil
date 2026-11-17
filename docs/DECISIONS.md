@@ -179,6 +179,15 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - No spawn eggs: 26.1 spawn eggs need the entity type at item registration time (registered after items) and their
   own textures; `/summon` covers testing.
 
+## 2026-11-17 – Phase 9
+
+- **Profiling result is the baseline:** the starlight network costs ≈ 0.06 ms/tick for 96 devices; reservoirs sync
+  their fill once per second, which is the largest packet source (1 BE update/s per changed reservoir) and is kept –
+  the client needs it for the fill display and Jade.
+- **ATM smoke tests are blocked on the server packs** (`tools/atm-smoketest.ps1` is ready); the dev compat instances
+  (Sodium, Iris, JEI/EMI, Jade, Patchouli, Curios, Apotheosis, KubeJS) ran clean on both targets.
+- **Publishing:** drafts only (`docs/publishing/`); slug, license and release channel are owner decisions.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best
