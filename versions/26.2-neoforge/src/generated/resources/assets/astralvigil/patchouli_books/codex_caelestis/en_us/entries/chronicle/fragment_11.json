@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_11",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "11. The Fall of the Towers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The towers did not fall to war. They fell because the watchers grew tired, and a tired watcher looks away."
+    }
+  ],
+  "sortnum": 10
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "astralvigil:sunstone",
+  "result": {
+    "id": "astralvigil:sunstone_bricks"
+  }
+}

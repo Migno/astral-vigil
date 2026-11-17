@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_24",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "24. Letzter Eintrag",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Wenn du dies liest, versagt die Bindung, und ich kann nicht mehr schreiben. Vollende die Chronik für mich."
+    }
+  ],
+  "sortnum": 23
+}

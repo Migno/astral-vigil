@@ -10,6 +10,10 @@ public final class ClientHooks {
     private ClientHooks() {}
 
     public static void openStarChart() {
+        //? if >=26.2 {
+        /*Minecraft.getInstance().gui.setScreen(new StarChartScreen());
+        *///?} else {
         Minecraft.getInstance().setScreen(new StarChartScreen());
+        //?}
     }
 }

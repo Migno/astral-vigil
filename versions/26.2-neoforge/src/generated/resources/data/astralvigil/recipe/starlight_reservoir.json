@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": "#c:ingots/gold",
+    "P": "#c:glass_blocks",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    "GPG",
+    "PSP",
+    "GPG"
+  ],
+  "result": {
+    "id": "astralvigil:starlight_reservoir"
+  }
+}

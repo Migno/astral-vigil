@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_10",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "10. Schlösser aus Sternen",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Die Wächter versiegelten ihre Schätze mit unseren Zeichen. Nur wer ein Zeichen am Himmel nachgezogen hat, darf öffnen, was es bewacht."
+    }
+  ],
+  "sortnum": 9
+}

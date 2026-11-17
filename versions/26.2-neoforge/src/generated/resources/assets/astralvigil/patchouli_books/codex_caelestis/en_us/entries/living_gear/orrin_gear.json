@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:seraph_chestplate",
+  "name": "Orrin's Plate",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:seraph_chestplate",
+      "text": "Seraph Plate, forged from diamond armour and Starmetal under Stella light. Its halo and light-wings grow with every awakening. The full set mends you under the night sky; awakened, it glides while you sneak and flings you forward as the glide begins; ascended, you no longer fear falls."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:starlight_aegis",
+      "text": "The Starlight Aegis, a Starmetal shield. Every blocked blow brings it closer to waking."
+    }
+  ],
+  "sortnum": 3
+}

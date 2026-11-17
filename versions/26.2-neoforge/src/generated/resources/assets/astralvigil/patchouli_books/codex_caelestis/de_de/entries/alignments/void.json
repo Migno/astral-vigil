@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/attuned_void",
+  "category": "astralvigil:alignments",
+  "icon": "minecraft:crying_obsidian",
+  "name": "Die Leere",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Kein Licht.$() Die Dunkelheit zwischen den Sternen: Sculk, Obsidian, die tiefen Orte und die ruhelosen Toten. Die Leere lauscht. Erforsche sie – doch vergiss nicht, wer sonst noch lauscht."
+    }
+  ],
+  "sortnum": 4
+}

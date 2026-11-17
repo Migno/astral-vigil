@@ -154,8 +154,11 @@ public final class AVWorldgen {
                 new net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePlacer(
                         net.minecraft.util.valueproviders.ConstantInt.of(4), net.minecraft.util.valueproviders.ConstantInt.of(0),
                         net.minecraft.util.valueproviders.ConstantInt.of(5), 0.25f, 0.5f, 0.16666667f, 0.33333334f),
-                new net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize(1, 0, 2))
-                .ignoreVines().build();
+                new net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize(1, 0, 2)
+                //? if >=26.2 {
+                /*, net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration.defaultPlaceBelowTreeTrunkProvider(ctx.lookup(Registries.BIOME))
+                *///?}
+                ).ignoreVines().build();
         net.minecraft.data.worldgen.features.FeatureUtils.register(ctx, AVBuilding.STARWOOD_TREE,
                 net.minecraft.world.level.levelgen.feature.Feature.TREE, tree);
     }
@@ -232,7 +235,12 @@ public final class AVWorldgen {
                     .set(net.minecraft.world.attribute.EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
                     .build();
             ctx.register(type(realm), new net.minecraft.world.level.dimension.DimensionType(true, true, false, false, 1.0, minY, height, height,
-                    net.minecraft.tags.BlockTags.INFINIBURN_OVERWORLD, s.ambient(),
+                    //? if >=26.2 {
+                    /*ctx.lookup(Registries.BLOCK).getOrThrow(net.minecraft.tags.BlockTags.INFINIBURN_OVERWORLD),
+                    *///?} else {
+                    net.minecraft.tags.BlockTags.INFINIBURN_OVERWORLD,
+                    //?}
+                    s.ambient(),
                     new net.minecraft.world.level.dimension.DimensionType.MonsterSettings(net.minecraft.util.valueproviders.ConstantInt.of(0), 0),
                     s.end() ? net.minecraft.world.level.dimension.DimensionType.Skybox.END : net.minecraft.world.level.dimension.DimensionType.Skybox.OVERWORLD,
                     net.minecraft.world.level.CardinalLighting.Type.DEFAULT, attributes, HolderSet.empty(), Optional.empty()));

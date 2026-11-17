@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_15",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "15. Lebender Stahl",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Eine Klinge erinnert sich, wofür sie benutzt wurde. Benutze sie gut, und sie wird sich an dich erinnern."
+    }
+  ],
+  "sortnum": 14
+}

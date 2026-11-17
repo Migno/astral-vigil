@@ -4,7 +4,16 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Added
+- **Minecraft 26.2 support** (NeoForge 26.2.0.95+, GeckoLib 5.5.6+). Same features as 26.1.2; all 36 GameTests pass.
+  Patchouli has no 26.2 build yet, so the Codex Caelestis only shows a hint until it does. JEI and Jade work.
+  The mod icon uses `iconFile` on 26.2 (NeoForge 26.2 shows a warning screen for the old `logoFile`).
+
 ### Project
+- Third Stonecutter target `26.2-neoforge`. API differences are mostly handled by Stonecutter replacements
+  (`EntityType.X` -> `EntityTypes.X`, advancement triggers package, `mainCamera()`); tag datagen goes through
+  `compat/TagOut` because 26.2 tags only accept registry keys.
+- Minecraft 26.3 port started (not shipped yet): the data generators need a rewrite for 26.3's new datagen API.
 - Versioning rule: the version goes up once per release; every release gets a detailed changelog.
 
 ## [0.0.1-alpha] - 2026-11-17

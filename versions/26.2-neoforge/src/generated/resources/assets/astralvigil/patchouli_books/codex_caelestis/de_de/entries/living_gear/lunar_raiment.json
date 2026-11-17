@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:lunar_helmet",
+  "name": "Mondgewandung",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vaels Gewand aus Mitternachtstuch und Mondsilber: ein Sichelreif, ein mit Sternen bestickter Mantel und drei kleine Monde, die hinter dir kreisen.$(br2)Vollständig getragen schenkt es nach der Dämmerung $(l)Nachtsicht$() und $(l)Tempo$() und halbiert den Biss jedes Sturzes."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:lunar_chestplate",
+      "text": "Mondmantel. Katalysator: ein Eisenbrustpanzer; Gaben: vier Mondsilberbarren, Wolle und eine Phantomhaut; 800 Luna-Licht. Die übrigen Teile verlangen Wolle, Phantomhäute und Federn."
+    }
+  ],
+  "sortnum": 6
+}

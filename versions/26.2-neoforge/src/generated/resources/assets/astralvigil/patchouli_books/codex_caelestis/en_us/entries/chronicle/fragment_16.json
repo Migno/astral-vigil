@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_16",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "16. The Gaze",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Every time you draw on the sky, the sky looks back. Most of it is kind. The part that is not has been waiting a long time."
+    }
+  ],
+  "sortnum": 15
+}

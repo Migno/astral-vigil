@@ -49,6 +49,11 @@ import net.neoforged.neoforge.registries.DeferredItem;
  * Textures come from {@code tools/dev/gen_building.py}.
  */
 public final class AVBuilding {
+    /** A vanilla tag by name; some constants (stairs/slabs items, sapling blocks) are gone from 26.2's tag classes. */
+    static <T> net.minecraft.tags.TagKey<T> vanilla(ResourceKey<? extends net.minecraft.core.Registry<T>> registry, String path) {
+        return net.minecraft.tags.TagKey.create(registry, net.minecraft.resources.Identifier.withDefaultNamespace(path));
+    }
+
     public enum Shape { CUBE, PILLAR, LOG, STAIRS, SLAB, WALL, FENCE, FENCE_GATE, DOOR, TRAPDOOR, BUTTON, PLATE, LEAVES, SAPLING, LANTERN, GLASS }
 
     public enum Material { WOOD, STONE, GLASS, LIGHT, PLANT }
@@ -223,7 +228,7 @@ public final class AVBuilding {
             case BUTTON -> t.add(net.minecraft.tags.BlockTags.WOODEN_BUTTONS);
             case PLATE -> t.add(net.minecraft.tags.BlockTags.WOODEN_PRESSURE_PLATES);
             case LEAVES -> t.add(net.minecraft.tags.BlockTags.LEAVES);
-            case SAPLING -> t.add(net.minecraft.tags.BlockTags.SAPLINGS);
+            case SAPLING -> t.add(vanilla(Registries.BLOCK, "saplings"));
             default -> {
                 if (e.id().equals("starwood_planks")) {
                     t.add(net.minecraft.tags.BlockTags.PLANKS);
@@ -242,8 +247,8 @@ public final class AVBuilding {
                 t.add(net.minecraft.tags.ItemTags.LOGS);
                 t.add(STARWOOD_LOGS);
             }
-            case STAIRS -> t.add(wood ? net.minecraft.tags.ItemTags.WOODEN_STAIRS : net.minecraft.tags.ItemTags.STAIRS);
-            case SLAB -> t.add(wood ? net.minecraft.tags.ItemTags.WOODEN_SLABS : net.minecraft.tags.ItemTags.SLABS);
+            case STAIRS -> t.add(wood ? net.minecraft.tags.ItemTags.WOODEN_STAIRS : vanilla(Registries.ITEM, "stairs"));
+            case SLAB -> t.add(wood ? net.minecraft.tags.ItemTags.WOODEN_SLABS : vanilla(Registries.ITEM, "slabs"));
             case WALL -> t.add(net.minecraft.tags.ItemTags.WALLS);
             case FENCE -> t.add(net.minecraft.tags.ItemTags.WOODEN_FENCES);
             case FENCE_GATE -> t.add(net.minecraft.tags.ItemTags.FENCE_GATES);

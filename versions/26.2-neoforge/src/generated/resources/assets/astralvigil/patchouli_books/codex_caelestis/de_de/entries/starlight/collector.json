@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:starlight_collector",
+  "name": "Sternenlichtsammler",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sternenlicht fällt nur unter offenem Himmel – am stärksten um Mitternacht, bei Vollmond, in klarer Nacht. Ein $(item)Sternenlichtsammler$() trinkt es und sendet es als sichtbaren Strahl aus seiner Front.$(br2)Regen halbiert das Licht; Gewitter ertränken es fast."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:starlight_collector",
+      "text": ""
+    }
+  ],
+  "sortnum": 0
+}

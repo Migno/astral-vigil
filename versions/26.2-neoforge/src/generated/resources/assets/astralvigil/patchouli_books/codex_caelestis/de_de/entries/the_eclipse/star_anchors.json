@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:the_eclipse",
+  "icon": "astralvigil:star_anchor",
+  "name": "Sternenanker",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:star_anchor",
+      "text": ""
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Setze $(item)Sternenanker$() unter offenem Himmel in der Form eines erlernten Sternbilds – dieselbe Form wie auf deiner Sternkarte, beliebig gedreht, gespiegelt oder nicht, in ein-, zwei- oder dreifacher Größe. Fülle jeden Anker mit Sternenlicht und berühre dann einen.$(br2)Das Ritual segnet alle in der Nähe und drängt den Blick zurück. Größere Anordnungen wirken länger und lindern mehr."
+    }
+  ],
+  "sortnum": 1
+}

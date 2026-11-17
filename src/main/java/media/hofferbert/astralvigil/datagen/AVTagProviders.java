@@ -38,6 +38,13 @@ public final class AVTagProviders {
         }
         *///?}
 
+        //? if >=26.2 {
+        /*@Override
+        protected media.hofferbert.astralvigil.compat.TagOut<net.minecraft.world.level.block.Block> tag(net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> key) {
+            return media.hofferbert.astralvigil.compat.TagOut.blocks(super.tag(key));
+        }
+        *///?}
+
         @Override
         protected void addTags(HolderLookup.Provider registries) {
             tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
@@ -93,6 +100,13 @@ public final class AVTagProviders {
                 CompletableFuture<TagsProvider.TagLookup<Block>> blockTags,
                 ExistingFileHelper efh) {
             super(output, lookup, blockTags, AstralVigil.MOD_ID, efh);
+        }
+        *///?}
+
+        //? if >=26.2 {
+        /*@Override
+        protected media.hofferbert.astralvigil.compat.TagOut<net.minecraft.world.item.Item> tag(net.minecraft.tags.TagKey<net.minecraft.world.item.Item> key) {
+            return media.hofferbert.astralvigil.compat.TagOut.items(super.tag(key));
         }
         *///?}
 

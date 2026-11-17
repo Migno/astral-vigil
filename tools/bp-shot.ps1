@@ -7,7 +7,7 @@
 #>
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)] [ValidateSet('1.21.1-neoforge', '26.1-neoforge')] [string] $Target,
+    [Parameter(Mandatory)] [ValidateSet('1.21.1-neoforge', '26.1-neoforge', '26.2-neoforge')] [string] $Target,
     [Parameter(Mandatory)] [string] $Phase,
     [Parameter(Mandatory)] [string] $Name,
     [string] $Before,

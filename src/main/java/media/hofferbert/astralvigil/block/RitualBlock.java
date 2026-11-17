@@ -38,9 +38,11 @@ public class RitualBlock extends BaseEntityBlock {
         FORGE
     }
 
+    //? if <26.3 {
     public static final MapCodec<RitualBlock> PEDESTAL_CODEC = simpleCodec(p -> new RitualBlock(p, Kind.PEDESTAL));
     public static final MapCodec<RitualBlock> ALTAR_CODEC = simpleCodec(p -> new RitualBlock(p, Kind.ALTAR));
     public static final MapCodec<RitualBlock> FORGE_CODEC = simpleCodec(p -> new RitualBlock(p, Kind.FORGE));
+    //?}
 
     private final Kind kind;
 
@@ -65,6 +67,7 @@ public class RitualBlock extends BaseEntityBlock {
         return kind;
     }
 
+    //? if <26.3 {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return switch (kind) {
@@ -73,6 +76,7 @@ public class RitualBlock extends BaseEntityBlock {
             case FORGE -> FORGE_CODEC;
         };
     }
+    //?}
 
     @Override
     protected RenderShape getRenderShape(BlockState state) {

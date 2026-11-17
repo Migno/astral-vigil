@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_meteoric_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#astralvigil:meteoric_stones"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "astralvigil:pedestal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_meteoric_stone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "astralvigil:pedestal"
+    ]
+  }
+}

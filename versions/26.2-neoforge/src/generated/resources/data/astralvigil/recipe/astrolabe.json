@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "#c:ingots/copper",
+    "G": "#c:ingots/gold",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    " G ",
+    "GSG",
+    " C "
+  ],
+  "result": {
+    "id": "astralvigil:astrolabe"
+  }
+}

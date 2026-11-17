@@ -1,0 +1,33 @@
+{
+  "parent": "astralvigil:read_the_heavens",
+  "criteria": {
+    "has_key": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:ascension_key"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.ascension.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "astralvigil:ascension_key"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.ascension.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_key"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

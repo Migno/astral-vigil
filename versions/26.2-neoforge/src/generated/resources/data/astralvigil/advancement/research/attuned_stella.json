@@ -1,0 +1,26 @@
+{
+  "parent": "astralvigil:research/first_scan",
+  "criteria": {
+    "research": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.attuned_stella.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:amethyst_cluster"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.attuned_stella.title"
+    }
+  },
+  "requirements": [
+    [
+      "research"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

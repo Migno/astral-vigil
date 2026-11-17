@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_13",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "13. The Prism's Lesson",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Orrin split light to understand it. He found three of us inside. He did not find the fifth, and that should have warned him."
+    }
+  ],
+  "sortnum": 12
+}

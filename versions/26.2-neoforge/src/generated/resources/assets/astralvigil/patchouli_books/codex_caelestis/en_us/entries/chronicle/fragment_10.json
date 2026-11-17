@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_10",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "10. Locks of Stars",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The watchers sealed their treasures with our signs. Only one who has traced a sign in the sky may open what it guards."
+    }
+  ],
+  "sortnum": 9
+}

@@ -1,0 +1,17 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "stella",
+  "center": "minecraft:shield",
+  "ingredients": [
+    "#c:ingots/starmetal",
+    "#c:ingots/starmetal",
+    "#astralvigil:astral_shards",
+    "#astralvigil:astral_shards"
+  ],
+  "result": {
+    "id": "astralvigil:starlight_aegis"
+  },
+  "starlight": 800,
+  "time": 200,
+  "tint": "stella"
+}

@@ -36,6 +36,13 @@ public final class AVAlignmentTags {
         }
         *///?}
 
+        //? if >=26.2 {
+        /*@Override
+        protected media.hofferbert.astralvigil.compat.TagOut<net.minecraft.world.entity.EntityType<?>> tag(net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> key) {
+            return media.hofferbert.astralvigil.compat.TagOut.entities(super.tag(key));
+        }
+        *///?}
+
         @Override
         protected void addTags(HolderLookup.Provider registries) {
             tag(AlignmentTags.entities(Alignment.SOL))

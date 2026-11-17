@@ -1,0 +1,14 @@
+{
+  "parent": "astralvigil:root",
+  "criteria": {
+    "read": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "read"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

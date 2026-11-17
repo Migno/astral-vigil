@@ -1,0 +1,26 @@
+{
+  "parent": "astralvigil:firmament/ascension",
+  "criteria": {
+    "trial": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.trial_ilyra.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "astralvigil:mark_of_ilyra"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.trial_ilyra.title"
+    }
+  },
+  "requirements": [
+    [
+      "trial"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

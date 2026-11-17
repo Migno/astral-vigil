@@ -1,0 +1,26 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:umbral_sigil",
+  "name": "Die Finsternis",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:umbral_sigil",
+      "text": "Am Konvergenzaltar aus drei Leerensplittern, einem Astralkern, Obsidian und einer Echoscherbe mit 3000 Stella-Licht geschmiedet. Benutze es in der $(l)Umbralen Kathedrale$() - nur durch ein Umbraltor erreichbar -, während du alle vier Zeichen trägst, um die Finsternis herabzurufen."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Der gefallene fünfte Wächter kämpft in drei Phasen und nennt jeden großen Schlag, bevor er fällt. $(l)Gefallenes Licht$(): Der Umbrale Hieb fegt den Boden vor ihr, die Leerenlanze erfasst dich - weiche seitlich aus - und Fallende Sterne zeichnen Kreise, die du verlassen musst. Nach schweren Schlägen sinkt sie zu Boden: Dann schlag zu."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Zerbrochener Heiligenschein$(): Vier Umbrale Pylonen erheben sich und schirmen sie ab - zerstöre sie alle, und sie taumelt. Echos greifen ein, und der Schattensturz zeichnet eine Stelle, ehe sie herabstürzt; spring über die Druckwelle. $(l)Totale Finsternis$(): Mauern aus weinendem Obsidian wachsen empor. Verbirg dich dort vor der Umbralen Nova, spring über den kreisenden Finsternisstrahl oder geh in Deckung. Dem Tode nah, rast sie. Wer sich ewig versteckt oder flieht, spürt ihren Umbralen Griff."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:halo_of_dawn",
+      "text": "Aus dem Herz der Finsternis, Sonnenstahl, Mondsilber, Sternenstahl und Seraphsfedern: der Heiligenschein der Morgenröte. Getragen senkt er die Sternenlichtkosten von Fähigkeiten und lässt den Blick der Finsternis an dir abgleiten. Seraphsfedern allein binden dir Seraphsflügel."
+    }
+  ],
+  "sortnum": 2
+}

@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_22",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "22. Darüber",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Jenseits der Wolken liegt das Firmament selbst – Inseln aus Stein, die vergessen haben zu fallen. Dort warten unsere Heiligtümer auf einen Anwärter."
+    }
+  ],
+  "sortnum": 21
+}

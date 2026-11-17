@@ -1,0 +1,17 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "luna",
+  "center": "minecraft:bow",
+  "ingredients": [
+    "#c:ingots/moonsilver",
+    "#c:ingots/moonsilver",
+    "#c:strings",
+    "#c:strings"
+  ],
+  "result": {
+    "id": "astralvigil:crescent"
+  },
+  "starlight": 800,
+  "time": 200,
+  "tint": "luna"
+}

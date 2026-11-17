@@ -1,0 +1,16 @@
+{
+  "type": "astralvigil:convergence",
+  "center": "astralvigil:sigil_blank",
+  "ingredients": [
+    "#c:dusts/glowstone",
+    "#c:dusts/glowstone",
+    "minecraft:sunflower",
+    "minecraft:sunflower"
+  ],
+  "result": {
+    "id": "astralvigil:sigil_dawn"
+  },
+  "starlight": 300,
+  "time": 120,
+  "tint": "sol"
+}

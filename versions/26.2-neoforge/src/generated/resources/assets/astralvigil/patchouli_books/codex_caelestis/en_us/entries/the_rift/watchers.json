@@ -1,0 +1,16 @@
+{
+  "category": "astralvigil:the_rift",
+  "icon": "astralvigil:astral_shard",
+  "name": "The Watchers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Four Watchers keep the firmament: $(l)Solenne$() of the sun, $(l)Vael$() of the moon, $(l)Orrin$() the starsmith, and I, $(l)Ilyra$(), who writes it all down.$(br2)There was a fifth. We do not speak the name. We call it the $(l)Eclipse$()."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A rift has opened in the sky. Through it, fragments of the firmament fall to your world – and through it, the Eclipse stirs.$(br2)You have looked up. That makes you a $(l)Seeker$(). Whether you become more is up to you."
+    }
+  ],
+  "sortnum": 0
+}

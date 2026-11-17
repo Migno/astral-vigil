@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": "#c:ingots/moonsilver",
+    "M": "#c:gems/quartz",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    "MSM",
+    "SIS",
+    "MSM"
+  ],
+  "result": {
+    "count": 4,
+    "id": "astralvigil:lunar_gate"
+  }
+}

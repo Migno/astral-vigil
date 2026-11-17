@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "astralvigil:block/starwood_door_bottom",
+    "top": "astralvigil:block/starwood_door_top"
+  }
+}

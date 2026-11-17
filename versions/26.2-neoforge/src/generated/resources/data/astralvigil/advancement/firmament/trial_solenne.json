@@ -1,0 +1,26 @@
+{
+  "parent": "astralvigil:firmament/ascension",
+  "criteria": {
+    "trial": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.trial_solenne.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "astralvigil:mark_of_solenne"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.trial_solenne.title"
+    }
+  },
+  "requirements": [
+    [
+      "trial"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,19 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "luna",
+  "center": "minecraft:iron_leggings",
+  "ingredients": [
+    "#c:ingots/moonsilver",
+    "#c:ingots/moonsilver",
+    "#c:ingots/moonsilver",
+    "#c:ingots/moonsilver",
+    "#minecraft:wool",
+    "#minecraft:wool"
+  ],
+  "result": {
+    "id": "astralvigil:lunar_leggings"
+  },
+  "starlight": 700,
+  "time": 200,
+  "tint": "luna"
+}

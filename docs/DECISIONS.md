@@ -294,3 +294,17 @@ New team members are added in code and ship with the next release.
   arrival pad), placed block by block from the template palette (access transformer on `StructureTemplate.palettes`)
   with an 8 ms per-tick budget. The Starlight Font marks "started", a bedrock block under the pad "complete".
 - Local dev servers under `run/<target>/server` accept the Minecraft EULA for testing only.
+
+## Minecraft 26.2 / 26.3 targets (2026-11-17)
+
+- **26.2 added as a third target** (`26.2-neoforge`, NeoForge 26.2.0.95, GeckoLib 5.5.6). 26.1 stays the source of
+  truth (ATM11). Mechanical renames are Stonecutter replacements in `stonecutter.gradle.kts` (string + one regex for
+  `EntityType.X`), real API gaps are `//? if >=26.2` branches. 26.2 tag providers only take `ResourceKey`s, so
+  `compat/TagOut` wraps the appender and keeps `add(Block...)`/`add(Item...)` working without touching every call.
+- Vanilla tag constants that 26.2 dropped (`ItemTags.STAIRS/SLABS`, `BlockTags.SAPLINGS`) are referenced by name
+  (`AVBuilding.vanilla(...)`), which works on every target.
+- Compat instance for 26.2/26.3 lacks Patchouli, KubeJS and Apotheosis (no builds on Modrinth yet).
+- **26.3 is not shipped yet.** 26.3 rewrote datagen (recipes/advancements/loot via `BootstrapContext`, split number
+  providers, configured features moved), removed block codecs and `AxeItem`, swapped GLFW for SDL and FML server configs
+  for `SYNCED`. Runtime renames are already in place (`>=26.3` replacements, `//? if <26.3` around block codecs); the
+  target is kept out of `settings.gradle.kts` until the datagen port compiles, so `main` stays green.

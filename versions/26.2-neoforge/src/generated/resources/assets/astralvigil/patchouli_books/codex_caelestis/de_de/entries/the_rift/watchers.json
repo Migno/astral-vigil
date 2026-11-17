@@ -1,0 +1,16 @@
+{
+  "category": "astralvigil:the_rift",
+  "icon": "astralvigil:astral_shard",
+  "name": "Die Wächter",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vier Wächter hüten das Firmament: $(l)Solenne$() der Sonne, $(l)Vael$() des Mondes, $(l)Orrin$() der Sternenschmied, und ich, $(l)Ilyra$(), die alles niederschreibt.$(br2)Es gab einen Fünften. Seinen Namen sprechen wir nicht aus. Wir nennen ihn die $(l)Finsternis$()."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ein Riss hat sich im Himmel aufgetan. Durch ihn fallen Splitter des Firmaments auf eure Welt – und durch ihn regt sich die Finsternis.$(br2)Du hast aufgeblickt. Das macht dich zum $(l)Suchenden$(). Ob du mehr wirst, liegt bei dir."
+    }
+  ],
+  "sortnum": 0
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "astralvigil:block/prism",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astralvigil:block/prism"
+    },
+    "facing=south": {
+      "model": "astralvigil:block/prism",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astralvigil:block/prism",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "astralvigil:astral_forge",
+  "ingredients": [
+    "#c:ingots/iron",
+    "#astralvigil:astral_shards",
+    "#astralvigil:astral_shards"
+  ],
+  "result": {
+    "id": "astralvigil:starmetal_ingot"
+  },
+  "starlight": 120,
+  "tint": "stella"
+}

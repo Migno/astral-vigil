@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": "minecraft:deepslate_tiles",
+    "C": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    "AAA",
+    "ACA",
+    "AAA"
+  ],
+  "result": {
+    "count": 8,
+    "id": "astralvigil:constellation_tiles"
+  }
+}

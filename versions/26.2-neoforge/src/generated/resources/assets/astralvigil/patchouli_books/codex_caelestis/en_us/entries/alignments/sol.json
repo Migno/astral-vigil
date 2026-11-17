@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/attuned_sol",
+  "category": "astralvigil:alignments",
+  "icon": "minecraft:sunflower",
+  "name": "Sol",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Solenne's light.$() Heat, gold and honey; deserts, savannas and the burning lands below. Sol favours those who fight by day and lay the restless dead to rest."
+    }
+  ],
+  "sortnum": 1
+}

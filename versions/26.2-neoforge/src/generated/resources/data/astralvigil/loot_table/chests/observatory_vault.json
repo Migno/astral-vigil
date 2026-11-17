@@ -1,0 +1,390 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 1
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 2
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 3
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 4
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 5
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 6
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 7
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 8
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 9
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 10
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 11
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 12
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 13
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 14
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 15
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 16
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 17
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 18
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 19
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 21
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 22
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 23
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "astralvigil:fragment": 24
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "astralvigil:lore_fragment"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "astralvigil:starmetal_ingot",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "astralvigil:sunsteel_ingot",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "astralvigil:moonsilver_ingot",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "astralvigil:sigil_blank",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "astralvigil:astral_shard",
+          "weight": 4
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 4.0,
+        "min": 2.0
+      }
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "astralvigil:astral_core"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 9
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "astralvigil:chests/observatory_vault"
+}

@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/attuned_void",
+  "category": "astralvigil:alignments",
+  "icon": "minecraft:crying_obsidian",
+  "name": "The Void",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Not a light.$() The dark between the stars: sculk, obsidian, the deep places and the restless dead. The Void listens. Study it – but remember who else is listening."
+    }
+  ],
+  "sortnum": 4
+}

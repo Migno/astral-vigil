@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:dawnbreaker",
+  "name": "Solennes Klingen",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:halo_edge",
+      "text": "Ein Sonnenstahlschwert. Katalysator: ein Diamantschwert; Gaben: zwei Sonnenstahlbarren und zwei Astralsplitter; 800 Sol-Licht."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:dawnbreaker",
+      "text": "Eine Sonnenstahl-Streitaxt. Katalysator: eine Diamantaxt; Gaben: drei Sonnenstahlbarren und ein Astralsplitter; 900 Sol-Licht."
+    }
+  ],
+  "sortnum": 1
+}

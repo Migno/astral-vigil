@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:mark_of_solenne",
+  "name": "Die Heiligtümer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vier Prüfungen liegen in vier eigenen Reichen, jede ein Tagewerk und jede nur durch ihr eigenes Tor erreichbar: Solennes Sonnenspitze in ewiger Morgenröte, Vaels Mondarena unter vollem Mond, Orrins Prismenobservatorium im tiefen All und Ilyras Endlose Bibliothek im Dunkel des Archivs. Jeder Wächter schwebt am Weg hinein - sprich ihn an, um seine Prüfung zu beginnen. Auf der Sonnenspitze darf nur, wer jede goldene Stufe erreicht hat, die Krone berühren.$(br2)Jede bestandene Prüfung gewährt das $(l)Zeichen$() des Wächters und seine $(l)Gunst$() – doch rivalisierende Wächter kühlen ab: Solenne und Vael, Orrin und Ilyra."
+    }
+  ],
+  "sortnum": 1
+}

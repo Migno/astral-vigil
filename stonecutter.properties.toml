@@ -42,3 +42,35 @@ deps.jei = "60HrmNPh"
 deps.emi = ""
 # EMI has no 26.1.2 build yet -> JEI on this target
 compat.mods = "mezzconfig:DbkwO49N,jei:60HrmNPh,jade:Pr1h4azo,curios:dRnRThvD,patchouli:2CsnFLom,sodium:zg4YQ9EL,iris:qE5Y7GrZ,placebo:c4uzJQYp,apothic-attributes:lLLTcZXk,apothic-enchanting:5yksP3X6,apothic-spawners:4tD6MEQ3,apotheosis:EXaIH7Xm,rhino:SqkDvOLG,better-advanced-tooltips:DKhR2dA5,architectury-api:5Bae8CM6,kubejs:5yNEdyfc"
+
+["26.2-neoforge"]
+mod.mc_compat = "[26.2]"
+mod.mc_releases = ["26.2"]
+mod.java = 25
+deps.neoforge = "26.2.0.95"
+deps.parchment_mc = ""
+deps.parchment = ""
+deps.geckolib = "5.5.6"
+deps.geckolib_id = "IEGPh4CJ"
+deps.geckolib_range = "[5.5,)"
+deps.jade = "GBES6etT"
+deps.jei = "lU7Sz0zI"
+deps.emi = ""
+# No Patchouli, KubeJS or Apotheosis builds for 26.2 yet (Modrinth, 2026-11-17)
+compat.mods = "mezzconfig:CLmDaL2q,jei:lU7Sz0zI,jade:GBES6etT,curios:BI7D0sbK,sodium:DmnNKsfS,iris:k55HdONq"
+
+["26.3-neoforge"]
+mod.mc_compat = "[26.3]"
+mod.mc_releases = ["26.3"]
+mod.java = 25
+deps.neoforge = "26.3.0.110"
+deps.parchment_mc = ""
+deps.parchment = ""
+deps.geckolib = "5.5.7"
+deps.geckolib_id = "2s1O42FX"
+deps.geckolib_range = "[5.5,)"
+deps.jade = "dVB8U7Td"
+deps.jei = "hvy9mHtw"
+deps.emi = ""
+# No Patchouli, KubeJS or Apotheosis builds for 26.3 yet (Modrinth, 2026-11-17)
+compat.mods = "mezzconfig:Y5gRtxs4,jei:hvy9mHtw,jade:dVB8U7Td,curios:NBT8yOsH,sodium:CT6qQx01,iris:Ag5S66CF,better-advanced-tooltips:YVj1xxHF"

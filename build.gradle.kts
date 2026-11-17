@@ -159,6 +159,7 @@ tasks {
     withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
         options.release = javaVersion
+        options.compilerArgs.addAll(listOf("-Xmaxerrs", "5000"))
     }
 
     processResources {
@@ -171,6 +172,8 @@ tasks {
             "minecraft" to sc.properties["mod.mc_compat"],
             "neoforge" to sc.properties["deps.neoforge"],
             "geckolib" to sc.properties["deps.geckolib_range"],
+            // NeoForge 26.2 deprecated logoFile (warning screen); the square icon is an iconFile there
+            "logo_key" to if (sc.current.parsed >= "26.2") "iconFile" else "logoFile",
         )
         inputs.properties(props)
         filesMatching("META-INF/neoforge.mods.toml") { expand(props) }

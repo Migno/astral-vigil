@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:sigil_flash",
+  "name": "Sigils",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sigils are cut from $(item)Sigil Blanks$() at the altar. $(l)Whirl$() and $(l)Shieldbreaker$() suit the axe, $(l)Dawn$() and $(l)Flash$() the sword, $(l)Precision$() and $(l)Undertow$() the bows, $(l)Aegis$() the shield and the Seraph Plate."
+    }
+  ],
+  "sortnum": 4
+}

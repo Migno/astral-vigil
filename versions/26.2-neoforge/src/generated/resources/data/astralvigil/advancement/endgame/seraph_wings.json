@@ -1,0 +1,32 @@
+{
+  "parent": "astralvigil:endgame/eclipse_defeated",
+  "criteria": {
+    "has_feather": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:seraph_feather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.seraph_wings.description"
+    },
+    "icon": {
+      "id": "astralvigil:seraph_feather"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.seraph_wings.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_feather"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_8",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "8. Die Bindung",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Zu viert hielten wir die Finsternis hinter dem Firmament. Es kostete all unser Licht. Es kostet es noch immer."
+    }
+  ],
+  "sortnum": 7
+}

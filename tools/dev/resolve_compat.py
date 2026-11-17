@@ -17,6 +17,12 @@ TARGETS = {
     "26.1-neoforge": ("26.1.2", ["mezzconfig", "jei", "jade", "curios", "patchouli", "sodium", "iris", "placebo",
                                  "apothic-attributes", "apothic-enchanting", "apothic-spawners", "apotheosis",
                                  "rhino", "better-advanced-tooltips", "architectury-api", "kubejs"]),
+    "26.2-neoforge": ("26.2", ["mezzconfig", "jei", "jade", "curios", "patchouli", "sodium", "iris", "placebo",
+                               "apothic-attributes", "apothic-enchanting", "apothic-spawners", "apotheosis",
+                               "rhino", "better-advanced-tooltips", "architectury-api", "kubejs"]),
+    "26.3-neoforge": ("26.3", ["mezzconfig", "jei", "jade", "curios", "patchouli", "sodium", "iris", "placebo",
+                               "apothic-attributes", "apothic-enchanting", "apothic-spawners", "apotheosis",
+                               "rhino", "better-advanced-tooltips", "architectury-api", "kubejs"]),
 }
 
 

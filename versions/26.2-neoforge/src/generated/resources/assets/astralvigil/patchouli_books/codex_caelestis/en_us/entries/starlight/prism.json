@@ -1,0 +1,18 @@
+{
+  "advancement": "astralvigil:research/first_scan",
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:prism",
+  "name": "The Prism",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Pure starlight is all lights at once. A $(item)Prism$() parts it: $(l)Stella$() leaves its front, $(l)Sol$() its left and $(l)Luna$() its right side. Some light is lost in the parting.$(br2)Many rituals will ask for one hue alone."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:prism",
+      "text": ""
+    }
+  ],
+  "sortnum": 2
+}

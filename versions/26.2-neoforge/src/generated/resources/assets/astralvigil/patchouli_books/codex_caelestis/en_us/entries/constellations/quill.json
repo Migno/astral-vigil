@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_quill",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:feather",
+  "name": "The Quill",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "My own sign. A long shaft and a feathered tip – it only shows itself to those who read both moon and stars."
+    }
+  ],
+  "sortnum": 4
+}

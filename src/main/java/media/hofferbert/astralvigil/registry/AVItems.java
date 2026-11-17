@@ -17,7 +17,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.core.component.DataComponents;
+//? if <26.3 {
 import net.minecraft.world.item.AxeItem;
+//?}
 import net.minecraft.world.item.component.ChargedProjectiles;
 //? if >=26.1 {
 import net.minecraft.sounds.SoundEvents;
@@ -67,7 +69,11 @@ public final class AVItems {
     public static final DeferredItem<Item> HALO_EDGE = AVItems.<Item>register(
             "halo_edge", Item::new, p -> p.sword(AVMaterials.SUNSTEEL, 3.0f, -2.4f).rarity(Rarity.RARE));
     public static final DeferredItem<Item> DAWNBREAKER = AVItems.<Item>register(
+            //? if >=26.3 {
+            /*"dawnbreaker", Item::new, p -> p.axe(AVMaterials.SUNSTEEL, 5.0f, -3.0f).rarity(Rarity.RARE));
+            *///?} else {
             "dawnbreaker", p -> new AxeItem(AVMaterials.SUNSTEEL, 5.0f, -3.0f, p), p -> p.rarity(Rarity.RARE));
+            //?}
     public static final DeferredItem<Item> STARLIGHT_AEGIS = AVItems.<Item>register("starlight_aegis", GearItems.Aegis::new, p -> p
             .durability(700)
             .rarity(Rarity.RARE)

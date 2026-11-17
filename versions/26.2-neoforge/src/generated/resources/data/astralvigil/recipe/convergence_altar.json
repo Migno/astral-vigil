@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": "#c:gems/diamond",
+    "G": "#c:ingots/gold",
+    "M": "#astralvigil:meteoric_stones",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    "GSG",
+    "MDM",
+    "MMM"
+  ],
+  "result": {
+    "id": "astralvigil:convergence_altar"
+  }
+}

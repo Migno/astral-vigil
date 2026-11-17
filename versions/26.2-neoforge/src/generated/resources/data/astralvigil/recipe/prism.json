@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "#c:gems/amethyst",
+    "N": "#c:nuggets/gold",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    " S ",
+    "SAS",
+    "NNN"
+  ],
+  "result": {
+    "id": "astralvigil:prism"
+  }
+}

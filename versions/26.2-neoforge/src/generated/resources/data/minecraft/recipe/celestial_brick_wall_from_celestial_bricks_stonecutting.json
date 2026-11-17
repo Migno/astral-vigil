@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "astralvigil:celestial_bricks",
+  "result": {
+    "id": "astralvigil:celestial_brick_wall"
+  }
+}

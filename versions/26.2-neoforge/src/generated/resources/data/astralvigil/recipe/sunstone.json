@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": "minecraft:smooth_sandstone",
+    "C": "#c:ingots/sunsteel"
+  },
+  "pattern": [
+    "AAA",
+    "ACA",
+    "AAA"
+  ],
+  "result": {
+    "count": 8,
+    "id": "astralvigil:sunstone"
+  }
+}

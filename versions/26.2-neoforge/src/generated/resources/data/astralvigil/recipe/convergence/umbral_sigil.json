@@ -1,0 +1,18 @@
+{
+  "type": "astralvigil:convergence",
+  "center": "astralvigil:void_shard",
+  "ingredients": [
+    "astralvigil:astral_core",
+    "astralvigil:void_shard",
+    "astralvigil:void_shard",
+    "#c:obsidians",
+    "#c:obsidians",
+    "minecraft:echo_shard"
+  ],
+  "result": {
+    "id": "astralvigil:umbral_sigil"
+  },
+  "starlight": 3000,
+  "time": 400,
+  "tint": "stella"
+}

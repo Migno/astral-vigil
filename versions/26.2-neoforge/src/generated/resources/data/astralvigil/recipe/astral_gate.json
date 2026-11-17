@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": "#c:ingots/starmetal",
+    "M": "#astralvigil:meteoric_stones",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    "MSM",
+    "SIS",
+    "MSM"
+  ],
+  "result": {
+    "count": 4,
+    "id": "astralvigil:astral_gate"
+  }
+}

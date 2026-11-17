@@ -17,6 +17,7 @@ stonecutter {
         // Project name -> Minecraft version used for version predicates (//? if >=26.1)
         version("1.21.1-neoforge", "1.21.1")
         version("26.1-neoforge", "26.1.2")
+        version("26.2-neoforge", "26.2")
         vcsVersion = "26.1-neoforge"
     }
 }

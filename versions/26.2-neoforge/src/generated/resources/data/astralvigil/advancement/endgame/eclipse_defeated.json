@@ -1,0 +1,26 @@
+{
+  "parent": "astralvigil:endgame/umbral_sigil",
+  "criteria": {
+    "defeated": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.eclipse_defeated.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "astralvigil:eclipse_heart"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.eclipse_defeated.title"
+    }
+  },
+  "requirements": [
+    [
+      "defeated"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

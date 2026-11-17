@@ -1,0 +1,26 @@
+{
+  "parent": "astralvigil:firmament/ascension",
+  "criteria": {
+    "trial": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.trial_orrin.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "astralvigil:mark_of_orrin"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.trial_orrin.title"
+    }
+  },
+  "requirements": [
+    [
+      "trial"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

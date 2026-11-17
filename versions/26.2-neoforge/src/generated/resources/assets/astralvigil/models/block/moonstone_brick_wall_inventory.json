@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "astralvigil:block/moonstone_bricks"
+  }
+}

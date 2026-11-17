@@ -1,0 +1,13 @@
+{
+  "type": "astralvigil:astral_forge",
+  "ingredients": [
+    "#c:ingots/iron",
+    "#astralvigil:astral_shards",
+    "#c:gems/quartz"
+  ],
+  "result": {
+    "id": "astralvigil:moonsilver_ingot"
+  },
+  "starlight": 120,
+  "tint": "luna"
+}

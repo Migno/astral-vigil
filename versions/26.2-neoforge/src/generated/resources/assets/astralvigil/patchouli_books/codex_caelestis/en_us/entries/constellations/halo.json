@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:research/constellation_halo",
+  "category": "astralvigil:constellations",
+  "icon": "minecraft:sunflower",
+  "name": "The Halo",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Solenne's ring: six stars around an unlit core. The core is not part of the sign – it is where the sun would stand."
+    }
+  ],
+  "sortnum": 1
+}

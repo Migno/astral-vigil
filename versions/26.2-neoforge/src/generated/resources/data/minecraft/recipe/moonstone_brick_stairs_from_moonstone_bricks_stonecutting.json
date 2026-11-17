@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "astralvigil:moonstone_bricks",
+  "result": {
+    "id": "astralvigil:moonstone_brick_stairs"
+  }
+}

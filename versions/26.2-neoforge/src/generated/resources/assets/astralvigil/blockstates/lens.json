@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "astralvigil:block/lens",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "astralvigil:block/lens",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "astralvigil:block/lens"
+    },
+    "facing=south": {
+      "model": "astralvigil:block/lens",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "astralvigil:block/lens",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "astralvigil:block/lens",
+      "y": 270
+    }
+  }
+}

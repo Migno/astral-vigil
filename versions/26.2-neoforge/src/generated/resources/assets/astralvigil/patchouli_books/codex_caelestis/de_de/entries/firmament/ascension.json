@@ -1,0 +1,31 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:ascension_key",
+  "name": "Aufstieg",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:ascension_key",
+      "text": "Am Konvergenzaltar geschmiedet: ein Astralkern als Katalysator; Sternenstahl, Sonnenstahl, Mondsilber, ein Leerensplitter und zwei Federn als Gaben; 2000 reines Sternenlicht. Der Schlüssel allein trägt niemanden - er entzündet ein Astraltor."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:void_shard",
+      "text": "Leerensplitter stammen aus Leerenkristallen, die der Blick der Finsternis wachsen lässt - oder, ohne auf das Dunkel zu warten, aus der $(l)Astralschmiede$(): Weinender Obsidian, ein Astralsplitter und Amethyst unter Stella-Licht ergeben zwei."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_gate",
+      "text": "Baue einen geschlossenen, aufrecht stehenden Rahmen, wie eine Tür: die Öffnung mindestens 2 breit und 3 hoch (Ecken sind freiwillig). Setze den Aufstiegsschlüssel in den Rahmen und tritt für einige Herzschläge ins Licht.$(br2)Der Rahmen bestimmt, wo du ankommst. Ein $(item)Astraltor$() öffnet sich zum wilden Firmament, wo Sternholz wächst; jeder Wächter hat ein eigenes Tor, und jedes Tor führt in ein eigenes Reich."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Sonnentor$() (Sonnenstahl, Goldblöcke) - Solennes Sonnenspitze.$(br)$(item)Mondtor$() (Mondsilber, Quarz) - Vaels Mondarena.$(br)$(item)Prismentor$() (Sternenstahl, Diamanten) - Orrins Prismenobservatorium.$(br)$(item)Archivtor$() (Amethyst, Bücherregale) - Ilyras Endlose Bibliothek.$(br)$(item)Umbraltor$() (weinender Obsidian, Obsidian) - der Umbralthron; es öffnet sich nur dem, der alle vier Zeichen trägt."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Das Firmament ist leicht: Du fällst langsam und landest sanft. Stürzt du aus einem Reich, fängt dich sein Himmel auf und setzt dich auf dem Ankunftsschrein ab - ebenso alles, was du fallen lässt. Jeder Schrein hat ein Tor, das nach Hause führt, und niemand kann es zerbrechen. Die Prüfungsreiche sind heilig: Dort lässt sich nichts abbauen oder bauen, und Enderperlen verpuffen."
+    }
+  ],
+  "sortnum": 0
+}

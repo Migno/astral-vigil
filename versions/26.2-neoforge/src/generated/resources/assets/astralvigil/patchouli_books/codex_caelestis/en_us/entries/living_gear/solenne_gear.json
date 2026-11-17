@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:dawnbreaker",
+  "name": "Solenne's Blades",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:halo_edge",
+      "text": "A Sunsteel sword. Catalyst: a diamond sword; offerings: two Sunsteel ingots and two Astral Shards; 800 Sol light."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:dawnbreaker",
+      "text": "A Sunsteel battle axe. Catalyst: a diamond axe; offerings: three Sunsteel ingots and an Astral Shard; 900 Sol light."
+    }
+  ],
+  "sortnum": 1
+}

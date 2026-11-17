@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": "minecraft:glowstone",
+    "S": "astralvigil:umbral_stone"
+  },
+  "pattern": [
+    " S ",
+    "SLS",
+    " S "
+  ],
+  "result": {
+    "count": 4,
+    "id": "astralvigil:umbral_lamp"
+  }
+}

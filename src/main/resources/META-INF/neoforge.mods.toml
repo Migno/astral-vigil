@@ -12,7 +12,7 @@ version = "${version}"
 displayName = "${name}"
 authors = "${authors}"
 displayURL = "https://github.com/Migno/astral-vigil"
-logoFile = "assets/astralvigil/icon.png"
+${logo_key} = "assets/astralvigil/icon.png"
 description = '''
 The Watchers guard the firmament. A rift in the sky rains star fragments upon the world - and the Eclipse awakens.
 Starlight, beams, constellations, living gear and a floating Firmament dimension.

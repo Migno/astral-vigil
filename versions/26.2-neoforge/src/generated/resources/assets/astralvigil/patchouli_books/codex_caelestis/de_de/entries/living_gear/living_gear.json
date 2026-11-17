@@ -1,0 +1,16 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:halo_edge",
+  "name": "Lebendige Ausrüstung",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Am $(item)Konvergenzaltar$() geschmiedete Ausrüstung $(l)schlummert$(). Taten im Geist ihres Wächters wecken sie: bei Tageslicht erschlagene Untote für Solennes Klingen, nächtliche Jagd für Vaels Bögen, abgewehrte Hiebe für die Ägis, Geschöpfe der Leere für die Seraphenrüstung.$(br2)$(l)Erwachte$() Ausrüstung erhält einen zweiten Siegelplatz, $(l)aufgestiegene$() einen dritten."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Halte die Ausrüstung, nimm ein $(item)Siegel$() in die Nebenhand und benutze sie schleichend, um es einzusetzen. Jedes Siegel ist eine $(l)Haltung$(): wechsle sie mit der Haltungstaste, entfessle sie mit der Fähigkeitstaste.$(br2)Fähigkeiten kosten $(l)Ladung$(). Ausrüstung lädt sich unter dem Nachthimmel auf – oder berühre damit einen $(item)Sternenlichtspeicher$()."
+    }
+  ],
+  "sortnum": 0
+}

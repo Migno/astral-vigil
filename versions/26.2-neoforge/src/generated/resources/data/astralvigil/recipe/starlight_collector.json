@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "#c:gems/amethyst",
+    "G": "#c:ingots/gold",
+    "M": "#astralvigil:meteoric_stones",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    " A ",
+    "GSG",
+    "MMM"
+  ],
+  "result": {
+    "id": "astralvigil:starlight_collector"
+  }
+}

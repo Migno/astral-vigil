@@ -1,0 +1,12 @@
+{
+  "type": "astralvigil:umbral_throne",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "astralvigil:umbral_throne",
+      "features": false,
+      "lakes": false,
+      "layers": []
+    }
+  }
+}

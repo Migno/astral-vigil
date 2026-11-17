@@ -1,0 +1,31 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:ascension_key",
+  "name": "Ascension",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:ascension_key",
+      "text": "Forged at the Convergence Altar: an Astral Core as catalyst; Starmetal, Sunsteel and Moonsilver, a Void Shard and two feathers as offerings; 2000 pure starlight. The key alone carries no one - it lights an Astral Gate."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:void_shard",
+      "text": "Void Shards come from Void Crystals, which the Eclipse Gaze grows - or, without waiting for the dark, from the $(l)Astral Forge$(): crying obsidian, an Astral Shard and amethyst under Stella light yield two."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_gate",
+      "text": "Build a closed frame standing upright, like a door: the opening at least 2 wide and 3 tall (corners are optional). Set the Ascension Key into the frame and step into the light for a few heartbeats.$(br2)The frame decides where you arrive. An $(item)Astral Gate$() opens onto the wild Firmament, where starwood grows; each Watcher has a gate of its own, and every gate leads to a realm of its own."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(item)Solar Gate$() (Sunsteel, gold blocks) - Solenne's Sun Spire.$(br)$(item)Lunar Gate$() (Moonsilver, quartz) - Vael's Moon Arena.$(br)$(item)Prism Gate$() (Starmetal, diamonds) - Orrin's Prism Observatory.$(br)$(item)Archive Gate$() (amethyst, bookshelves) - Ilyra's Endless Library.$(br)$(item)Umbral Gate$() (crying obsidian, obsidian) - the Umbral Throne; it opens only for one who carries all four Marks."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Firmament is light: you fall slowly and land softly. Fall from a realm and its sky catches you and sets you down on the arrival shrine - and so it does with anything you drop. Every shrine has a gate that leads home, and no one can break it. The trial realms are sacred: nothing can be dug or built there, and ender pearls fizzle."
+    }
+  ],
+  "sortnum": 0
+}

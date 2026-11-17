@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_7",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "7. Die erste Finsternis",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Als das fünfte Licht zum ersten Mal die Sonne verschlang, nannten wir es einen Zufall. Beim zweiten Mal gaben wir ihm einen Namen."
+    }
+  ],
+  "sortnum": 6
+}

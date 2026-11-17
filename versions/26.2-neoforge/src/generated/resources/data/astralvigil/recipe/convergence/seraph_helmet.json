@@ -1,0 +1,17 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "stella",
+  "center": "minecraft:diamond_helmet",
+  "ingredients": [
+    "#c:ingots/starmetal",
+    "#c:ingots/starmetal",
+    "#astralvigil:astral_shards",
+    "#astralvigil:astral_shards"
+  ],
+  "result": {
+    "id": "astralvigil:seraph_helmet"
+  },
+  "starlight": 700,
+  "time": 200,
+  "tint": "stella"
+}

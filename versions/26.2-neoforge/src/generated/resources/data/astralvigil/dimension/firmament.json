@@ -1,0 +1,11 @@
+{
+  "type": "astralvigil:firmament",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "astralvigil:firmament"
+    },
+    "settings": "minecraft:floating_islands"
+  }
+}

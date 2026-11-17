@@ -1,0 +1,19 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "sol",
+  "center": "minecraft:iron_leggings",
+  "ingredients": [
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:dusts/glowstone",
+    "#c:dusts/glowstone"
+  ],
+  "result": {
+    "id": "astralvigil:solar_leggings"
+  },
+  "starlight": 700,
+  "time": 200,
+  "tint": "sol"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "experience": 0.1,
+  "ingredient": "astralvigil:celestial_bricks",
+  "result": {
+    "id": "astralvigil:cracked_celestial_bricks"
+  }
+}

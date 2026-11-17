@@ -16,13 +16,15 @@ decide and record in `docs/DECISIONS.md`.
 |---|---|---|---|---|---|
 | `1.21.1-neoforge` | 1.21.1 | 21.1.266 | 21 | ATM10 | 4.9.3 (`software.bernie.geckolib`) |
 | `26.1-neoforge` (vcs/active) | 26.1.2 | 26.1.2.126 | 25 | ATM11 | 5.5.2 (`com.geckolib`) |
+| `26.2-neoforge` | 26.2 | 26.2.0.95 | 25 | – | 5.5.6 (`com.geckolib`) |
 
 Versions live in `stonecutter.properties.toml` – verify against maven.neoforged.net / Modrinth before bumping.
 
 - Source of truth in `src/` is **26.1** (`stonecutter active "26.1-neoforge"`). 1.21.1 code is in
   Stonecutter comments: `//? if >=26.1 {` … `//?} else {` `/*…*/` `//?}`. No nested `/* */` inside
   commented branches.
-- `ResourceLocation` ↔ `Identifier` is swapped automatically (replacement in `stonecutter.gradle.kts`).
+- `ResourceLocation` ↔ `Identifier` is swapped automatically (replacement in `stonecutter.gradle.kts`); so are the 26.2
+  renames (`EntityType.X`→`EntityTypes.X`, trigger package, `mainCamera()`). Three-way branches: `//? if >=26.2 {` … `//?} elif >=26.1 {` … `//?} else {`.
 - Version-specific imports go **inside** the conditionals (formatter strips unused imports).
 - Bigger API gaps: adapter in `compat/` (or a version-switched helper like `gametest/GT.java`).
 - 26.1 is unobfuscated (no mappings); 1.21.1 uses Parchment.

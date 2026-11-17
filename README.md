@@ -15,6 +15,7 @@ of the Eclipse, the fallen fifth Watcher.
 |---|---|---|---|---|
 | 1.21.1 | NeoForge 21.1.266+ | 21 | GeckoLib 4.9+ | feature complete, pre-release |
 | 26.1.2 | NeoForge 26.1.2.126+ | 25 | GeckoLib 5.5+ | feature complete, pre-release |
+| 26.2 | NeoForge 26.2.0.95+ | 25 | GeckoLib 5.5.6+ | feature complete, pre-release (no Patchouli build yet: Codex unavailable) |
 
 [Deutsch weiter unten](#deutsch) · [Changelog](docs/CHANGELOG.md) · [Roadmap](docs/ROADMAP.md) ·
 [Balance](docs/BALANCE.md) · [Design decisions](docs/DECISIONS.md)
@@ -139,8 +140,8 @@ erwacht.*
 Astral Vigil ist ein Fortschritts-Mod für NeoForge rund um Sternenlicht. Er beginnt mit einem Meteor, der in einer
 klaren Nacht in deine Welt stürzt, und endet hoch über den Wolken im **Firmament**: einer schwebenden
 Welt aus sechs Himmelsreichen, die du nur durch selbst gebaute Tore erreichst. Behütet von vier
-gewaltigen Wächtern – und heimgesucht von ihrem gefallenen fünften Geschwister, der Finsternis. Für Minecraft 1.21.1
-und 26.1.2, vollständig auf Deutsch spielbar.
+gewaltigen Wächtern – und heimgesucht von ihrem gefallenen fünften Geschwister, der Finsternis. Für Minecraft 1.21.1,
+26.1.2 und 26.2, vollständig auf Deutsch spielbar.
 
 ### Was dich erwartet
 

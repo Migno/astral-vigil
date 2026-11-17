@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_19",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "19. Anchors",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Lay our signs upon the ground in starlit stone, and the sky will lean closer to see them. While it leans, the dark cannot."
+    }
+  ],
+  "sortnum": 18
+}

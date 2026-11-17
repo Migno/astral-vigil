@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:seraph_chestplate",
+  "name": "Orrins Rüstung",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:seraph_chestplate",
+      "text": "Seraphenrüstung, aus Diamantrüstung und Sternenstahl unter Stella-Licht geschmiedet. Heiligenschein und Lichtschwingen wachsen mit jedem Erwachen. Der volle Satz heilt dich unter dem Nachthimmel; erwacht gleitest du schleichend und wirst zu Beginn des Fluges vorangeschleudert; aufgestiegen fürchtest du keinen Sturz mehr."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:starlight_aegis",
+      "text": "Die Sternenlicht-Ägis, ein Schild aus Sternenstahl. Jeder abgewehrte Hieb bringt sie dem Erwachen näher."
+    }
+  ],
+  "sortnum": 3
+}

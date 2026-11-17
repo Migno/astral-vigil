@@ -47,9 +47,15 @@ public final class CosmeticsClient {
             return;
         }
         while (OPEN.consumeClick()) {
+            //? if >=26.2 {
+            /*if (mc.gui.screen() == null) {
+                mc.gui.setScreen(new CosmeticsScreen());
+            }
+            *///?} else {
             if (mc.screen == null) {
                 mc.setScreen(new CosmeticsScreen());
             }
+            //?}
         }
         if (mc.isPaused()) {
             return;

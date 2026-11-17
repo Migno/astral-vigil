@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:starlight",
+  "icon": "astralvigil:starlight_reservoir",
+  "name": "Starlight Reservoir",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A $(item)Starlight Reservoir$() keeps every hue apart and safe until it is needed. A comparator reads how full it is."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:starlight_reservoir",
+      "text": ""
+    }
+  ],
+  "sortnum": 3
+}

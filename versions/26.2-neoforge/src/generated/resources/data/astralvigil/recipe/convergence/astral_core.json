@@ -1,0 +1,16 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "stella",
+  "center": "#c:gems/diamond",
+  "ingredients": [
+    "#c:ingots/starmetal",
+    "#c:ingots/sunsteel",
+    "#c:ingots/moonsilver",
+    "#astralvigil:astral_shards"
+  ],
+  "result": {
+    "id": "astralvigil:astral_core"
+  },
+  "starlight": 1000,
+  "time": 200
+}

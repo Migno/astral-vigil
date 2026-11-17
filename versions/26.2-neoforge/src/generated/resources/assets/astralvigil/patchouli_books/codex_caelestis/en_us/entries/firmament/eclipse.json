@@ -1,0 +1,26 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:umbral_sigil",
+  "name": "The Eclipse",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:umbral_sigil",
+      "text": "Forged at the Convergence Altar from three Void Shards, an Astral Core, obsidian and an echo shard with 3000 Stella light. Use it in the $(l)Umbral Cathedral$() - reached only through an Umbral Gate - while carrying all four Marks to call down the Eclipse."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The fallen fifth Watcher fights in three phases, and it names every great blow before it falls. $(l)Fallen Light$(): the Umbral Sweep rakes the ground before it, the Void Lance locks onto you - step sideways - and Falling Stars mark circles you must leave. After heavy blows it sinks to the ground: strike then."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Shattered Halo$(): four Umbral Pylons rise and shield it - destroy them all and it staggers. Echoes join, and the Shadow Dive marks a spot before it slams down; jump the shockwave. $(l)Total Eclipse$(): walls of crying obsidian rise. Hide behind them from the Umbral Nova, jump or hide from the sweeping Eclipse Ray. Near death it rages. Hiding forever or fleeing earns its Umbral Grasp."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:halo_of_dawn",
+      "text": "From the Eclipse Heart, Sunsteel, Moonsilver, Starmetal and Seraph Feathers: the Halo of Dawn. Carried, it lowers the starlight cost of abilities and lets the Eclipse's gaze slide off you. Seraph Feathers alone bind Seraph Wings to you."
+    }
+  ],
+  "sortnum": 2
+}

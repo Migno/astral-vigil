@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:convergence",
+  "icon": "astralvigil:astral_core",
+  "name": "Astralkern",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_core",
+      "text": "Katalysator: ein Diamant. Gaben: je ein Barren Sternenstahl, Sonnenstahl und Mondsilber sowie ein Astralsplitter. 1000 reines Sternenlicht. Stella-Blöcke stützen es."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:sigil_blank",
+      "text": "Katalysator: ein Sternenstahlbarren. Gaben: zwei Goldklumpen und zwei Amethystsplitter. 400 Stella-Sternenlicht. Ergibt zwei Rohlinge – aus ihnen werden die Siegel der Wächter geschnitten."
+    }
+  ],
+  "sortnum": 2
+}

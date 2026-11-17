@@ -1,0 +1,13 @@
+{
+  "advancement": "astralvigil:lore/fragment_18",
+  "category": "astralvigil:chronicle",
+  "icon": "astralvigil:lore_fragment",
+  "name": "18. Void Glass",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Where its gaze rests too long, the world forgets how to be stone and remembers how to be night."
+    }
+  ],
+  "sortnum": 17
+}

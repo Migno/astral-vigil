@@ -54,6 +54,7 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
     }
 
     // one codec per kind (BaseEntityBlock requires a codec; properties are the only constructor input)
+    //? if <26.3 {
     public static final MapCodec<StarlightDeviceBlock> COLLECTOR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.COLLECTOR));
     public static final MapCodec<StarlightDeviceBlock> LENS_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.LENS));
     public static final MapCodec<StarlightDeviceBlock> MIRROR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.MIRROR));
@@ -62,6 +63,7 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
     public static final MapCodec<StarlightDeviceBlock> ANCHOR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.ANCHOR));
     public static final MapCodec<StarlightDeviceBlock> FONT_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.FONT));
     public static final MapCodec<StarlightDeviceBlock> RECEPTOR_CODEC = simpleCodec(p -> new StarlightDeviceBlock(p, Kind.RECEPTOR));
+    //?}
 
     /** Set before super() runs so createBlockStateDefinition knows the kind. */
     private static final ThreadLocal<Kind> CONSTRUCTING = new ThreadLocal<>();
@@ -122,6 +124,7 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
         return kind;
     }
 
+    //? if <26.3 {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return switch (kind) {
@@ -135,6 +138,7 @@ public class StarlightDeviceBlock extends BaseEntityBlock {
             case RECEPTOR -> RECEPTOR_CODEC;
         };
     }
+    //?}
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

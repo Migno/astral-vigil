@@ -1,0 +1,22 @@
+{
+  "category": "astralvigil:the_rift",
+  "icon": "astralvigil:fallen_star",
+  "name": "Starfall",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "On clear nights, stars fall. You will see the streak across the sky and hear the impact; the chronicle notes in which direction it came down.$(br2)Under a $(l)full moon$() the sky sheds more often."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:fallen_star",
+      "text": "Each impact leaves a small crater lined with $(item)Meteoric Stone$() and, at its heart, a $(item)Fallen Star$(). Break it with an iron pickaxe to pry loose $(item)Astral Shards$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_shard",
+      "text": "Astral Shards still hum with starlight. They are the root of everything in this chronicle."
+    }
+  ],
+  "sortnum": 1
+}
