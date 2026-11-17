@@ -76,7 +76,7 @@ Run dirs: `run/<target>/{client,server,gametest,data,compat}` (git-ignored).
   Stonecutter. Assets go in both layouts (`geo/`, `animations/` and `geckolib/models|animations/`).
 - Watchers: geo/animations/textures come from `python -I tools/dev/gen_watcher.py` (not Blockbench).
 - Developer cosmetics: textures + `client/cosmetics/CosmeticMeshes.java` come from `python -I tools/dev/gen_cosmetics.py`
-  (never edit the generated Java). Access: `CosmeticsManager.TEAM` + `[cosmetics] developers` config.
+  (never edit the generated Java). Access: only `CosmeticsManager.TEAM` (UUIDs in code; server admins can only disable via `[cosmetics] enabled`).
 - Normal (non-flat) test world: `-Pav.autojoin=true -Pav.worldtype=normal`.
 - Commits: Conventional Commits, no AI attribution lines.
 

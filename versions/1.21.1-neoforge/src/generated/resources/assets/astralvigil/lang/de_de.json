@@ -83,7 +83,6 @@
   "astralvigil.configuration.astrolabe.track_range": "Ortungsreichweite",
   "astralvigil.configuration.beam_quality": "Strahlqualität",
   "astralvigil.configuration.cosmetics": "Entwickler-Kosmetik",
-  "astralvigil.configuration.cosmetics.developers": "Weitere Entwickler (UUIDs)",
   "astralvigil.configuration.cosmetics.enabled": "Aktiviert",
   "astralvigil.configuration.crafting": "Herstellung",
   "astralvigil.configuration.crafting.aligned_bonus": "Bonus ausgerichteter Blöcke",

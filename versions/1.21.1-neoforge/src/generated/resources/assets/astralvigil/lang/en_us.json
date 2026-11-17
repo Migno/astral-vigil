@@ -83,7 +83,6 @@
   "astralvigil.configuration.astrolabe.track_range": "Tracking Range",
   "astralvigil.configuration.beam_quality": "Beam Quality",
   "astralvigil.configuration.cosmetics": "Developer Cosmetics",
-  "astralvigil.configuration.cosmetics.developers": "Extra Developers (UUIDs)",
   "astralvigil.configuration.cosmetics.enabled": "Enabled",
   "astralvigil.configuration.crafting": "Crafting",
   "astralvigil.configuration.crafting.aligned_bonus": "Aligned Block Bonus",

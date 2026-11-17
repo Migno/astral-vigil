@@ -277,3 +277,10 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - **Seraph Wings** stay a vanilla model layer, now generated (`gen_seraph_wings.py` → `SeraphWingsRig`) and animated
   by a small keyframe player (`client/anim/Keyframes`) with GeckoLib's easing formulas; `art/bbmodel/entity/seraph_wings.bbmodel`
   is stale.
+
+## Developer cosmetics access (2026-11-17)
+
+Only the built-in team list `CosmeticsManager.TEAM` grants developer cosmetics (Migno is on it). The former
+`[cosmetics] developers` server-config list is removed: server admins cannot hand cosmetics out, they can only switch
+them off with `[cosmetics] enabled`. Development environments (runClient/GameTests) keep full access for testing.
+New team members are added in code and ship with the next release.

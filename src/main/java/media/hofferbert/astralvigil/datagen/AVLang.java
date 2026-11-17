@@ -414,7 +414,6 @@ public final class AVLang {
         add("message.astralvigil.cosmetics.locked", "Developer cosmetics are reserved for the Astral Vigil team.", "Entwickler-Kosmetik ist dem Astral-Vigil-Team vorbehalten.");
         add("astralvigil.configuration.cosmetics", "Developer Cosmetics", "Entwickler-Kosmetik");
         add("astralvigil.configuration.cosmetics.enabled", "Enabled", "Aktiviert");
-        add("astralvigil.configuration.cosmetics.developers", "Extra Developers (UUIDs)", "Weitere Entwickler (UUIDs)");
         add("key.categories.astralvigil", "Astral Vigil", "Astral Vigil");
         add("key.category.astralvigil.astralvigil", "Astral Vigil", "Astral Vigil");
         String[][] sigils = {

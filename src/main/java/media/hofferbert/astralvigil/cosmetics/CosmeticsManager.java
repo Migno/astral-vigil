@@ -14,12 +14,14 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 /**
  * Server side of the developer cosmetics: who may wear them and applying a loadout chosen in the Cosmetics screen.
- * Access is decided on the server only (built-in team list, the {@code cosmetics.developers} server config list, or a
- * development environment) and mirrored to the client in {@link AVAttachments#COSMETIC_ACCESS} for the screen.
+ * Access is decided on the server only - the built-in team list below, or a development environment - and mirrored to
+ * the client in {@link AVAttachments#COSMETIC_ACCESS} for the screen. Server admins cannot grant access (only switch the
+ * cosmetics off with {@code cosmetics.enabled}); new team members are added here, in code.
  */
 public final class CosmeticsManager {
-    /** Mojang account UUIDs of the Astral Vigil team (online-mode accounts). Owner: add yours here. */
-    static final Set<UUID> TEAM = Set.of();
+    /** Mojang account UUIDs of the Astral Vigil team (online-mode accounts). The only way to grant access. */
+    static final Set<UUID> TEAM = Set.of(
+            UUID.fromString("46c36850-3377-4b83-9804-ae2b572495c1")); // Migno
 
     private CosmeticsManager() {}
 
@@ -40,10 +42,7 @@ public final class CosmeticsManager {
         //?} else {
         /*boolean production = FMLEnvironment.production;
         *///?}
-        if (!production || TEAM.contains(player.getUUID())) {
-            return true;
-        }
-        return AVServerConfig.SPEC.isLoaded() && AVServerConfig.COSMETIC_DEVELOPERS.get().contains(player.getUUID().toString());
+        return !production || TEAM.contains(player.getUUID());
     }
 
     /** Re-evaluates access on login; someone who lost access also loses the loadout. */

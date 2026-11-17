@@ -112,7 +112,6 @@ public final class AVServerConfig {
     public static final ModConfigSpec.DoubleValue HALO_COST_REDUCTION;
     public static final ModConfigSpec.DoubleValue HALO_GAZE_REDUCTION;
     public static final ModConfigSpec.BooleanValue COSMETICS_ENABLED;
-    public static final ModConfigSpec.ConfigValue<List<? extends String>> COSMETIC_DEVELOPERS;
 
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
@@ -215,9 +214,6 @@ public final class AVServerConfig {
         COSMETICS_ENABLED = b.comment("If false, nobody on this server can wear developer cosmetics.")
                 .translation("astralvigil.configuration.cosmetics.enabled")
                 .define("enabled", true);
-        COSMETIC_DEVELOPERS = b.comment("Extra player UUIDs (besides the built-in team) allowed to wear developer cosmetics.")
-                .translation("astralvigil.configuration.cosmetics.developers")
-                .defineListAllowEmpty("developers", List.of(), () -> "00000000-0000-0000-0000-000000000000", o -> o instanceof String);
         b.pop();
 
         b.comment("Eclipse Gaze: heavy use of celestial power draws the Eclipse's attention.")
