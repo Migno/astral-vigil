@@ -43,12 +43,9 @@ public final class AstralVigilClient {
         event.registerBlockEntityRenderer(AVBlockEntities.CONVERGENCE_ALTAR.get(), FloatingItemsRenderer::new);
         event.registerBlockEntityRenderer(AVBlockEntities.ASTRAL_FORGE.get(), FloatingItemsRenderer::new);
         event.registerBlockEntityRenderer(AVBlockEntities.STARLIGHT_FONT.get(), ctx -> new StarlightBeamRenderer());
-        // Watchers: one GeckoLib model per Watcher id (geo/animation/texture share the id)
+        // Watchers: shared GeckoLib rig, per-Watcher texture + emissive glowmask
         media.hofferbert.astralvigil.registry.AVEntities.WATCHERS.forEach((w, type) -> event.registerEntityRenderer(
-                type.get(), ctx -> new com.geckolib.renderer.GeoEntityRenderer<>(
-                        ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.firmament.WatcherEntity>(
-                                media.hofferbert.astralvigil.AstralVigil.id("watcher"))
-                                .withAltTexture(media.hofferbert.astralvigil.AstralVigil.id("watcher/" + w.id())))));
+                type.get(), ctx -> media.hofferbert.astralvigil.client.WatcherRenderer.create(ctx, w)));
         event.registerEntityRenderer(media.hofferbert.astralvigil.registry.AVEntities.ECLIPSE.get(), ctx -> new com.geckolib.renderer.GeoEntityRenderer<>(
                 ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.eclipse.EclipseEntity>(
                                 media.hofferbert.astralvigil.AstralVigil.id("eclipse"))

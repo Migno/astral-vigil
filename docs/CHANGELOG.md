@@ -4,6 +4,12 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Watchers reworked
+- The four Watchers are now towering, floating seraphs (≈ 5 blocks): six layered wings, a sun-disc nimbus behind the
+  head, a spinning halo, a sunburst crown, faceless helm with glowing eyes, glowing chest core, gold stole, a flared
+  gown dissolving into drips of light and crystal shards orbiting the chest. Emissive glowmask on every Watcher.
+- New idle (float, wing beats, spinning halos), cast and talk animations.
+
 ### Developer cosmetics
 - **Celestial Wardrobe** (key **J**): one cosmetic per slot with a turning live preview of your own player.
   Head: **Solar Crown**, **Eclipse Crown** (crackles), **Seraph Halo** (floating, spinning). Cape: **Seraph Cape**,

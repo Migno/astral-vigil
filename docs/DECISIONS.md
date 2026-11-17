@@ -207,6 +207,13 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   `Missing sampler Sampler1` as soon as dropped items are on screen. A vanilla diamond triggers it as well, so it is
   not an Astral Vigil bug; shader screenshots of item-heavy scenes (network, rituals) are pending an Iris fix.
 
+## 2026-11-17 – Watcher rework
+
+- **Generated rig:** `tools/dev/gen_watcher.py` writes the geo, animations and all textures/glowmasks (≤ 8 colours
+  checked) – it replaces `art/bbmodel/entity/watcher.bbmodel` as source of truth (the old 3-block rig was removed).
+- **Glow:** vanilla `eyes` render type layer (GeckoLib 5 `TextureLayerGeoLayer`, GeckoLib 4 custom `GeoRenderLayer`),
+  no GeckoLib emissive shader. Renderer scale 1.4, hitbox 1.8 × 5.6.
+
 ## Open (owner)
 
 - **Developer UUIDs.** Add the team's Mojang account UUIDs to `CosmeticsManager.TEAM` (or the server config list) –

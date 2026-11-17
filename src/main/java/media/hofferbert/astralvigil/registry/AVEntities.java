@@ -53,7 +53,7 @@ public final class AVEntities {
         for (Watcher w : Watcher.values()) {
             map.put(w, ENTITY_TYPES.register(w.id(), () -> EntityType.Builder.<WatcherEntity>of(
                             (type, level) -> new WatcherEntity(type, level, w), MobCategory.MISC)
-                    .sized(1.2f, 3.0f)
+                    .sized(1.8f, 5.6f)
                     .clientTrackingRange(10)
                     .fireImmune()
                     //? if >=26.1 {
