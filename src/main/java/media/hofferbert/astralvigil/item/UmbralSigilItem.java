@@ -54,7 +54,8 @@ public class UmbralSigilItem extends Item {
             player.sendSystemMessage(Component.translatable("message.astralvigil.umbral.present").withStyle(ChatFormatting.DARK_PURPLE));
             return false;
         }
-        EclipseEntity.summon(level, Vec3.atBottomCenterOf(media.hofferbert.astralvigil.firmament.SanctumBuilder.THRONE).add(0, 4, 0));
+        EclipseEntity.summon(level, Vec3.atBottomCenterOf(media.hofferbert.astralvigil.firmament.SanctumBuilder.THRONE).add(0, 4, 0),
+                player.getAbilities().instabuild ? null : player);
         if (!player.getAbilities().instabuild) {
             stack.shrink(1);
         }

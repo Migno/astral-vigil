@@ -10,7 +10,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Der gefallene fünfte Wächter kämpft in drei Phasen. $(l)Erstens$(): weite Hiebe und die Leerenlanze – hebt sie die Arme, weiche seitlich aus. $(l)Zweitens$(): sie zersplittert in Echos der Finsternis. $(l)Drittens$(): sie springt neben dich und sammelt eine Umbrale Nova; unterbrich die Sichtlinie hinter festen Blöcken."
+      "text": "Der gefallene fünfte Wächter kämpft in drei Phasen und nennt jeden großen Schlag, bevor er fällt. $(l)Gefallenes Licht$(): Der Umbrale Hieb fegt den Boden vor ihr, die Leerenlanze erfasst dich - weiche seitlich aus - und Fallende Sterne zeichnen Kreise, die du verlassen musst. Nach schweren Schlägen sinkt sie zu Boden: Dann schlag zu."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Zerbrochener Heiligenschein$(): Vier Umbrale Pylonen erheben sich und schirmen sie ab - zerstöre sie alle, und sie taumelt. Echos greifen ein, und der Schattensturz zeichnet eine Stelle, ehe sie herabstürzt; spring über die Druckwelle. $(l)Totale Finsternis$(): Mauern aus weinendem Obsidian wachsen empor. Verbirg dich dort vor der Umbralen Nova, spring über den kreisenden Finsternisstrahl oder geh in Deckung. Dem Tode nah, rast sie. Wer sich ewig versteckt oder flieht, spürt ihren Umbralen Griff."
     },
     {
       "type": "patchouli:spotlight",

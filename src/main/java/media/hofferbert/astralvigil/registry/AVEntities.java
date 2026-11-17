@@ -26,8 +26,8 @@ public final class AVEntities {
     public static final Supplier<EntityType<media.hofferbert.astralvigil.eclipse.EclipseEntity>> ECLIPSE = ENTITY_TYPES.register(
             "eclipse", () -> EntityType.Builder.<media.hofferbert.astralvigil.eclipse.EclipseEntity>of(
                             media.hofferbert.astralvigil.eclipse.EclipseEntity::new, MobCategory.MONSTER)
-                    .sized(1.6f, 4.0f)
-                    .clientTrackingRange(12)
+                    .sized(2.0f, 5.4f)
+                    .clientTrackingRange(16)
                     .fireImmune()
                     //? if >=26.1 {
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, AstralVigil.id("eclipse"))));
@@ -44,6 +44,18 @@ public final class AVEntities {
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, AstralVigil.id("eclipse_echo"))));
                     //?} else {
                     /*.build("eclipse_echo"));
+                    *///?}
+
+    public static final Supplier<EntityType<media.hofferbert.astralvigil.eclipse.UmbralPylon>> UMBRAL_PYLON = ENTITY_TYPES.register(
+            "umbral_pylon", () -> EntityType.Builder.<media.hofferbert.astralvigil.eclipse.UmbralPylon>of(
+                            media.hofferbert.astralvigil.eclipse.UmbralPylon::new, MobCategory.MISC)
+                    .sized(1.0f, 2.1f)
+                    .clientTrackingRange(12)
+                    .fireImmune()
+                    //? if >=26.1 {
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, AstralVigil.id("umbral_pylon"))));
+                    //?} else {
+                    /*.build("umbral_pylon"));
                     *///?}
 
     private AVEntities() {}
@@ -72,6 +84,7 @@ public final class AVEntities {
             WATCHERS.values().forEach(t -> e.put(t.get(), WatcherEntity.createAttributes().build()));
             e.put(ECLIPSE.get(), media.hofferbert.astralvigil.eclipse.EclipseEntity.createAttributes().build());
             e.put(ECLIPSE_ECHO.get(), media.hofferbert.astralvigil.eclipse.EclipseEcho.createAttributes().build());
+            e.put(UMBRAL_PYLON.get(), media.hofferbert.astralvigil.eclipse.UmbralPylon.createAttributes().build());
         });
     }
 }
