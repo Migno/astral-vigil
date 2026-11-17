@@ -58,6 +58,7 @@ public final class Firmament {
         NeoForge.EVENT_BUS.addListener(Firmament::onPlace);
         NeoForge.EVENT_BUS.addListener(Firmament::onPearl);
         FloatingBlocks.register();
+        RealmBuilder.register();
     }
 
     /** True in any realm of the Firmament. */

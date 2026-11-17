@@ -113,33 +113,72 @@ public final class TrialBlocks {
             builder.add(LIT);
         }
 
+        /** Target positions of an arena, scanned once per level (the template never changes). */
+        private static final java.util.Map<net.minecraft.resources.ResourceKey<Level>, java.util.Set<BlockPos>> TARGETS = new java.util.HashMap<>();
+        static final String HITS_KEY = "astralvigil_moon_hits";
+
+        static java.util.Set<BlockPos> targets(ServerLevel level, BlockPos near) {
+            return TARGETS.computeIfAbsent(level.dimension(), k -> {
+                java.util.Set<BlockPos> set = new java.util.HashSet<>();
+                for (BlockPos p : arena(near)) {
+                    if (level.getBlockState(p).getBlock() instanceof MoonTarget) {
+                        set.add(p.immutable());
+                    }
+                }
+                return set;
+            });
+        }
+
+        /** Targets this player has lit in the running trial (per player - other archers see their own progress). */
+        public static java.util.Set<BlockPos> hits(Player player) {
+            java.util.Set<BlockPos> set = new java.util.HashSet<>();
+            //? if >=26.1 {
+            long[] packed = player.getPersistentData().getLongArray(HITS_KEY).orElse(new long[0]);
+            //?} else {
+            /*long[] packed = player.getPersistentData().getLongArray(HITS_KEY);
+            *///?}
+            for (long l : packed) {
+                set.add(BlockPos.of(l));
+            }
+            return set;
+        }
+
+        static void saveHits(Player player, java.util.Set<BlockPos> hits) {
+            player.getPersistentData().putLongArray(HITS_KEY, hits.stream().mapToLong(BlockPos::asLong).toArray());
+        }
+
+        /** Forgets a player's lit targets and shows them dark again (trial start, completion). */
+        public static void resetHits(ServerPlayer player) {
+            for (BlockPos p : hits(player)) {
+                BlockState s = player.level().getBlockState(p);
+                if (s.getBlock() instanceof MoonTarget) {
+                    player.connection.send(new net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket(p, s.setValue(LIT, false)));
+                }
+            }
+            player.getPersistentData().remove(HITS_KEY);
+        }
+
         @Override
         protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
             if (!(level instanceof ServerLevel server) || !(projectile.getOwner() instanceof ServerPlayer player)
-                    || state.getValue(LIT) || !"vael".equals(TrialManager.activeTrial(player))) {
+                    || !"vael".equals(TrialManager.activeTrial(player))) {
                 return;
             }
-            BlockPos pos = hit.getBlockPos();
-            server.setBlock(pos, state.setValue(LIT, true), Block.UPDATE_ALL);
-            server.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.5f, 1.5f);
-            int total = 0;
-            int lit = 0;
-            for (BlockPos p : arena(pos)) {
-                BlockState s = server.getBlockState(p);
-                if (s.getBlock() instanceof MoonTarget) {
-                    total++;
-                    if (s.getValue(LIT)) {
-                        lit++;
-                    }
-                }
+            BlockPos pos = hit.getBlockPos().immutable();
+            java.util.Set<BlockPos> hits = hits(player);
+            if (!hits.add(pos)) {
+                return;
             }
-            if (total > 0 && lit >= total && TrialManager.complete(player, Watcher.VAEL)) {
-                for (BlockPos p : arena(pos)) {
-                    BlockState s = server.getBlockState(p);
-                    if (s.getBlock() instanceof MoonTarget) {
-                        server.setBlock(p.immutable(), s.setValue(LIT, false), Block.UPDATE_ALL);
-                    }
-                }
+            saveHits(player, hits);
+            // the world keeps the target dark; only this archer sees it light up
+            player.connection.send(new net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket(pos, state.setValue(LIT, true)));
+            server.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.5f, 1.5f);
+            java.util.Set<BlockPos> all = targets(server, pos);
+            hits.retainAll(all);
+            media.hofferbert.astralvigil.firmament.Firmament.actionBar(player, net.minecraft.network.chat.Component.translatable(
+                    "message.astralvigil.trial.moon_progress", hits.size(), all.size()).withStyle(net.minecraft.ChatFormatting.AQUA));
+            if (!all.isEmpty() && hits.containsAll(all) && TrialManager.complete(player, Watcher.VAEL)) {
+                resetHits(player);
             }
         }
     }

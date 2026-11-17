@@ -92,10 +92,29 @@ public final class TrialManager {
         }
         player.getPersistentData().putString(TRIAL_KEY, w.id());
         Firmament.resetCheckpoints(player);
+        onTrialStart(player, w);
         player.getPersistentData().putLong(TRIAL_UNTIL, player.level().getGameTime() + TRIAL_TICKS);
         player.sendSystemMessage(Component.translatable("trial.astralvigil." + w.id() + ".intro", name).withStyle(ChatFormatting.GOLD));
         player.sendSystemMessage(Component.translatable("trial.astralvigil." + w.id() + ".hint").withStyle(ChatFormatting.AQUA));
         return true;
+    }
+
+    /**
+     * Per-player trial state on start: Vael's targets light up for each archer separately; Orrin's mirror puzzle is
+     * shared in the world, so it is turned back to its start - unless someone else is solving it right now (then the
+     * two solve it together).
+     */
+    static void onTrialStart(ServerPlayer player, Watcher w) {
+        if (w == Watcher.VAEL) {
+            media.hofferbert.astralvigil.block.TrialBlocks.MoonTarget.resetHits(player);
+        } else if (w == Watcher.ORRIN && player.level() instanceof net.minecraft.server.level.ServerLevel level
+                && Realm.of(level) == Realm.STARFORGE) {
+            boolean othersSolving = level.players().stream()
+                    .anyMatch(p -> p != player && "orrin".equals(activeTrial((ServerPlayer) p)));
+            if (!othersSolving) {
+                RealmBuilder.resetMirrors(level, Realm.STARFORGE);
+            }
+        }
     }
 
     /** Completes the player's trial if it is the given Watcher's. */

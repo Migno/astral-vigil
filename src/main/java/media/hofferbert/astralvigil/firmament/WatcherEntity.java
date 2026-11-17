@@ -103,6 +103,7 @@ public class WatcherEntity extends PathfinderMob implements GeoEntity {
         if (level().isClientSide() || tickCount % 10 != 0) {
             return;
         }
+        settle();
         long now = level().getGameTime();
         Player near = level().getNearestPlayer(this, playerNear ? LEAVE_RANGE : GREET_RANGE);
         boolean arrived = near != null && !near.isSpectator() && !playerNear;
@@ -110,6 +111,24 @@ public class WatcherEntity extends PathfinderMob implements GeoEntity {
         if (arrived && now >= nextGreet && now >= busyUntil) {
             nextGreet = now + GREET_COOLDOWN;
             play("greet", 52);
+        }
+    }
+
+    /** Hover height of the hitbox above the ground: low enough to be spoken to (the model floats higher by itself). */
+    static final double HOVER = 1.0;
+
+    /** Sinks a Watcher that floats too high to be reached back down to its hover height (older realms spawned them higher). */
+    private void settle() {
+        net.minecraft.core.BlockPos.MutableBlockPos p = blockPosition().mutable();
+        for (int i = 0; i < 12; i++) {
+            p.move(net.minecraft.core.Direction.DOWN);
+            if (!level().getBlockState(p).getCollisionShape(level(), p).isEmpty()) {
+                double gap = getY() - (p.getY() + 1);
+                if (gap > HOVER + 0.05) {
+                    setPos(getX(), getY() - Math.min(gap - HOVER, 0.4), getZ());
+                }
+                return;
+            }
         }
     }
 

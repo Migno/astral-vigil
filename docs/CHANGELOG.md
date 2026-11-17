@@ -4,6 +4,15 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Multiplayer readiness (tested on dedicated servers, both targets)
+- **Trials are per player:** Vael's moon targets light up only for the archer who hit them (progress on the action
+  bar, the world stays dark for everyone else); Orrin's mirror puzzle turns back to its start when someone begins the
+  trial, unless another player is solving it right now (then they solve it together).
+- **No more freeze on a realm's first visit:** realms are split into pieces; the arrival shrine appears at once and
+  the rest is placed block by block within ~8 ms per tick. An interrupted build resumes on the next visit.
+- **Watchers float right beside the bridge** so they can be spoken to from the walkway (they hovered out of reach);
+  Watchers that float too high sink back to hover height.
+
 ### Models and animations, AAA pass (`docs/ART_GUIDE.md`)
 - **The Eclipse**: rebuilt to player-anchored proportions (no more spaghetti fingers), jointed arms, wings and
   tendrils, 275 cubes / 63 bones; every one of its 39 animations re-keyed with anticipation, contact holds and

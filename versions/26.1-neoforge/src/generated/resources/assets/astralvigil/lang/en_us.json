@@ -543,6 +543,7 @@
   "message.astralvigil.trial.checkpoint": "Solenne's light marks your climb (%s of 4).",
   "message.astralvigil.trial.complete": "%s accepts your trial and grants you their Mark.",
   "message.astralvigil.trial.expired": "Your trial has lapsed. Speak to the Watcher again.",
+  "message.astralvigil.trial.moon_progress": "Moon targets lit: %s of %s",
   "message.astralvigil.trial.skipped": "The crown stays cold: you passed only %s of %s gold pads.",
   "message.astralvigil.umbral.marks": "The sigil needs all four Watchers' Marks to answer.",
   "message.astralvigil.umbral.not_here": "The sigil is cold. Only on the Umbral Throne - reached through an Umbral Gate - can the Eclipse be called.",

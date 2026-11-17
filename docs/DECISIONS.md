@@ -284,3 +284,13 @@ Only the built-in team list `CosmeticsManager.TEAM` grants developer cosmetics (
 `[cosmetics] developers` server-config list is removed: server admins cannot hand cosmetics out, they can only switch
 them off with `[cosmetics] enabled`. Development environments (runClient/GameTests) keep full access for testing.
 New team members are added in code and ship with the next release.
+
+## Multiplayer pass (2026-11-17)
+
+- **Per-player trial state** lives in the player's persistent data (Vael: lit target positions; Sun Spire: checkpoints).
+  Per-player visuals use client-only block updates, so the world never changes. Orrin's puzzle is physical and shared:
+  it resets on trial start unless someone else is mid-solve (co-op instead of griefing).
+- **Realm construction is incremental:** templates are written as pieces (`structure/realm/<id>/p0..pN.nbt`, p0 = the
+  arrival pad), placed block by block from the template palette (access transformer on `StructureTemplate.palettes`)
+  with an 8 ms per-tick budget. The Starlight Font marks "started", a bedrock block under the pad "complete".
+- Local dev servers under `run/<target>/server` accept the Minecraft EULA for testing only.

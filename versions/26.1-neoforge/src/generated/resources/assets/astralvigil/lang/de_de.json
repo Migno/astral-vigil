@@ -543,6 +543,7 @@
   "message.astralvigil.trial.checkpoint": "Solennes Licht zeichnet deinen Aufstieg (%s von 4).",
   "message.astralvigil.trial.complete": "%s erkennt deine Prüfung an und gewährt dir sein Zeichen.",
   "message.astralvigil.trial.expired": "Deine Prüfung ist verstrichen. Sprich erneut mit dem Wächter.",
+  "message.astralvigil.trial.moon_progress": "Mondzielscheiben entzündet: %s von %s",
   "message.astralvigil.trial.skipped": "Die Krone bleibt kalt: Du hast nur %s von %s goldenen Stufen erreicht.",
   "message.astralvigil.umbral.marks": "Das Siegel antwortet nur mit den Zeichen aller vier Wächter.",
   "message.astralvigil.umbral.not_here": "Das Siegel bleibt kalt. Nur auf dem Umbralthron - erreichbar durch ein Umbraltor - lässt sich die Finsternis rufen.",

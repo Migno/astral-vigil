@@ -161,20 +161,26 @@ def main():
     jar = zipfile.ZipFile(sys.argv[2]) if len(sys.argv) > 2 else None
     os.makedirs(out, exist_ok=True)
     summary = {}
-    for fn in sorted(os.listdir(TEMPLATES)):
-        realm = fn[:-4]
-        nbt = read_nbt(gzip.decompress(open(os.path.join(TEMPLATES, fn), 'rb').read()))
-        names = [p['Name'] for p in nbt['palette']]
-        palette, pidx = [], {}
-        for nm in names:
-            if nm not in pidx:
-                pidx[nm] = len(palette)
-                palette.append([nm.split(':')[1], colour(nm, jar), kind(nm)])
-        solid = {}
-        for b in nbt['blocks']:
-            x, y, z = b['pos']
-            nm = names[b['state']]
-            solid[(x - ANCHOR, y - FLOOR_Y, z - ANCHOR)] = pidx[nm]
+    for realm in sorted(os.listdir(TEMPLATES)):
+        rdir = os.path.join(TEMPLATES, realm)
+        if not os.path.isdir(rdir):
+            continue
+        palette, pidx, solid = [], {}, {}
+        k = 0
+        while os.path.exists(os.path.join(rdir, 'p%d.nbt' % k)):
+            nbt = read_nbt(gzip.decompress(open(os.path.join(rdir, 'p%d.nbt' % k), 'rb').read()))
+            names = [p['Name'] for p in nbt['palette']]
+            for nm in names:
+                if nm not in pidx:
+                    pidx[nm] = len(palette)
+                    palette.append([nm.split(':')[1], colour(nm, jar), kind(nm), nm])
+            for b in nbt['blocks']:
+                x, y, z = b['pos']
+                nm = names[b['state']]
+                if nm == 'minecraft:bedrock':
+                    continue   # completion marker
+                solid[(x - ANCHOR, y - FLOOR_Y, z - ANCHOR)] = pidx[nm]
+            k += 1
         opaque = {k for k, v in solid.items() if palette[v][2] in (0, 1)}
         buf = bytearray()
         kept = 0

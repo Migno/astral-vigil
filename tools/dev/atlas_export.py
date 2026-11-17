@@ -218,14 +218,9 @@ def realms(out, jar):
     rvd.main()   # writes <tmp>/<realm>.json with palette + blocks
     for fn in sorted(os.listdir(tmp)):
         d = json.load(open(os.path.join(tmp, fn)))
-        nbt = rvd.read_nbt(gzip.decompress(open(os.path.join(rvd.TEMPLATES, fn.replace('.json', '.nbt')), 'rb').read()))
-        names = []
-        for p in nbt['palette']:
-            if p['Name'] not in names:
-                names.append(p['Name'])
-        tiles = [atlas.faces(n) for n in names]
-        for entry, t in zip(d['palette'], tiles):
-            entry.append([-1 if v is None else v for v in t])
+        for entry in d['palette']:
+            t = atlas.faces(entry[3])
+            entry[3] = [-1 if v is None else v for v in t]
         json.dump(d, open(os.path.join(out, 'data', 'realm-' + d['realm'].replace('_', '-') + '.json'), 'w'), separators=(',', ':'))
         os.remove(os.path.join(tmp, fn))
     os.rmdir(tmp)

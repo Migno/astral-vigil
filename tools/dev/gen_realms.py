@@ -82,9 +82,31 @@ class World:
         for y in range(y0, y1):
             self.put(x, y, z, name, **props)
 
-    def write(self, path):
+    PAD_HALF = 12   # piece 0: the arrival shrine and its gate, placed at once when the first traveller arrives
+    TILE = 16       # the rest is split into 16x16 columns that the server places over the following ticks
+
+    def write_pieces(self, directory):
+        """Writes p0.nbt (the arrival pad), then p1..pN (one per non-empty 16x16 column) - all in the same frame.
+        The last piece also carries the completion marker (bedrock hidden under the pad, see RealmBuilder)."""
+        os.makedirs(directory, exist_ok=True)
+        for f in os.listdir(directory):
+            if f.endswith('.nbt'):
+                os.remove(os.path.join(directory, f))
+        pad, tiles = {}, {}
+        for (x, y, z), v in self.blocks.items():
+            if abs(x) <= self.PAD_HALF and abs(z) <= self.PAD_HALF:
+                pad[(x, y, z)] = v
+            else:
+                tiles.setdefault(((x + ANCHOR) // self.TILE, (z + ANCHOR) // self.TILE), {})[(x, y, z)] = v
+        pieces = [pad] + [tiles[k] for k in sorted(tiles)]
+        pieces[-1][(0, -3, 0)] = ('minecraft:bedrock', ())
+        for i, blocks in enumerate(pieces):
+            self.write(os.path.join(directory, 'p%d.nbt' % i), blocks, quiet=True)
+        print('wrote', os.path.basename(directory), len(self.blocks), 'blocks in', len(pieces), 'pieces')
+
+    def write(self, path, blocks=None, quiet=False):
         palette, index, entries = [], {}, []
-        for (x, y, z), (name, props) in sorted(self.blocks.items(), key=lambda kv: (kv[0][1], kv[0][2], kv[0][0])):
+        for (x, y, z), (name, props) in sorted((blocks if blocks is not None else self.blocks).items(), key=lambda kv: (kv[0][1], kv[0][2], kv[0][0])):
             tx, ty, tz = x + ANCHOR, y + FLOOR_Y, z + ANCHOR
             if not (0 <= tx <= 2 * ANCHOR and 0 <= ty < HEIGHT and 0 <= tz <= 2 * ANCHOR):
                 continue
@@ -105,7 +127,8 @@ class World:
         ]))
         with open(path, 'wb') as f:
             f.write(gzip.compress(root, mtime=0))
-        print('wrote', os.path.basename(path), len(entries), 'blocks,', len(palette), 'states')
+        if not quiet:
+            print('wrote', os.path.basename(path), len(entries), 'blocks,', len(palette), 'states')
 
 
 # ------------------------------------------------------------------ shapes
@@ -1315,4 +1338,7 @@ REALMS = {
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
     for name, fn in REALMS.items():
-        fn().write(os.path.join(OUT, name + '.nbt'))
+        fn().write_pieces(os.path.join(OUT, name))
+        old = os.path.join(OUT, name + '.nbt')
+        if os.path.exists(old):
+            os.remove(old)

@@ -527,6 +527,7 @@ public final class AVLang {
         add("realm.astralvigil.umbral_throne", "The Umbral Cathedral", "Die Umbrale Kathedrale");
         add("realm.astralvigil.umbral_throne.subtitle", "The fallen Watcher's broken sanctuary", "Das zerbrochene Heiligtum des gefallenen Wächters");
         add("message.astralvigil.firmament.sacred", "This ground is sacred to the Watchers.", "Dieser Boden ist den Wächtern heilig.");
+        add("message.astralvigil.trial.moon_progress", "Moon targets lit: %s of %s", "Mondzielscheiben entzündet: %s von %s");
         add("message.astralvigil.trial.checkpoint", "Solenne's light marks your climb (%s of 4).", "Solennes Licht zeichnet deinen Aufstieg (%s von 4).");
         add("message.astralvigil.trial.skipped", "The crown stays cold: you passed only %s of %s gold pads.", "Die Krone bleibt kalt: Du hast nur %s von %s goldenen Stufen erreicht.");
         add("message.astralvigil.firmament.arrive", "You rise above the clouds. The gate behind you leads home.", "Du steigst über die Wolken. Das Tor hinter dir führt nach Hause.");

@@ -151,16 +151,28 @@ public final class AVGameTests {
         var anchor = new net.minecraft.core.BlockPos(media.hofferbert.astralvigil.firmament.Realm.ANCHOR, media.hofferbert.astralvigil.firmament.Realm.FLOOR_Y,
                 media.hofferbert.astralvigil.firmament.Realm.ANCHOR);
         for (var realm : media.hofferbert.astralvigil.firmament.Realm.values()) {
-            var template = manager.get(AstralVigil.id("realm/" + realm.id()));
-            GT.check(helper, template.isPresent(), "missing template " + realm.id());
-            var fonts = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, media.hofferbert.astralvigil.registry.AVBlocks.STARLIGHT_FONT.get());
+            var pad = manager.get(AstralVigil.id("realm/" + realm.id() + "/p0"));
+            GT.check(helper, pad.isPresent(), "missing pad piece of " + realm.id());
+            var fonts = pad.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, media.hofferbert.astralvigil.registry.AVBlocks.STARLIGHT_FONT.get());
             GT.check(helper, fonts.stream().anyMatch(i -> i.pos().equals(anchor)), realm.id() + ": no Starlight Font on the anchor");
-            int portals = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings,
+            int portals = pad.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings,
                     media.hofferbert.astralvigil.registry.AVBlocks.PORTALS.get(realm.gate()).get()).size();
-            GT.check(helper, portals == 6, realm.id() + ": expected a lit 2x3 return gate, found " + portals + " portal blocks");
+            GT.check(helper, portals == 6, realm.id() + ": the pad piece needs a lit 2x3 return gate, found " + portals + " portal blocks");
             var k = key.get(realm);
+            int found = 0, markers = 0, pieces = 0;
+            for (int i = 0; ; i++) {
+                var t = manager.get(AstralVigil.id("realm/" + realm.id() + "/p" + i));
+                if (t.isEmpty()) {
+                    break;
+                }
+                pieces++;
+                if (k != null) {
+                    found += t.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, k.getKey()).size();
+                }
+                markers += t.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, net.minecraft.world.level.block.Blocks.BEDROCK).size();
+            }
+            GT.check(helper, pieces > 1 && markers == 1, realm.id() + ": expected pieces with one completion marker (" + pieces + "/" + markers + ")");
             if (k != null) {
-                int found = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, k.getKey()).size();
                 GT.check(helper, found == k.getValue(), realm.id() + ": expected " + k.getValue() + " key blocks, found " + found);
             }
         }
