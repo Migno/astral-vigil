@@ -225,6 +225,15 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   difficulty comes from length, precision, archery under pressure and a dark maze.
 - **The Eclipse is bound to the Umbral Throne** (summoned onto its dais) so the fight always has cover pillars.
 
+## 2026-11-17 – One gate per challenge
+
+- **Frame block decides the destination** (`GateKind`): one portal block per kind so the colour shows where it
+  leads, and a gate frame must be a single kind. Same Ascension Key for all; the Umbral Gate additionally checks the
+  four Marks when it is lit.
+- **No bridges:** islands are only reachable through their gates; each has an arrival platform with a return gate
+  and its Watcher. The first trip builds the whole Firmament (a few seconds, once).
+- Vanilla's player portal cooldown (15 s after any dimension change) applies to every gate.
+
 ## Open (owner)
 
 - **Developer UUIDs.** Add the team's Mojang account UUIDs to `CosmeticsManager.TEAM` (or the server config list) –

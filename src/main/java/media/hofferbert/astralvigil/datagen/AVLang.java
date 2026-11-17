@@ -431,17 +431,33 @@ public final class AVLang {
         add("block.astralvigil.trial_goal", "Trial Beacon", "Prüfungsleuchte");
         add("block.astralvigil.moon_target", "Moon Target", "Mondzielscheibe");
         add("item.astralvigil.ascension_key", "Ascension Key", "Aufstiegsschlüssel");
-        add("item.astralvigil.ascension_key.desc", "Set it into a finished Astral Gate frame to light the way to the Firmament.",
-                "In einen vollendeten Astraltor-Rahmen gesetzt, öffnet er den Weg ins Firmament.");
+        add("item.astralvigil.ascension_key.desc", "Set it into a finished gate frame. Each kind of gate opens onto a different place in the Firmament.",
+                "In einen vollendeten Torrahmen gesetzt. Jede Torart öffnet sich zu einem anderen Ort im Firmament.");
         add("block.astralvigil.astral_gate", "Astral Gate", "Astraltor");
         add("block.astralvigil.celestial_portal", "Celestial Portal", "Himmelsportal");
-        add("message.astralvigil.gate.hint", "The key yearns for an Astral Gate: build a closed frame of Astral Gate blocks, then set the key into it.",
-                "Der Schlüssel sehnt sich nach einem Astraltor: Baue einen geschlossenen Rahmen aus Astraltor-Blöcken und setze den Schlüssel ein.");
+        add("block.astralvigil.solar_gate", "Solar Gate", "Sonnentor");
+        add("block.astralvigil.solar_portal", "Solar Portal", "Sonnenportal");
+        add("block.astralvigil.lunar_gate", "Lunar Gate", "Mondtor");
+        add("block.astralvigil.lunar_portal", "Lunar Portal", "Mondportal");
+        add("block.astralvigil.prism_gate", "Prism Gate", "Prismentor");
+        add("block.astralvigil.prism_portal", "Prism Portal", "Prismenportal");
+        add("block.astralvigil.archive_gate", "Archive Gate", "Archivtor");
+        add("block.astralvigil.archive_portal", "Archive Portal", "Archivportal");
+        add("block.astralvigil.umbral_gate", "Umbral Gate", "Umbraltor");
+        add("block.astralvigil.umbral_portal", "Umbral Portal", "Umbralportal");
+        add("message.astralvigil.gate.lit.astral", "The Astral Gate opens onto the Firmament's hub.", "Das Astraltor öffnet sich zur Mitte des Firmaments.");
+        add("message.astralvigil.gate.lit.solar", "The Solar Gate opens at the foot of Solenne's Sun Spire.", "Das Sonnentor öffnet sich am Fuß von Solennes Sonnenspitze.");
+        add("message.astralvigil.gate.lit.lunar", "The Lunar Gate opens onto Vael's Moon Arena.", "Das Mondtor öffnet sich zu Vaels Mondarena.");
+        add("message.astralvigil.gate.lit.prism", "The Prism Gate opens before Orrin's Prism Observatory.", "Das Prismentor öffnet sich vor Orrins Prismenobservatorium.");
+        add("message.astralvigil.gate.lit.archive", "The Archive Gate opens before Ilyra's Endless Library.", "Das Archivtor öffnet sich vor Ilyras Endloser Bibliothek.");
+        add("message.astralvigil.gate.lit.umbral", "The Umbral Gate tears open. The Throne of the Eclipse lies beyond.", "Das Umbraltor reißt auf. Dahinter liegt der Thron der Finsternis.");
+        add("message.astralvigil.gate.umbral_marks", "The Umbral Gate stays dark: carry all four Watchers' Marks.", "Das Umbraltor bleibt dunkel: Trage die Zeichen aller vier Wächter bei dir.");
+        add("message.astralvigil.gate.hint", "The key yearns for a gate: build a closed, upright frame of one kind of gate block, then set the key into it.",
+                "Der Schlüssel sehnt sich nach einem Tor: Baue einen geschlossenen, aufrechten Rahmen aus einer Sorte Torblöcke und setze den Schlüssel ein.");
         add("message.astralvigil.gate.incomplete", "The frame is not closed (opening at least 2 wide and 3 tall, at most 21).",
                 "Der Rahmen ist nicht geschlossen (Öffnung mindestens 2 breit und 3 hoch, höchstens 21).");
-        add("message.astralvigil.gate.lit", "The gate opens onto the Firmament.", "Das Tor öffnet sich zum Firmament.");
         add("dimension.astralvigil.firmament", "The Firmament", "Das Firmament");
-        add("message.astralvigil.firmament.arrive", "You rise above the clouds. Four bridges lead to the Watchers' trials; the gate behind you leads home.", "Du steigst über die Wolken. Vier Brücken führen zu den Prüfungen der Wächter; das Tor hinter dir führt nach Hause.");
+        add("message.astralvigil.firmament.arrive", "You rise above the clouds. The gate behind you leads home.", "Du steigst über die Wolken. Das Tor hinter dir führt nach Hause.");
         add("message.astralvigil.firmament.missing", "The Firmament is closed on this server.", "Das Firmament ist auf diesem Server verschlossen.");
         add("message.astralvigil.watcher.favour", "%s regards you. Favour: %s", "%s betrachtet dich. Gunst: %s");
         add("message.astralvigil.trial.complete", "%s accepts your trial and grants you their Mark.", "%s erkennt deine Prüfung an und gewährt dir sein Zeichen.");
@@ -488,7 +504,7 @@ public final class AVLang {
         add("item.astralvigil.seraph_feather.desc", "Use to bind Seraph Wings to yourself; use again to show or hide them.", "Benutzen, um dir Seraphsflügel zu binden; erneut benutzen, um sie zu zeigen oder zu verbergen.");
         add("item.astralvigil.halo_of_dawn", "Halo of Dawn", "Heiligenschein der Morgenröte");
         add("item.astralvigil.halo_of_dawn.desc", "Carried: abilities cost less starlight and the Eclipse's gaze slides off you.", "Getragen: Fähigkeiten kosten weniger Sternenlicht und der Blick der Finsternis gleitet an dir ab.");
-        add("message.astralvigil.umbral.not_here", "The sigil is cold. Only on the Umbral Throne, far west of the Firmament's hub beyond Vael's arena, can the Eclipse be called.", "Das Siegel bleibt kalt. Nur auf dem Umbralthron, weit westlich der Firmamentmitte hinter Vaels Arena, lässt sich die Finsternis rufen.");
+        add("message.astralvigil.umbral.not_here", "The sigil is cold. Only on the Umbral Throne - reached through an Umbral Gate - can the Eclipse be called.", "Das Siegel bleibt kalt. Nur auf dem Umbralthron - erreichbar durch ein Umbraltor - lässt sich die Finsternis rufen.");
         add("message.astralvigil.umbral.marks", "The sigil needs all four Watchers' Marks to answer.", "Das Siegel antwortet nur mit den Zeichen aller vier Wächter.");
         add("message.astralvigil.umbral.peaceful", "The Eclipse does not answer in a peaceful world.", "In einer friedlichen Welt antwortet die Finsternis nicht.");
         add("message.astralvigil.umbral.present", "The Eclipse is already here.", "Die Finsternis ist bereits hier.");

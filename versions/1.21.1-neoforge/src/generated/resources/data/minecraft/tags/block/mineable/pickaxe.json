@@ -13,7 +13,12 @@
     "astralvigil:star_anchor",
     "astralvigil:void_crystal",
     "astralvigil:firmament_stone",
+    "astralvigil:eclipse_seal",
     "astralvigil:astral_gate",
-    "astralvigil:eclipse_seal"
+    "astralvigil:solar_gate",
+    "astralvigil:lunar_gate",
+    "astralvigil:prism_gate",
+    "astralvigil:archive_gate",
+    "astralvigil:umbral_gate"
   ]
 }

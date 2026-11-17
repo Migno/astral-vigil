@@ -7,8 +7,9 @@ Every template is a floating island: tapered underside, the floor at y = FLOOR, 
 SanctumBuilder places them so that FLOOR lands on Firmament.LANDING.y. Deterministic (seeded). Air is not stored:
 the Firmament sky at the build height is empty.
 
-Layout (keep in sync with SanctumBuilder): sanctums 240 blocks east (Solenne), west (Vael), south (Orrin) and north
-(Ilyra) of the hub; the Umbral Throne 520 blocks west, its bridge runs through Vael's arena (keep z = 0 clear there).
+Layout (keep in sync with SanctumBuilder): trial islands 240 blocks east (Solenne), west (Vael), south (Orrin) and north
+(Ilyra) of the hub, the Umbral Throne 520 blocks west. No bridges between them: each has an arrival platform with its
+own return gate and is reached only through its own gate.
 """
 import gzip
 import math
@@ -137,6 +138,15 @@ def landing():
     for dx, dz in ((4, 0), (-4, 0), (0, 4)):
         isl.put(c + dx, FLOOR + 1, c + dz, 'minecraft:lantern', hanging='false', waterlogged='false')
     gate(isl, c, c - 5)  # return gate on the north side; arrivals land at (c, c + 3)
+    return isl
+
+
+def arrival():
+    """Arrival platform in front of a trial island / the throne; SanctumBuilder adds the return gate and a short bridge."""
+    isl = Island(6, FLOOR + 8, seed=71)
+    c = isl.c
+    for dx, dz in ((3, 3), (-3, 3), (3, -3), (-3, -3)):
+        isl.put(c + dx, FLOOR + 1, c + dz, 'minecraft:lantern', hanging='false', waterlogged='false')
     return isl
 
 
@@ -332,7 +342,7 @@ def throne():
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
-    for name, fn in (('landing', landing), ('solenne', solenne), ('vael', vael), ('orrin', orrin), ('ilyra', ilyra),
+    for name, fn in (('landing', landing), ('arrival', arrival), ('solenne', solenne), ('vael', vael), ('orrin', orrin), ('ilyra', ilyra),
                      ('throne', throne)):
         isl = fn()
         write(os.path.join(OUT, name + '.nbt'), isl.size, isl.blocks)

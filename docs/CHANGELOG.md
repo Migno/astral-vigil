@@ -4,6 +4,13 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### A gate for every challenge
+- Six gate kinds, each with its own frame block, portal colour and destination: **Astral** (hub), **Solar** (Sun
+  Spire), **Lunar** (Moon Arena), **Prism** (Prism Observatory), **Archive** (Endless Library), **Umbral** (Umbral
+  Throne – only lights for a player carrying all four Marks). All lit with the Ascension Key; 4 frames per craft.
+- The bridges are gone: every trial island and the throne has its own arrival platform with a return gate, so its
+  gate is the only way in.
+
 ### Firmament: built gate, large-scale trials, Umbral Throne
 - **Astral Gate:** the Ascension Key no longer teleports. Build an upright, closed frame of **Astral Gate** blocks
   (crafted from Starmetal, Astral Shards and Meteoric Stone; opening 2×3 up to 21×21) and set the key into it to

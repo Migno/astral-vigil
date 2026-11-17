@@ -2,7 +2,9 @@ package media.hofferbert.astralvigil.item;
 
 import java.util.List;
 import media.hofferbert.astralvigil.block.CelestialPortalBlock;
+import media.hofferbert.astralvigil.firmament.GateKind;
 import media.hofferbert.astralvigil.firmament.GateShape;
+import media.hofferbert.astralvigil.firmament.Watcher;
 import media.hofferbert.astralvigil.registry.AVBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -21,8 +23,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
- * Ascension Key: set into an Astral Gate frame it lights the gate's opening with a Celestial Portal. The key itself no
- * longer carries anyone - the gate has to be built first.
+ * Ascension Key: set into a gate frame it lights the opening with that gate's portal. Each gate kind has its own frame
+ * block and leads to its own place (hub, one of the four trial islands, the Umbral Throne). The key itself carries no
+ * one - the gates have to be built first; the Umbral Gate only opens for someone carrying all four Marks.
  */
 public class AscensionKeyItem extends Item {
     public AscensionKeyItem(Properties properties) {
@@ -34,7 +37,8 @@ public class AscensionKeyItem extends Item {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
-        if (!level.getBlockState(pos).is(AVBlocks.ASTRAL_GATE.get())) {
+        GateKind kind = frameKind(level.getBlockState(pos));
+        if (kind == null) {
             if (player != null && !level.isClientSide()) {
                 player.sendSystemMessage(Component.translatable("message.astralvigil.gate.hint").withStyle(ChatFormatting.AQUA));
             }
@@ -42,6 +46,10 @@ public class AscensionKeyItem extends Item {
         }
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
+        }
+        if (kind == GateKind.UMBRAL && player != null && !carriesAllMarks(player)) {
+            player.sendSystemMessage(Component.translatable("message.astralvigil.gate.umbral_marks").withStyle(ChatFormatting.DARK_PURPLE));
+            return InteractionResult.FAIL;
         }
         int lit = ignite(level, pos);
         if (lit == 0) {
@@ -52,30 +60,56 @@ public class AscensionKeyItem extends Item {
         }
         level.playSound(null, pos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.8f, 1.4f);
         if (player != null) {
-            player.sendSystemMessage(Component.translatable("message.astralvigil.gate.lit").withStyle(ChatFormatting.GOLD));
+            player.sendSystemMessage(Component.translatable("message.astralvigil.gate.lit." + kind.id()).withStyle(ChatFormatting.GOLD));
         }
         return InteractionResult.SUCCESS;
     }
 
+    /** The gate kind whose frame block this is, or null. */
+    public static GateKind frameKind(BlockState state) {
+        for (var e : AVBlocks.GATES.entrySet()) {
+            if (state.is(e.getValue().get())) {
+                return e.getKey();
+            }
+        }
+        return null;
+    }
+
+    static boolean carriesAllMarks(Player player) {
+        for (Watcher w : Watcher.values()) {
+            if (!player.getInventory().contains(new net.minecraft.world.item.ItemStack(media.hofferbert.astralvigil.registry.AVItems.MARKS.get(w).get()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
-     * Lights the gate whose frame contains {@code frame}: tries the X plane, then the Z plane.
+     * Lights the gate whose frame contains {@code frame}: tries the X plane, then the Z plane. The frame must be made
+     * entirely of one gate kind; the portal takes that kind.
      *
      * @return number of portal blocks placed (0 = no complete gate)
      */
     public static int ignite(Level level, BlockPos frame) {
+        GateKind kind = frameKind(level.getBlockState(frame));
+        if (kind == null) {
+            return 0;
+        }
+        Block frameBlock = AVBlocks.GATES.get(kind).get();
+        Block portalBlock = AVBlocks.PORTALS.get(kind).get();
         for (Direction.Axis axis : new Direction.Axis[] {Direction.Axis.X, Direction.Axis.Z}) {
             boolean x = axis == Direction.Axis.X;
             int u0 = x ? frame.getX() : frame.getZ();
             List<int[]> cells = GateShape.opening(u0, frame.getY(),
-                    (u, y) -> level.getBlockState(at(frame, x, u, y)).is(AVBlocks.ASTRAL_GATE.get()),
+                    (u, y) -> level.getBlockState(at(frame, x, u, y)).is(frameBlock),
                     (u, y) -> {
                         BlockState s = level.getBlockState(at(frame, x, u, y));
-                        return s.isAir() || s.is(AVBlocks.CELESTIAL_PORTAL.get()) || s.canBeReplaced();
+                        return s.isAir() || s.is(portalBlock) || s.canBeReplaced();
                     });
             if (cells.isEmpty()) {
                 continue;
             }
-            BlockState portal = AVBlocks.CELESTIAL_PORTAL.get().defaultBlockState().setValue(CelestialPortalBlock.AXIS, axis);
+            BlockState portal = portalBlock.defaultBlockState().setValue(CelestialPortalBlock.AXIS, axis);
             for (int[] c : cells) {
                 BlockPos p = at(frame, x, c[0], c[1]);
                 level.setBlock(p, portal, Block.UPDATE_CLIENTS);

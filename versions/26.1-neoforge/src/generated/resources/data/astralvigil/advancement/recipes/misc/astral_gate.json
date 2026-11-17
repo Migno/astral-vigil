@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_starmetal": {
+    "has_astral_shard": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/starmetal"
+            "items": "#astralvigil:astral_shards"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_starmetal"
+      "has_astral_shard"
     ]
   ],
   "rewards": {

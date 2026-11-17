@@ -16,9 +16,28 @@ OUT = os.path.join(ROOT, "src", "main", "resources", "assets", "astralvigil", "t
 C = png.hexc
 
 
-def gate():
-    navy, white, pale, shade = C("1E1A2E"), C("FFFFFF"), C("D8D8E6"), C("B9B3CC")
-    gold, gold_d, cyan, cyan_d = C("F2C94C"), C("C9971E"), C("8FEFFF"), C("2FA8D0")
+# per gate kind: outline, body light, body, body shade, trim, trim dark, sigil, sigil dark
+THEMES = {
+    "astral": ("1E1A2E", "FFFFFF", "D8D8E6", "B9B3CC", "F2C94C", "C9971E", "8FEFFF", "2FA8D0"),
+    "solar": ("7A5A12", "FFF4C0", "F2C94C", "C9971E", "FFFFFF", "E0A030", "FF8A3D", "C2410C"),
+    "lunar": ("1E1A2E", "FFFFFF", "C8D4EA", "9AA3B8", "E6EEFA", "7F93B8", "8FEFFF", "2FA8D0"),
+    "prism": ("1E1A2E", "B9F6FF", "4F6F8F", "33506B", "C9971E", "7A5A12", "FFFFFF", "8FEFFF"),
+    "archive": ("0F0C1A", "6B4A2B", "4A3220", "2F1F14", "F2C94C", "C9971E", "B9F6FF", "4A4790"),
+    "umbral": ("0B0912", "3A2560", "2C1F45", "1E1A2E", "8C5AC8", "5B2A86", "E0C8FF", "B57CFF"),
+}
+# portal swirl: deep, mid, bright, star a, star b, star c
+PORTAL_THEMES = {
+    "celestial_portal": ("1E1A2E", "2C2942", "5B2A86", "2FA8D0", "8FEFFF", "FFFFFF"),
+    "solar_portal": ("7A3A0A", "C2410C", "E0A030", "F2C94C", "FFF4C0", "FFFFFF"),
+    "lunar_portal": ("1E1A2E", "33506B", "7F93B8", "C8D4EA", "E6EEFA", "FFFFFF"),
+    "prism_portal": ("0F2A3A", "2FA8D0", "5B2A86", "F2C94C", "8FEFFF", "FFFFFF"),
+    "archive_portal": ("0F0C1A", "2C2A5E", "4A4790", "C9971E", "B9F6FF", "FFFFFF"),
+    "umbral_portal": ("05040A", "1E1A2E", "5B2A86", "8C5AC8", "B57CFF", "E0C8FF"),
+}
+
+
+def gate(theme="astral"):
+    navy, white, pale, shade, gold, gold_d, cyan, cyan_d = (C(c) for c in THEMES[theme])
     img = png.blank(16, 16)
     for y in range(16):
         for x in range(16):
@@ -47,9 +66,10 @@ def gate():
     return img
 
 
-def portal(frames=8):
-    deep, violet, mid = C("1E1A2E", 200), C("5B2A86", 190), C("2C2942", 190)
-    glow, cyan, white = C("8FEFFF", 220), C("2FA8D0", 210), C("FFFFFF", 235)
+def portal(theme="celestial_portal", frames=8):
+    t6 = PORTAL_THEMES[theme]
+    deep, mid, violet = C(t6[0], 200), C(t6[1], 190), C(t6[2], 190)
+    cyan, glow, white = C(t6[3], 210), C(t6[4], 220), C(t6[5], 235)
     rnd = random.Random(5)
     stars = [(rnd.random() * 16, rnd.random() * 16, rnd.choice((cyan, glow, white))) for _ in range(9)]
     rows = []
@@ -73,14 +93,31 @@ def portal(frames=8):
     return rows
 
 
+MODELS = os.path.join(ROOT, "src", "main", "resources", "assets", "astralvigil", "models", "block")
+PORTAL_MODEL = """{
+  "parent": "minecraft:block/nether_portal_%s",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "particle": "astralvigil:block/%s",
+    "portal": "astralvigil:block/%s"
+  }
+}
+"""
+
+
 def main():
-    for name, img in (("astral_gate", gate()), ("celestial_portal", portal())):
+    images = [(k + "_gate", gate(k)) for k in THEMES] + [(k, portal(k)) for k in PORTAL_THEMES]
+    for name, img in images:
         n = len(png.colours(img))
         assert n <= 8, f"{name}: {n} colours"
         png.write(os.path.join(OUT, name + ".png"), img)
-    with open(os.path.join(OUT, "celestial_portal.png.mcmeta"), "w", encoding="utf-8", newline="\n") as f:
-        f.write('{\n  "animation": {\n    "frametime": 3,\n    "interpolate": true\n  }\n}\n')
-    print("gate textures written to", OUT)
+    for name in PORTAL_THEMES:
+        with open(os.path.join(OUT, name + ".png.mcmeta"), "w", encoding="utf-8", newline="\n") as f:
+            f.write('{\n  "animation": {\n    "frametime": 3,\n    "interpolate": true\n  }\n}\n')
+        for axis in ("ns", "ew"):
+            with open(os.path.join(MODELS, f"{name}_{axis}.json"), "w", encoding="utf-8", newline="\n") as f:
+                f.write(PORTAL_MODEL % (axis, name, name))
+    print("gate textures + portal models written:", len(images))
 
 
 if __name__ == "__main__":

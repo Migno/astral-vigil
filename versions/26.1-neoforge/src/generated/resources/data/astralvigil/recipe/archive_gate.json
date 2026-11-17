@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "#c:gems/amethyst",
+    "M": "#c:bookshelves",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    "MSM",
+    "SIS",
+    "MSM"
+  ],
+  "result": {
+    "count": 4,
+    "id": "astralvigil:archive_gate"
+  }
+}

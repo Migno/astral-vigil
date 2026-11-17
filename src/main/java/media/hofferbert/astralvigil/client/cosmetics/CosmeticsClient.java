@@ -176,10 +176,6 @@ public final class CosmeticsClient {
     }
 
     static DustParticleOptions dust(int rgb, float scale) {
-        //? if >=26.1 {
-        return new DustParticleOptions(rgb, scale);
-        //?} else {
-        /*return new DustParticleOptions(net.minecraft.world.phys.Vec3.fromRGB24(rgb).toVector3f(), scale);
-        *///?}
+        return media.hofferbert.astralvigil.compat.Particles.dust(rgb, scale);
     }
 }

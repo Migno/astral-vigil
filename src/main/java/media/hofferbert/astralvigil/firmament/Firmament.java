@@ -25,7 +25,7 @@ import net.minecraft.world.level.portal.TeleportTransition;
 /*import net.minecraft.world.level.portal.DimensionTransition;
 *///?}
 
-/** The Firmament dimension: reached through an Astral Gate, low gravity, one-time sanctum construction. */
+/** The Firmament dimension: reached through player-built gates (one per destination), low gravity, one-time construction. */
 public final class Firmament {
     public static final ResourceKey<Level> LEVEL = ResourceKey.create(Registries.DIMENSION, AstralVigil.id("firmament"));
     public static final BlockPos LANDING = new BlockPos(0, 290, 0);
@@ -46,7 +46,7 @@ public final class Firmament {
     /** Where a player standing in a Celestial Gate arrives: in the Firmament next to the return gate, or back home. */
     record Target(ServerLevel level, Vec3 pos, boolean ascending) {}
 
-    static Target target(ServerPlayer player) {
+    static Target target(ServerPlayer player, GateKind kind) {
         var server = player.level().getServer();
         if (server == null) {
             return null;
@@ -85,21 +85,21 @@ public final class Firmament {
         back.putDouble("z", player.getZ());
         player.getPersistentData().put(RETURN_KEY, back);
         SanctumBuilder.ensureBuilt(firmament);
-        return new Target(firmament, Vec3.atBottomCenterOf(ARRIVAL), true);
+        return new Target(firmament, Vec3.atBottomCenterOf(SanctumBuilder.arrival(kind)), true);
     }
 
     /** Arrival spot on the hub, in front of the return gate. */
     public static final BlockPos ARRIVAL = LANDING.offset(0, 1, 3);
 
     //? if >=26.1 {
-    public static TeleportTransition gateDestination(ServerPlayer player) {
-        Target t = target(player);
+    public static TeleportTransition gateDestination(ServerPlayer player, GateKind kind) {
+        Target t = target(player, kind);
         return t == null ? null : new TeleportTransition(t.level(), t.pos(), Vec3.ZERO, player.getYRot(), player.getXRot(),
                 TeleportTransition.PLACE_PORTAL_TICKET.then(e -> arrived(e, t)));
     }
     //?} else {
-    /*public static DimensionTransition gateDestination(ServerPlayer player) {
-        Target t = target(player);
+    /*public static DimensionTransition gateDestination(ServerPlayer player, GateKind kind) {
+        Target t = target(player, kind);
         return t == null ? null : new DimensionTransition(t.level(), t.pos(), Vec3.ZERO, player.getYRot(), player.getXRot(),
                 DimensionTransition.PLACE_PORTAL_TICKET.then(e -> arrived(e, t)));
     }

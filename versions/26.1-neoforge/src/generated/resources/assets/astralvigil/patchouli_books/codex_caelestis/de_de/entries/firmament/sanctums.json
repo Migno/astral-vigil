@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Vier lange Brücken führen vom Landeplatz zu den vier Prüfungsinseln, jede ein Tagewerk: Solennes Sonnenspitze (Osten), Vaels Mondarena (Westen), Orrins Prismenobservatorium (Süden) und Ilyras Endlose Bibliothek (Norden). Die Wächter warten an den Brückenenden - sprich einen an, um seine Prüfung zu beginnen.$(br2)Jede bestandene Prüfung gewährt das $(l)Zeichen$() des Wächters und seine $(l)Gunst$() – doch rivalisierende Wächter kühlen ab: Solenne und Vael, Orrin und Ilyra."
+      "text": "Vier Prüfungsinseln schweben weit voneinander entfernt, jede ein Tagewerk und jede nur durch ihr eigenes Tor erreichbar: Solennes Sonnenspitze, Vaels Mondarena, Orrins Prismenobservatorium und Ilyras Endlose Bibliothek. Jeder Wächter wartet neben seinem Ankunftsplatz - sprich ihn an, um seine Prüfung zu beginnen.$(br2)Jede bestandene Prüfung gewährt das $(l)Zeichen$() des Wächters und seine $(l)Gunst$() – doch rivalisierende Wächter kühlen ab: Solenne und Vael, Orrin und Ilyra."
     }
   ],
   "sortnum": 1

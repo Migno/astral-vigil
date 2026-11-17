@@ -69,7 +69,8 @@ Run dirs: `run/<target>/{client,server,gametest,data,compat}` (git-ignored).
   `/astralvigil showcase network|ritual|forge|armory` (film-ready scene east of you); `/place structure astralvigil:fallen_observatory`.
 - Structures: regenerate templates with `python -I tools/dev/gen_observatory.py` / `gen_firmament.py`; worldgen
   (incl. the Firmament `LEVEL_STEM`) in `worldgen/AVWorldgen`. Firmament hub, trial islands (240 out) and the Umbral Throne (520 west) are built on first arrival (`SanctumBuilder`);
-  reach it through an Astral Gate frame lit with the Ascension Key (`CelestialPortalBlock`, `GateShape`). Own dimension
+  reach them through gate frames lit with the Ascension Key, one gate kind per destination (`GateKind`,
+  `CelestialPortalBlock`, `GateShape`); no bridges. Own dimension
   type (build limit 448). Textures: `python -I tools/dev/gen_gate_textures.py`.
 - GeckoLib: write code against `com.geckolib` (26.1, GeckoLib 5); the 1.21.1 package `software.bernie.geckolib` is swapped by
   Stonecutter. Assets go in both layouts (`geo/`, `animations/` and `geckolib/models|animations/`).

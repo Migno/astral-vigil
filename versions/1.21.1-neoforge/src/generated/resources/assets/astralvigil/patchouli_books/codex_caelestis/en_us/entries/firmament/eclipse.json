@@ -6,7 +6,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "astralvigil:umbral_sigil",
-      "text": "Forged at the Convergence Altar from a Void Shard, an Astral Core, Void Crystals, obsidian and an echo shard with 3000 Stella light. Use it on the $(l)Umbral Throne$() - the dark arena far west, beyond Vael's arena - while carrying all four Marks to call down the Eclipse."
+      "text": "Forged at the Convergence Altar from a Void Shard, an Astral Core, Void Crystals, obsidian and an echo shard with 3000 Stella light. Use it on the $(l)Umbral Throne$() - reached only through an Umbral Gate - while carrying all four Marks to call down the Eclipse."
     },
     {
       "type": "patchouli:text",

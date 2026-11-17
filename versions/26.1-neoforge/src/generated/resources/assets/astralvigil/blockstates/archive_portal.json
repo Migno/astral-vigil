@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "astralvigil:block/archive_portal_ns"
+    },
+    "axis=z": {
+      "model": "astralvigil:block/archive_portal_ew"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "astralvigil:block/umbral_portal_ns"
+    },
+    "axis=z": {
+      "model": "astralvigil:block/umbral_portal_ew"
+    }
+  }
+}

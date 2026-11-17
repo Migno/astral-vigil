@@ -11,11 +11,15 @@
     {
       "type": "patchouli:spotlight",
       "item": "astralvigil:astral_gate",
-      "text": "Build a closed frame of $(item)Astral Gate$() blocks standing upright, like a door: the opening at least 2 wide and 3 tall (corners are optional). Set the Ascension Key into the frame and step into the light for a few heartbeats."
+      "text": "Build a closed frame standing upright, like a door: the opening at least 2 wide and 3 tall (corners are optional). Set the Ascension Key into the frame and step into the light for a few heartbeats.$(br2)The frame decides where you arrive. An $(item)Astral Gate$() leads to the hub; each Watcher has a gate of its own."
     },
     {
       "type": "patchouli:text",
-      "text": "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and sets you down at the nearest island. The gate behind the landing leads home."
+      "text": "$(item)Solar Gate$() (Sunsteel, gold blocks) - Solenne's Sun Spire.$(br)$(item)Lunar Gate$() (Moonsilver, quartz) - Vael's Moon Arena.$(br)$(item)Prism Gate$() (Starmetal, diamond blocks) - Orrin's Prism Observatory.$(br)$(item)Archive Gate$() (amethyst, bookshelves) - Ilyra's Endless Library.$(br)$(item)Umbral Gate$() (crying obsidian, obsidian) - the Umbral Throne; it opens only for one who carries all four Marks."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and sets you down at the nearest arrival platform. Every platform has a gate that leads home."
     }
   ],
   "sortnum": 0

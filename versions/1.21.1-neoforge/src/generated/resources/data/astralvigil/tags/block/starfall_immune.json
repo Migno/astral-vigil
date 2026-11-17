@@ -1,12 +1,22 @@
 {
   "values": [
+    "astralvigil:astral_gate",
+    "astralvigil:solar_gate",
+    "astralvigil:lunar_gate",
+    "astralvigil:prism_gate",
+    "astralvigil:archive_gate",
+    "astralvigil:umbral_gate",
+    "astralvigil:celestial_portal",
+    "astralvigil:solar_portal",
+    "astralvigil:lunar_portal",
+    "astralvigil:prism_portal",
+    "astralvigil:archive_portal",
+    "astralvigil:umbral_portal",
     "#minecraft:features_cannot_replace",
     "astralvigil:constellation_lock",
     "astralvigil:starlight_font",
     "astralvigil:trial_receptor",
     "astralvigil:trial_goal",
-    "astralvigil:moon_target",
-    "astralvigil:celestial_portal",
-    "astralvigil:astral_gate"
+    "astralvigil:moon_target"
   ]
 }

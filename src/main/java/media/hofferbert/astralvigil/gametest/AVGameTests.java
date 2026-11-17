@@ -139,12 +139,13 @@ public final class AVGameTests {
         var settings = new net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings();
         java.util.Map<String, net.minecraft.world.level.block.Block> key = java.util.Map.of(
                 "landing", media.hofferbert.astralvigil.registry.AVBlocks.CELESTIAL_PORTAL.get(),
+                "arrival", net.minecraft.world.level.block.Blocks.LANTERN,
                 "solenne", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(),
                 "vael", media.hofferbert.astralvigil.registry.AVBlocks.MOON_TARGET.get(),
                 "orrin", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_RECEPTOR.get(),
                 "ilyra", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(),
                 "throne", media.hofferbert.astralvigil.registry.AVBlocks.ECLIPSE_SEAL.get());
-        java.util.Map<String, Integer> counts = java.util.Map.of("landing", 12, "vael", 10, "orrin", 3);
+        java.util.Map<String, Integer> counts = java.util.Map.of("landing", 12, "arrival", 4, "vael", 10, "orrin", 3);
         for (var e : key.entrySet()) {
             var template = manager.get(AstralVigil.id("firmament/" + e.getKey()));
             GT.check(helper, template.isPresent(), "missing template " + e.getKey());
@@ -455,6 +456,25 @@ public final class AVGameTests {
         }
         int lit = media.hofferbert.astralvigil.item.AscensionKeyItem.ignite(helper.getLevel(), helper.absolutePos(GT.pos(2, 3, 4)));
         GT.check(helper, lit == 6, "expected 6 portal blocks, lit " + lit);
+        // a frame of another kind (Solar) lights its own portal, not the Astral one
+        var solarGate = media.hofferbert.astralvigil.registry.AVBlocks.GATES.get(media.hofferbert.astralvigil.firmament.GateKind.SOLAR).get();
+        var solarPortal = media.hofferbert.astralvigil.registry.AVBlocks.PORTALS.get(media.hofferbert.astralvigil.firmament.GateKind.SOLAR).get();
+        for (int x = 1; x <= 6; x++) {
+            for (int y = 1; y <= 6; y++) {
+                helper.setBlock(GT.pos(x, y, 8), net.minecraft.world.level.block.Blocks.AIR);
+            }
+        }
+        for (int y = 2; y <= 4; y++) {
+            helper.setBlock(GT.pos(2, y, 8), solarGate);
+            helper.setBlock(GT.pos(5, y, 8), solarGate);
+        }
+        for (int x = 3; x <= 4; x++) {
+            helper.setBlock(GT.pos(x, 1, 8), solarGate);
+            helper.setBlock(GT.pos(x, 5, 8), solarGate);
+        }
+        GT.check(helper, media.hofferbert.astralvigil.item.AscensionKeyItem.ignite(helper.getLevel(), helper.absolutePos(GT.pos(2, 3, 8))) == 6,
+                "solar gate not lit");
+        helper.assertBlockPresent(solarPortal, GT.pos(3, 3, 8));
         helper.assertBlockPresent(portal, GT.pos(3, 2, 4));
         helper.setBlock(GT.pos(5, 3, 4), net.minecraft.world.level.block.Blocks.AIR);
         helper.succeedWhen(() -> {

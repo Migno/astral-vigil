@@ -49,6 +49,20 @@ public class AVRecipeProvider extends RecipeProvider {
         };
     }
 
+    /** Gate frames: astral shards around a themed centre, themed corners; 4 per craft. */
+    private void gate(media.hofferbert.astralvigil.firmament.GateKind kind, net.minecraft.tags.TagKey<net.minecraft.world.item.Item> centre,
+            net.minecraft.tags.TagKey<net.minecraft.world.item.Item> corners) {
+        shaped(RecipeCategory.MISC, AVItems.GATES.get(kind).get(), 4)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('I', centre)
+                .define('M', corners)
+                .pattern("MSM")
+                .pattern("SIS")
+                .pattern("MSM")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
+    }
+
     @Override
     protected void buildRecipes() {
         shaped(RecipeCategory.MISC, AVItems.STAR_ANCHOR.get(), 2)
@@ -60,15 +74,13 @@ public class AVRecipeProvider extends RecipeProvider {
                 .pattern("MMM")
                 .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
                 .save(output);
-        shaped(RecipeCategory.MISC, AVItems.ASTRAL_GATE.get(), 4)
-                .define('S', AVTags.Items.ASTRAL_SHARDS)
-                .define('I', AVTags.Items.INGOTS_STARMETAL)
-                .define('M', AVTags.Items.METEORIC_STONES)
-                .pattern("MSM")
-                .pattern("SIS")
-                .pattern("MSM")
-                .unlockedBy("has_starmetal", has(AVTags.Items.INGOTS_STARMETAL))
-                .save(output);
+        // Gate frames: same pattern; centre and corners are themed after where the gate leads
+        gate(media.hofferbert.astralvigil.firmament.GateKind.ASTRAL, AVTags.Items.INGOTS_STARMETAL, AVTags.Items.METEORIC_STONES);
+        gate(media.hofferbert.astralvigil.firmament.GateKind.SOLAR, AVTags.Items.INGOTS_SUNSTEEL, Tags.Items.STORAGE_BLOCKS_GOLD);
+        gate(media.hofferbert.astralvigil.firmament.GateKind.LUNAR, AVTags.Items.INGOTS_MOONSILVER, Tags.Items.GEMS_QUARTZ);
+        gate(media.hofferbert.astralvigil.firmament.GateKind.PRISM, AVTags.Items.INGOTS_STARMETAL, Tags.Items.STORAGE_BLOCKS_DIAMOND);
+        gate(media.hofferbert.astralvigil.firmament.GateKind.ARCHIVE, Tags.Items.GEMS_AMETHYST, Tags.Items.BOOKSHELVES);
+        gate(media.hofferbert.astralvigil.firmament.GateKind.UMBRAL, Tags.Items.OBSIDIANS_CRYING, Tags.Items.OBSIDIANS_NORMAL);
         shaped(RecipeCategory.MISC, AVItems.PEDESTAL.get(), 2)
                 .define('G', Tags.Items.INGOTS_GOLD)
                 .define('M', AVTags.Items.METEORIC_STONES)
@@ -182,8 +194,29 @@ public class AVRecipeProvider extends RecipeProvider {
         return new AVRecipeProvider(out, lookup);
     }
 
+    // Gate frames: astral shards around a themed centre, themed corners; 4 per craft.
+    private void gate(RecipeOutput output, media.hofferbert.astralvigil.firmament.GateKind kind,
+            net.minecraft.tags.TagKey<net.minecraft.world.item.Item> centre, net.minecraft.tags.TagKey<net.minecraft.world.item.Item> corners) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AVItems.GATES.get(kind).get(), 4)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('I', centre)
+                .define('M', corners)
+                .pattern("MSM")
+                .pattern("SIS")
+                .pattern("MSM")
+                .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
+                .save(output);
+    }
+
     @Override
     protected void buildRecipes(RecipeOutput output) {
+        // Gate frames: same pattern; centre and corners are themed after where the gate leads
+        gate(output, media.hofferbert.astralvigil.firmament.GateKind.ASTRAL, AVTags.Items.INGOTS_STARMETAL, AVTags.Items.METEORIC_STONES);
+        gate(output, media.hofferbert.astralvigil.firmament.GateKind.SOLAR, AVTags.Items.INGOTS_SUNSTEEL, Tags.Items.STORAGE_BLOCKS_GOLD);
+        gate(output, media.hofferbert.astralvigil.firmament.GateKind.LUNAR, AVTags.Items.INGOTS_MOONSILVER, Tags.Items.GEMS_QUARTZ);
+        gate(output, media.hofferbert.astralvigil.firmament.GateKind.PRISM, AVTags.Items.INGOTS_STARMETAL, Tags.Items.STORAGE_BLOCKS_DIAMOND);
+        gate(output, media.hofferbert.astralvigil.firmament.GateKind.ARCHIVE, Tags.Items.GEMS_AMETHYST, Tags.Items.BOOKSHELVES);
+        gate(output, media.hofferbert.astralvigil.firmament.GateKind.UMBRAL, Tags.Items.OBSIDIANS_CRYING, Tags.Items.OBSIDIANS_NORMAL);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AVItems.STAR_ANCHOR.get(), 2)
                 .define('S', AVTags.Items.ASTRAL_SHARDS)
                 .define('G', Tags.Items.INGOTS_GOLD)

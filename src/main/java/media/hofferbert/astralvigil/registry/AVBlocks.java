@@ -65,18 +65,30 @@ public final class AVBlocks {
             .mapColor(MapColor.SNOW).strength(-1.0f, 3_600_000.0f).noLootTable()
             .lightLevel(s -> s.getValue(TrialBlocks.MoonTarget.LIT) ? 12 : 3).sound(SoundType.AMETHYST));
 
-    // Firmament gate (built by players, lit with the Ascension Key)
-    public static final DeferredBlock<Block> ASTRAL_GATE = register("astral_gate", Block::new, p -> p
-            .mapColor(MapColor.QUARTZ).strength(5.0f, 1200.0f).requiresCorrectToolForDrops().lightLevel(s -> 5).sound(SoundType.AMETHYST));
-    public static final DeferredBlock<media.hofferbert.astralvigil.block.CelestialPortalBlock> CELESTIAL_PORTAL = register(
-            "celestial_portal", media.hofferbert.astralvigil.block.CelestialPortalBlock::new, p -> p
+    // Firmament gates (built by players, lit with the Ascension Key): one frame + portal block per GateKind
+    public static final java.util.Map<media.hofferbert.astralvigil.firmament.GateKind, DeferredBlock<Block>> GATES = new java.util.EnumMap<>(
+            media.hofferbert.astralvigil.firmament.GateKind.class);
+    public static final java.util.Map<media.hofferbert.astralvigil.firmament.GateKind, DeferredBlock<media.hofferbert.astralvigil.block.CelestialPortalBlock>>
+            PORTALS = new java.util.EnumMap<>(media.hofferbert.astralvigil.firmament.GateKind.class);
+
+    static {
+        for (var kind : media.hofferbert.astralvigil.firmament.GateKind.values()) {
+            GATES.put(kind, register(kind.frameId(), Block::new, p -> p
+                    .mapColor(MapColor.QUARTZ).strength(5.0f, 1200.0f).requiresCorrectToolForDrops().lightLevel(s -> 5).sound(SoundType.AMETHYST)));
+            PORTALS.put(kind, register(kind.portalId(), p -> new media.hofferbert.astralvigil.block.CelestialPortalBlock(p, kind), p -> p
                     //? if >=26.1 {
                     .noCollision()
                     //?} else {
                     /*.noCollission()
                     *///?}
                     .strength(-1.0f).noLootTable().sound(SoundType.GLASS).lightLevel(s -> 12)
-                    .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
+                    .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK)));
+        }
+    }
+
+    public static final DeferredBlock<Block> ASTRAL_GATE = GATES.get(media.hofferbert.astralvigil.firmament.GateKind.ASTRAL);
+    public static final DeferredBlock<media.hofferbert.astralvigil.block.CelestialPortalBlock> CELESTIAL_PORTAL =
+            PORTALS.get(media.hofferbert.astralvigil.firmament.GateKind.ASTRAL);
 
     // Phase 8
     public static final DeferredBlock<Block> ECLIPSE_SEAL = register("eclipse_seal", Block::new, p -> p

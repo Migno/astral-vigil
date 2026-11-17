@@ -138,7 +138,14 @@ public final class AVItems {
 
     // Phase 7 – Firmament
     public static final DeferredItem<BlockItem> FIRMAMENT_STONE = ITEMS.registerSimpleBlockItem(AVBlocks.FIRMAMENT_STONE);
-    public static final DeferredItem<BlockItem> ASTRAL_GATE = ITEMS.registerSimpleBlockItem(AVBlocks.ASTRAL_GATE);
+    public static final java.util.Map<media.hofferbert.astralvigil.firmament.GateKind, DeferredItem<BlockItem>> GATES = gates();
+    public static final DeferredItem<BlockItem> ASTRAL_GATE = GATES.get(media.hofferbert.astralvigil.firmament.GateKind.ASTRAL);
+
+    private static java.util.Map<media.hofferbert.astralvigil.firmament.GateKind, DeferredItem<BlockItem>> gates() {
+        var map = new java.util.EnumMap<media.hofferbert.astralvigil.firmament.GateKind, DeferredItem<BlockItem>>(media.hofferbert.astralvigil.firmament.GateKind.class);
+        AVBlocks.GATES.forEach((k, b) -> map.put(k, ITEMS.registerSimpleBlockItem(b)));
+        return map;
+    }
     public static final DeferredItem<Item> ASCENSION_KEY = AVItems.<Item>register(
             "ascension_key", media.hofferbert.astralvigil.item.AscensionKeyItem::new, p -> p.stacksTo(1).rarity(Rarity.EPIC));
     public static final Map<media.hofferbert.astralvigil.firmament.Watcher, DeferredItem<Item>> MARKS = marks();

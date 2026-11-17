@@ -44,15 +44,18 @@ public final class AVTagProviders {
                     AVBlocks.FALLEN_STAR.get(), AVBlocks.METEORIC_STONE.get(), AVBlocks.STARLIGHT_COLLECTOR.get(),
                     AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get(),
                     AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get(),
-                    AVBlocks.STAR_ANCHOR.get(), AVBlocks.VOID_CRYSTAL.get(), AVBlocks.FIRMAMENT_STONE.get(), AVBlocks.ASTRAL_GATE.get(),
+                    AVBlocks.STAR_ANCHOR.get(), AVBlocks.VOID_CRYSTAL.get(), AVBlocks.FIRMAMENT_STONE.get(),
                     AVBlocks.ECLIPSE_SEAL.get());
+            AVBlocks.GATES.values().forEach(g -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(g.get()));
+            AVBlocks.GATES.values().forEach(g -> tag(AVTags.Blocks.STARFALL_IMMUNE).add(g.get()));
+            AVBlocks.PORTALS.values().forEach(g -> tag(AVTags.Blocks.STARFALL_IMMUNE).add(g.get()));
             tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.VOID_CRYSTAL.get());
             tag(AVTags.Blocks.BEAM_TRANSPARENT).addTag(Tags.Blocks.GLASS_BLOCKS).addTag(Tags.Blocks.GLASS_PANES);
             tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.FALLEN_STAR.get());
             tag(BlockTags.NEEDS_STONE_TOOL).add(AVBlocks.METEORIC_STONE.get());
             tag(AVTags.Blocks.STARFALL_IMMUNE).addTag(BlockTags.FEATURES_CANNOT_REPLACE).add(
                     AVBlocks.CONSTELLATION_LOCK.get(), AVBlocks.STARLIGHT_FONT.get(), AVBlocks.TRIAL_RECEPTOR.get(),
-                    AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get(), AVBlocks.CELESTIAL_PORTAL.get(), AVBlocks.ASTRAL_GATE.get());
+                    AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get());
 
             // Celestial alignments (packmakers: extend via datapack/KubeJS)
             tag(AlignmentTags.blocks(Alignment.SOL))

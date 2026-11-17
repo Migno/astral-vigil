@@ -42,8 +42,11 @@ public class CelestialPortalBlock extends Block implements Portal {
     /** Ticks a survival player must stand in the gate (creative players pass almost at once). */
     public static final int TRANSITION_TICKS = 60;
 
-    public CelestialPortalBlock(Properties properties) {
+    private final media.hofferbert.astralvigil.firmament.GateKind kind;
+
+    public CelestialPortalBlock(Properties properties, media.hofferbert.astralvigil.firmament.GateKind kind) {
         super(properties);
+        this.kind = kind;
         registerDefaultState(stateDefinition.any().setValue(AXIS, Direction.Axis.X));
     }
 
@@ -57,11 +60,15 @@ public class CelestialPortalBlock extends Block implements Portal {
         return state.getValue(AXIS) == Direction.Axis.X ? X_SHAPE : Z_SHAPE;
     }
 
-    /** A gate side that is neither portal nor frame any more collapses the whole opening (cascades block by block). */
-    static boolean supported(BlockState state, Direction toNeighbour, BlockState neighbour) {
+    public media.hofferbert.astralvigil.firmament.GateKind kind() {
+        return kind;
+    }
+
+    /** A gate side that is neither this portal nor its frame any more collapses the whole opening (cascades block by block). */
+    boolean supported(BlockState state, Direction toNeighbour, BlockState neighbour) {
         Direction.Axis axis = toNeighbour.getAxis();
         boolean inPlane = axis == Direction.Axis.Y || axis == state.getValue(AXIS);
-        return !inPlane || neighbour.is(AVBlocks.CELESTIAL_PORTAL.get()) || neighbour.is(AVBlocks.ASTRAL_GATE.get());
+        return !inPlane || neighbour.is(this) || neighbour.is(AVBlocks.GATES.get(kind).get());
     }
 
     //? if >=26.1 {
@@ -80,7 +87,7 @@ public class CelestialPortalBlock extends Block implements Portal {
 
     @Override
     public TeleportTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
-        return entity instanceof ServerPlayer player ? Firmament.gateDestination(player) : null;
+        return entity instanceof ServerPlayer player ? Firmament.gateDestination(player, kind) : null;
     }
     //?} else {
     /*@Override
@@ -98,7 +105,7 @@ public class CelestialPortalBlock extends Block implements Portal {
 
     @Override
     public DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
-        return entity instanceof ServerPlayer player ? Firmament.gateDestination(player) : null;
+        return entity instanceof ServerPlayer player ? Firmament.gateDestination(player, kind) : null;
     }
     *///?}
 
@@ -118,8 +125,12 @@ public class CelestialPortalBlock extends Block implements Portal {
             double x = pos.getX() + random.nextDouble();
             double y = pos.getY() + random.nextDouble();
             double z = pos.getZ() + random.nextDouble();
-            level.addParticle(i == 0 ? ParticleTypes.END_ROD : ParticleTypes.ELECTRIC_SPARK, x, y, z,
-                    (random.nextDouble() - 0.5) * 0.02, 0.02, (random.nextDouble() - 0.5) * 0.02);
+            if (i == 0) {
+                level.addParticle(media.hofferbert.astralvigil.compat.Particles.dust(kind.colour(), 1.0f), x, y, z, 0, 0.02, 0);
+            } else {
+                level.addParticle(kind == media.hofferbert.astralvigil.firmament.GateKind.UMBRAL ? ParticleTypes.REVERSE_PORTAL : ParticleTypes.END_ROD,
+                        x, y, z, (random.nextDouble() - 0.5) * 0.02, 0.02, (random.nextDouble() - 0.5) * 0.02);
+            }
         }
     }
 }

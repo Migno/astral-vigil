@@ -47,19 +47,40 @@ public final class SanctumBuilder {
         return Firmament.LANDING.relative(DIRECTION.get(w), DISTANCE);
     }
 
-    /** Point on the bridge just in front of a sanctum (where the Watcher waits and fallen players are set down). */
-    public static BlockPos entrance(Watcher w) {
-        return centre(w).relative(DIRECTION.get(w).getOpposite(), RADIUS.get(w) + 4).above();
+    /** Gap between an island's rim and its arrival platform (crossed by a short bridge). */
+    static final int PAD_GAP = 12;
+
+    /** Centre of the arrival platform in front of a destination (on the hub-facing side). */
+    public static BlockPos pad(GateKind kind) {
+        if (kind == GateKind.ASTRAL) {
+            return Firmament.LANDING;
+        }
+        if (kind == GateKind.UMBRAL) {
+            return THRONE.east(THRONE_RADIUS + PAD_GAP);
+        }
+        Watcher w = kind.watcher();
+        return centre(w).relative(DIRECTION.get(w).getOpposite(), RADIUS.get(w) + PAD_GAP);
+    }
+
+    /** Direction from a pad towards the island it serves (ASTRAL: south, away from the hub's return gate). */
+    static Direction inward(GateKind kind) {
+        if (kind == GateKind.ASTRAL) {
+            return Direction.SOUTH;
+        }
+        return kind == GateKind.UMBRAL ? Direction.WEST : DIRECTION.get(kind.watcher());
+    }
+
+    /** Where a traveller through this kind of gate arrives: on the pad, in front of the pad's return gate. */
+    public static BlockPos arrival(GateKind kind) {
+        return kind == GateKind.ASTRAL ? Firmament.ARRIVAL : pad(kind).relative(inward(kind), 2).above();
     }
 
     /** All places the sky's safety net may return a falling player to. */
     public static List<BlockPos> anchors() {
         List<BlockPos> list = new ArrayList<>();
-        list.add(Firmament.ARRIVAL);
-        for (Watcher w : Watcher.values()) {
-            list.add(entrance(w));
+        for (GateKind kind : GateKind.values()) {
+            list.add(arrival(kind));
         }
-        list.add(THRONE.east(THRONE_RADIUS + 4).above());
         return list;
     }
 
@@ -76,14 +97,51 @@ public final class SanctumBuilder {
         place(level, "landing", Firmament.LANDING);
         for (Watcher w : Watcher.values()) {
             place(level, w.id(), centre(w));
-            bridge(level, Firmament.LANDING, centre(w));
-            Direction toHub = DIRECTION.get(w).getOpposite();
-            BlockPos at = centre(w).relative(toHub, RADIUS.get(w) + 3).relative(toHub.getClockWise(), 5).above(3);
-            spawnWatcher(level, w, at, toHub.getClockWise().getOpposite());
+            GateKind kind = gateOf(w);
+            arrivalPad(level, kind, centre(w));
+            Direction in = inward(kind);
+            BlockPos at = pad(kind).relative(in.getClockWise(), 5).above(3);
+            spawnWatcher(level, w, at, in.getCounterClockWise());
         }
         place(level, "throne", THRONE);
-        bridge(level, centre(Watcher.VAEL), THRONE);
-        AstralVigil.LOGGER.info("Firmament sanctums and the Umbral Throne built");
+        arrivalPad(level, GateKind.UMBRAL, THRONE);
+        AstralVigil.LOGGER.info("Firmament: hub, four trial islands and the Umbral Throne built (gates only, no bridges)");
+    }
+
+    public static GateKind gateOf(Watcher w) {
+        for (GateKind k : GateKind.values()) {
+            if (k.watcher() == w) {
+                return k;
+            }
+        }
+        throw new IllegalArgumentException(w.toString());
+    }
+
+    /**
+     * A small floating platform in front of a destination island: the return gate (framed in this kind's blocks) on
+     * the outer edge, a short bridge to the island's rim on the inner side.
+     */
+    static void arrivalPad(ServerLevel level, GateKind kind, BlockPos islandCentre) {
+        BlockPos pad = pad(kind);
+        place(level, "arrival", pad);
+        Direction in = inward(kind);
+        buildGate(level, pad.relative(in.getOpposite(), 3).above(), in.getClockWise().getAxis(), kind);
+        bridge(level, pad, islandCentre);
+    }
+
+    /** An upright gate frame with a lit portal: 2 wide, 3 tall opening, bottom frame row at {@code base}. */
+    static void buildGate(ServerLevel level, BlockPos base, Direction.Axis axis, GateKind kind) {
+        Direction along = axis == Direction.Axis.X ? Direction.EAST : Direction.SOUTH;
+        var frame = AVBlocks.GATES.get(kind).get().defaultBlockState();
+        var portal = AVBlocks.PORTALS.get(kind).get().defaultBlockState()
+                .setValue(media.hofferbert.astralvigil.block.CelestialPortalBlock.AXIS, axis);
+        for (int i = -2; i <= 1; i++) {
+            for (int y = 0; y <= 4; y++) {
+                BlockPos p = base.relative(along, i).above(y);
+                boolean edge = i == -2 || i == 1 || y == 0 || y == 4;
+                level.setBlock(p, edge ? frame : portal, Block.UPDATE_CLIENTS);
+            }
+        }
     }
 
     /** Places a template so that its centre floor block lands on {@code centre}. */
