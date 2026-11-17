@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import media.hofferbert.astralvigil.AstralVigil;
 import media.hofferbert.astralvigil.crafting.StarlightRecipe;
+import media.hofferbert.astralvigil.gear.Sigil;
+import net.minecraft.world.item.Items;
 import media.hofferbert.astralvigil.research.Alignment;
 import media.hofferbert.astralvigil.starlight.Tint;
 import net.minecraft.core.registries.Registries;
@@ -284,6 +286,50 @@ public class AVRecipeProvider extends RecipeProvider {
                 Tint.PURE, 1000, 200, Optional.of(Alignment.STELLA),
                 ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_SUNSTEEL),
                 ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.ASTRAL_SHARDS));
+        // Phase 5 – living gear (vanilla gear as catalyst, aligned light)
+        gear(output, "halo_edge", AVItems.HALO_EDGE.get(), Items.DIAMOND_SWORD, Tint.SOL, 800, Alignment.SOL,
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL),
+                ing(AVTags.Items.ASTRAL_SHARDS), ing(AVTags.Items.ASTRAL_SHARDS));
+        gear(output, "dawnbreaker", AVItems.DAWNBREAKER.get(), Items.DIAMOND_AXE, Tint.SOL, 900, Alignment.SOL,
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL),
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.ASTRAL_SHARDS));
+        gear(output, "crescent", AVItems.CRESCENT.get(), Items.BOW, Tint.LUNA, 800, Alignment.LUNA,
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER),
+                ing(Tags.Items.STRINGS), ing(Tags.Items.STRINGS));
+        gear(output, "tidecaller", AVItems.TIDECALLER.get(), Items.CROSSBOW, Tint.LUNA, 900, Alignment.LUNA,
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER),
+                ing(Tags.Items.GEMS_PRISMARINE), ing(Tags.Items.GEMS_PRISMARINE));
+        gear(output, "starlight_aegis", AVItems.STARLIGHT_AEGIS.get(), Items.SHIELD, Tint.STELLA, 800, Alignment.STELLA,
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
+                ing(AVTags.Items.ASTRAL_SHARDS), ing(AVTags.Items.ASTRAL_SHARDS));
+        gear(output, "seraph_helmet", AVItems.SERAPH_HELMET.get(), Items.DIAMOND_HELMET, Tint.STELLA, 700, Alignment.STELLA,
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
+                ing(AVTags.Items.ASTRAL_SHARDS), ing(AVTags.Items.ASTRAL_SHARDS));
+        gear(output, "seraph_chestplate", AVItems.SERAPH_CHESTPLATE.get(), Items.DIAMOND_CHESTPLATE, Tint.STELLA, 1200, Alignment.STELLA,
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.ASTRAL_SHARDS), ing(AVTags.Items.ASTRAL_SHARDS));
+        gear(output, "seraph_leggings", AVItems.SERAPH_LEGGINGS.get(), Items.DIAMOND_LEGGINGS, Tint.STELLA, 1000, Alignment.STELLA,
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.ASTRAL_SHARDS), ing(AVTags.Items.ASTRAL_SHARDS));
+        gear(output, "seraph_boots", AVItems.SERAPH_BOOTS.get(), Items.DIAMOND_BOOTS, Tint.STELLA, 700, Alignment.STELLA,
+                ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
+                ing(AVTags.Items.ASTRAL_SHARDS), ing(AVTags.Items.ASTRAL_SHARDS));
+
+        sigil(output, Sigil.WHIRL, Tint.SOL, ing(Tags.Items.FEATHERS), ing(Tags.Items.FEATHERS),
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL));
+        sigil(output, Sigil.SHIELDBREAKER, Tint.SOL, ing(Tags.Items.INGOTS_IRON), ing(Tags.Items.INGOTS_IRON),
+                ing(Tags.Items.OBSIDIANS), ing(Tags.Items.OBSIDIANS));
+        sigil(output, Sigil.DAWN, Tint.SOL, ing(Tags.Items.DUSTS_GLOWSTONE), ing(Tags.Items.DUSTS_GLOWSTONE),
+                Ingredient.of(Items.SUNFLOWER), Ingredient.of(Items.SUNFLOWER));
+        sigil(output, Sigil.FLASH, Tint.SOL, ing(Tags.Items.FEATHERS), ing(Tags.Items.FEATHERS),
+                Ingredient.of(Items.SUGAR), Ingredient.of(Items.SUGAR));
+        sigil(output, Sigil.PRECISION, Tint.LUNA, Ingredient.of(Items.SPIDER_EYE), Ingredient.of(Items.SPIDER_EYE),
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER));
+        sigil(output, Sigil.UNDERTOW, Tint.LUNA, ing(Tags.Items.GEMS_PRISMARINE), ing(Tags.Items.GEMS_PRISMARINE),
+                Ingredient.of(Items.KELP), Ingredient.of(Items.KELP));
+        sigil(output, Sigil.AEGIS, Tint.STELLA, ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
+                ing(Tags.Items.OBSIDIANS), ing(Tags.Items.OBSIDIANS));
+
         convergence(output, "sigil_blank", res(AVItems.SIGIL_BLANK.get(), 2), ing(AVTags.Items.INGOTS_STARMETAL),
                 Tint.STELLA, 400, 120, Optional.of(Alignment.STELLA),
                 ing(Tags.Items.NUGGETS_GOLD), ing(Tags.Items.NUGGETS_GOLD),
@@ -314,6 +360,16 @@ public class AVRecipeProvider extends RecipeProvider {
 
     private record Result(ItemStack stack) {}
     *///?}
+
+    private void gear(RecipeOutput output, String name, Item result, Item base, Tint tint, int starlight, Alignment alignment,
+            Ingredient... pedestals) {
+        convergence(output, name, res(result, 1), Ingredient.of(base), tint, starlight, 200, Optional.of(alignment), pedestals);
+    }
+
+    private void sigil(RecipeOutput output, Sigil sigil, Tint tint, Ingredient... pedestals) {
+        convergence(output, "sigil_" + sigil.id(), res(AVItems.SIGILS.get(sigil).get(), 1),
+                Ingredient.of(AVItems.SIGIL_BLANK.get()), tint, 300, 120, Optional.empty(), pedestals);
+    }
 
     private static void save(RecipeOutput output, String path, StarlightRecipe recipe) {
         //? if >=26.1 {

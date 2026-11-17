@@ -1,0 +1,17 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "sol",
+  "center": "minecraft:diamond_sword",
+  "ingredients": [
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#astralvigil:astral_shards",
+    "#astralvigil:astral_shards"
+  ],
+  "result": {
+    "id": "astralvigil:halo_edge"
+  },
+  "starlight": 800,
+  "time": 200,
+  "tint": "sol"
+}

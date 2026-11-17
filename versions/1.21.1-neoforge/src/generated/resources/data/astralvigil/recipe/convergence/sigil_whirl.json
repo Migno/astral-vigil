@@ -1,0 +1,27 @@
+{
+  "type": "astralvigil:convergence",
+  "center": {
+    "item": "astralvigil:sigil_blank"
+  },
+  "ingredients": [
+    {
+      "tag": "c:feathers"
+    },
+    {
+      "tag": "c:feathers"
+    },
+    {
+      "tag": "c:ingots/sunsteel"
+    },
+    {
+      "tag": "c:ingots/sunsteel"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:sigil_whirl"
+  },
+  "starlight": 300,
+  "time": 120,
+  "tint": "sol"
+}

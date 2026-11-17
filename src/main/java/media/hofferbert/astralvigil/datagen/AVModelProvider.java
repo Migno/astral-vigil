@@ -12,6 +12,7 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.world.level.block.Block;
 //?} else {
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 *///?}
@@ -59,6 +61,23 @@ public class AVModelProvider extends ModelProvider {
         itemModels.generateFlatItem(AVItems.MOONSILVER_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.ASTRAL_CORE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.SIGIL_BLANK.get(), ModelTemplates.FLAT_ITEM);
+
+        // Phase 5 – gear
+        itemModels.generateFlatItem(AVItems.HALO_EDGE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(AVItems.DAWNBREAKER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateBow(AVItems.CRESCENT.get());
+        itemModels.generateCrossbow(AVItems.TIDECALLER.get());
+        // generateBow/generateCrossbow only create the frames; the standby model is hand-made in vanilla
+        ModelTemplates.BOW.create(ModelLocationUtils.getModelLocation(AVItems.CRESCENT.get()),
+                TextureMapping.layer0(AVItems.CRESCENT.get()), itemModels.modelOutput);
+        ModelTemplates.CROSSBOW.create(ModelLocationUtils.getModelLocation(AVItems.TIDECALLER.get()),
+                TextureMapping.layer0(AVItems.TIDECALLER.get()), itemModels.modelOutput);
+        itemModels.generateFlatItem(AVItems.STARLIGHT_AEGIS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.SERAPH_HELMET.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.SERAPH_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.SERAPH_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.SERAPH_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+        AVItems.SIGILS.values().forEach(s -> itemModels.generateFlatItem(s.get(), ModelTemplates.FLAT_ITEM));
     }
 
     private static void facing(BlockModelGenerators blockModels, Block block, PropertyDispatch<VariantMutator> rotation) {
@@ -131,6 +150,54 @@ public class AVModelProvider extends ModelProvider {
             basicItem(AVItems.MOONSILVER_INGOT.get());
             basicItem(AVItems.ASTRAL_CORE.get());
             basicItem(AVItems.SIGIL_BLANK.get());
+
+            // Phase 5 – gear
+            handheldItem(AVItems.HALO_EDGE.get());
+            handheldItem(AVItems.DAWNBREAKER.get());
+            bow(AVItems.CRESCENT.get());
+            crossbow(AVItems.TIDECALLER.get());
+            basicItem(AVItems.STARLIGHT_AEGIS.get());
+            basicItem(AVItems.SERAPH_HELMET.get());
+            basicItem(AVItems.SERAPH_CHESTPLATE.get());
+            basicItem(AVItems.SERAPH_LEGGINGS.get());
+            basicItem(AVItems.SERAPH_BOOTS.get());
+            AVItems.SIGILS.values().forEach(s -> basicItem(s.get()));
+        }
+
+        private String name(Item item) {
+            return BuiltInRegistries.ITEM.getKey(item).getPath();
+        }
+
+        private ModelFile frame(String name, String parent) {
+            return withExistingParent(name, mcLoc("item/" + parent)).texture("layer0", modLoc("item/" + name));
+        }
+
+        // Same override thresholds as the vanilla bow model.
+        private void bow(Item item) {
+            String n = name(item);
+            ModelFile p0 = frame(n + "_pulling_0", "bow");
+            ModelFile p1 = frame(n + "_pulling_1", "bow");
+            ModelFile p2 = frame(n + "_pulling_2", "bow");
+            withExistingParent(n, mcLoc("item/bow")).texture("layer0", modLoc("item/" + n))
+                    .override().predicate(mcLoc("pulling"), 1).model(p0).end()
+                    .override().predicate(mcLoc("pulling"), 1).predicate(mcLoc("pull"), 0.65f).model(p1).end()
+                    .override().predicate(mcLoc("pulling"), 1).predicate(mcLoc("pull"), 0.9f).model(p2).end();
+        }
+
+        // Same override thresholds as the vanilla crossbow model.
+        private void crossbow(Item item) {
+            String n = name(item);
+            ModelFile p0 = frame(n + "_pulling_0", "crossbow");
+            ModelFile p1 = frame(n + "_pulling_1", "crossbow");
+            ModelFile p2 = frame(n + "_pulling_2", "crossbow");
+            ModelFile arrow = frame(n + "_arrow", "crossbow");
+            ModelFile firework = frame(n + "_firework", "crossbow");
+            withExistingParent(n, mcLoc("item/crossbow")).texture("layer0", modLoc("item/" + n))
+                    .override().predicate(mcLoc("pulling"), 1).model(p0).end()
+                    .override().predicate(mcLoc("pulling"), 1).predicate(mcLoc("pull"), 0.58f).model(p1).end()
+                    .override().predicate(mcLoc("pulling"), 1).predicate(mcLoc("pull"), 1.0f).model(p2).end()
+                    .override().predicate(mcLoc("charged"), 1).model(arrow).end()
+                    .override().predicate(mcLoc("charged"), 1).predicate(mcLoc("firework"), 1).model(firework).end();
         }
     }
 }

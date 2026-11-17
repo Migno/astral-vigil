@@ -1,0 +1,27 @@
+{
+  "type": "astralvigil:convergence",
+  "center": {
+    "item": "astralvigil:sigil_blank"
+  },
+  "ingredients": [
+    {
+      "tag": "c:feathers"
+    },
+    {
+      "tag": "c:feathers"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:sigil_flash"
+  },
+  "starlight": 300,
+  "time": 120,
+  "tint": "sol"
+}

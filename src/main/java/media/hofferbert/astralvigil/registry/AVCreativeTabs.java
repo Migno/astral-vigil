@@ -36,6 +36,16 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.MOONSILVER_INGOT.get());
                 output.accept(AVItems.ASTRAL_CORE.get());
                 output.accept(AVItems.SIGIL_BLANK.get());
+                output.accept(AVItems.HALO_EDGE.get());
+                output.accept(AVItems.DAWNBREAKER.get());
+                output.accept(AVItems.CRESCENT.get());
+                output.accept(AVItems.TIDECALLER.get());
+                output.accept(AVItems.STARLIGHT_AEGIS.get());
+                output.accept(AVItems.SERAPH_HELMET.get());
+                output.accept(AVItems.SERAPH_CHESTPLATE.get());
+                output.accept(AVItems.SERAPH_LEGGINGS.get());
+                output.accept(AVItems.SERAPH_BOOTS.get());
+                AVItems.SIGILS.values().forEach(s -> output.accept(s.get()));
             })
             .build());
 

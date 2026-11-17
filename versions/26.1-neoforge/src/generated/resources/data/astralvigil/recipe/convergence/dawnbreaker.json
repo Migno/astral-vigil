@@ -1,0 +1,17 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "sol",
+  "center": "minecraft:diamond_axe",
+  "ingredients": [
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#astralvigil:astral_shards"
+  ],
+  "result": {
+    "id": "astralvigil:dawnbreaker"
+  },
+  "starlight": 900,
+  "time": 200,
+  "tint": "sol"
+}

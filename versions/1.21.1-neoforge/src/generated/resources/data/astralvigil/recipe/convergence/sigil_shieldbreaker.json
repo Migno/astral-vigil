@@ -1,0 +1,27 @@
+{
+  "type": "astralvigil:convergence",
+  "center": {
+    "item": "astralvigil:sigil_blank"
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:obsidians"
+    },
+    {
+      "tag": "c:obsidians"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:sigil_shieldbreaker"
+  },
+  "starlight": 300,
+  "time": 120,
+  "tint": "sol"
+}

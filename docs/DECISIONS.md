@@ -100,6 +100,23 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   straight back out.
 - **EMI only on 1.21.1** (no 26.1 build exists yet); JEI on both. Compat ids pinned in `stonecutter.properties.toml`.
 
+## 2026-11-17 – Phase 5
+
+- **Wing cosmetic moved to Phase 7.** The brief wants GeckoLib only for the wings; GeckoLib 4 (1.21.1) and 5 (26.1)
+  have different packages and render APIs, and Phase 7 needs the same GeckoLib layer for the Watchers anyway. Doing it
+  once there avoids two half-integrations.
+- **Gear state is one data component** (`astralvigil:gear`: deeds, sigils, stance, charge, cooldown) – survives
+  anvils/repairs, shows in tooltips without extra sync.
+- **Abilities via key binds (V/B) + C2S payload**, executed and validated server-side (charge, cooldown, stance).
+- **Socketing via `PlayerInteractEvent.RightClickItem`** (sneak + sigil in off hand) instead of overriding `use` in
+  six vanilla item subclasses with version-specific signatures.
+- **Arrow bonuses via entity tags + `LivingIncomingDamageEvent`**: 26.1 removed `AbstractArrow#getBaseDamage`, so
+  arrows are tagged at creation (`customArrow`) and scaled on impact – identical on both targets.
+- **Starlight Aegis uses a flat item model** (no block-entity-without-level renderer): blocking works on both targets
+  (1.21.1 `ShieldItem`, 26.1 `BLOCKS_ATTACKS` component), and the art stays vanilla-style pixel art.
+- **Gear recipes upgrade vanilla gear** at the Convergence Altar (diamond sword → Halo Edge …): keeps enchanting
+  progression meaningful and makes recipes easy to override with KubeJS.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best

@@ -1,0 +1,12 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:sigil_flash",
+  "name": "Siegel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Siegel werden am Altar aus $(item)Siegelrohlingen$() geschnitten. $(l)Wirbel$() und $(l)Schildbrecher$() passen zur Axt, $(l)Morgenröte$() und $(l)Lichtblitz$() zum Schwert, $(l)Präzision$() und $(l)Sog$() zu den Bögen, $(l)Ägis$() zu Schild und Seraphenrüstung."
+    }
+  ],
+  "sortnum": 4
+}

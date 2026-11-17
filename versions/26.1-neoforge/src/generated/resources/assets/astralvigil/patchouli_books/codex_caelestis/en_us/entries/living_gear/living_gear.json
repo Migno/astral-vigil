@@ -1,0 +1,16 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:halo_edge",
+  "name": "Living Gear",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Gear forged at the $(item)Convergence Altar$() is $(l)dormant$(). Deeds in the spirit of its Watcher awaken it: undead slain by daylight for Solenne's blades, night kills for Vael's bows, blocked blows for the Aegis, Void creatures for the Seraph Plate.$(br2)$(l)Awakened$() gear gains a second sigil slot, $(l)Ascended$() gear a third."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hold the gear, take a $(item)Sigil$() in your off hand and use while sneaking to set it. Each sigil is a $(l)stance$(): switch with the stance key, unleash with the ability key.$(br2)Abilities cost $(l)charge$(). Gear recharges under the night sky – or touch a $(item)Starlight Reservoir$() with it."
+    }
+  ],
+  "sortnum": 0
+}

@@ -53,8 +53,31 @@ public final class AVServerConfig {
     public static final ModConfigSpec.DoubleValue INSTABILITY_EVENT_FACTOR;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> INSTABILITY_MOBS;
 
+    // Living gear
+    public static final ModConfigSpec.IntValue GEAR_CHARGE_CAPACITY;
+    public static final ModConfigSpec.IntValue GEAR_CHARGE_RATE;
+    public static final ModConfigSpec.DoubleValue ABILITY_COST_MULTIPLIER;
+    public static final ModConfigSpec.DoubleValue ABILITY_COOLDOWN_MULTIPLIER;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
+
+        b.comment("Living gear: starlight charge, sigil abilities.")
+                .translation("astralvigil.configuration.gear")
+                .push("gear");
+        GEAR_CHARGE_CAPACITY = b.comment("Starlight charge a piece of gear can hold.")
+                .translation("astralvigil.configuration.gear.charge_capacity")
+                .defineInRange("chargeCapacity", 200, 1, 100_000);
+        GEAR_CHARGE_RATE = b.comment("Charge regained every 2 seconds at 100% starlight (held/worn gear only).")
+                .translation("astralvigil.configuration.gear.charge_rate")
+                .defineInRange("chargeRate", 4, 0, 10_000);
+        ABILITY_COST_MULTIPLIER = b.comment("Multiplier for every ability's starlight cost.")
+                .translation("astralvigil.configuration.gear.cost_multiplier")
+                .defineInRange("abilityCostMultiplier", 1.0, 0.0, 100.0);
+        ABILITY_COOLDOWN_MULTIPLIER = b.comment("Multiplier for every ability's cooldown.")
+                .translation("astralvigil.configuration.gear.cooldown_multiplier")
+                .defineInRange("abilityCooldownMultiplier", 1.0, 0.0, 100.0);
+        b.pop();
 
         b.comment("Convergence Altar and Astral Forge.")
                 .translation("astralvigil.configuration.crafting")

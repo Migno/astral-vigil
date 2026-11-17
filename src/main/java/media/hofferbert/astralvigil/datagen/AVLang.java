@@ -280,6 +280,60 @@ public final class AVLang {
         add("astralvigil.configuration.crafting.instability_factor", "Instability Factor", "Instabilitätsfaktor");
         add("astralvigil.configuration.crafting.instability_mobs", "Instability Creatures", "Instabilitäts-Kreaturen");
 
+        // Phase 5 – living gear
+        add("item.astralvigil.halo_edge", "Halo Edge", "Halo Edge");
+        add("item.astralvigil.dawnbreaker", "Dawnbreaker", "Dawnbreaker");
+        add("item.astralvigil.crescent", "Crescent", "Crescent");
+        add("item.astralvigil.tidecaller", "Tidecaller", "Tidecaller");
+        add("item.astralvigil.starlight_aegis", "Starlight Aegis", "Sternenlicht-Ägis");
+        add("item.astralvigil.seraph_helmet", "Seraph Helm", "Seraphenhelm");
+        add("item.astralvigil.seraph_chestplate", "Seraph Breastplate", "Seraphenbrustpanzer");
+        add("item.astralvigil.seraph_leggings", "Seraph Greaves", "Seraphenbeinschienen");
+        add("item.astralvigil.seraph_boots", "Seraph Sabatons", "Seraphenstiefel");
+        add("gear.astralvigil.level.0", "Dormant", "Schlummernd");
+        add("gear.astralvigil.level.1", "Awakened", "Erwacht");
+        add("gear.astralvigil.level.2", "Ascended", "Aufgestiegen");
+        add("gear.astralvigil.deed.sword", "Slay %s more undead by daylight", "Erschlage noch %s Untote bei Tageslicht");
+        add("gear.astralvigil.deed.axe", "Slay %s more undead by daylight", "Erschlage noch %s Untote bei Tageslicht");
+        add("gear.astralvigil.deed.bow", "Slay %s more foes at night (full moon counts thrice)", "Erlege noch %s Feinde bei Nacht (Vollmond zählt dreifach)");
+        add("gear.astralvigil.deed.crossbow", "Slay %s more foes at night (full moon counts thrice)", "Erlege noch %s Feinde bei Nacht (Vollmond zählt dreifach)");
+        add("gear.astralvigil.deed.shield", "Block %s more attacks", "Wehre noch %s Angriffe ab");
+        add("gear.astralvigil.deed.armor", "Slay %s more Void creatures in the full set", "Erschlage noch %s Geschöpfe der Leere in voller Rüstung");
+        add("gear.astralvigil.charge", "Charge: %s / %s", "Ladung: %s / %s");
+        add("gear.astralvigil.empty_slot", " \u25C7 empty sigil slot", " \u25C7 leerer Siegelplatz");
+        add("gear.astralvigil.hint", "%s: ability · %s: stance", "%s: Fähigkeit · %s: Haltung");
+        add("gear.astralvigil.sigil_cost", "Costs %s charge · %s s cooldown", "Kostet %s Ladung · %s s Abklingzeit");
+        add("message.astralvigil.gear.awakened", "%s is now %s!", "%s ist nun %s!");
+        add("message.astralvigil.gear.socketed", "%s set into %s.", "%s in %s eingesetzt.");
+        add("message.astralvigil.gear.socket_failed", "The sigil does not fit – wrong gear, already set, or no free slot.", "Das Siegel passt nicht – falsche Ausrüstung, schon eingesetzt oder kein freier Platz.");
+        add("message.astralvigil.gear.stance", "Stance: %s", "Haltung: %s");
+        add("message.astralvigil.gear.no_stance", "No sigil set in your gear.", "In deiner Ausrüstung ist kein Siegel eingesetzt.");
+        add("message.astralvigil.gear.cooldown", "Recovering… %s s", "Erholt sich… %s s");
+        add("message.astralvigil.gear.no_charge", "Not enough charge (%s needed).", "Nicht genug Ladung (%s benötigt).");
+        add("key.astralvigil.ability", "Gear Ability", "Ausrüstungsfähigkeit");
+        add("key.astralvigil.stance", "Cycle Stance", "Haltung wechseln");
+        add("key.categories.astralvigil", "Astral Vigil", "Astral Vigil");
+        add("key.category.astralvigil.astralvigil", "Astral Vigil", "Astral Vigil");
+        String[][] sigils = {
+            {"whirl", "Sigil of the Whirl", "Siegel des Wirbels", "Whirl", "Wirbel", "Spin, striking everything around you.", "Wirble herum und triff alles um dich."},
+            {"shieldbreaker", "Sigil of the Shieldbreaker", "Siegel des Schildbrechers", "Shieldbreaker", "Schildbrecher", "Your next blow strikes 40% harder.", "Dein nächster Hieb trifft 40 % härter."},
+            {"dawn", "Sigil of Dawn", "Siegel der Morgenröte", "Dawn", "Morgenröte", "A burst of daylight: undead burn, the rest are revealed.", "Ein Ausbruch von Tageslicht: Untote brennen, alles andere wird enthüllt."},
+            {"flash", "Sigil of the Flash", "Siegel des Lichtblitzes", "Flash", "Lichtblitz", "Dash forward on a streak of light.", "Stürme auf einem Lichtstreif nach vorn."},
+            {"precision", "Sigil of Precision", "Siegel der Präzision", "Precision", "Präzision", "Your next arrow strikes far harder and marks its target.", "Dein nächster Pfeil trifft weit härter und markiert sein Ziel."},
+            {"undertow", "Sigil of the Undertow", "Siegel des Sogs", "Undertow", "Sog", "Your next shot drags its target towards you.", "Dein nächster Schuss zieht sein Ziel zu dir heran."},
+            {"aegis", "Sigil of the Aegis", "Siegel der Ägis", "Aegis", "Ägis", "Wrap yourself in a ward of starlight.", "Hülle dich in einen Schutz aus Sternenlicht."}
+        };
+        for (String[] s : sigils) {
+            add("item.astralvigil.sigil_" + s[0], s[1], s[2]);
+            add("sigil.astralvigil." + s[0], s[3], s[4]);
+            add("sigil.astralvigil." + s[0] + ".desc", s[5], s[6]);
+        }
+        add("astralvigil.configuration.gear", "Living Gear", "Lebendige Ausrüstung");
+        add("astralvigil.configuration.gear.charge_capacity", "Charge Capacity", "Ladungskapazität");
+        add("astralvigil.configuration.gear.charge_rate", "Charge Rate", "Laderate");
+        add("astralvigil.configuration.gear.cost_multiplier", "Ability Cost Multiplier", "Multiplikator Fähigkeitskosten");
+        add("astralvigil.configuration.gear.cooldown_multiplier", "Ability Cooldown Multiplier", "Multiplikator Abklingzeit");
+
         // Config screen
         add("astralvigil.configuration.title", "Astral Vigil Configuration", "Astral Vigil – Einstellungen");
         add("astralvigil.configuration.section.astralvigil.server.toml", "Server Settings", "Server-Einstellungen");

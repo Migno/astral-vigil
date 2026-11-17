@@ -3,12 +3,32 @@ package media.hofferbert.astralvigil.registry;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import media.hofferbert.astralvigil.AstralVigil;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import media.hofferbert.astralvigil.gear.AVMaterials;
+import media.hofferbert.astralvigil.gear.GearItems;
+import media.hofferbert.astralvigil.gear.Sigil;
 import media.hofferbert.astralvigil.item.AstrolabeItem;
 import media.hofferbert.astralvigil.item.CodexItem;
 import media.hofferbert.astralvigil.item.StarChartItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.component.ChargedProjectiles;
+//? if >=26.1 {
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.component.BlocksAttacks;
+import net.minecraft.world.item.equipment.ArmorType;
+//?} else {
+/*import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.SwordItem;
+*///?}
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -41,6 +61,72 @@ public final class AVItems {
     public static final DeferredItem<BlockItem> PEDESTAL = ITEMS.registerSimpleBlockItem(AVBlocks.PEDESTAL);
     public static final DeferredItem<BlockItem> CONVERGENCE_ALTAR = ITEMS.registerSimpleBlockItem(AVBlocks.CONVERGENCE_ALTAR);
     public static final DeferredItem<BlockItem> ASTRAL_FORGE = ITEMS.registerSimpleBlockItem(AVBlocks.ASTRAL_FORGE);
+
+    // Phase 5 – living gear
+    //? if >=26.1 {
+    public static final DeferredItem<Item> HALO_EDGE = AVItems.<Item>register(
+            "halo_edge", Item::new, p -> p.sword(AVMaterials.SUNSTEEL, 3.0f, -2.4f).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> DAWNBREAKER = AVItems.<Item>register(
+            "dawnbreaker", p -> new AxeItem(AVMaterials.SUNSTEEL, 5.0f, -3.0f, p), p -> p.rarity(Rarity.RARE));
+    public static final DeferredItem<Item> STARLIGHT_AEGIS = AVItems.<Item>register("starlight_aegis", GearItems.Aegis::new, p -> p
+            .durability(700)
+            .rarity(Rarity.RARE)
+            .repairable(AVTags.Items.INGOTS_STARMETAL)
+            .equippableUnswappable(EquipmentSlot.OFFHAND)
+            .delayedComponent(DataComponents.BLOCKS_ATTACKS, ctx -> new BlocksAttacks(
+                    0.25f,
+                    1.0f,
+                    List.of(new BlocksAttacks.DamageReduction(90.0f, Optional.empty(), 0.0f, 1.0f)),
+                    new BlocksAttacks.ItemDamageFunction(3.0f, 1.0f, 1.0f),
+                    Optional.of(ctx.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)))
+            .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
+    public static final DeferredItem<Item> SERAPH_HELMET =
+            AVItems.<Item>register("seraph_helmet", Item::new, p -> p.humanoidArmor(AVMaterials.SERAPH, ArmorType.HELMET).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> SERAPH_CHESTPLATE =
+            AVItems.<Item>register("seraph_chestplate", Item::new, p -> p.humanoidArmor(AVMaterials.SERAPH, ArmorType.CHESTPLATE).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> SERAPH_LEGGINGS =
+            AVItems.<Item>register("seraph_leggings", Item::new, p -> p.humanoidArmor(AVMaterials.SERAPH, ArmorType.LEGGINGS).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> SERAPH_BOOTS =
+            AVItems.<Item>register("seraph_boots", Item::new, p -> p.humanoidArmor(AVMaterials.SERAPH, ArmorType.BOOTS).rarity(Rarity.RARE));
+    //?} else {
+    /*public static final DeferredItem<Item> HALO_EDGE = AVItems.<Item>register("halo_edge",
+            p -> new SwordItem(AVMaterials.SUNSTEEL, p),
+            p -> p.attributes(SwordItem.createAttributes(AVMaterials.SUNSTEEL, 3, -2.4f)).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> DAWNBREAKER = AVItems.<Item>register("dawnbreaker",
+            p -> new AxeItem(AVMaterials.SUNSTEEL, p),
+            p -> p.attributes(AxeItem.createAttributes(AVMaterials.SUNSTEEL, 5.0f, -3.0f)).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> STARLIGHT_AEGIS =
+            AVItems.<Item>register("starlight_aegis", GearItems.Aegis::new, p -> p.durability(700).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> SERAPH_HELMET = armor("seraph_helmet", ArmorItem.Type.HELMET);
+    public static final DeferredItem<Item> SERAPH_CHESTPLATE = armor("seraph_chestplate", ArmorItem.Type.CHESTPLATE);
+    public static final DeferredItem<Item> SERAPH_LEGGINGS = armor("seraph_leggings", ArmorItem.Type.LEGGINGS);
+    public static final DeferredItem<Item> SERAPH_BOOTS = armor("seraph_boots", ArmorItem.Type.BOOTS);
+
+    private static DeferredItem<Item> armor(String name, ArmorItem.Type type) {
+        return AVItems.<Item>register(name, p -> new ArmorItem(AVMaterials.SERAPH, type, p),
+                p -> p.durability(type.getDurability(AVMaterials.SERAPH_DURABILITY_FACTOR)).rarity(Rarity.RARE));
+    }
+    *///?}
+    public static final DeferredItem<Item> CRESCENT = AVItems.<Item>register(
+            "crescent", GearItems.Crescent::new, p -> p.durability(640).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> TIDECALLER = AVItems.<Item>register("tidecaller", GearItems.Tidecaller::new, p -> p
+            .stacksTo(1)
+            .durability(700)
+            .rarity(Rarity.RARE)
+            .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY));
+
+    public static final Map<Sigil, DeferredItem<Item>> SIGILS = sigils();
+
+    private static Map<Sigil, DeferredItem<Item>> sigils() {
+        Map<Sigil, DeferredItem<Item>> map = new EnumMap<>(Sigil.class);
+        for (Sigil s : Sigil.values()) {
+            map.put(s, AVItems.<Item>register(
+                    "sigil_" + s.id(), p -> new GearItems.SigilItem(p, s), p -> p.stacksTo(16).rarity(Rarity.UNCOMMON)));
+        }
+        return map;
+    }
 
     private AVItems() {}
 

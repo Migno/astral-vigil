@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:crescent",
+  "name": "Vael's Bows",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:crescent",
+      "text": "A Moonsilver bow whose arrows bite deeper at night. Catalyst: a bow; offerings: two Moonsilver ingots and two strings; 800 Luna light."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:tidecaller",
+      "text": "A Moonsilver crossbow. Catalyst: a crossbow; offerings: two Moonsilver ingots and two prismarine crystals; 900 Luna light."
+    }
+  ],
+  "sortnum": 2
+}

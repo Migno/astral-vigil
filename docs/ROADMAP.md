@@ -9,9 +9,9 @@ Every phase ends with: build of both targets ✅ · GameTests ✅ · in-game scr
 | 2 – Research | Alignment system (Sol/Luna/Stella/Void), scans, Codex Caelestis (Patchouli), star-chart screen | ✅ done |
 | 3 – Energy | Starlight storage, lenses/mirrors/prisms, beam renderer, Jade plugin | ✅ done |
 | 4 – Crafting | Convergence Altar + Astral Forge, EMI/JEI plugins, tag-based recipes | ✅ done |
-| 5 – Gear | Weapons, bows, armour incl. wing cosmetic, sigils/stances, living-gear progression, animations + particles | – |
+| 5 – Gear | Weapons, bows, armour, sigils/stances, living-gear progression, ability particles (wing cosmetic moved to Phase 7 with GeckoLib) | ✅ done |
 | 6 – World | Fallen Observatories, constellations/Star Anchors, Eclipse Gaze + events | – |
-| 7 – Firmament | Dimension, four sanctums + Watcher entities, favour system | – |
+| 7 – Firmament | Dimension, four sanctums + Watcher entities, favour system, GeckoLib setup incl. Seraph wing cosmetic | – |
 | 8 – Endgame | Eclipse boss (3 phases), final advancements, balance pass | – |
 | 9 – Release readiness | Compat instances + ATM10/ATM11 smoke tests, profiling, README en/de, Modrinth/CurseForge drafts (not published) | – |
 

@@ -1,0 +1,27 @@
+{
+  "type": "astralvigil:convergence",
+  "center": {
+    "item": "astralvigil:sigil_blank"
+  },
+  "ingredients": [
+    {
+      "tag": "c:gems/prismarine"
+    },
+    {
+      "tag": "c:gems/prismarine"
+    },
+    {
+      "item": "minecraft:kelp"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:sigil_undertow"
+  },
+  "starlight": 300,
+  "time": 120,
+  "tint": "luna"
+}

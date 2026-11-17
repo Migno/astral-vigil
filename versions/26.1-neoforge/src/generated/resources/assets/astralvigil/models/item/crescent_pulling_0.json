@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bow",
+  "textures": {
+    "layer0": "astralvigil:item/crescent_pulling_0"
+  }
+}

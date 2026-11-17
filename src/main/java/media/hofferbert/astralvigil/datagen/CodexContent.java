@@ -93,13 +93,21 @@ public final class CodexContent {
                     "astralvigil:convergence_altar",
                     3),
             new Category(
+                    "living_gear",
+                    "Living Gear",
+                    "Lebendige Ausrüstung",
+                    "Weapons and armour that remember what you did with them.",
+                    "Waffen und Rüstungen, die sich erinnern, was du mit ihnen getan hast.",
+                    "astralvigil:halo_edge",
+                    4),
+            new Category(
                     "constellations",
                     "Constellations",
                     "Sternbilder",
                     "The Watchers' signs, written in stars.",
                     "Die Zeichen der Wächter, in Sterne geschrieben.",
                     "astralvigil:star_chart",
-                    5));
+                    6));
 
     public static final List<Entry> ENTRIES = List.of(
             // ---------------------------------------------------------------- the rift
@@ -211,6 +219,39 @@ public final class CodexContent {
                             "astralvigil:sigil_blank",
                             "Catalyst: a Starmetal Ingot. Offerings: two gold nuggets and two amethyst shards. 400 Stella starlight. Yields two blanks – the Watchers' sigils will be cut from them.",
                             "Katalysator: ein Sternenstahlbarren. Gaben: zwei Goldklumpen und zwei Amethystsplitter. 400 Stella-Sternenlicht. Ergibt zwei Rohlinge – aus ihnen werden die Siegel der Wächter geschnitten."))),
+            // ---------------------------------------------------------------- living gear
+            new Entry("living_gear", "living_gear", "Living Gear", "Lebendige Ausrüstung", "astralvigil:halo_edge", 0, null, List.of(
+                    new Text(
+                            "Gear forged at the $(item)Convergence Altar$() is $(l)dormant$(). Deeds in the spirit of its Watcher awaken it: undead slain by daylight for Solenne's blades, night kills for Vael's bows, blocked blows for the Aegis, Void creatures for the Seraph Plate.$(br2)$(l)Awakened$() gear gains a second sigil slot, $(l)Ascended$() gear a third.",
+                            "Am $(item)Konvergenzaltar$() geschmiedete Ausrüstung $(l)schlummert$(). Taten im Geist ihres Wächters wecken sie: bei Tageslicht erschlagene Untote für Solennes Klingen, nächtliche Jagd für Vaels Bögen, abgewehrte Hiebe für die Ägis, Geschöpfe der Leere für die Seraphenrüstung.$(br2)$(l)Erwachte$() Ausrüstung erhält einen zweiten Siegelplatz, $(l)aufgestiegene$() einen dritten."),
+                    new Text(
+                            "Hold the gear, take a $(item)Sigil$() in your off hand and use while sneaking to set it. Each sigil is a $(l)stance$(): switch with the stance key, unleash with the ability key.$(br2)Abilities cost $(l)charge$(). Gear recharges under the night sky – or touch a $(item)Starlight Reservoir$() with it.",
+                            "Halte die Ausrüstung, nimm ein $(item)Siegel$() in die Nebenhand und benutze sie schleichend, um es einzusetzen. Jedes Siegel ist eine $(l)Haltung$(): wechsle sie mit der Haltungstaste, entfessle sie mit der Fähigkeitstaste.$(br2)Fähigkeiten kosten $(l)Ladung$(). Ausrüstung lädt sich unter dem Nachthimmel auf – oder berühre damit einen $(item)Sternenlichtspeicher$()."))),
+            new Entry("solenne_gear", "living_gear", "Solenne's Blades", "Solennes Klingen", "astralvigil:dawnbreaker", 1, null, List.of(
+                    new Spotlight("astralvigil:halo_edge",
+                            "A Sunsteel sword. Catalyst: a diamond sword; offerings: two Sunsteel ingots and two Astral Shards; 800 Sol light.",
+                            "Ein Sonnenstahlschwert. Katalysator: ein Diamantschwert; Gaben: zwei Sonnenstahlbarren und zwei Astralsplitter; 800 Sol-Licht."),
+                    new Spotlight("astralvigil:dawnbreaker",
+                            "A Sunsteel battle axe. Catalyst: a diamond axe; offerings: three Sunsteel ingots and an Astral Shard; 900 Sol light.",
+                            "Eine Sonnenstahl-Streitaxt. Katalysator: eine Diamantaxt; Gaben: drei Sonnenstahlbarren und ein Astralsplitter; 900 Sol-Licht."))),
+            new Entry("vael_gear", "living_gear", "Vael's Bows", "Vaels Bögen", "astralvigil:crescent", 2, null, List.of(
+                    new Spotlight("astralvigil:crescent",
+                            "A Moonsilver bow whose arrows bite deeper at night. Catalyst: a bow; offerings: two Moonsilver ingots and two strings; 800 Luna light.",
+                            "Ein Mondsilberbogen, dessen Pfeile nachts tiefer beißen. Katalysator: ein Bogen; Gaben: zwei Mondsilberbarren und zwei Fäden; 800 Luna-Licht."),
+                    new Spotlight("astralvigil:tidecaller",
+                            "A Moonsilver crossbow. Catalyst: a crossbow; offerings: two Moonsilver ingots and two prismarine crystals; 900 Luna light.",
+                            "Eine Mondsilber-Armbrust. Katalysator: eine Armbrust; Gaben: zwei Mondsilberbarren und zwei Prismarinkristalle; 900 Luna-Licht."))),
+            new Entry("orrin_gear", "living_gear", "Orrin's Plate", "Orrins Rüstung", "astralvigil:seraph_chestplate", 3, null, List.of(
+                    new Spotlight("astralvigil:seraph_chestplate",
+                            "Seraph Plate, forged from diamond armour and Starmetal under Stella light. Awakened, the full set lets you glide while sneaking; ascended, you no longer fear falls.",
+                            "Seraphenrüstung, aus Diamantrüstung und Sternenstahl unter Stella-Licht geschmiedet. Erwacht lässt dich der volle Satz schleichend gleiten; aufgestiegen fürchtest du keinen Sturz mehr."),
+                    new Spotlight("astralvigil:starlight_aegis",
+                            "The Starlight Aegis, a Starmetal shield. Every blocked blow brings it closer to waking.",
+                            "Die Sternenlicht-Ägis, ein Schild aus Sternenstahl. Jeder abgewehrte Hieb bringt sie dem Erwachen näher."))),
+            new Entry("sigils", "living_gear", "Sigils", "Siegel", "astralvigil:sigil_flash", 4, null, List.of(
+                    new Text(
+                            "Sigils are cut from $(item)Sigil Blanks$() at the altar. $(l)Whirl$() and $(l)Shieldbreaker$() suit the axe, $(l)Dawn$() and $(l)Flash$() the sword, $(l)Precision$() and $(l)Undertow$() the bows, $(l)Aegis$() the shield and the Seraph Plate.",
+                            "Siegel werden am Altar aus $(item)Siegelrohlingen$() geschnitten. $(l)Wirbel$() und $(l)Schildbrecher$() passen zur Axt, $(l)Morgenröte$() und $(l)Lichtblitz$() zum Schwert, $(l)Präzision$() und $(l)Sog$() zu den Bögen, $(l)Ägis$() zu Schild und Seraphenrüstung."))),
             // ---------------------------------------------------------------- constellations
             new Entry("constellations", "constellations", "Signs in the Sky", "Zeichen am Himmel", "astralvigil:star_chart", 0, null, List.of(
                     new Text(

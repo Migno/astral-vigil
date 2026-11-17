@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 //? if >=26.1 {
@@ -96,6 +97,20 @@ public final class AVTagProviders {
                     .addTag(AVTags.Items.INGOTS_STARMETAL)
                     .addTag(AVTags.Items.INGOTS_SUNSTEEL)
                     .addTag(AVTags.Items.INGOTS_MOONSILVER);
+            tag(ItemTags.SWORDS).add(AVItems.HALO_EDGE.get());
+            tag(ItemTags.AXES).add(AVItems.DAWNBREAKER.get());
+            tag(ItemTags.BOW_ENCHANTABLE).add(AVItems.CRESCENT.get());
+            tag(ItemTags.CROSSBOW_ENCHANTABLE).add(AVItems.TIDECALLER.get());
+            tag(ItemTags.DURABILITY_ENCHANTABLE).add(
+                    AVItems.HALO_EDGE.get(), AVItems.DAWNBREAKER.get(), AVItems.CRESCENT.get(), AVItems.TIDECALLER.get(),
+                    AVItems.STARLIGHT_AEGIS.get());
+            tag(ItemTags.HEAD_ARMOR).add(AVItems.SERAPH_HELMET.get());
+            tag(ItemTags.CHEST_ARMOR).add(AVItems.SERAPH_CHESTPLATE.get());
+            tag(ItemTags.LEG_ARMOR).add(AVItems.SERAPH_LEGGINGS.get());
+            tag(ItemTags.FOOT_ARMOR).add(AVItems.SERAPH_BOOTS.get());
+            tag(Tags.Items.TOOLS_SHIELD).add(AVItems.STARLIGHT_AEGIS.get());
+            tag(Tags.Items.TOOLS_BOW).add(AVItems.CRESCENT.get());
+            tag(Tags.Items.TOOLS_CROSSBOW).add(AVItems.TIDECALLER.get());
             tag(AVTags.Items.CHART_PAPER).add(net.minecraft.world.item.Items.PAPER);
             tag(AVTags.Items.CODEX_BOOKS).add(net.minecraft.world.item.Items.BOOK);
         }

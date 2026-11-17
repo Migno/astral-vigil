@@ -29,6 +29,7 @@ public final class AVDataGen {
         CompletableFuture<HolderLookup.Provider> lookup = event.getLookupProvider();
 
         gen.addProvider(true, new AVModelProvider(out));
+        gen.addProvider(true, new AVEquipmentProvider(out));
         common(gen, out, lookup);
         gen.addProvider(true, new AVTagProviders.BlockTagProvider(out, lookup));
         gen.addProvider(true, new AVTagProviders.ItemTagProvider(out, lookup));

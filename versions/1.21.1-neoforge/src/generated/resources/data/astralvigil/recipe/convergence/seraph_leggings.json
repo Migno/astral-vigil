@@ -1,0 +1,34 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "stella",
+  "center": {
+    "item": "minecraft:diamond_leggings"
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/starmetal"
+    },
+    {
+      "tag": "c:ingots/starmetal"
+    },
+    {
+      "tag": "c:ingots/starmetal"
+    },
+    {
+      "tag": "c:ingots/starmetal"
+    },
+    {
+      "tag": "astralvigil:astral_shards"
+    },
+    {
+      "tag": "astralvigil:astral_shards"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:seraph_leggings"
+  },
+  "starlight": 1000,
+  "time": 200,
+  "tint": "stella"
+}

@@ -1,0 +1,28 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "luna",
+  "center": {
+    "item": "minecraft:crossbow"
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "tag": "c:gems/prismarine"
+    },
+    {
+      "tag": "c:gems/prismarine"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:tidecaller"
+  },
+  "starlight": 900,
+  "time": 200,
+  "tint": "luna"
+}

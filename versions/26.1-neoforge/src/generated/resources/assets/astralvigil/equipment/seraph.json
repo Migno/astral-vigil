@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "astralvigil:seraph"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "astralvigil:seraph"
+      }
+    ]
+  }
+}

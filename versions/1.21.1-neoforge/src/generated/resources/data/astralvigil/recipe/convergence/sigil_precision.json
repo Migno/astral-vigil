@@ -1,0 +1,27 @@
+{
+  "type": "astralvigil:convergence",
+  "center": {
+    "item": "astralvigil:sigil_blank"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "tag": "c:ingots/moonsilver"
+    },
+    {
+      "tag": "c:ingots/moonsilver"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:sigil_precision"
+  },
+  "starlight": 300,
+  "time": 120,
+  "tint": "luna"
+}

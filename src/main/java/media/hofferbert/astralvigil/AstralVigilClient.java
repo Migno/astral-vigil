@@ -2,6 +2,7 @@ package media.hofferbert.astralvigil;
 
 import media.hofferbert.astralvigil.client.ClientRecipes;
 import media.hofferbert.astralvigil.client.FloatingItemsRenderer;
+import media.hofferbert.astralvigil.client.GearClient;
 import media.hofferbert.astralvigil.client.StarlightBeamRenderer;
 import media.hofferbert.astralvigil.datagen.AVDataGen;
 import media.hofferbert.astralvigil.registry.AVBlockEntities;
@@ -27,6 +28,7 @@ public final class AstralVigilClient {
         modBus.addListener(AVDataGen::gather);
         modBus.addListener(AstralVigilClient::registerRenderers);
         ClientRecipes.register();
+        GearClient.register(modBus);
         NeoForge.EVENT_BUS.addListener(AstralVigilClient::onTooltip);
     }
 

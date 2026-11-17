@@ -4,6 +4,21 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 5 – Gear
+- **Living gear:** Halo Edge (sword) and Dawnbreaker (battle axe) of Sunsteel, Crescent (bow) and Tidecaller
+  (crossbow) of Moonsilver, Starlight Aegis (shield) and Seraph Plate (armour) of Starmetal – forged at the
+  Convergence Altar from vanilla diamond gear / bow / crossbow / shield.
+- **Deeds awaken gear** (Dormant → Awakened at 25 → Ascended at 100): undead slain by day (Sol blades), night kills
+  with full-moon bonus (Luna bows), blocked attacks (Aegis), Void creatures slain in the full Seraph set.
+- **Sigils & stances:** 7 sigils (Whirl, Shieldbreaker, Dawn, Flash, Precision, Undertow, Aegis); 1/2/3 sockets by
+  level; sneak-use with a sigil in the off hand to socket; keys V (ability) and B (stance).
+- **Starlight charge:** abilities cost charge + cooldown; gear recharges under the night sky or from a reservoir.
+- Bonuses are utility-first: night/precision arrows, undead bonus per level, Seraph glide (Awakened) and fall immunity
+  (Ascended). Raw damage stays at Netherite level.
+- Bow/crossbow draw frames on both targets (26.1 item model definitions, 1.21.1 vanilla property functions),
+  equipment asset for Seraph Plate on 26.1, armour layers on 1.21.1.
+- Codex category "Living Gear"; JUnit for gear rules; GameTests for socketing, deeds and the Whirl ability.
+
 ### Phase 4 – Crafting
 - **Convergence Altar + Pedestals:** infusion ritual (catalyst + up to 12 offerings), powered by starlight beamed in or
   fed by a touching reservoir. **Stability** from pedestal symmetry, nearby aligned blocks (recipe alignment), Void

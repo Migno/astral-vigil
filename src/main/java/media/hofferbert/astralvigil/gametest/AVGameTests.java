@@ -14,6 +14,9 @@ import media.hofferbert.astralvigil.research.ResearchManager;
 import media.hofferbert.astralvigil.crafting.AstralForgeBlockEntity;
 import media.hofferbert.astralvigil.crafting.ConvergenceAltarBlockEntity;
 import media.hofferbert.astralvigil.crafting.PedestalBlockEntity;
+import media.hofferbert.astralvigil.gear.GearData;
+import media.hofferbert.astralvigil.gear.GearManager;
+import media.hofferbert.astralvigil.gear.Sigil;
 import media.hofferbert.astralvigil.starlight.Tint;
 import net.minecraft.world.item.Item;
 import media.hofferbert.astralvigil.starlight.network.Devices;
@@ -63,7 +66,43 @@ public final class AVGameTests {
             new Def("reservoir_feeds_lens", CRATER_FIELD, 140, true, AVGameTests::reservoirFeedsLens),
             new Def("forge_makes_starmetal", CRATER_FIELD, 200, true, AVGameTests::forgeMakesStarmetal),
             new Def("altar_symmetric_ritual", CRATER_FIELD, 300, true, AVGameTests::altarSymmetricRitual),
-            new Def("altar_asymmetry_lowers_stability", CRATER_FIELD, 60, true, AVGameTests::altarAsymmetry));
+            new Def("altar_asymmetry_lowers_stability", CRATER_FIELD, 60, true, AVGameTests::altarAsymmetry),
+            new Def("sigil_sockets_into_gear", PLATFORM, 40, false, AVGameTests::sigilSockets),
+            new Def("undead_kill_by_day_is_a_deed", PLATFORM, 40, false, AVGameTests::undeadDeed),
+            new Def("whirl_hits_nearby_mobs", CRATER_FIELD, 40, true, AVGameTests::whirlHits));
+
+    static void sigilSockets(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new ItemStack(AVItems.HALO_EDGE.get()));
+        player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, new ItemStack(AVItems.SIGILS.get(Sigil.DAWN).get()));
+        GT.check(helper, GearManager.trySocket(player), "socketing not handled");
+        GearData data = GearManager.data(player.getMainHandItem());
+        GT.check(helper, data.sigils().equals(List.of("dawn")), "sigils " + data.sigils());
+        GT.check(helper, data.activeSigil().orElse(null) == Sigil.DAWN, "active sigil " + data.activeSigil());
+        helper.succeed();
+    }
+
+    static void undeadDeed(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        ItemStack sword = new ItemStack(AVItems.HALO_EDGE.get());
+        var zombie = helper.spawn(net.minecraft.world.entity.EntityType.ZOMBIE, GT.pos(2, 1, 2));
+        boolean day = !media.hofferbert.astralvigil.starlight.StarlightMath.isNight(Celestial.dayTime(helper.getLevel()));
+        GearManager.onKill(player, zombie, sword);
+        int expected = day ? 1 : 0;
+        GT.check(helper, GearManager.data(sword).deeds() == expected, "deeds " + GearManager.data(sword).deeds() + " expected " + expected);
+        helper.succeed();
+    }
+
+    static void whirlHits(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        BlockPos at = helper.absolutePos(GT.pos(6, 4, 6));
+        player.setPos(at.getX() + 0.5, at.getY(), at.getZ() + 0.5);
+        var pig = helper.spawnWithNoFreeWill(net.minecraft.world.entity.EntityType.PIG, GT.pos(7, 4, 6));
+        float before = pig.getHealth();
+        GearManager.performForTest(helper.getLevel(), player, Sigil.WHIRL);
+        GT.check(helper, pig.getHealth() < before, "pig was not hit (" + pig.getHealth() + ")");
+        helper.succeed();
+    }
 
     static void forgeMakesStarmetal(GameTestHelper helper) {
         AstralForgeBlockEntity forge = (AstralForgeBlockEntity) placeBe(helper, GT.pos(6, 4, 6), AVBlocks.ASTRAL_FORGE.get());

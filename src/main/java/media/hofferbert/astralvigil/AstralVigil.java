@@ -7,7 +7,12 @@ import media.hofferbert.astralvigil.gametest.GameTestRegistration;
 import media.hofferbert.astralvigil.network.AVNetwork;
 import media.hofferbert.astralvigil.registry.AVAttachments;
 import media.hofferbert.astralvigil.registry.AVBlockEntities;
+import media.hofferbert.astralvigil.gear.GearEvents;
 import media.hofferbert.astralvigil.registry.AVBlocks;
+import media.hofferbert.astralvigil.registry.AVComponents;
+//? if <26.1 {
+/*import media.hofferbert.astralvigil.gear.AVMaterials;
+*///?}
 import media.hofferbert.astralvigil.registry.AVRecipes;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
@@ -39,6 +44,10 @@ public final class AstralVigil {
         AVItems.ITEMS.register(modBus);
         AVCreativeTabs.TABS.register(modBus);
         AVAttachments.ATTACHMENTS.register(modBus);
+        AVComponents.COMPONENTS.register(modBus);
+        //? if <26.1 {
+        /*AVMaterials.ARMOR_MATERIALS.register(modBus);
+        *///?}
         AVBlockEntities.BLOCK_ENTITIES.register(modBus);
         AVRecipes.register(modBus);
         //? if >=26.1 {
@@ -48,6 +57,7 @@ public final class AstralVigil {
         AVNetwork.register(modBus);
 
         StarfallManager.register();
+        GearEvents.register();
         AVCommands.register();
         GameTestRegistration.register(modBus);
     }

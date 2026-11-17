@@ -84,6 +84,35 @@ Devices work once per second (not every tick), so even large networks stay cheap
 
 Ingot cost ≈ one collector-night of aligned light – metals are a mid-game step, not a grind wall.
 
+## Living gear (`[gear]`)
+
+| Item | Stats | Netherite reference |
+|---|---|---|
+| Halo Edge | 8 dmg, 1.6 speed, 1800 uses | 8 / 1.6 / 2031 |
+| Dawnbreaker | 10 dmg, 1.0 speed, 1800 uses | 10 / 1.0 / 2031 |
+| Crescent / Tidecaller | vanilla draw, 640 / 700 uses; arrows +15 % at night, +10 % per level | bow 384 / crossbow 465 uses |
+| Starlight Aegis | vanilla shield blocking, 700 uses | 336 |
+| Seraph Plate | 3/8/6/3 armour, 3 toughness, 0.1 knockback res., durability factor 35 | 3/8/6/3, 3, 0.1, 37 |
+
+Living-gear bonuses are utility: +15 % damage vs undead per level (Sol blades), glide while sneaking (Seraph,
+Awakened), no fall damage (Seraph, Ascended). Deeds: 25 → Awakened, 100 → Ascended.
+
+| Key | Default | Why |
+|---|---|---|
+| `chargeCapacity` | 200 | 4–10 ability uses. |
+| `chargeRate` | 4 per 2 s at 100 % starlight | A clear night refills a piece in ~2 min of real time outdoors; indoors/daytime needs a reservoir. |
+| `abilityCostMultiplier` / `abilityCooldownMultiplier` | 1.0 | Pack-level tuning knobs. |
+
+| Sigil | Cost | Cooldown | Effect |
+|---|---|---|---|
+| Whirl | 30 | 6 s | AoE hit (60 % + 10 %/level of attack damage) in 3.5 blocks |
+| Shieldbreaker | 20 | 8 s | Next melee hit +40 % |
+| Dawn | 40 | 12 s | Undead in 6 blocks burn + 4 (+2/level) magic damage; others glow |
+| Flash | 25 | 4 s | Dash ~6 blocks, fall reset |
+| Precision | 20 | 6 s | Next arrow +60 % and glowing |
+| Undertow | 25 | 8 s | Next arrow pulls the target |
+| Aegis | 40 | 20 s | Absorption II–III 10 s + Resistance I 5 s |
+
 ## Starlight formula
 
 `intensity = night(t) × moon(phase) × weather`, 0 without sky access.

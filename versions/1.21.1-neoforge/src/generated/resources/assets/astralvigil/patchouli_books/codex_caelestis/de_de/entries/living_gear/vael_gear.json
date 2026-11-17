@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:crescent",
+  "name": "Vaels Bögen",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:crescent",
+      "text": "Ein Mondsilberbogen, dessen Pfeile nachts tiefer beißen. Katalysator: ein Bogen; Gaben: zwei Mondsilberbarren und zwei Fäden; 800 Luna-Licht."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:tidecaller",
+      "text": "Eine Mondsilber-Armbrust. Katalysator: eine Armbrust; Gaben: zwei Mondsilberbarren und zwei Prismarinkristalle; 900 Luna-Licht."
+    }
+  ],
+  "sortnum": 2
+}
