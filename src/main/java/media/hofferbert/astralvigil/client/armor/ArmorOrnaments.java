@@ -100,6 +100,29 @@ public final class ArmorOrnaments {
 
     private ArmorOrnaments() {}
 
+    /** Head ornaments that make way for a head cosmetic (crown/halo) - the side crests and the hood stay. */
+    static final java.util.Set<String> HEAD_YIELD = java.util.Set.of("halo", "halo_inner", "crest", "crest_plume_right", "crest_plume_left",
+            "crown", "circlet", "moon_halo");
+    /** Back ornaments that make way for a cape, a wing cosmetic or the Seraph Wings. */
+    static final java.util.Set<String> BACK_YIELD = java.util.Set.of("wing_right", "wing_left", "wing_grand_right", "wing_grand_left",
+            "mandorla", "sun_disc", "mantle", "moon_motes");
+
+    /** Pure: is an ornament piece hidden because the wearer shows a cosmetic in the same place? */
+    public static boolean yields(String piece, boolean headCosmetic, boolean backCovered) {
+        return headCosmetic && HEAD_YIELD.contains(piece) || backCovered && BACK_YIELD.contains(piece);
+    }
+
+    static boolean headCosmetic(net.minecraft.world.entity.player.Player player) {
+        return player.getData(media.hofferbert.astralvigil.registry.AVAttachments.COSMETICS)
+                .get(media.hofferbert.astralvigil.cosmetics.Cosmetic.Slot.HEAD).isPresent();
+    }
+
+    static boolean backCovered(net.minecraft.world.entity.player.Player player) {
+        var loadout = player.getData(media.hofferbert.astralvigil.registry.AVAttachments.COSMETICS);
+        return loadout.get(media.hofferbert.astralvigil.cosmetics.Cosmetic.Slot.BACK).isPresent()
+                || media.hofferbert.astralvigil.client.SeraphWings.shown(player);
+    }
+
     public static void register(IEventBus modBus) {
         modBus.addListener(ArmorOrnaments::addLayers);
         //? if >=26.1 {
@@ -107,6 +130,9 @@ public final class ArmorOrnaments {
         modBus.addListener((RegisterRenderStateModifiersEvent e) -> e.registerAvatarEntityModifier(new AvatarRenderStateModifier() {
             @Override
             public <T extends Avatar & ClientAvatarEntity> void accept(T avatar, AvatarRenderState state) {
+                boolean player = avatar instanceof net.minecraft.world.entity.player.Player;
+                state.setRenderData(HEAD_COSMETIC, player && headCosmetic((net.minecraft.world.entity.player.Player) avatar));
+                state.setRenderData(BACK_COVERED, player && backCovered((net.minecraft.world.entity.player.Player) avatar));
                 if (ArmorSets.inSlot(avatar.getItemBySlot(EquipmentSlot.CHEST), EquipmentSlot.CHEST) != null) {
                     state.showCape = false;
                 }
@@ -114,6 +140,13 @@ public final class ArmorOrnaments {
         }));
         //?}
     }
+
+    //? if >=26.1 {
+    static final net.minecraft.util.context.ContextKey<Boolean> HEAD_COSMETIC =
+            new net.minecraft.util.context.ContextKey<>(AstralVigil.id("ornaments_head_cosmetic"));
+    static final net.minecraft.util.context.ContextKey<Boolean> BACK_COVERED =
+            new net.minecraft.util.context.ContextKey<>(AstralVigil.id("ornaments_back_covered"));
+    //?}
 
     static Map<ArmorSet, SetModel> bake() {
         Map<ArmorSet, SetModel> map = new EnumMap<>(ArmorSet.class);
@@ -241,6 +274,8 @@ public final class ArmorOrnaments {
                 return;
             }
             int level = ArmorSets.level(state.chestEquipment);
+            boolean headCos = Boolean.TRUE.equals(state.getRenderData(HEAD_COSMETIC));
+            boolean backCov = Boolean.TRUE.equals(state.getRenderData(BACK_COVERED));
             M parent = getParentModel();
             for (int i = 0; i < worn.length; i++) {
                 ArmorSet set = worn[i];
@@ -253,7 +288,7 @@ public final class ArmorOrnaments {
                 collector.submitModel(glowModels.get(slot), state, poseStack, RenderTypes.eyes(model.layerGlow(slot)), FULL_BRIGHT,
                         OverlayTexture.NO_OVERLAY, color, null, state.outlineColor, null);
                 for (Baked b : model.pieces()) {
-                    if (b.piece().slot() != slot || b.piece().minLevel() > level) {
+                    if (b.piece().slot() != slot || b.piece().minLevel() > level || yields(b.piece().name(), headCos, backCov)) {
                         continue;
                     }
                     poseStack.pushPose();
@@ -313,6 +348,8 @@ public final class ArmorOrnaments {
                 return;
             }
             int level = ArmorSets.level(entity.getItemBySlot(EquipmentSlot.CHEST));
+            boolean headCos = entity instanceof net.minecraft.world.entity.player.Player p && headCosmetic(p);
+            boolean backCov = entity instanceof net.minecraft.world.entity.player.Player p2 && backCovered(p2);
             M parent = getParentModel();
             for (int i = 0; i < worn.length; i++) {
                 ArmorSet set = worn[i];
@@ -328,7 +365,7 @@ public final class ArmorOrnaments {
                 armor.renderToBuffer(poseStack, buffers.getBuffer(RenderType.eyes(model.layerGlow(slot))), FULL_BRIGHT,
                         OverlayTexture.NO_OVERLAY, color);
                 for (Baked b : model.pieces()) {
-                    if (b.piece().slot() != slot || b.piece().minLevel() > level) {
+                    if (b.piece().slot() != slot || b.piece().minLevel() > level || yields(b.piece().name(), headCos, backCov)) {
                         continue;
                     }
                     poseStack.pushPose();

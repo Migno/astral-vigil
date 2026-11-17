@@ -75,7 +75,7 @@ public final class SeraphWings {
         //?}
     }
 
-    static boolean shown(Player player) {
+    public static boolean shown(Player player) {
         return player.getData(AVAttachments.WINGS) == SeraphFeatherItem.SHOWN || cosmetic(player) != null;
     }
 
