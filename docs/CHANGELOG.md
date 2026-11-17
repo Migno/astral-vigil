@@ -4,6 +4,17 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Developer cosmetics
+- **Celestial Wardrobe** (key **K**): one cosmetic per slot with a turning live preview of your own player.
+  Head: **Solar Crown**, **Eclipse Crown** (crackles), **Seraph Halo** (floating, spinning). Cape: **Seraph Cape**,
+  **Starfield Cape** (twinkling stars), **Eclipse Cape**. Wings: **Radiant Wings**, **Eclipse Wings**. Aura:
+  **Starlight Motes**, **Solar Embers**, **Void Storm** (forked lightning arcs).
+- Emissive glow passes with a slow pulse on every cosmetic; vanilla model layers on both targets, visible to everyone.
+- Access is decided by the server (built-in team list, `[cosmetics] developers` UUID list, dev environment);
+  `[cosmetics] enabled = false` turns them off for a server.
+- Debug commands: `/astralvigil cosmetic <id>|clear`, `/astralvigil showcase network|ritual|forge|armory`.
+- Full screenshot suite in `docs/screenshots/suite/`.
+
 ### Phase 9 – Release readiness
 - README rewritten in English and German (journey, integrations, configuration, building).
 - Modrinth and CurseForge page drafts in `docs/publishing/` (not published).

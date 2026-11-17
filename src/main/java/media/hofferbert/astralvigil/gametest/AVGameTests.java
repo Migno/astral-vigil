@@ -58,6 +58,7 @@ public final class AVGameTests {
             new Def("eclipse_drops_heart", PLATFORM, 40, true, AVGameTests::eclipseDropsHeart),
             new Def("echo_expires", PLATFORM, 60, true, AVGameTests::echoExpires),
             new Def("eclipse_awards_advancement", PLATFORM, 40, false, AVGameTests::eclipseAwardsAdvancement),
+            new Def("cosmetics_apply_sanitizes", PLATFORM, 40, false, AVGameTests::cosmeticsApplySanitizes),
             new Def("fallen_star_drops_shards", PLATFORM, 40, false, AVGameTests::fallenStarDropsShards),
             new Def("no_starlight_under_roof", PLATFORM, 40, false, AVGameTests::noStarlightUnderRoof),
             new Def("starfall_crater", CRATER_FIELD, 40, true, AVGameTests::starfallCrater),
@@ -415,6 +416,20 @@ public final class AVGameTests {
         player.setData(AVAttachments.RESEARCH, ResearchData.EMPTY.withScan("test/sol", Set.of(Alignment.SOL), threshold));
         ResearchManager.solveConstellation(player, "halo");
         GT.check(helper, ResearchManager.get(player).hasConstellation("halo"), "halo not learned after attunement");
+        helper.succeed();
+    }
+
+    static void cosmeticsApplySanitizes(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        // GameTests run in a development environment, where everyone counts as a developer
+        GT.check(helper, media.hofferbert.astralvigil.cosmetics.CosmeticsManager.isDeveloper(player), "dev environment should grant cosmetics");
+        var requested = new media.hofferbert.astralvigil.cosmetics.Loadout("seraph_halo", "void_storm", "radiant_wings", "unknown");
+        GT.check(helper, media.hofferbert.astralvigil.cosmetics.CosmeticsManager.apply(player, requested), "apply refused");
+        var worn = player.getData(AVAttachments.COSMETICS);
+        GT.check(helper, worn.equals(new media.hofferbert.astralvigil.cosmetics.Loadout("seraph_halo", "", "radiant_wings", "")),
+                "loadout not sanitized: " + worn);
+        media.hofferbert.astralvigil.cosmetics.CosmeticsManager.refresh(player);
+        GT.check(helper, player.getData(AVAttachments.COSMETIC_ACCESS), "access flag not set");
         helper.succeed();
     }
 

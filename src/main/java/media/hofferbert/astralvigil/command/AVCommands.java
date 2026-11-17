@@ -26,6 +26,23 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 public final class AVCommands {
     private AVCommands() {}
 
+    /** Puts on one developer cosmetic (replacing whatever is in its slot); same access rules as the Cosmetics screen. */
+    private static int wearCosmetic(CommandSourceStack source, String id) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+        ServerPlayer player = source.getPlayerOrException();
+        var cosmetic = media.hofferbert.astralvigil.cosmetics.Cosmetic.byId(id);
+        if (cosmetic.isEmpty()) {
+            source.sendFailure(Component.translatable("commands.astralvigil.cosmetic.unknown", id));
+            return 0;
+        }
+        var current = player.getData(media.hofferbert.astralvigil.registry.AVAttachments.COSMETICS);
+        if (!media.hofferbert.astralvigil.cosmetics.CosmeticsManager.apply(player, current.with(cosmetic.get().slot(), cosmetic))) {
+            return 0;
+        }
+        source.sendSuccess(() -> Component.translatable("commands.astralvigil.cosmetic.set",
+                Component.translatable(cosmetic.get().translationKey())), false);
+        return 1;
+    }
+
     public static void register() {
         NeoForge.EVENT_BUS.addListener((RegisterCommandsEvent e) -> register(e.getDispatcher()));
     }
@@ -51,6 +68,32 @@ public final class AVCommands {
                                                         BlockPosArgument.getLoadedBlockPos(ctx, "pos"),
                                                         StringArgumentType.getString(ctx, "tint"),
                                                         IntegerArgumentType.getInteger(ctx, "amount")))))))
+                .then(Commands.literal("showcase")
+                        .then(Commands.argument("scene", StringArgumentType.word())
+                                .suggests((ctx, b) -> SharedSuggestionProvider.suggest(Showcase.SCENES, b))
+                                .executes(ctx -> {
+                                    String scene = StringArgumentType.getString(ctx, "scene");
+                                    BlockPos origin = BlockPos.containing(ctx.getSource().getPosition()).east(2);
+                                    if (!Showcase.build(ctx.getSource().getLevel(), origin, scene)) {
+                                        ctx.getSource().sendFailure(Component.translatable("commands.astralvigil.showcase.unknown", scene));
+                                        return 0;
+                                    }
+                                    ctx.getSource().sendSuccess(() -> Component.translatable("commands.astralvigil.showcase.built", scene), true);
+                                    return 1;
+                                })))
+                .then(Commands.literal("cosmetic")
+                        .then(Commands.literal("clear").executes(ctx -> {
+                            ServerPlayer player = ctx.getSource().getPlayerOrException();
+                            if (!media.hofferbert.astralvigil.cosmetics.CosmeticsManager.apply(player, media.hofferbert.astralvigil.cosmetics.Loadout.EMPTY)) {
+                                return 0;
+                            }
+                            ctx.getSource().sendSuccess(() -> Component.translatable("commands.astralvigil.cosmetic.clear"), false);
+                            return 1;
+                        }))
+                        .then(Commands.argument("id", StringArgumentType.word())
+                                .suggests((ctx, b) -> SharedSuggestionProvider.suggest(
+                                        Arrays.stream(media.hofferbert.astralvigil.cosmetics.Cosmetic.values()).map(media.hofferbert.astralvigil.cosmetics.Cosmetic::id), b))
+                                .executes(ctx -> wearCosmetic(ctx.getSource(), StringArgumentType.getString(ctx, "id")))))
                 .then(Commands.literal("research")
                         .then(Commands.literal("reset").executes(ctx -> {
                             ServerPlayer player = ctx.getSource().getPlayerOrException();

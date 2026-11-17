@@ -35,3 +35,4 @@ replay_*.log
 # Local-only
 /astral-vigil-claude-code-prompt.md
 .claude/settings.local.json
+__pycache__/

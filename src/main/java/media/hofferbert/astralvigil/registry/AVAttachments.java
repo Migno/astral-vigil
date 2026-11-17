@@ -69,6 +69,33 @@ public final class AVAttachments {
                             net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
                     .build());
 
+    /** Developer cosmetics the player wears. Survives death; synced to every client (it is visible). */
+    public static final Supplier<AttachmentType<media.hofferbert.astralvigil.cosmetics.Loadout>> COSMETICS = ATTACHMENTS.register(
+            "cosmetics",
+            () -> AttachmentType.builder(() -> media.hofferbert.astralvigil.cosmetics.Loadout.EMPTY)
+                    //? if >=26.1 {
+                    .serialize(media.hofferbert.astralvigil.cosmetics.Loadout.MAP_CODEC)
+                    //?} else {
+                    /*.serialize(media.hofferbert.astralvigil.cosmetics.Loadout.MAP_CODEC.codec())
+                    *///?}
+                    .copyOnDeath()
+                    .sync((holder, to) -> to.connection != null && to.connection.hasChannel(SyncAttachmentsPayload.TYPE),
+                            media.hofferbert.astralvigil.cosmetics.Loadout.STREAM_CODEC)
+                    .build());
+
+    /** Whether the server lets this player wear developer cosmetics (decided at login). Synced to the owner only. */
+    public static final Supplier<AttachmentType<Boolean>> COSMETIC_ACCESS = ATTACHMENTS.register(
+            "cosmetic_access",
+            () -> AttachmentType.builder(() -> false)
+                    //? if >=26.1 {
+                    .serialize(com.mojang.serialization.Codec.BOOL.fieldOf("access"))
+                    //?} else {
+                    /*.serialize(com.mojang.serialization.Codec.BOOL)
+                    *///?}
+                    .copyOnDeath()
+                    .sync(AVAttachments::syncToOwner, net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                    .build());
+
     private AVAttachments() {}
 
     /** Only the owner needs their research; skip players without a negotiated channel (GameTest mock players). */

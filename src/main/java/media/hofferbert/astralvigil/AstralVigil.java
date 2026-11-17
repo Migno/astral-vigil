@@ -61,6 +61,7 @@ public final class AstralVigil {
         GearEvents.register();
         media.hofferbert.astralvigil.eclipse.GazeManager.register();
         media.hofferbert.astralvigil.firmament.Firmament.register();
+        media.hofferbert.astralvigil.cosmetics.CosmeticsManager.register();
         AVCommands.register();
         GameTestRegistration.register(modBus);
     }

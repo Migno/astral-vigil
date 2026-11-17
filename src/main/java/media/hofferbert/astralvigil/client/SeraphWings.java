@@ -63,13 +63,23 @@ public final class SeraphWings {
                 boolean player = avatar instanceof Player;
                 state.setRenderData(SHOWN, player && shown((Player) avatar));
                 state.setRenderData(GLIDING, player && gliding((Player) avatar));
+                state.setRenderData(COSMETIC, player ? cosmetic((Player) avatar) : null);
             }
         }));
         //?}
     }
 
     static boolean shown(Player player) {
-        return player.getData(AVAttachments.WINGS) == SeraphFeatherItem.SHOWN;
+        return player.getData(AVAttachments.WINGS) == SeraphFeatherItem.SHOWN || cosmetic(player) != null;
+    }
+
+    /** Developer wing cosmetic (radiant/eclipse recolour with an emissive pass), or null for the plain Seraph Wings. */
+    static media.hofferbert.astralvigil.cosmetics.Cosmetic cosmetic(Player player) {
+        return player.getData(AVAttachments.COSMETICS).get(media.hofferbert.astralvigil.cosmetics.Cosmetic.Slot.WINGS).orElse(null);
+    }
+
+    static Identifier texture(media.hofferbert.astralvigil.cosmetics.Cosmetic cosmetic) {
+        return cosmetic == null ? TEXTURE : media.hofferbert.astralvigil.client.cosmetics.CosmeticLayer.texture(cosmetic);
     }
 
     static boolean gliding(Player player) {
@@ -112,6 +122,7 @@ public final class SeraphWings {
     //? if >=26.1 {
     static final ContextKey<Boolean> SHOWN = new ContextKey<>(AstralVigil.id("wings_shown"));
     static final ContextKey<Boolean> GLIDING = new ContextKey<>(AstralVigil.id("wings_gliding"));
+    static final ContextKey<media.hofferbert.astralvigil.cosmetics.Cosmetic> COSMETIC = new ContextKey<>(AstralVigil.id("wings_cosmetic"));
 
     static LayerDefinition layer() {
         MeshDefinition mesh = PlayerModel.createMesh(CubeDeformation.NONE, false);
@@ -158,7 +169,13 @@ public final class SeraphWings {
             if (state.isInvisible || !Boolean.TRUE.equals(state.getRenderData(SHOWN))) {
                 return;
             }
-            collector.submitModel(model, state, poseStack, RenderTypes.entityCutout(TEXTURE), light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+            var cosmetic = state.getRenderData(COSMETIC);
+            collector.submitModel(model, state, poseStack, RenderTypes.entityCutout(texture(cosmetic)), light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+            if (cosmetic != null) {
+                collector.submitModel(model, state, poseStack, RenderTypes.eyes(media.hofferbert.astralvigil.client.cosmetics.CosmeticLayer.glow(cosmetic, state.ageInTicks)),
+                        0xF000F0, OverlayTexture.NO_OVERLAY, media.hofferbert.astralvigil.client.cosmetics.CosmeticLayer.pulse(cosmetic, state.ageInTicks),
+                        null, state.outlineColor, null);
+            }
         }
     }
     //?} else {
@@ -197,7 +214,12 @@ public final class SeraphWings {
             }
             body.copyFrom(getParentModel().body);
             pose(right, left, sweep(ageInTicks, gliding(player)));
-            body.render(poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(TEXTURE)), light, OverlayTexture.NO_OVERLAY);
+            var cosmetic = cosmetic(player);
+            body.render(poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(texture(cosmetic))), light, OverlayTexture.NO_OVERLAY);
+            if (cosmetic != null) {
+                body.render(poseStack, buffers.getBuffer(RenderType.eyes(media.hofferbert.astralvigil.client.cosmetics.CosmeticLayer.glow(cosmetic, ageInTicks))),
+                        0xF000F0, OverlayTexture.NO_OVERLAY, media.hofferbert.astralvigil.client.cosmetics.CosmeticLayer.pulse(cosmetic, ageInTicks));
+            }
         }
     }
     *///?}

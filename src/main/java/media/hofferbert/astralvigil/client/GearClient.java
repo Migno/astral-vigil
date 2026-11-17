@@ -32,13 +32,13 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 /** Ability/stance key bindings and living-gear tooltips. */
 public final class GearClient {
     //? if >=26.1 {
-    static final KeyMapping.Category CATEGORY = new KeyMapping.Category(AstralVigil.id("astralvigil"));
+    public static final KeyMapping.Category CATEGORY = new KeyMapping.Category(AstralVigil.id("astralvigil"));
     static final KeyMapping ABILITY =
             new KeyMapping("key.astralvigil.ability", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY);
     static final KeyMapping STANCE =
             new KeyMapping("key.astralvigil.stance", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_B, CATEGORY);
     //?} else {
-    /*static final String CATEGORY = "key.categories.astralvigil";
+    /*public static final String CATEGORY = "key.categories.astralvigil";
     static final KeyMapping ABILITY =
             new KeyMapping("key.astralvigil.ability", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, CATEGORY);
     static final KeyMapping STANCE =

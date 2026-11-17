@@ -23,7 +23,28 @@ public final class AVNetwork {
     private static void onRegister(RegisterPayloadHandlersEvent event) {
         event.registrar("1")
                 .playToServer(SolveConstellation.TYPE, SolveConstellation.CODEC, AVNetwork::handleSolve)
-                .playToServer(GearAction.TYPE, GearAction.CODEC, AVNetwork::handleGear);
+                .playToServer(GearAction.TYPE, GearAction.CODEC, AVNetwork::handleGear)
+                .playToServer(SetCosmetics.TYPE, SetCosmetics.CODEC, AVNetwork::handleCosmetics);
+    }
+
+    private static void handleCosmetics(SetCosmetics payload, IPayloadContext ctx) {
+        ctx.enqueueWork(() -> {
+            if (ctx.player() instanceof ServerPlayer player) {
+                media.hofferbert.astralvigil.cosmetics.CosmeticsManager.apply(player, payload.loadout());
+            }
+        });
+    }
+
+    /** Client -> server: "wear this loadout" from the Cosmetics screen. Server checks developer access. */
+    public record SetCosmetics(media.hofferbert.astralvigil.cosmetics.Loadout loadout) implements CustomPacketPayload {
+        public static final Type<SetCosmetics> TYPE = new Type<>(AstralVigil.id("set_cosmetics"));
+        public static final StreamCodec<io.netty.buffer.ByteBuf, SetCosmetics> CODEC = media.hofferbert.astralvigil.cosmetics.Loadout.STREAM_CODEC
+                .map(SetCosmetics::new, SetCosmetics::loadout);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
     }
 
     private static void handleSolve(SolveConstellation payload, IPayloadContext ctx) {

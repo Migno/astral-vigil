@@ -188,7 +188,25 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   (Sodium, Iris, JEI/EMI, Jade, Patchouli, Curios, Apotheosis, KubeJS) ran clean on both targets.
 - **Publishing:** drafts only (`docs/publishing/`); slug, license and release channel are owner decisions.
 
+## 2026-11-17 – Developer cosmetics
+
+- **Server decides access**, never the client: built-in `CosmeticsManager.TEAM` UUID set (empty until the owner adds
+  their Mojang account UUID), the `[cosmetics] developers` server config list, and every player in a development
+  environment. The decision is mirrored to the client (`cosmetic_access` attachment) only to lock the screen.
+- **Vanilla model layers, not GeckoLib**, like the Seraph Wings: they work with every player renderer and shader pack,
+  and the emissive pass uses the vanilla `eyes` render type (GeckoLib emissives are broken on macOS/Linux).
+- **Cape:** on 26.1 the vanilla `PlayerCapeModel` (exact cape physics) and `showCape=false` hides a Mojang cape; on
+  1.21.1 the cape physics are copied from `CapeLayer` – a Mojang cape can overlap there (no mixin for it).
+- **Textures and meshes are generated** (`tools/dev/gen_cosmetics.py`, pure Python, ≤ 8 colours checked); the
+  generated `CosmeticMeshes.java` keeps box UVs and textures in sync.
+- **Particles are client-only** and follow the particle-density setting; your own aura is hidden while the camera is
+  in your head.
+- `/astralvigil showcase <scene>` builds film-ready scenes for screenshots (op only).
+
 ## Open (owner)
+
+- **Developer UUIDs.** Add the team's Mojang account UUIDs to `CosmeticsManager.TEAM` (or the server config list) –
+  in production nobody has cosmetics until then.
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best
   for packmakers/addons, matches ecosystem), assets under **CC BY-NC-SA 4.0** or ARR to protect the

@@ -40,6 +40,13 @@ Firmament dimension, guarded by four Watchers – and their fallen fifth sibling
 | ![Starlight network](docs/screenshots/phase3/26.1-neoforge-network.png) | ![Convergence ritual](docs/screenshots/phase4/26.1-neoforge-altar-ritual.png) |
 | ![Seraph Plate](docs/screenshots/phase5/26.1-neoforge-seraph-plate.png) | ![Fallen Observatory](docs/screenshots/phase6/26.1-neoforge-observatory.png) |
 | ![Watcher Orrin](docs/screenshots/phase7/26.1-neoforge-watcher_orrin.png) | ![The Eclipse](docs/screenshots/phase8/26.1-neoforge-eclipse_bossbar.png) |
+| ![Celestial Wardrobe](docs/screenshots/suite/26.1-neoforge-21-cosmetics-wardrobe.png) | ![Void Storm lightning](docs/screenshots/suite/26.1-neoforge-24-cosmetics-eclipse-lightning.png) |
+
+More screenshots: [`docs/screenshots/suite/`](docs/screenshots/suite/).
+
+**Developer cosmetics.** Members of the Astral Vigil team open the *Celestial Wardrobe* with **K**: crowns, a floating
+halo, capes, glowing wings and particle auras (including a lightning storm), visible to every player. Server owners
+can grant them to staff via `[cosmetics] developers` or switch them off with `[cosmetics] enabled = false`.
 
 ## Compatibility
 
