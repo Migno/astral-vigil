@@ -117,6 +117,18 @@ select {
 .lightbox .row button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
 .lightbox h4 { margin: 0; font: 400 0.85rem var(--mono); overflow-wrap: anywhere; }
 
+.animbox { display: flex; flex-direction: column; gap: 8px; }
+.nowplaying { display: flex; justify-content: space-between; gap: 8px; font: 500 0.8rem var(--body); }
+.nowplaying span:last-child { font: 400 0.7rem var(--mono); color: var(--muted); }
+#scrub { width: 100%; accent-color: var(--accent); }
+label.inline { font-size: 0.72rem; color: var(--muted); }
+select.small { width: auto; padding: 4px 6px; font-size: 0.74rem; }
+.agroup { display: flex; flex-direction: column; gap: 5px; }
+.agroup h4 { margin: 4px 0 0; font: 600 0.62rem var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.agroup div { display: flex; flex-wrap: wrap; gap: 5px; }
+.agroup button { font: 500 0.72rem var(--body); color: var(--text); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 7px; padding: 5px 8px; cursor: pointer; }
+.agroup button small { color: var(--muted); font: 400 0.62rem var(--mono); margin-left: 4px; }
+.agroup button[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 18%, transparent); }
 @media (max-width: 640px) {
   .bar h1 { display: none; }
   .panel { max-height: 44%; padding: 12px; gap: 10px; }
@@ -179,9 +191,18 @@ select {
   <div class="chips" id="modelChips"></div>
   <div class="ctl">
     <div id="variantRow"><label for="variant"><span>Texture</span></label><select id="variant"></select></div>
-    <div id="animRow"><label for="anim"><span>Animation</span><span id="animLen"></span></label><select id="anim"></select></div>
+    <div id="animRow" class="animbox">
+      <div class="nowplaying"><span id="animNow">–</span><span id="animLen"></span></div>
+      <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Animation timeline">
+      <div class="row">
+        <label for="speed" class="inline">Speed</label>
+        <select id="speed" class="small"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+        <button type="button" id="mAll" aria-pressed="false">Play all in turn</button>
+      </div>
+      <div id="animList"></div>
+    </div>
     <div class="row">
-      <button type="button" id="mPlay" aria-pressed="true">Playing</button>
+      <button type="button" id="mPlay" aria-pressed="true">Pause</button>
       <button type="button" id="mGlow" aria-pressed="true">Glow</button>
       <button type="button" id="mSpin" aria-pressed="false">Turntable</button>
     </div>
@@ -674,9 +695,9 @@ select {
       const built = buildGeo(e.geo, tex, glow);
       modelRoot = built.root; modelBones = built.bones; modelAnims = e.animations;
       const names = Object.keys(modelAnims);
-      const keep = names.includes(animName) ? animName : (names.find((n) => /^idle/.test(n)) || names[0]);
-      $('anim').innerHTML = names.map((n) => `<option${n === keep ? ' selected' : ''}>${n}</option>`).join('');
-      setAnim(keep);
+      buildAnimEntries(e.id, modelAnims);
+      const first = animEntries.find((x) => x.label === lastEntryLabel) || animEntries.find((x) => /^idle/i.test(x.label)) || animEntries[0];
+      playEntry(animEntries.indexOf(first));
       const cubes = e.geo.bones.reduce((s, b) => s + (b.cubes ? b.cubes.length : 0), 0);
       $('mSub').textContent = `${e.geo.bones.length} bones · ${cubes} cubes · ${names.length} animations · texture ${e.geo.description.texture_width}×${e.geo.description.texture_height}`;
     } else {
@@ -691,31 +712,104 @@ select {
     frameModel(modelRoot, item.kind === 'entity' ? 1.1 : 1.6);
     $('mStatus').textContent = item.kind === 'entity' ? 'Animations play straight from the GeckoLib files.' : 'Hand-made model from the resource pack (Blockbench).';
   }
-  let animCompiled = null;
-  function setAnim(name) {
-    animName = name; animT = 0;
-    const a = modelAnims[name];
-    const len = a.animation_length || 2;
-    $('animLen').textContent = len.toFixed(2) + ' s' + (a.loop ? ' · loop' : '');
-    animCompiled = { len, loop: !!a.loop, bones: Object.entries(a.bones || {}).map(([bn, ch]) => ({ bn, rot: channel(ch.rotation), pos: channel(ch.position), scale: channel(ch.scale) })) };
+  // ---- animation player: entries are single clips or chained sequences (wind-up -> strike -> recovery)
+  const MOVE_NAMES = { sweep: 'Umbral Sweep', lance: 'Void Lance', starfall: 'Falling Stars', summon: 'Echoes of the Fallen', dive: 'Shadow Dive',
+    beam: 'Eclipse Ray', nova: 'Umbral Nova', blink: 'Blink', grasp: 'Umbral Grasp' };
+  const EVENT_NAMES = { entrance: 'Entrance', phase2: 'Phase 2: Shattered Halo', phase3: 'Phase 3: Total Eclipse', shield_raise: 'Shield raise',
+    enrage: 'Enrage', stagger: 'Stagger', grounded: 'Grounded (melee window)', death: 'Death', cast: 'Cast', talk: 'Talk', attack: 'Attack',
+    glide: 'Glide', idle: 'Idle', idle_total: 'Idle: Total Eclipse', idle_enraged: 'Idle: enraged', idle_shielded: 'Idle: shielded' };
+  let animEntries = [], entryIdx = -1, entry = null, entryT = 0, holdT = 0, speed = 1, playAll = false, lastEntryLabel = null;
+  const compiled = {};
+  function compileClip(name) {
+    if (!compiled[name]) {
+      const a = modelAnims[name];
+      compiled[name] = { name, len: a.animation_length || 2, loop: !!a.loop,
+        bones: Object.entries(a.bones || {}).map(([bn, ch]) => ({ bn, rot: channel(ch.rotation), pos: channel(ch.position), scale: channel(ch.scale) })) };
+    }
+    return compiled[name];
   }
+  function buildAnimEntries(id, anims) {
+    for (const k of Object.keys(compiled)) delete compiled[k];
+    const names = Object.keys(anims), used = new Set(), groups = { Idle: [], Attacks: [], 'Phases and events': [], Clips: [] };
+    // chained moves: <prefix>_windup / _strike / _recover
+    const prefixes = [...new Set(names.filter((n) => /_windup$/.test(n)).map((n) => n.replace(/_windup$/, '')))];
+    for (const pre of prefixes) {
+      const parts = ['windup', 'strike', 'recover'].map((p) => pre + '_' + p).filter((n) => anims[n]);
+      const seq = [];
+      for (const n of parts) { const reps = anims[n].loop ? 3 : 1; for (let r = 0; r < reps; r++) seq.push(n); }
+      groups.Attacks.push({ label: MOVE_NAMES[pre] || pre, seq, note: parts.length + ' stages' });
+      parts.forEach((n) => used.add(n));
+    }
+    for (const n of names) {
+      if (used.has(n)) continue;
+      const label = EVENT_NAMES[n] || n.replace(/_/g, ' ');
+      if (/^idle/.test(n) || n === 'glide' || n === 'talk') groups.Idle.push({ label, seq: [n], loopEntry: !!anims[n].loop });
+      else if (anims[n].loop) groups.Idle.push({ label, seq: [n], loopEntry: true });
+      else (id === 'eclipse' ? groups['Phases and events'] : groups.Attacks).push({ label, seq: [n] });
+    }
+    // every raw clip stays reachable on its own
+    for (const n of names) groups.Clips.push({ label: n, seq: [n], loopEntry: !!anims[n].loop, raw: true });
+    animEntries = [];
+    const html = [];
+    for (const [g, list] of Object.entries(groups)) {
+      if (!list.length || (g === 'Clips' && list.length === animEntries.length)) continue;
+      if (g === 'Clips' && list.every((x) => animEntries.some((y) => y.seq.length === 1 && y.seq[0] === x.seq[0]))) continue;
+      html.push(`<section class="agroup"><h4>${g === 'Clips' ? 'Single clips' : g} · ${list.length}</h4><div>` + list.map((x) => {
+        animEntries.push(x);
+        const i = animEntries.length - 1;
+        const dur = x.seq.reduce((sum, n) => sum + (anims[n].animation_length || 2), 0);
+        return `<button type="button" data-i="${i}" aria-pressed="false">${x.label}<small>${dur.toFixed(1)}s</small></button>`;
+      }).join('') + '</div></section>');
+    }
+    $('animList').innerHTML = html.join('');
+  }
+  function playEntry(i) {
+    entryIdx = (i + animEntries.length) % animEntries.length;
+    const x = animEntries[entryIdx];
+    let start = 0;
+    entry = { ...x, segs: x.seq.map((n) => { const c = compileClip(n); const seg = { clip: c, start, len: c.len }; start += c.len; return seg; }) };
+    entry.total = start; entryT = 0; holdT = 0; lastEntryLabel = x.label;
+    $('animNow').textContent = x.label;
+    $('animLen').textContent = entry.total.toFixed(2) + ' s' + (x.seq.length > 1 ? ' · ' + x.seq.length + ' clips' : '') + (x.loopEntry ? ' · loop' : '');
+    $('animList').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.i) === entryIdx)));
+  }
+  function pose(t) {
+    for (const node of Object.values(modelBones)) { node.group.position.copy(node.base.pos); node.group.rotation.copy(node.base.rot); node.group.scale.setScalar(1); }
+    let seg = entry.segs[entry.segs.length - 1];
+    for (const sgm of entry.segs) { if (t < sgm.start + sgm.len) { seg = sgm; break; } }
+    const lt = Math.min(Math.max(t - seg.start, 0), seg.len);
+    for (const b of seg.clip.bones) {
+      const node = modelBones[b.bn]; if (!node) continue;
+      if (b.rot) { const r = b.rot(lt); node.group.rotation.set(node.base.rot.x - r[0] * DEG, node.base.rot.y - r[1] * DEG, node.base.rot.z + r[2] * DEG, 'ZYX'); }
+      if (b.pos) { const p = b.pos(lt); node.group.position.set(node.base.pos.x - p[0], node.base.pos.y + p[1], node.base.pos.z + p[2]); }
+      if (b.scale) { const sc = b.scale(lt); node.group.scale.set(sc[0], sc[1], sc[2]); }
+    }
+  }
+  let scrubbing = false;
   M.tick = (dt) => {
-    if (modelBones && animCompiled) {
-      if (mPlaying && !reduced) animT += dt;
-      const t = animCompiled.loop ? animT % animCompiled.len : (animT > animCompiled.len + 0.8 ? (animT = 0) : Math.min(animT, animCompiled.len));
-      for (const node of Object.values(modelBones)) { node.group.position.copy(node.base.pos); node.group.rotation.copy(node.base.rot); node.group.scale.setScalar(1); }
-      for (const b of animCompiled.bones) {
-        const node = modelBones[b.bn]; if (!node) continue;
-        if (b.rot) { const r = b.rot(t); node.group.rotation.set(node.base.rot.x - r[0] * DEG, node.base.rot.y - r[1] * DEG, node.base.rot.z + r[2] * DEG, 'ZYX'); }
-        if (b.pos) { const p = b.pos(t); node.group.position.set(node.base.pos.x - p[0], node.base.pos.y + p[1], node.base.pos.z + p[2]); }
-        if (b.scale) { const s = b.scale(t); node.group.scale.set(s[0], s[1], s[2]); }
+    if (modelBones && entry) {
+      if (mPlaying && !reduced && !scrubbing) {
+        if (entryT >= entry.total) {
+          holdT += dt;
+          const hold = playAll ? (entry.loopEntry ? 0 : 0.6) : (entry.loopEntry ? 0 : 0.9);
+          if (holdT >= hold) {
+            if (playAll) playEntry(entryIdx + 1);
+            else { entryT = entry.loopEntry ? entryT % entry.total : 0; holdT = 0; }
+          }
+        } else entryT = Math.min(entry.total, entryT + dt * speed);
       }
+      pose(Math.min(entryT, entry.total));
+      if (!scrubbing) $('scrub').value = String(Math.round(1000 * Math.min(entryT, entry.total) / Math.max(entry.total, 1e-6)));
     }
     if (mSpin && modelRoot && !reduced) modelRoot.rotation.y += dt * 0.4;
   };
+  $('animList').addEventListener('click', (e) => { const b = e.target.closest('button[data-i]'); if (b) playEntry(Number(b.dataset.i)); });
+  $('scrub').addEventListener('input', (e) => { scrubbing = true; if (entry) { entryT = entry.total * Number(e.target.value) / 1000; holdT = 0; } });
+  $('scrub').addEventListener('change', () => { scrubbing = false; });
+  $('speed').addEventListener('change', (e) => { speed = Number(e.target.value); });
+  toggle($('mAll'), (on) => { playAll = on; });
   $('variant').addEventListener('change', (e) => showModel(modelCurrent, Number(e.target.value)));
-  $('anim').addEventListener('change', (e) => setAnim(e.target.value));
-  toggle($('mPlay'), (on) => { mPlaying = on; $('mPlay').textContent = on ? 'Playing' : 'Paused'; });
+  toggle($('mPlay'), (on) => { mPlaying = on; $('mPlay').textContent = on ? 'Pause' : 'Play'; });
   toggle($('mGlow'), (on) => { glowOn = on; glowMats.forEach((m) => { m.visible = on; }); });
   toggle($('mSpin'), (on) => { mSpin = on; if (!on && modelRoot) modelRoot.rotation.y = 0; });
   async function initModels() {
