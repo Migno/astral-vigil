@@ -79,6 +79,8 @@ import com.geckolib.animatable.manager.AnimatableManager;
  */
 public class EclipseEntity extends Monster implements GeoEntity {
     public static final int DEATH_TICKS = 100;
+    /** The renderer draws the generated model this much larger (model units → blocks: x MODEL_SCALE / 16). */
+    public static final float MODEL_SCALE = 1.4f;
     public static final double BEAM_LENGTH = 24;
     /** The ray emerges from the ground this far from the arena centre (clear of a dais) and hugs the floor from there. */
     public static final double BEAM_START = 6.5;
@@ -141,6 +143,9 @@ public class EclipseEntity extends Monster implements GeoEntity {
     private int clientMove = -1;
     private int clientStage = -1;
     private int clientStageTicks;
+    private int animKey = -2;
+    private EclipseMove animMove = EclipseMove.NONE;
+    private int animTransition = 3;
 
     private record Star(Vec3 pos, int[] timer) {}
 
@@ -1637,11 +1642,15 @@ public class EclipseEntity extends Monster implements GeoEntity {
             clientStageTicks++;
         }
         double density = media.hofferbert.astralvigil.config.AVClientConfig.particleFactor();
-        if (density <= 0 || isDeadOrDying()) {
+        if (isDeadOrDying()) {
             return;
         }
         EclipseMove move = EclipseMove.byId(m);
         Stage stage = currentStage();
+        weaponFx(move, stage, density);
+        if (density <= 0) {
+            return;
+        }
         Vec3 aim = aim();
         Level level = level();
         // ambience: void motes drip from the wings and robe
@@ -1748,6 +1757,27 @@ public class EclipseEntity extends Monster implements GeoEntity {
             }
             default -> {}
         }
+    }
+
+    /** Client: bursts and sounds when a summoned weapon materialises or dissolves (timed with the animation). */
+    private void weaponFx(EclipseMove move, Stage stage, double density) {
+        for (int k = 0; k < 2; k++) {
+            boolean appear = k == 0;
+            for (EclipseWeapon w : EclipseWeapon.at(move, stage, clientStageTicks, appear)) {
+                float[] a = w.anchor(appear);
+                EclipseFx.weaponBurst(level(), modelPoint(a[0], a[1], a[2]), w, appear, density, random);
+                if (w.twin()) {
+                    EclipseFx.weaponBurst(level(), modelPoint(-a[0], a[1], a[2]), w, appear, density * 0.6, random);
+                }
+            }
+        }
+    }
+
+    /** World position of a model-space point (left, up, forward in model units), ignoring the animation. */
+    private Vec3 modelPoint(double left, double up, double forward) {
+        double s = MODEL_SCALE / 16.0;
+        Vec3 f = dir(yBodyRot);
+        return position().add(f.x * forward * s + f.z * left * s, up * s, f.z * forward * s - f.x * left * s);
     }
 
     /** Turning direction of the Eclipse Ray (synced). */
@@ -1859,12 +1889,35 @@ public class EclipseEntity extends Monster implements GeoEntity {
         return ANIMATIONS.get((f & FLAG_TOTAL) != 0 ? "idle_total" : "idle");
     }
 
+    /**
+     * Blend length into the requested clip: the stages of one move are authored to flow into each other, so they cut
+     * over in a single tick (a longer blend would delay and clip the fast strikes); anything else blends over 3 ticks.
+     */
+    int transitionTicks() {
+        EclipseMove m = isDeadOrDying() ? EclipseMove.NONE : currentMove();
+        int key = isDeadOrDying() ? -1 : m.ordinal() * 8 + currentStage().ordinal();
+        if (key != animKey) {
+            boolean chained = m == animMove && m != EclipseMove.NONE
+                    && (m.kind() == EclipseMove.Kind.ATTACK || m.kind() == EclipseMove.Kind.FORCED);
+            animTransition = chained ? 1 : 3;
+            animKey = key;
+            animMove = m;
+        }
+        return animTransition;
+    }
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         //? if >=26.1 {
-        controllers.add(new AnimationController<EclipseEntity>("main", 3, test -> test.setAndContinue(test.animatable().currentAnimation())));
+        controllers.add(new AnimationController<EclipseEntity>("main", 3, test -> {
+            test.controller().setTransitionTicks(test.animatable().transitionTicks());
+            return test.setAndContinue(test.animatable().currentAnimation());
+        }));
         //?} else {
-        /*controllers.add(new AnimationController<>(this, "main", 3, state -> state.setAndContinue(state.getAnimatable().currentAnimation())));
+        /*controllers.add(new AnimationController<>(this, "main", 3, state -> {
+            state.getController().transitionLength(state.getAnimatable().transitionTicks());
+            return state.setAndContinue(state.getAnimatable().currentAnimation());
+        }));
         *///?}
     }
 

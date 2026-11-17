@@ -2,29 +2,106 @@
  "format_version": "1.8.0",
  "animations": {
   "idle": {
-   "loop": true,
-   "animation_length": 4,
+   "animation_length": 4.0,
    "bones": {
     "crystal": {
+     "position": {
+      "0.0": {
+       "vector": [
+        0,
+        0,
+        0
+       ]
+      },
+      "1.5": {
+       "vector": [
+        0,
+        1.6,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "1.8": {
+       "vector": [
+        0,
+        1.8,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "2.1": {
+       "vector": [
+        0,
+        1.6,
+        0
+       ],
+       "easing": "easeInQuad"
+      },
+      "4.0": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     },
+     "scale": {
+      "0.0": {
+       "vector": [
+        1,
+        1,
+        1
+       ]
+      },
+      "1.5": {
+       "vector": [
+        1.04,
+        1.04,
+        1.04
+       ],
+       "easing": "easeInOutSine"
+      },
+      "1.8": {
+       "vector": [
+        1.1,
+        1.1,
+        1.1
+       ],
+       "easing": "easeOutQuad"
+      },
+      "2.1": {
+       "vector": [
+        1,
+        1,
+        1
+       ],
+       "easing": "easeInQuad"
+      },
+      "4.0": {
+       "vector": [
+        1,
+        1,
+        1
+       ],
+       "easing": "easeInOutSine"
+      }
+     },
      "rotation": [
       "0",
-      "query.anim_time * 90",
-      "0"
-     ],
-     "position": [
-      "0",
-      "math.sin(query.anim_time * 90) * 1.2",
+      "query.life_time * 70",
       "0"
      ]
     },
     "ring": {
      "rotation": [
-      "0",
-      "query.anim_time * -60",
+      "math.sin(query.life_time * 45) * 6",
+      "query.life_time * -50",
       "0"
      ]
     }
-   }
+   },
+   "loop": true
   }
  },
  "geckolib_format_version": 2
