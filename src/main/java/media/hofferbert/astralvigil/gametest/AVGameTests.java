@@ -225,7 +225,12 @@ public final class AVGameTests {
 
     static void altarSymmetricRitual(GameTestHelper helper) {
         ConvergenceAltarBlockEntity altar = altarWithPedestals(helper, 6, 6, true);
+        // aligned blocks lift stability to 100, so no random instability event can spoil the ritual
+        for (int[] d : new int[][] {{-3, -3}, {3, 3}, {-3, 3}, {3, -3}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}}) {
+            helper.setBlock(GT.pos(6 + d[0], 3, 6 + d[1]), Blocks.AMETHYST_BLOCK);
+        }
         GT.check(helper, altar.tryStart(helper.getLevel()), "ritual did not start");
+        GT.check(helper, altar.stability() == 100, "stability " + altar.stability());
         helper.succeedWhen(() -> GT.check(
                 helper,
                 altar.catalyst().is(AVItems.SIGIL_BLANK.get()) && altar.catalyst().getCount() == 2,
