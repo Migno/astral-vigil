@@ -1,0 +1,420 @@
+<title>Firmament Realm Atlas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one full-bleed 3D stage; a floating glass panel (realm list, facts, controls) at the top left,
+   a quiet control hint at the bottom. Single dark look: the realms are night skies. */
+:root {
+  --ink: #0b0a14;
+  --panel: rgba(20, 17, 34, 0.78);
+  --line: rgba(216, 216, 230, 0.14);
+  --text: #e9e7f3;
+  --muted: #a7a3bd;
+  --gold: #f2c94c;
+  --cyan: #8fefff;
+  --accent: #f2c94c;
+  --display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--ink); color: var(--text); font-family: var(--body); overflow: hidden; }
+#stage { position: fixed; inset: 0; }
+#stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+
+.panel {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  left: max(16px, env(safe-area-inset-left, 0px));
+  width: min(340px, calc(100vw - 32px));
+  max-height: calc(100% - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.brand { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.brand h1 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.08em; margin: 0; text-wrap: balance; }
+.brand span { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+button.toggle-panel { display: none; }
+
+.realms { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.realms button {
+  font: 500 0.78rem var(--body); color: var(--text); text-align: left;
+  background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); border-radius: 9px;
+  padding: 8px 9px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-width: 0;
+}
+.realms button small { font: 400 0.66rem var(--mono); color: var(--muted); }
+.realms button[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.realms button:focus-visible, .ctl button:focus-visible, input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+.info h2 { font-family: var(--display); font-size: 1.35rem; margin: 0 0 2px; color: var(--accent); letter-spacing: 0.04em; text-wrap: balance; }
+.info .sub { color: var(--muted); font-size: 0.82rem; margin: 0 0 10px; }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.76rem; margin: 0; }
+.facts dt { color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.64rem; padding-top: 2px; }
+.facts dd { margin: 0; font-variant-numeric: tabular-nums; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font: 400 0.68rem var(--mono); color: var(--muted); }
+.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+
+.ctl { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; }
+.row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.ctl button {
+  font: 500 0.74rem var(--body); color: var(--text); background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer;
+}
+.ctl button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
+.ctl label { font-size: 0.72rem; color: var(--muted); display: flex; justify-content: space-between; }
+.ctl input[type=range] { width: 100%; accent-color: var(--accent); }
+.status { font: 400 0.7rem var(--mono); color: var(--muted); min-height: 1em; }
+
+.hint {
+  position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  font: 400 0.7rem var(--mono); color: var(--muted); background: var(--panel); border: 1px solid var(--line);
+  border-radius: 8px; padding: 6px 10px; pointer-events: none;
+}
+@media (max-width: 640px) {
+  .panel { max-height: 46%; padding: 12px; gap: 10px; }
+  .realms { grid-template-columns: repeat(3, 1fr); }
+  .realms button small { display: none; }
+  .hint { display: none; }
+  .info .sub { margin-bottom: 6px; }
+  .panel.collapsed > :not(.brand) { display: none; }
+  button.toggle-panel { display: inline-block; font: 500 0.7rem var(--body); color: var(--text); background: none; border: 1px solid var(--line); border-radius: 7px; padding: 3px 8px; }
+}
+</style>
+
+<div id="stage"></div>
+
+<aside class="panel" id="panel">
+  <div class="brand">
+    <h1>Firmament Realm Atlas</h1>
+    <span>Astral Vigil</span>
+    <button class="toggle-panel" id="togglePanel" type="button" aria-expanded="true">Hide</button>
+  </div>
+  <nav class="realms" id="realms" aria-label="Realms"></nav>
+  <section class="info" aria-live="polite">
+    <h2 id="rName">…</h2>
+    <p class="sub" id="rSub"></p>
+    <dl class="facts">
+      <dt>Gate</dt><dd id="rGate"></dd>
+      <dt>Sky</dt><dd id="rSky"></dd>
+      <dt>Trial</dt><dd id="rTrial"></dd>
+      <dt>Blocks</dt><dd id="rBlocks"></dd>
+    </dl>
+  </section>
+  <div class="legend" id="legend"></div>
+  <div class="ctl">
+    <div class="row" role="group" aria-label="Camera">
+      <button type="button" id="vIso" aria-pressed="true">Isometric</button>
+      <button type="button" id="vTop">Top</button>
+      <button type="button" id="vSide">Side</button>
+      <button type="button" id="vSpin" aria-pressed="false">Turntable</button>
+    </div>
+    <div>
+      <label for="slice"><span>Cut away above height</span><span id="sliceVal">all</span></label>
+      <input type="range" id="slice" min="0" max="100" value="100">
+    </div>
+    <div class="row">
+      <button type="button" id="tFloat" aria-pressed="true">Floating blocks</button>
+      <button type="button" id="tGlass" aria-pressed="true">Glass</button>
+    </div>
+    <div class="status" id="status">Loading…</div>
+  </div>
+</aside>
+<div class="hint">drag: orbit · right-drag / two fingers: pan · wheel / pinch: zoom</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(() => {
+  // Realm facts mirror firmament/Realm.java and worldgen/AVWorldgen.java (pad at y 0 here; north is -z).
+  const REALMS = [
+    { id: 'firmament', name: 'The Firmament', sub: 'Starwood groves above the clouds', gate: 'Astral Gate',
+      sky: 'Moonlit night, full moon', trial: 'None: the wilds (live game adds floating-island terrain)', bg: 0x0b0a1e, fog: 0x1e2a5a, accent: '#8fefff',
+      centre: [0, 0, 0], floatR: 30, floatCols: ['#e8e8f2', '#8fefff', '#3f7fa8', '#8562c0'] },
+    { id: 'sunspire', name: 'The Sunspire', sub: "Solenne's eternal dawn", gate: 'Solar Gate',
+      sky: 'Fixed sunrise, golden haze', trial: '100-block climb, 64 pads, 4 gold checkpoints', bg: 0x2a3550, fog: 0xf2b46b, accent: '#f2c94c',
+      centre: [0, 0, -31], floatR: 22, floatCols: ['#e0a030', '#ffe08a', '#f5cf45', '#f2c94c'] },
+    { id: 'moonwell', name: 'The Moonwell', sub: "Vael's silver midnight", gate: 'Lunar Gate',
+      sky: 'Full-moon midnight', trial: 'Light 10 moon targets while Echoes rise', bg: 0x10183a, fog: 0x2a3b6e, accent: '#c8d4ea',
+      centre: [0, 0, -43], floatR: 34, floatCols: ['#c8d4ea', '#e6eefa', '#9aa3b8', '#dfe0dc'] },
+    { id: 'starforge', name: 'The Starforge', sub: 'Where Orrin bends the light', gate: 'Prism Gate',
+      sky: 'Deep space, new moon', trial: 'Three mirror halls, three receptors at once', bg: 0x0a0614, fog: 0x2a1450, accent: '#2fa8d0',
+      centre: [0, 0, -39], floatR: 30, floatCols: ['#8562c0', '#5b2a86', '#8fefff', '#f2c94c'] },
+    { id: 'archive', name: 'The Endless Archive', sub: 'Ilyra remembers everything', gate: 'Archive Gate',
+      sky: 'Starless dark, drifting glyphs', trial: 'Roofed bookshelf maze, 70 × 70', bg: 0x07060f, fog: 0x1b1426, accent: '#b9f6ff',
+      centre: [0, 0, -54], floatR: 45, floatCols: ['#6b5236', '#8a6a3c', '#c9971e', '#a07a4a'] },
+    { id: 'umbral_throne', name: 'The Umbral Cathedral', sub: "The fallen Watcher's broken sanctuary", gate: 'Umbral Gate',
+      sky: 'End sky, violet fog', trial: 'The Eclipse, three phases', bg: 0x0a0414, fog: 0x1a0a2e, accent: '#b57cff',
+      centre: [0, 0, -51], floatR: 40, floatCols: ['#2f1b48', '#2b1943', '#b07ef0', '#482a6c', '#966ac3'] },
+  ];
+
+  const $ = (id) => document.getElementById(id);
+  const stage = $('stage');
+  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.localClippingEnabled = true;
+  stage.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -2000, 4000);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.screenSpacePanning = true;
+  controls.minZoom = 0.25;
+  controls.maxZoom = 18;
+
+  scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x2a2140, 0.75));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.75);
+  sun.position.set(-0.6, 1, 0.4);
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0x9fb4ff, 0.25);
+  fill.position.set(0.7, 0.3, -0.6);
+  scene.add(fill);
+
+  // starfield shell
+  const starGeo = new THREE.BufferGeometry();
+  const sp = [];
+  for (let i = 0; i < 1600; i++) {
+    const u = Math.random() * 2 - 1, t = Math.random() * Math.PI * 2, r = 900;
+    const s = Math.sqrt(1 - u * u);
+    sp.push(Math.cos(t) * s * r, u * r, Math.sin(t) * s * r);
+  }
+  starGeo.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3));
+  const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.8 }));
+  scene.add(stars);
+
+  const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 10000);
+  const box = new THREE.BoxGeometry(1, 1, 1);
+  const mats = {
+    0: new THREE.MeshLambertMaterial({ clippingPlanes: [clip] }),
+    1: new THREE.MeshBasicMaterial({ clippingPlanes: [clip] }),
+    2: new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.42, depthWrite: false, clippingPlanes: [clip] }),
+    3: new THREE.MeshBasicMaterial({ clippingPlanes: [clip] }),
+  };
+  const floatMat = new THREE.MeshLambertMaterial({ clippingPlanes: [clip] });
+
+  let group = null, floaters = null, current = null, bounds = null, spin = false, view = 'iso';
+  const cache = {};
+
+  function decode(json) {
+    const bin = atob(json.blocks);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new DataView(bytes.buffer);
+  }
+
+  function hash(x, y, z) {
+    let h = (x * 73856093) ^ (y * 19349663) ^ (z * 83492791);
+    h = (h ^ (h >>> 13)) * 1274126177;
+    return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+  }
+
+  function build(realm, json) {
+    const dv = decode(json);
+    const n = dv.byteLength / 7;
+    const counts = { 0: 0, 1: 0, 2: 0, 3: 0 };
+    const kinds = json.palette.map((p) => p[2]);
+    for (let i = 0; i < n; i++) counts[kinds[dv.getUint8(i * 7 + 6)]]++;
+    const g = new THREE.Group();
+    const meshes = {};
+    for (const k of [0, 1, 2, 3]) {
+      if (!counts[k]) continue;
+      const m = new THREE.InstancedMesh(box, mats[k], counts[k]);
+      m.userData.i = 0;
+      m.userData.kind = k;
+      meshes[k] = m;
+      g.add(m);
+    }
+    const colors = json.palette.map((p) => new THREE.Color(p[1]));
+    const m4 = new THREE.Matrix4(), c = new THREE.Color();
+    const min = new THREE.Vector3(Infinity, Infinity, Infinity), max = new THREE.Vector3(-Infinity, -Infinity, -Infinity);
+    const tally = new Map();
+    for (let i = 0; i < n; i++) {
+      const o = i * 7;
+      const x = dv.getInt16(o, true), y = dv.getInt16(o + 2, true), z = dv.getInt16(o + 4, true), p = dv.getUint8(o + 6);
+      const k = kinds[p];
+      const mesh = meshes[k];
+      const s = k === 3 ? 0.45 : 1;
+      m4.makeScale(s, s, s).setPosition(x + 0.5, y + (k === 3 ? 0.25 : 0.5), z + 0.5);
+      mesh.setMatrixAt(mesh.userData.i, m4);
+      const j = k === 0 ? 0.9 + hash(x, y, z) * 0.2 : 1;
+      c.copy(colors[p]).multiplyScalar(j);
+      mesh.setColorAt(mesh.userData.i, c);
+      mesh.userData.i++;
+      min.min(new THREE.Vector3(x, y, z)); max.max(new THREE.Vector3(x, y, z));
+      tally.set(p, (tally.get(p) || 0) + 1);
+    }
+    for (const m of Object.values(meshes)) { m.instanceMatrix.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; }
+    // floating blocks (the game spawns animated block displays; these follow the same palette and placement idea)
+    const fN = realm.id === 'umbral_throne' ? 70 : 36;
+    const fm = new THREE.InstancedMesh(box, floatMat, fN);
+    const seeds = [];
+    for (let i = 0; i < fN; i++) {
+      const r1 = hash(i, 7, realm.id.length), r2 = hash(i, 11, 3), r3 = hash(i, 13, 5), r4 = hash(i, 17, 9);
+      const a = r1 * Math.PI * 2, d = Math.sqrt(r2) * realm.floatR;
+      let pos;
+      if (realm.id === 'umbral_throne' && i < 40) pos = [realm.centre[0] + (r1 - 0.5) * 30, 9 + r3 * 22, realm.centre[2] + (r2 - 0.6) * 54];
+      else pos = [realm.centre[0] + Math.cos(a) * d, 6 + r3 * 30, realm.centre[2] + Math.sin(a) * d];
+      const scale = 0.45 + (r4 < 0.15 ? r3 * 1.6 : r4 * 0.7);
+      seeds.push({ pos, scale, phase: r4 * 6.28, spin: (r1 < 0.5 ? 1 : -1) * (0.3 + r2 * 0.4) });
+      fm.setColorAt(i, new THREE.Color(realm.floatCols[i % realm.floatCols.length]));
+    }
+    fm.instanceColor.needsUpdate = true;
+    fm.userData.seeds = seeds;
+    g.add(fm);
+    return { group: g, floaters: fm, min, max, tally, total: json.total, visible: n, palette: json.palette };
+  }
+
+  function legend(info) {
+    const top = [...info.tally.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
+    $('legend').innerHTML = top.map(([p, n]) => {
+      const [name, col] = info.palette[p];
+      return `<span><i style="background:${col}"></i>${name.replace(/_/g, ' ')}</span>`;
+    }).join('');
+  }
+
+  function frame() {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    renderer.setSize(w, h, false);
+    const size = bounds ? Math.max(bounds.max.x - bounds.min.x, bounds.max.z - bounds.min.z, (bounds.max.y - bounds.min.y) * 1.3) : 200;
+    const half = size * 0.62;
+    const aspect = w / h;
+    camera.left = -half * aspect; camera.right = half * aspect; camera.top = half; camera.bottom = -half;
+    camera.updateProjectionMatrix();
+  }
+
+  function setView(v) {
+    view = v;
+    for (const [id, name] of [['vIso', 'iso'], ['vTop', 'top'], ['vSide', 'side']]) $(id).setAttribute('aria-pressed', String(name === v));
+    if (!bounds) return;
+    const c = bounds.min.clone().add(bounds.max).multiplyScalar(0.5);
+    const d = 600;
+    const dir = v === 'top' ? new THREE.Vector3(0.0001, 1, 0.0001) : v === 'side' ? new THREE.Vector3(1, 0.12, 0) : new THREE.Vector3(1, 0.82, 1);
+    camera.position.copy(c).add(dir.normalize().multiplyScalar(d));
+    camera.zoom = 1;
+    controls.target.copy(c);
+    camera.updateProjectionMatrix();
+    controls.update();
+  }
+
+  async function show(id) {
+    const realm = REALMS.find((r) => r.id === id) || REALMS[REALMS.length - 1];
+    current = realm;
+    document.documentElement.style.setProperty('--accent', realm.accent);
+    [...$('realms').children].forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === realm.id)));
+    $('rName').textContent = realm.name;
+    $('rSub').textContent = realm.sub;
+    $('rGate').textContent = realm.gate;
+    $('rSky').textContent = realm.sky;
+    $('rTrial').textContent = realm.trial;
+    $('rBlocks').textContent = '…';
+    $('status').textContent = 'Loading ' + realm.name + '…';
+    scene.background = new THREE.Color(realm.bg);
+    try {
+      if (!cache[id]) {
+        const res = await fetch('data/' + id + '.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        cache[id] = build(realm, await res.json());
+      }
+    } catch (e) {
+      $('status').textContent = 'Could not load this realm (' + e.message + '). Reload the page to try again.';
+      return;
+    }
+    if (current !== realm) return;
+    if (group) scene.remove(group);
+    const info = cache[id];
+    group = info.group; floaters = info.floaters;
+    scene.add(group);
+    bounds = { min: info.min, max: info.max };
+    $('rBlocks').textContent = info.total.toLocaleString('en') + ' placed · ' + info.visible.toLocaleString('en') + ' visible';
+    legend(info);
+    const s = $('slice');
+    s.min = Math.floor(info.min.y); s.max = Math.ceil(info.max.y) + 1; s.value = s.max;
+    applySlice();
+    frame();
+    setView(view);
+    $('status').textContent = 'Heights relative to the arrival shrine (y 0); north points into the trial.';
+    try { if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id); } catch (e) { /* hash optional */ }
+  }
+
+  function applySlice() {
+    const s = $('slice');
+    const v = Number(s.value);
+    const all = v >= Number(s.max);
+    clip.constant = all ? 10000 : v;
+    $('sliceVal').textContent = all ? 'all' : 'y ' + v;
+  }
+
+  for (const r of REALMS) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.id = r.id;
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = `<span>${r.name.replace('The ', '')}</span><small>${r.gate}</small>`;
+    b.addEventListener('click', () => show(r.id));
+    $('realms').appendChild(b);
+  }
+  $('vIso').addEventListener('click', () => setView('iso'));
+  $('vTop').addEventListener('click', () => setView('top'));
+  $('vSide').addEventListener('click', () => setView('side'));
+  $('vSpin').addEventListener('click', () => { spin = !spin; $('vSpin').setAttribute('aria-pressed', String(spin)); });
+  $('slice').addEventListener('input', applySlice);
+  $('tFloat').addEventListener('click', (e) => {
+    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', String(on));
+    Object.values(cache).forEach((c) => { c.floaters.visible = on; });
+  });
+  $('tGlass').addEventListener('click', (e) => {
+    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', String(on));
+    mats[2].visible = on;
+  });
+  $('togglePanel').addEventListener('click', (e) => {
+    const p = $('panel');
+    const collapsed = p.classList.toggle('collapsed');
+    e.currentTarget.textContent = collapsed ? 'Show' : 'Hide';
+    e.currentTarget.setAttribute('aria-expanded', String(!collapsed));
+  });
+  window.addEventListener('resize', frame);
+  window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e3 = new THREE.Euler(), v3 = new THREE.Vector3(), sc = new THREE.Vector3();
+  const clock = new THREE.Clock();
+  function tick() {
+    const t = clock.getElapsedTime();
+    if (floaters && floaters.visible) {
+      const seeds = floaters.userData.seeds;
+      for (let i = 0; i < seeds.length; i++) {
+        const s = seeds[i];
+        const tt = reduced ? 0 : t;
+        e3.set(Math.sin(tt * 0.5 + s.phase) * 0.18, tt * s.spin + s.phase, Math.sin(tt * 0.35 + s.phase) * 0.12);
+        q.setFromEuler(e3);
+        v3.set(s.pos[0], s.pos[1] + Math.sin(tt * 0.9 + s.phase) * 0.4 * Math.max(0.6, s.scale), s.pos[2]);
+        sc.setScalar(s.scale);
+        floaters.setMatrixAt(i, m4.compose(v3, q, sc));
+      }
+      floaters.instanceMatrix.needsUpdate = true;
+    }
+    if (spin && !reduced) {
+      const off = camera.position.clone().sub(controls.target);
+      off.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.0035);
+      camera.position.copy(controls.target).add(off);
+    }
+    controls.update();
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+  frame();
+  show(location.hash.slice(1) || 'umbral_throne');
+  tick();
+})();
+</script>
