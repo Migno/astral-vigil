@@ -3,7 +3,7 @@
 mod.id = "astralvigil"
 mod.name = "Astral Vigil"
 mod.group = "media.hofferbert.astralvigil"
-mod.version = "0.1.0"
+mod.version = "0.0.1-alpha"
 mod.license = "All Rights Reserved"
 mod.authors = "Migno"
 

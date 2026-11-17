@@ -2,7 +2,9 @@
 
 All notable changes. Format based on [Keep a Changelog](https://keepachangelog.com/), versions follow SemVer.
 
-## [Unreleased]
+## [0.0.1-alpha] - 2026-11-17
+
+First public alpha for multiplayer testing. Everything below is part of it.
 
 ### Multiplayer readiness (tested on dedicated servers, both targets)
 - **Trials are per player:** Vael's moon targets light up only for the archer who hit them (progress on the action
