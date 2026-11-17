@@ -4,7 +4,8 @@ import zlib
 
 
 def read(path):
-    """Returns (width, height, rows) with rows[y][x] = (r, g, b, a). Supports 8-bit RGBA, RGB and palette PNGs."""
+    """Returns (width, height, rows) with rows[y][x] = (r, g, b, a). Supports RGBA, RGB, grey (+alpha) and palette PNGs
+    (palette and grey also at 1/2/4 bits)."""
     data = open(path, "rb").read()
     assert data[:8] == b"\x89PNG\r\n\x1a\n", path
     pos, idat, palette, trns = 8, b"", None, None
@@ -14,16 +15,18 @@ def read(path):
         pos += 12 + length
         if ctype == b"IHDR":
             w, h, depth, color = struct.unpack(">IIBB", chunk[:10])
-            assert depth == 8, "only 8-bit PNGs"
+            assert depth == 8 or (color in (0, 3) and depth in (1, 2, 4)), "unsupported PNG bit depth"
         elif ctype == b"PLTE":
             palette = [tuple(chunk[i:i + 3]) for i in range(0, len(chunk), 3)]
         elif ctype == b"tRNS":
             trns = chunk
         elif ctype == b"IDAT":
             idat += chunk
-    bpp = {6: 4, 2: 3, 3: 1}[color]
+    channels = {6: 4, 2: 3, 3: 1, 0: 1, 4: 2}[color]
+    bits = depth * channels
+    bpp = max(1, bits // 8)
+    stride = (w * bits + 7) // 8
     raw = zlib.decompress(idat)
-    stride = w * bpp
     rows, prev = [], bytearray(stride)
     for y in range(h):
         f = raw[y * (stride + 1)]
@@ -45,11 +48,27 @@ def read(path):
         prev = line
         row = []
         for x in range(w):
+            if depth < 8:
+                per = 8 // depth
+                byte = line[x // per]
+                shift = 8 - depth * (x % per + 1)
+                val = (byte >> shift) & ((1 << depth) - 1)
+                if color == 3:
+                    alpha = trns[val] if trns is not None and val < len(trns) else 255
+                    row.append(palette[val] + (alpha,))
+                else:
+                    g = val * 255 // ((1 << depth) - 1)
+                    row.append((g, g, g, 255))
+                continue
             px = line[x * bpp:(x + 1) * bpp]
             if color == 6:
                 row.append(tuple(px))
             elif color == 2:
                 row.append(tuple(px) + (255,))
+            elif color == 0:
+                row.append((px[0], px[0], px[0], 255))
+            elif color == 4:
+                row.append((px[0], px[0], px[0], px[1]))
             else:
                 idx = px[0]
                 alpha = trns[idx] if trns is not None and idx < len(trns) else 255

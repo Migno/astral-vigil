@@ -39,3 +39,6 @@ __pycache__/
 
 # agent worktrees
 .claude/worktrees/
+
+# atlas export (contains vanilla textures; regenerate with tools/dev/atlas_export.py)
+docs/realm-viewer/data/

@@ -1,13 +1,14 @@
-<title>Firmament Realm Atlas</title>
+<title>Astral Vigil Atlas</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
 <style>
-/* Layout: one full-bleed 3D stage; a floating glass panel (realm list, facts, controls) at the top left,
-   a quiet control hint at the bottom. Single dark look: the realms are night skies. */
+/* Layout: a slim top bar with the four sections; 3D sections are a full-bleed stage with a floating glass panel,
+   the texture section is a scrolling gallery. Single dark look: everything here lives in a night sky. */
 :root {
   --ink: #0b0a14;
-  --panel: rgba(20, 17, 34, 0.78);
+  --ink-2: #13111f;
+  --panel: rgba(20, 17, 34, 0.82);
   --line: rgba(216, 216, 230, 0.14);
   --text: #e9e7f3;
   --muted: #a7a3bd;
@@ -19,49 +20,53 @@
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
   color-scheme: dark;
 }
+[hidden] { display: none !important; }
 html, body { height: 100%; }
 body { background: var(--ink); color: var(--text); font-family: var(--body); overflow: hidden; }
-#stage { position: fixed; inset: 0; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink-2); }
+
+.bar {
+  position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 5; height: 48px;
+  display: flex; align-items: center; gap: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--ink-2); border-bottom: 1px solid var(--line);
+}
+.bar h1 { font-family: var(--display); font-size: 1rem; letter-spacing: 0.1em; margin: 0; white-space: nowrap; }
+.bar h1 span { color: var(--gold); }
+.tabs { display: flex; gap: 4px; overflow-x: auto; min-width: 0; }
+.tabs a {
+  font: 500 0.8rem var(--body); color: var(--muted); text-decoration: none; padding: 7px 12px; border-radius: 8px; white-space: nowrap;
+}
+.tabs a[aria-current="page"] { color: var(--ink); background: var(--accent); }
+.tabs a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+#stage { position: fixed; inset: calc(48px + env(safe-area-inset-top, 0px)) 0 0 0; }
 #stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 
 .panel {
-  position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  position: fixed; z-index: 4;
+  top: calc(env(safe-area-inset-top, 0px) + 64px);
   left: max(16px, env(safe-area-inset-left, 0px));
-  width: min(340px, calc(100vw - 32px));
-  max-height: calc(100% - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  width: min(330px, calc(100vw - 32px));
+  max-height: calc(100% - 80px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
-  background: var(--panel);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 16px;
+  background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line); border-radius: 14px; padding: 16px;
   display: flex; flex-direction: column; gap: 14px;
 }
-.brand { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-.brand h1 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.08em; margin: 0; text-wrap: balance; }
-.brand span { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
-button.toggle-panel { display: none; }
-
-.realms { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.realms button {
-  font: 500 0.78rem var(--body); color: var(--text); text-align: left;
-  background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); border-radius: 9px;
-  padding: 8px 9px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-width: 0;
+.panel h2 { font-family: var(--display); font-size: 1.3rem; margin: 0; color: var(--accent); letter-spacing: 0.04em; text-wrap: balance; }
+.panel .sub { color: var(--muted); font-size: 0.82rem; margin: 2px 0 0; }
+.chips { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.chips button {
+  font: 500 0.76rem var(--body); color: var(--text); text-align: left; background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line); border-radius: 9px; padding: 7px 9px; cursor: pointer; min-width: 0;
+  display: flex; flex-direction: column; gap: 2px;
 }
-.realms button small { font: 400 0.66rem var(--mono); color: var(--muted); }
-.realms button[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
-.realms button:focus-visible, .ctl button:focus-visible, input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
-
-.info h2 { font-family: var(--display); font-size: 1.35rem; margin: 0 0 2px; color: var(--accent); letter-spacing: 0.04em; text-wrap: balance; }
-.info .sub { color: var(--muted); font-size: 0.82rem; margin: 0 0 10px; }
+.chips button small { font: 400 0.64rem var(--mono); color: var(--muted); }
+.chips button[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
 .facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 0.76rem; margin: 0; }
 .facts dt { color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.64rem; padding-top: 2px; }
 .facts dd { margin: 0; font-variant-numeric: tabular-nums; }
-.legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font: 400 0.68rem var(--mono); color: var(--muted); }
-.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
-
 .ctl { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; }
 .row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .ctl button {
@@ -69,352 +74,877 @@ button.toggle-panel { display: none; }
   border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer;
 }
 .ctl button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
-.ctl label { font-size: 0.72rem; color: var(--muted); display: flex; justify-content: space-between; }
+.ctl label { font-size: 0.72rem; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
 .ctl input[type=range] { width: 100%; accent-color: var(--accent); }
+select {
+  width: 100%; font: 400 0.8rem var(--body); color: var(--text); background: var(--ink-2);
+  border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px;
+}
 .status { font: 400 0.7rem var(--mono); color: var(--muted); min-height: 1em; }
+.icons { display: flex; gap: 8px; }
+.icons img { width: 40px; height: 40px; image-rendering: pixelated; background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 6px; }
 
 .hint {
-  position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  position: fixed; z-index: 4; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
   font: 400 0.7rem var(--mono); color: var(--muted); background: var(--panel); border: 1px solid var(--line);
   border-radius: 8px; padding: 6px 10px; pointer-events: none;
 }
-@media (max-width: 640px) {
-  .panel { max-height: 46%; padding: 12px; gap: 10px; }
-  .realms { grid-template-columns: repeat(3, 1fr); }
-  .realms button small { display: none; }
-  .hint { display: none; }
-  .info .sub { margin-bottom: 6px; }
-  .panel.collapsed > :not(.brand) { display: none; }
-  button.toggle-panel { display: inline-block; font: 500 0.7rem var(--body); color: var(--text); background: none; border: 1px solid var(--line); border-radius: 7px; padding: 3px 8px; }
+
+/* textures */
+#gallery {
+  position: fixed; inset: calc(48px + env(safe-area-inset-top, 0px)) 0 0 0; overflow-y: auto;
+  padding-block: 20px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
+.gal-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.gal-head h2 { font-family: var(--display); font-size: 1.3rem; margin: 0; color: var(--accent); }
+.gal-head input { font: 400 0.85rem var(--body); color: var(--text); background: var(--ink-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: min(280px, 100%); }
+.cat { margin: 0 0 24px; }
+.cat h3 { font: 600 0.72rem var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; }
+.tex {
+  background: var(--ink-2); border: 1px solid var(--line); border-radius: 10px; padding: 8px; cursor: pointer; color: var(--text);
+  display: flex; flex-direction: column; gap: 6px; text-align: left; font: inherit; min-width: 0;
+}
+.tex:hover { border-color: var(--accent); }
+.tex .img { aspect-ratio: 1; display: grid; place-items: center; background: repeating-conic-gradient(#1b1830 0 25%, #221e3a 0 50%) 0 0 / 12px 12px; border-radius: 6px; overflow: hidden; }
+.tex img { max-width: 100%; max-height: 100%; image-rendering: pixelated; width: 100%; height: 100%; object-fit: contain; }
+.tex span { font: 400 0.66rem var(--mono); overflow-wrap: anywhere; }
+.tex small { font: 400 0.62rem var(--mono); color: var(--muted); }
+.lightbox { position: fixed; inset: 0; z-index: 20; background: rgba(5, 4, 10, 0.86); display: grid; place-items: center; padding: 24px; }
+.lightbox .card { background: var(--ink-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; max-width: min(720px, 100%); max-height: 100%; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+.lightbox canvas { image-rendering: pixelated; max-width: 100%; height: auto; background: repeating-conic-gradient(#1b1830 0 25%, #221e3a 0 50%) 0 0 / 16px 16px; }
+.lightbox .row button { font: 500 0.76rem var(--body); color: var(--text); background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+.lightbox .row button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
+.lightbox h4 { margin: 0; font: 400 0.85rem var(--mono); overflow-wrap: anywhere; }
+
+@media (max-width: 640px) {
+  .bar h1 { display: none; }
+  .panel { max-height: 44%; padding: 12px; gap: 10px; }
+  .chips { grid-template-columns: repeat(3, 1fr); }
+  .chips button small { display: none; }
+  .hint { display: none; }
+  .panel.collapsed > :not(.phead) { display: none; }
+}
+.phead { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.phead button { font: 500 0.7rem var(--body); color: var(--text); background: none; border: 1px solid var(--line); border-radius: 7px; padding: 3px 8px; cursor: pointer; }
+@media (min-width: 641px) { .phead button { display: none; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
 </style>
+
+<header class="bar">
+  <h1>Astral Vigil <span>Atlas</span></h1>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#realms" data-tab="realms">Realms</a>
+    <a href="#models" data-tab="models">Models</a>
+    <a href="#armor" data-tab="armor">Armour</a>
+    <a href="#textures" data-tab="textures">Textures</a>
+  </nav>
+</header>
 
 <div id="stage"></div>
 
-<aside class="panel" id="panel">
-  <div class="brand">
-    <h1>Firmament Realm Atlas</h1>
-    <span>Astral Vigil</span>
-    <button class="toggle-panel" id="togglePanel" type="button" aria-expanded="true">Hide</button>
-  </div>
-  <nav class="realms" id="realms" aria-label="Realms"></nav>
-  <section class="info" aria-live="polite">
-    <h2 id="rName">…</h2>
-    <p class="sub" id="rSub"></p>
-    <dl class="facts">
-      <dt>Gate</dt><dd id="rGate"></dd>
-      <dt>Sky</dt><dd id="rSky"></dd>
-      <dt>Trial</dt><dd id="rTrial"></dd>
-      <dt>Blocks</dt><dd id="rBlocks"></dd>
-    </dl>
-  </section>
-  <div class="legend" id="legend"></div>
+<!-- realms panel -->
+<aside class="panel" id="p-realms" hidden>
+  <div class="phead"><div><h2 id="rName">…</h2><p class="sub" id="rSub"></p></div><button type="button" class="collapse">Hide</button></div>
+  <div class="chips" id="realmChips"></div>
+  <dl class="facts">
+    <dt>Gate</dt><dd id="rGate"></dd>
+    <dt>Sky</dt><dd id="rSky"></dd>
+    <dt>Trial</dt><dd id="rTrial"></dd>
+    <dt>Blocks</dt><dd id="rBlocks"></dd>
+  </dl>
   <div class="ctl">
     <div class="row" role="group" aria-label="Camera">
-      <button type="button" id="vIso" aria-pressed="true">Isometric</button>
-      <button type="button" id="vTop">Top</button>
-      <button type="button" id="vSide">Side</button>
-      <button type="button" id="vSpin" aria-pressed="false">Turntable</button>
+      <button type="button" data-view="iso" aria-pressed="true">Isometric</button>
+      <button type="button" data-view="top">Top</button>
+      <button type="button" data-view="side">Side</button>
+      <button type="button" id="rSpin" aria-pressed="false">Turntable</button>
     </div>
     <div>
       <label for="slice"><span>Cut away above height</span><span id="sliceVal">all</span></label>
       <input type="range" id="slice" min="0" max="100" value="100">
     </div>
     <div class="row">
+      <button type="button" id="tTex" aria-pressed="true">Textures</button>
       <button type="button" id="tFloat" aria-pressed="true">Floating blocks</button>
       <button type="button" id="tGlass" aria-pressed="true">Glass</button>
     </div>
-    <div class="status" id="status">Loading…</div>
+    <div class="status" id="rStatus">Loading…</div>
   </div>
 </aside>
-<div class="hint">drag: orbit · right-drag / two fingers: pan · wheel / pinch: zoom</div>
+
+<!-- models panel -->
+<aside class="panel" id="p-models" hidden>
+  <div class="phead"><div><h2 id="mName">Models</h2><p class="sub" id="mSub">Entities and block models, with their textures and animations.</p></div><button type="button" class="collapse">Hide</button></div>
+  <div class="chips" id="modelChips"></div>
+  <div class="ctl">
+    <div id="variantRow"><label for="variant"><span>Texture</span></label><select id="variant"></select></div>
+    <div id="animRow"><label for="anim"><span>Animation</span><span id="animLen"></span></label><select id="anim"></select></div>
+    <div class="row">
+      <button type="button" id="mPlay" aria-pressed="true">Playing</button>
+      <button type="button" id="mGlow" aria-pressed="true">Glow</button>
+      <button type="button" id="mSpin" aria-pressed="false">Turntable</button>
+    </div>
+    <div class="status" id="mStatus"></div>
+  </div>
+</aside>
+
+<!-- armour panel -->
+<aside class="panel" id="p-armor" hidden>
+  <div class="phead"><div><h2 id="aName">Armour</h2><p class="sub" id="aSub"></p></div><button type="button" class="collapse">Hide</button></div>
+  <div class="chips" id="armorChips"></div>
+  <div class="icons" id="aIcons"></div>
+  <div class="ctl">
+    <div id="levelRow">
+      <label for="level"><span>Awakening</span><span id="levelVal">Dormant</span></label>
+      <input type="range" id="level" min="0" max="2" value="2">
+    </div>
+    <div class="row">
+      <button type="button" id="aOrn" aria-pressed="true">Ornaments</button>
+      <button type="button" id="aGlow" aria-pressed="true">Glow</button>
+      <button type="button" id="aBody" aria-pressed="true">Mannequin</button>
+      <button type="button" id="aSpin" aria-pressed="true">Turntable</button>
+    </div>
+    <div class="row" role="group" aria-label="Pieces">
+      <button type="button" data-slot="HEAD" aria-pressed="true">Helmet</button>
+      <button type="button" data-slot="CHEST" aria-pressed="true">Chest</button>
+      <button type="button" data-slot="LEGS" aria-pressed="true">Legs</button>
+      <button type="button" data-slot="FEET" aria-pressed="true">Boots</button>
+    </div>
+    <div class="status" id="aStatus"></div>
+  </div>
+</aside>
+
+<main id="gallery" hidden>
+  <div class="gal-head">
+    <h2>Textures</h2>
+    <input type="search" id="texSearch" placeholder="Filter by name, e.g. umbral" aria-label="Filter textures">
+  </div>
+  <div id="texCats"><p class="status">Loading textures…</p></div>
+</main>
+
+<div class="hint" id="hint">drag: orbit · right-drag / two fingers: pan · wheel / pinch: zoom</div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (() => {
-  // Realm facts mirror firmament/Realm.java and worldgen/AVWorldgen.java (pad at y 0 here; north is -z).
-  const REALMS = [
-    { id: 'firmament', name: 'The Firmament', sub: 'Starwood groves above the clouds', gate: 'Astral Gate',
-      sky: 'Moonlit night, full moon', trial: 'None: the wilds (live game adds floating-island terrain)', bg: 0x0b0a1e, fog: 0x1e2a5a, accent: '#8fefff',
-      centre: [0, 0, 0], floatR: 30, floatCols: ['#e8e8f2', '#8fefff', '#3f7fa8', '#8562c0'] },
-    { id: 'sunspire', name: 'The Sunspire', sub: "Solenne's eternal dawn", gate: 'Solar Gate',
-      sky: 'Fixed sunrise, golden haze', trial: '100-block climb, 64 pads, 4 gold checkpoints', bg: 0x2a3550, fog: 0xf2b46b, accent: '#f2c94c',
-      centre: [0, 0, -31], floatR: 22, floatCols: ['#e0a030', '#ffe08a', '#f5cf45', '#f2c94c'] },
-    { id: 'moonwell', name: 'The Moonwell', sub: "Vael's silver midnight", gate: 'Lunar Gate',
-      sky: 'Full-moon midnight', trial: 'Light 10 moon targets while Echoes rise', bg: 0x10183a, fog: 0x2a3b6e, accent: '#c8d4ea',
-      centre: [0, 0, -43], floatR: 34, floatCols: ['#c8d4ea', '#e6eefa', '#9aa3b8', '#dfe0dc'] },
-    { id: 'starforge', name: 'The Starforge', sub: 'Where Orrin bends the light', gate: 'Prism Gate',
-      sky: 'Deep space, new moon', trial: 'Three mirror bays under a crystal vault, three receptors at once', bg: 0x0a0614, fog: 0x2a1450, accent: '#2fa8d0',
-      centre: [0, 0, -50], floatR: 40, floatCols: ['#8562c0', '#5b2a86', '#8fefff', '#f2c94c'] },
-    { id: 'archive', name: 'The Endless Archive', sub: 'Ilyra remembers everything', gate: 'Archive Gate',
-      sky: 'Starless dark, drifting glyphs', trial: 'Bookshelf maze, 70 × 70, inside the grand library', bg: 0x07060f, fog: 0x1b1426, accent: '#b9f6ff',
-      centre: [0, 0, -63], floatR: 52, floatCols: ['#6b5236', '#8a6a3c', '#c9971e', '#a07a4a'] },
-    { id: 'umbral_throne', name: 'The Umbral Cathedral', sub: "The fallen Watcher's broken sanctuary", gate: 'Umbral Gate',
-      sky: 'End sky, violet fog', trial: 'The Eclipse, three phases', bg: 0x0a0414, fog: 0x1a0a2e, accent: '#b57cff',
-      centre: [0, 0, -51], floatR: 40, floatCols: ['#2f1b48', '#2b1943', '#b07ef0', '#482a6c', '#966ac3'] },
-  ];
-
   const $ = (id) => document.getElementById(id);
+  const DEG = Math.PI / 180;
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const getJSON = async (p) => { const r = await fetch(p); if (!r.ok) throw new Error(p + ': HTTP ' + r.status); return r.json(); };
+  const loadTex = (src) => new Promise((ok, bad) => new THREE.TextureLoader().load(src, (t) => {
+    t.magFilter = THREE.NearestFilter; t.minFilter = THREE.NearestFilter; t.generateMipmaps = false; ok(t);
+  }, undefined, bad));
+
+  // ---------------------------------------------------------------- shared renderer
   const stage = $('stage');
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.localClippingEnabled = true;
   stage.appendChild(renderer.domElement);
+  const clock = new THREE.Clock();
+  let active = null; // current 3D view {scene, camera, controls, tick, resize}
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -2000, 4000);
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.08;
-  controls.screenSpacePanning = true;
-  controls.minZoom = 0.25;
-  controls.maxZoom = 18;
-
-  scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x2a2140, 0.75));
-  const sun = new THREE.DirectionalLight(0xffffff, 0.75);
-  sun.position.set(-0.6, 1, 0.4);
-  scene.add(sun);
-  const fill = new THREE.DirectionalLight(0x9fb4ff, 0.25);
-  fill.position.set(0.7, 0.3, -0.6);
-  scene.add(fill);
-
-  // starfield shell
-  const starGeo = new THREE.BufferGeometry();
-  const sp = [];
-  for (let i = 0; i < 1600; i++) {
-    const u = Math.random() * 2 - 1, t = Math.random() * Math.PI * 2, r = 900;
-    const s = Math.sqrt(1 - u * u);
-    sp.push(Math.cos(t) * s * r, u * r, Math.sin(t) * s * r);
+  function makeView(ortho) {
+    const scene = new THREE.Scene();
+    const camera = ortho ? new THREE.OrthographicCamera(-1, 1, 1, -1, -2000, 4000) : new THREE.PerspectiveCamera(35, 1, 0.5, 5000);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; controls.dampingFactor = 0.08; controls.screenSpacePanning = true; controls.enabled = false;
+    scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x2a2140, 0.8));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(-0.6, 1, 0.4); scene.add(sun);
+    const fill = new THREE.DirectionalLight(0x9fb4ff, 0.3); fill.position.set(0.7, 0.3, -0.6); scene.add(fill);
+    return { scene, camera, controls };
   }
-  starGeo.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3));
-  const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.8 }));
-  scene.add(stars);
+  function starfield(scene, r) {
+    const g = new THREE.BufferGeometry(), p = [];
+    for (let i = 0; i < 1500; i++) {
+      const u = Math.random() * 2 - 1, t = Math.random() * Math.PI * 2, s = Math.sqrt(1 - u * u);
+      p.push(Math.cos(t) * s * r, u * r, Math.sin(t) * s * r);
+    }
+    g.setAttribute('position', new THREE.Float32BufferAttribute(p, 3));
+    scene.add(new THREE.Points(g, new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, sizeAttenuation: false, transparent: true, opacity: 0.8 })));
+  }
+  function resize() {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    renderer.setSize(w, h, false);
+    if (active && active.resize) active.resize(w, h);
+  }
+  window.addEventListener('resize', resize);
+  function loop() {
+    const dt = Math.min(clock.getDelta(), 0.1);
+    if (active) { active.tick && active.tick(dt); active.controls.update(); renderer.render(active.scene, active.camera); }
+    requestAnimationFrame(loop);
+  }
 
+  // box geometry with Minecraft/Blockbench box UVs; faces px,nx,py,ny,pz,nz = east,west,up,down,south,north
+  function setFaceUV(geo, face, rect, tw, th, flipV) {
+    let [u, v, w, h] = rect;
+    let u0 = u / tw, u1 = (u + w) / tw, v0 = 1 - v / th, v1 = 1 - (v + h) / th;
+    if (flipV) [v0, v1] = [v1, v0];
+    const uv = geo.attributes.uv, i = face * 4;
+    uv.setXY(i, u0, v0); uv.setXY(i + 1, u1, v0); uv.setXY(i + 2, u0, v1); uv.setXY(i + 3, u1, v1);
+  }
+  function boxUVGeometry(sx, sy, sz, inflate, uvSpec, tw, th, mirror) {
+    const geo = new THREE.BoxGeometry(Math.max(sx + 2 * inflate, 0.001), Math.max(sy + 2 * inflate, 0.001), Math.max(sz + 2 * inflate, 0.001));
+    if (Array.isArray(uvSpec)) {
+      const [u, v] = uvSpec, w = sx, h = sy, d = sz;
+      let east = [u, v + d, d, h], west = [u + d + w, v + d, d, h];
+      if (mirror) { east = [u + d + w + d, v + d, -d, h]; west = [u + d, v + d, -d, h]; }
+      const rects = [east, west, [u + d, v, w, d], [u + d + w, v, w, d], [u + 2 * d + w, v + d, w, h], [u + d, v + d, w, h]];
+      if (mirror) { rects[2] = [u + d + w, v, -w, d]; rects[3] = [u + d + w + w, v, -w, d]; rects[4] = [u + 2 * d + w + w, v + d, -w, h]; rects[5] = [u + d + w, v + d, -w, h]; }
+      rects.forEach((r, f) => setFaceUV(geo, f, r, tw, th, f === 3));
+    } else if (uvSpec) {
+      ['east', 'west', 'up', 'down', 'south', 'north'].forEach((n, f) => {
+        const s = uvSpec[n];
+        if (s) setFaceUV(geo, f, [s.uv[0], s.uv[1], s.uv_size[0], s.uv_size[1]], tw, th, f === 3);
+        else setFaceUV(geo, f, [0, 0, 0, 0], tw, th, false);
+      });
+    }
+    geo.attributes.uv.needsUpdate = true;
+    return geo;
+  }
+
+  // ---------------------------------------------------------------- REALMS
+  const REALMS = [
+    { id: 'firmament', name: 'The Firmament', sub: 'Starwood groves above the clouds', gate: 'Astral Gate', sky: 'Moonlit night, full moon',
+      trial: 'None: the wilds (the game adds random floating-island terrain)', bg: 0x0b0a1e, accent: '#8fefff', centre: [0, 0, 0], floatR: 30,
+      floatCols: ['#e8e8f2', '#8fefff', '#3f7fa8', '#8562c0'] },
+    { id: 'sunspire', name: 'The Sunspire', sub: "Solenne's eternal dawn", gate: 'Solar Gate', sky: 'Fixed sunrise, golden haze',
+      trial: '100-block climb, 64 pads, 4 gold checkpoints', bg: 0x2a3550, accent: '#f2c94c', centre: [0, 0, -31], floatR: 22,
+      floatCols: ['#e0a030', '#ffe08a', '#f5cf45', '#f2c94c'] },
+    { id: 'moonwell', name: 'The Moonwell', sub: "Vael's silver midnight", gate: 'Lunar Gate', sky: 'Full-moon midnight',
+      trial: 'Light 10 moon targets while Echoes rise', bg: 0x10183a, accent: '#c8d4ea', centre: [0, 0, -43], floatR: 34,
+      floatCols: ['#c8d4ea', '#e6eefa', '#9aa3b8', '#dfe0dc'] },
+    { id: 'starforge', name: 'The Starforge', sub: 'Where Orrin bends the light', gate: 'Prism Gate', sky: 'Deep space, new moon',
+      trial: 'Three mirror bays under a crystal vault, three receptors at once', bg: 0x0a0614, accent: '#2fa8d0', centre: [0, 0, -50], floatR: 40,
+      floatCols: ['#8562c0', '#5b2a86', '#8fefff', '#f2c94c'] },
+    { id: 'archive', name: 'The Endless Archive', sub: 'Ilyra remembers everything', gate: 'Archive Gate', sky: 'Starless dark, drifting glyphs',
+      trial: 'Bookshelf maze, 70 × 70, inside the grand library', bg: 0x07060f, accent: '#b9f6ff', centre: [0, 0, -63], floatR: 52,
+      floatCols: ['#6b5236', '#8a6a3c', '#c9971e', '#a07a4a'] },
+    { id: 'umbral-throne', name: 'The Umbral Cathedral', sub: "The fallen Watcher's broken sanctuary", gate: 'Umbral Gate', sky: 'End sky, violet fog',
+      trial: 'The Eclipse, three phases', bg: 0x0a0414, accent: '#b57cff', centre: [0, 0, -51], floatR: 40,
+      floatCols: ['#2f1b48', '#2b1943', '#b07ef0', '#482a6c', '#966ac3'] },
+  ];
+  const R = makeView(true);
+  starfield(R.scene, 900);
+  R.controls.minZoom = 0.25; R.controls.maxZoom = 18;
   const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 10000);
-  const box = new THREE.BoxGeometry(1, 1, 1);
-  const mats = {
+  let atlasInfo = null, atlasTex = null, rGroup = null, rFloat = null, rBounds = null, rView = 'iso', rSpin = false, realmCurrent = null, useTex = true;
+  const rCache = {};
+  const rMats = {};
+  function texturedMaterial(kind) {
+    const base = kind === 0 ? new THREE.MeshLambertMaterial({ alphaTest: 0.35 })
+      : kind === 2 ? new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.55, depthWrite: false })
+      : new THREE.MeshBasicMaterial({ alphaTest: 0.35 });
+    base.clippingPlanes = [clip];
+    if (atlasTex) {
+      base.map = atlasTex;
+      base.onBeforeCompile = (sh) => {
+        sh.vertexShader = 'attribute vec3 tiles;\n' + sh.vertexShader.replace('#include <uv_vertex>', `
+          #ifdef USE_UV
+            float tile = normal.y > 0.5 ? tiles.x : (normal.y < -0.5 ? tiles.z : tiles.y);
+            tile = max(tile, 0.0);
+            vec2 cell = vec2(mod(tile, ${atlasInfo.cols.toFixed(1)}), floor(tile / ${atlasInfo.cols.toFixed(1)}));
+            vUv = vec2((cell.x + uv.x) / ${atlasInfo.cols.toFixed(1)}, 1.0 - (cell.y + 1.0 - uv.y) / ${atlasInfo.rows.toFixed(1)});
+          #endif`);
+      };
+    }
+    return base;
+  }
+  const plainMats = {
     0: new THREE.MeshLambertMaterial({ clippingPlanes: [clip] }),
     1: new THREE.MeshBasicMaterial({ clippingPlanes: [clip] }),
     2: new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.42, depthWrite: false, clippingPlanes: [clip] }),
     3: new THREE.MeshBasicMaterial({ clippingPlanes: [clip] }),
   };
   const floatMat = new THREE.MeshLambertMaterial({ clippingPlanes: [clip] });
+  const hash3 = (x, y, z) => { let h = (x * 73856093) ^ (y * 19349663) ^ (z * 83492791); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967295; };
 
-  let group = null, floaters = null, current = null, bounds = null, spin = false, view = 'iso';
-  const cache = {};
-
-  function decode(json) {
-    const bin = atob(json.blocks);
-    const bytes = new Uint8Array(bin.length);
+  function buildRealm(realm, json) {
+    const bin = atob(json.blocks), bytes = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    return new DataView(bytes.buffer);
-  }
-
-  function hash(x, y, z) {
-    let h = (x * 73856093) ^ (y * 19349663) ^ (z * 83492791);
-    h = (h ^ (h >>> 13)) * 1274126177;
-    return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
-  }
-
-  function build(realm, json) {
-    const dv = decode(json);
-    const n = dv.byteLength / 7;
-    const counts = { 0: 0, 1: 0, 2: 0, 3: 0 };
+    const dv = new DataView(bytes.buffer), n = dv.byteLength / 7;
     const kinds = json.palette.map((p) => p[2]);
+    const counts = [0, 0, 0, 0];
     for (let i = 0; i < n; i++) counts[kinds[dv.getUint8(i * 7 + 6)]]++;
-    const g = new THREE.Group();
-    const meshes = {};
+    const g = new THREE.Group(), meshes = {}, tiles = {};
+    const box = new THREE.BoxGeometry(1, 1, 1);
     for (const k of [0, 1, 2, 3]) {
       if (!counts[k]) continue;
-      const m = new THREE.InstancedMesh(box, mats[k], counts[k]);
-      m.userData.i = 0;
-      m.userData.kind = k;
-      meshes[k] = m;
-      g.add(m);
+      const geo = box.clone();
+      tiles[k] = new Float32Array(counts[k] * 3);
+      geo.setAttribute('tiles', new THREE.InstancedBufferAttribute(tiles[k], 3));
+      const m = new THREE.InstancedMesh(geo, useTex ? rMats[k] : plainMats[k], counts[k]);
+      m.userData = { i: 0, kind: k };
+      meshes[k] = m; g.add(m);
     }
     const colors = json.palette.map((p) => new THREE.Color(p[1]));
-    const m4 = new THREE.Matrix4(), c = new THREE.Color();
-    const min = new THREE.Vector3(Infinity, Infinity, Infinity), max = new THREE.Vector3(-Infinity, -Infinity, -Infinity);
-    const tally = new Map();
+    const m4 = new THREE.Matrix4(), c = new THREE.Color(), white = new THREE.Color(1, 1, 1);
+    const min = new THREE.Vector3(1e9, 1e9, 1e9), max = new THREE.Vector3(-1e9, -1e9, -1e9);
     for (let i = 0; i < n; i++) {
-      const o = i * 7;
-      const x = dv.getInt16(o, true), y = dv.getInt16(o + 2, true), z = dv.getInt16(o + 4, true), p = dv.getUint8(o + 6);
-      const k = kinds[p];
-      const mesh = meshes[k];
+      const o = i * 7, x = dv.getInt16(o, true), y = dv.getInt16(o + 2, true), z = dv.getInt16(o + 4, true), p = dv.getUint8(o + 6);
+      const k = kinds[p], mesh = meshes[k], j = mesh.userData.i;
       const s = k === 3 ? 0.45 : 1;
       m4.makeScale(s, s, s).setPosition(x + 0.5, y + (k === 3 ? 0.25 : 0.5), z + 0.5);
-      mesh.setMatrixAt(mesh.userData.i, m4);
-      const j = k === 0 ? 0.9 + hash(x, y, z) * 0.2 : 1;
-      c.copy(colors[p]).multiplyScalar(j);
-      mesh.setColorAt(mesh.userData.i, c);
+      mesh.setMatrixAt(j, m4);
+      mesh.userData.colors = mesh.userData.colors || [];
+      const jit = k === 0 ? 0.9 + hash3(x, y, z) * 0.1 : 1;
+      mesh.userData.colors.push(p, jit);
+      c.copy(useTex ? white : colors[p]).multiplyScalar(jit);
+      mesh.setColorAt(j, c);
+      const t = json.palette[p][3] || [0, 0, 0];
+      tiles[k][j * 3] = t[0]; tiles[k][j * 3 + 1] = t[1]; tiles[k][j * 3 + 2] = t[2];
       mesh.userData.i++;
-      min.min(new THREE.Vector3(x, y, z)); max.max(new THREE.Vector3(x, y, z));
-      tally.set(p, (tally.get(p) || 0) + 1);
+      if (x < min.x) min.x = x; if (y < min.y) min.y = y; if (z < min.z) min.z = z;
+      if (x > max.x) max.x = x; if (y > max.y) max.y = y; if (z > max.z) max.z = z;
     }
-    for (const m of Object.values(meshes)) { m.instanceMatrix.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; }
-    // floating blocks (the game spawns animated block displays; these follow the same palette and placement idea)
-    const fN = realm.id === 'umbral_throne' ? 70 : 36;
-    const fm = new THREE.InstancedMesh(box, floatMat, fN);
-    const seeds = [];
+    for (const m of Object.values(meshes)) { m.instanceMatrix.needsUpdate = true; m.instanceColor.needsUpdate = true; m.userData.palette = colors; }
+    const fN = realm.id === 'umbral-throne' ? 70 : 36;
+    const fm = new THREE.InstancedMesh(box, floatMat, fN), seeds = [];
     for (let i = 0; i < fN; i++) {
-      const r1 = hash(i, 7, realm.id.length), r2 = hash(i, 11, 3), r3 = hash(i, 13, 5), r4 = hash(i, 17, 9);
+      const r1 = hash3(i, 7, realm.id.length), r2 = hash3(i, 11, 3), r3 = hash3(i, 13, 5), r4 = hash3(i, 17, 9);
       const a = r1 * Math.PI * 2, d = Math.sqrt(r2) * realm.floatR;
-      let pos;
-      if (realm.id === 'umbral_throne' && i < 40) pos = [realm.centre[0] + (r1 - 0.5) * 30, 9 + r3 * 22, realm.centre[2] + (r2 - 0.6) * 54];
-      else pos = [realm.centre[0] + Math.cos(a) * d, 6 + r3 * 30, realm.centre[2] + Math.sin(a) * d];
-      const scale = 0.45 + (r4 < 0.15 ? r3 * 1.6 : r4 * 0.7);
-      seeds.push({ pos, scale, phase: r4 * 6.28, spin: (r1 < 0.5 ? 1 : -1) * (0.3 + r2 * 0.4) });
+      const pos = realm.id === 'umbral-throne' && i < 40 ? [realm.centre[0] + (r1 - 0.5) * 30, 9 + r3 * 22, realm.centre[2] + (r2 - 0.6) * 54]
+        : [realm.centre[0] + Math.cos(a) * d, 6 + r3 * 30, realm.centre[2] + Math.sin(a) * d];
+      seeds.push({ pos, scale: 0.45 + (r4 < 0.15 ? r3 * 1.6 : r4 * 0.7), phase: r4 * 6.28, spin: (r1 < 0.5 ? 1 : -1) * (0.3 + r2 * 0.4) });
       fm.setColorAt(i, new THREE.Color(realm.floatCols[i % realm.floatCols.length]));
     }
-    fm.instanceColor.needsUpdate = true;
-    fm.userData.seeds = seeds;
-    g.add(fm);
-    return { group: g, floaters: fm, min, max, tally, total: json.total, visible: n, palette: json.palette };
+    fm.instanceColor.needsUpdate = true; fm.userData.seeds = seeds; g.add(fm);
+    return { group: g, meshes, floaters: fm, min, max, total: json.total, visible: n };
   }
-
-  function legend(info) {
-    const top = [...info.tally.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
-    $('legend').innerHTML = top.map(([p, n]) => {
-      const [name, col] = info.palette[p];
-      return `<span><i style="background:${col}"></i>${name.replace(/_/g, ' ')}</span>`;
-    }).join('');
-  }
-
-  function frame() {
-    const w = stage.clientWidth, h = stage.clientHeight;
-    renderer.setSize(w, h, false);
-    const size = bounds ? Math.max(bounds.max.x - bounds.min.x, bounds.max.z - bounds.min.z, (bounds.max.y - bounds.min.y) * 1.3) : 200;
-    const half = size * 0.62;
-    const aspect = w / h;
-    camera.left = -half * aspect; camera.right = half * aspect; camera.top = half; camera.bottom = -half;
-    camera.updateProjectionMatrix();
-  }
-
-  function setView(v) {
-    view = v;
-    for (const [id, name] of [['vIso', 'iso'], ['vTop', 'top'], ['vSide', 'side']]) $(id).setAttribute('aria-pressed', String(name === v));
-    if (!bounds) return;
-    const c = bounds.min.clone().add(bounds.max).multiplyScalar(0.5);
-    const d = 600;
-    const dir = v === 'top' ? new THREE.Vector3(0.0001, 1, 0.0001) : v === 'side' ? new THREE.Vector3(1, 0.12, 0) : new THREE.Vector3(1, 0.82, 1);
-    camera.position.copy(c).add(dir.normalize().multiplyScalar(d));
-    camera.zoom = 1;
-    controls.target.copy(c);
-    camera.updateProjectionMatrix();
-    controls.update();
-  }
-
-  async function show(id) {
-    const realm = REALMS.find((r) => r.id === id) || REALMS[REALMS.length - 1];
-    current = realm;
-    document.documentElement.style.setProperty('--accent', realm.accent);
-    [...$('realms').children].forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === realm.id)));
-    $('rName').textContent = realm.name;
-    $('rSub').textContent = realm.sub;
-    $('rGate').textContent = realm.gate;
-    $('rSky').textContent = realm.sky;
-    $('rTrial').textContent = realm.trial;
-    $('rBlocks').textContent = '…';
-    $('status').textContent = 'Loading ' + realm.name + '…';
-    scene.background = new THREE.Color(realm.bg);
-    try {
-      if (!cache[id]) {
-        const res = await fetch('data/' + id + '.json');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        cache[id] = build(realm, await res.json());
+  function applyTextures() {
+    for (const info of Object.values(rCache)) {
+      for (const m of Object.values(info.meshes)) {
+        m.material = useTex ? rMats[m.userData.kind] : plainMats[m.userData.kind];
+        const cols = m.userData.colors, pal = m.userData.palette, c = new THREE.Color();
+        for (let j = 0; j < cols.length / 2; j++) {
+          c.copy(useTex ? new THREE.Color(1, 1, 1) : pal[cols[j * 2]]).multiplyScalar(cols[j * 2 + 1]);
+          m.setColorAt(j, c);
+        }
+        m.instanceColor.needsUpdate = true;
       }
-    } catch (e) {
-      $('status').textContent = 'Could not load this realm (' + e.message + '). Reload the page to try again.';
-      return;
     }
-    if (current !== realm) return;
-    if (group) scene.remove(group);
-    const info = cache[id];
-    group = info.group; floaters = info.floaters;
-    scene.add(group);
-    bounds = { min: info.min, max: info.max };
+  }
+  R.resize = (w, h) => {
+    const b = rBounds, size = b ? Math.max(b.max.x - b.min.x, b.max.z - b.min.z, (b.max.y - b.min.y) * 1.3) : 200;
+    const half = size * 0.62, aspect = w / h;
+    Object.assign(R.camera, { left: -half * aspect, right: half * aspect, top: half, bottom: -half });
+    R.camera.updateProjectionMatrix();
+  };
+  function setRealmView(v) {
+    rView = v;
+    document.querySelectorAll('[data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+    if (!rBounds) return;
+    const c = rBounds.min.clone().add(rBounds.max).multiplyScalar(0.5);
+    const dir = v === 'top' ? new THREE.Vector3(0.0001, 1, 0.0001) : v === 'side' ? new THREE.Vector3(1, 0.12, 0) : new THREE.Vector3(1, 0.82, 1);
+    R.camera.position.copy(c).add(dir.normalize().multiplyScalar(600));
+    R.camera.zoom = 1; R.controls.target.copy(c); R.camera.updateProjectionMatrix(); R.controls.update();
+  }
+  async function showRealm(id) {
+    const realm = REALMS.find((r) => r.id === id) || REALMS[REALMS.length - 1];
+    realmCurrent = realm;
+    document.documentElement.style.setProperty('--accent', realm.accent);
+    [...$('realmChips').children].forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === realm.id)));
+    $('rName').textContent = realm.name; $('rSub').textContent = realm.sub; $('rGate').textContent = realm.gate;
+    $('rSky').textContent = realm.sky; $('rTrial').textContent = realm.trial; $('rBlocks').textContent = '…';
+    $('rStatus').textContent = 'Loading ' + realm.name + '…';
+    R.scene.background = new THREE.Color(realm.bg);
+    try {
+      if (!atlasInfo) {
+        atlasInfo = await getJSON('data/realm-atlas.json');
+        atlasTex = await loadTex('data/realm-atlas.png');
+        for (const k of [0, 1, 2, 3]) rMats[k] = texturedMaterial(k);
+      }
+      if (!rCache[realm.id]) rCache[realm.id] = buildRealm(realm, await getJSON('data/realm-' + realm.id + '.json'));
+    } catch (e) { $('rStatus').textContent = 'Could not load this realm (' + e.message + '). Reload to try again.'; return; }
+    if (realmCurrent !== realm) return;
+    if (rGroup) R.scene.remove(rGroup);
+    const info = rCache[realm.id];
+    rGroup = info.group; rFloat = info.floaters; R.scene.add(rGroup);
+    rBounds = { min: info.min, max: info.max };
     $('rBlocks').textContent = info.total.toLocaleString('en') + ' placed · ' + info.visible.toLocaleString('en') + ' visible';
-    legend(info);
-    const s = $('slice');
-    s.min = Math.floor(info.min.y); s.max = Math.ceil(info.max.y) + 1; s.value = s.max;
-    applySlice();
-    frame();
-    setView(view);
-    $('status').textContent = 'Heights relative to the arrival shrine (y 0); north points into the trial.';
-    try { if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id); } catch (e) { /* hash optional */ }
+    const s = $('slice'); s.min = Math.floor(info.min.y); s.max = Math.ceil(info.max.y) + 1; s.value = s.max; applySlice();
+    resize(); setRealmView(rView);
+    $('rStatus').textContent = 'Heights relative to the arrival shrine (y 0); north points into the trial.';
   }
-
   function applySlice() {
-    const s = $('slice');
-    const v = Number(s.value);
-    const all = v >= Number(s.max);
-    clip.constant = all ? 10000 : v;
-    $('sliceVal').textContent = all ? 'all' : 'y ' + v;
+    const s = $('slice'), v = Number(s.value), all = v >= Number(s.max);
+    clip.constant = all ? 10000 : v; $('sliceVal').textContent = all ? 'all' : 'y ' + v;
   }
-
   for (const r of REALMS) {
     const b = document.createElement('button');
-    b.type = 'button';
-    b.dataset.id = r.id;
-    b.setAttribute('aria-pressed', 'false');
+    b.type = 'button'; b.dataset.id = r.id; b.setAttribute('aria-pressed', 'false');
     b.innerHTML = `<span>${r.name.replace('The ', '')}</span><small>${r.gate}</small>`;
-    b.addEventListener('click', () => show(r.id));
-    $('realms').appendChild(b);
+    b.addEventListener('click', () => showRealm(r.id));
+    $('realmChips').appendChild(b);
   }
-  $('vIso').addEventListener('click', () => setView('iso'));
-  $('vTop').addEventListener('click', () => setView('top'));
-  $('vSide').addEventListener('click', () => setView('side'));
-  $('vSpin').addEventListener('click', () => { spin = !spin; $('vSpin').setAttribute('aria-pressed', String(spin)); });
+  document.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => setRealmView(b.dataset.view)));
+  const toggle = (el, fn) => el.addEventListener('click', () => { const on = el.getAttribute('aria-pressed') !== 'true'; el.setAttribute('aria-pressed', String(on)); fn(on); });
+  toggle($('rSpin'), (on) => { rSpin = on; });
+  toggle($('tTex'), (on) => { useTex = on; applyTextures(); });
+  toggle($('tFloat'), (on) => Object.values(rCache).forEach((c) => { c.floaters.visible = on; }));
+  toggle($('tGlass'), (on) => { plainMats[2].visible = on; if (rMats[2]) rMats[2].visible = on; });
   $('slice').addEventListener('input', applySlice);
-  $('tFloat').addEventListener('click', (e) => {
-    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
-    e.currentTarget.setAttribute('aria-pressed', String(on));
-    Object.values(cache).forEach((c) => { c.floaters.visible = on; });
-  });
-  $('tGlass').addEventListener('click', (e) => {
-    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
-    e.currentTarget.setAttribute('aria-pressed', String(on));
-    mats[2].visible = on;
-  });
-  $('togglePanel').addEventListener('click', (e) => {
-    const p = $('panel');
-    const collapsed = p.classList.toggle('collapsed');
-    e.currentTarget.textContent = collapsed ? 'Show' : 'Hide';
-    e.currentTarget.setAttribute('aria-expanded', String(!collapsed));
-  });
-  window.addEventListener('resize', frame);
-  window.addEventListener('hashchange', () => show(location.hash.slice(1)));
-
-  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e3 = new THREE.Euler(), v3 = new THREE.Vector3(), sc = new THREE.Vector3();
-  const clock = new THREE.Clock();
-  function tick() {
-    const t = clock.getElapsedTime();
-    if (floaters && floaters.visible) {
-      const seeds = floaters.userData.seeds;
+  let rTime = 0;
+  R.tick = (dt) => {
+    rTime += reduced ? 0 : dt;
+    if (rFloat && rFloat.visible) {
+      const seeds = rFloat.userData.seeds;
       for (let i = 0; i < seeds.length; i++) {
         const s = seeds[i];
-        const tt = reduced ? 0 : t;
-        e3.set(Math.sin(tt * 0.5 + s.phase) * 0.18, tt * s.spin + s.phase, Math.sin(tt * 0.35 + s.phase) * 0.12);
-        q.setFromEuler(e3);
-        v3.set(s.pos[0], s.pos[1] + Math.sin(tt * 0.9 + s.phase) * 0.4 * Math.max(0.6, s.scale), s.pos[2]);
-        sc.setScalar(s.scale);
-        floaters.setMatrixAt(i, m4.compose(v3, q, sc));
+        e3.set(Math.sin(rTime * 0.5 + s.phase) * 0.18, rTime * s.spin + s.phase, Math.sin(rTime * 0.35 + s.phase) * 0.12);
+        q.setFromEuler(e3); v3.set(s.pos[0], s.pos[1] + Math.sin(rTime * 0.9 + s.phase) * 0.4 * Math.max(0.6, s.scale), s.pos[2]);
+        sc.setScalar(s.scale); rFloat.setMatrixAt(i, m4.compose(v3, q, sc));
       }
-      floaters.instanceMatrix.needsUpdate = true;
+      rFloat.instanceMatrix.needsUpdate = true;
     }
-    if (spin && !reduced) {
-      const off = camera.position.clone().sub(controls.target);
-      off.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.0035);
-      camera.position.copy(controls.target).add(off);
+    if (rSpin && !reduced) {
+      const off = R.camera.position.clone().sub(R.controls.target).applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.0035);
+      R.camera.position.copy(R.controls.target).add(off);
     }
-    controls.update();
-    renderer.render(scene, camera);
-    requestAnimationFrame(tick);
+  };
+
+  // ---------------------------------------------------------------- MODELS
+  const M = makeView(false);
+  M.scene.background = new THREE.Color(0x0e0c1a);
+  starfield(M.scene, 1500);
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(1, 64), new THREE.MeshLambertMaterial({ color: 0x1b1830 }));
+  floor.rotation.x = -Math.PI / 2; M.scene.add(floor);
+  let modelsData = null, modelRoot = null, modelBones = null, modelAnims = null, animName = null, animT = 0, mPlaying = true, mSpin = false, glowOn = true;
+  const glowMats = [];
+  const Mo = {
+    sin: (a) => Math.sin(a * DEG), cos: (a) => Math.cos(a * DEG), abs: Math.abs, sqrt: Math.sqrt, pow: Math.pow, min: Math.min, max: Math.max,
+    floor: Math.floor, ceil: Math.ceil, round: Math.round, pi: Math.PI, clamp: (v, a, b) => Math.min(b, Math.max(a, v)),
+    lerp: (a, b, t) => a + (b - a) * t, random: (a, b) => a + Math.random() * (b - a), exp: Math.exp, mod: (a, b) => a % b,
+    atan2: (y, x) => Math.atan2(y, x) / DEG, asin: (x) => Math.asin(x) / DEG, acos: (x) => Math.acos(x) / DEG,
+  };
+  const exprCache = new Map();
+  // a tiny Molang subset compiler (numbers, + - * /, parentheses, math.* calls, query.anim_time) - no eval needed
+  function parseMolang(src) {
+    const toks = src.match(/\d+\.?\d*|\.\d+|[A-Za-z_][\w.]*|[-+*/(),]/g) || ['0'];
+    let i = 0;
+    const peek = () => toks[i], next = () => toks[i++];
+    function expr() {
+      let a = term();
+      while (peek() === '+' || peek() === '-') { const op = next(), b = term(), l = a; a = op === '+' ? (t, M) => l(t, M) + b(t, M) : (t, M) => l(t, M) - b(t, M); }
+      return a;
+    }
+    function term() {
+      let a = unary();
+      while (peek() === '*' || peek() === '/') { const op = next(), b = unary(), l = a; a = op === '*' ? (t, M) => l(t, M) * b(t, M) : (t, M) => l(t, M) / b(t, M); }
+      return a;
+    }
+    function unary() {
+      if (peek() === '-') { next(); const a = unary(); return (t, M) => -a(t, M); }
+      if (peek() === '+') { next(); return unary(); }
+      return primary();
+    }
+    function primary() {
+      const tk = next();
+      if (tk === '(') { const a = expr(); next(); return a; }
+      if (/^[\d.]/.test(tk)) { const v = parseFloat(tk); return () => v; }
+      if (/^(math|Math)\./.test(tk)) {
+        const fn = tk.split('.')[1];
+        if (peek() !== '(') return () => (fn === 'pi' ? Math.PI : 0);
+        next(); const args = [];
+        while (peek() !== ')' && i < toks.length) { args.push(expr()); if (peek() === ',') next(); }
+        next();
+        return (t, M) => (M[fn] ? M[fn](...args.map((a) => a(t, M))) : 0);
+      }
+      if (/^(query|q)\.(anim_time|life_time)$/.test(tk)) return (t) => t;
+      return () => 0;
+    }
+    const f = expr();
+    return f;
   }
-  frame();
-  show(location.hash.slice(1) || 'umbral_throne');
-  tick();
+  function molang(v) {
+    if (typeof v === 'number') return () => v;
+    const key = String(v);
+    if (!exprCache.has(key)) {
+      let f;
+      try { f = parseMolang(key); f(0, Mo); } catch (e) { f = () => 0; }
+      exprCache.set(key, f);
+    }
+    const f = exprCache.get(key);
+    return (t) => { const r = f(t, Mo); return Number.isFinite(r) ? r : 0; };
+  }
+  function channel(spec) {
+    if (spec == null) return null;
+    const vecFns = (arr) => (Array.isArray(arr) ? arr : [arr, arr, arr]).map(molang);
+    if (Array.isArray(spec) || typeof spec !== 'object' || spec.vector) {
+      const f = vecFns(spec.vector || spec);
+      return (t) => f.map((g) => g(t));
+    }
+    const keys = Object.keys(spec).map((k) => [parseFloat(k), spec[k]]).sort((a, b) => a[0] - b[0])
+      .map(([time, val]) => {
+        const v = val && !Array.isArray(val) && typeof val === 'object' ? (val.post || val.vector || val.pre) : val;
+        return [time, vecFns(v)];
+      });
+    return (t) => {
+      if (t <= keys[0][0]) return keys[0][1].map((g) => g(t));
+      for (let i = 0; i < keys.length - 1; i++) {
+        const [t0, a] = keys[i], [t1, b] = keys[i + 1];
+        if (t <= t1) { const s = (t - t0) / Math.max(t1 - t0, 1e-6); return a.map((g, j) => g(t) + (b[j](t) - g(t)) * s); }
+      }
+      return keys[keys.length - 1][1].map((g) => g(t));
+    };
+  }
+  function buildGeo(geo, tex, glow) {
+    const tw = geo.description.texture_width, th = geo.description.texture_height;
+    const mat = new THREE.MeshLambertMaterial({ map: tex, alphaTest: 0.1, side: THREE.DoubleSide });
+    const gmat = glow ? new THREE.MeshBasicMaterial({ map: glow, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }) : null;
+    if (gmat) { gmat.visible = glowOn; glowMats.push(gmat); }
+    const root = new THREE.Group(), bones = {};
+    const pivotOf = (b) => { const p = b.pivot || [0, 0, 0]; return new THREE.Vector3(-p[0], p[1], p[2]); };
+    for (const b of geo.bones) bones[b.name] = { def: b, group: new THREE.Group(), pivot: pivotOf(b) };
+    for (const b of geo.bones) {
+      const node = bones[b.name], parent = b.parent && bones[b.parent];
+      (parent ? parent.group : root).add(node.group);
+      node.group.position.copy(node.pivot).sub(parent ? parent.pivot : new THREE.Vector3());
+      const r = b.rotation || [0, 0, 0];
+      node.base = { pos: node.group.position.clone(), rot: new THREE.Euler(-r[0] * DEG, -r[1] * DEG, r[2] * DEG, 'ZYX') };
+      node.group.rotation.copy(node.base.rot);
+      for (const c of b.cubes || []) {
+        const size = c.size || [0, 0, 0], o = c.origin || [0, 0, 0], inf = c.inflate || 0;
+        const geom = boxUVGeometry(size[0], size[1], size[2], inf, c.uv, tw, th, c.mirror);
+        const centre = new THREE.Vector3(-(o[0] + size[0]) + size[0] / 2, o[1] + size[1] / 2, o[2] + size[2] / 2);
+        const holder = new THREE.Group();
+        if (c.rotation) {
+          const cp = c.pivot || [0, 0, 0], piv = new THREE.Vector3(-cp[0], cp[1], cp[2]);
+          holder.position.copy(piv).sub(node.pivot);
+          holder.rotation.set(-c.rotation[0] * DEG, -c.rotation[1] * DEG, c.rotation[2] * DEG, 'ZYX');
+          centre.sub(piv);
+        } else centre.sub(node.pivot);
+        const mesh = new THREE.Mesh(geom, mat); mesh.position.copy(centre); holder.add(mesh);
+        if (gmat) { const gm = new THREE.Mesh(geom, gmat); gm.position.copy(centre); gm.scale.setScalar(1.002); holder.add(gm); }
+        node.group.add(holder);
+      }
+    }
+    return { root, bones };
+  }
+  function buildBlockModel(model, texMap) {
+    const root = new THREE.Group();
+    for (const el of model.elements) {
+      const f = el.from, t = el.to, size = [t[0] - f[0], t[1] - f[1], t[2] - f[2]];
+      const geom = new THREE.BoxGeometry(Math.max(size[0], 0.01), Math.max(size[1], 0.01), Math.max(size[2], 0.01));
+      const mats = [];
+      ['east', 'west', 'up', 'down', 'south', 'north'].forEach((n, i) => {
+        const face = el.faces && el.faces[n];
+        if (!face) { mats.push(new THREE.MeshBasicMaterial({ visible: false })); return; }
+        const tex = texMap[(face.texture || '').replace('#', '')];
+        mats.push(tex ? new THREE.MeshLambertMaterial({ map: tex, alphaTest: 0.1, transparent: false }) : new THREE.MeshLambertMaterial({ color: 0x888888 }));
+        const uv = face.uv || [0, 0, 16, 16];
+        setFaceUV(geom, i, [uv[0], uv[1], uv[2] - uv[0], uv[3] - uv[1]], 16, 16, false);
+      });
+      geom.attributes.uv.needsUpdate = true;
+      const mesh = new THREE.Mesh(geom, mats);
+      const centre = new THREE.Vector3(f[0] + size[0] / 2 - 8, f[1] + size[1] / 2, f[2] + size[2] / 2 - 8);
+      if (el.rotation) {
+        const o = el.rotation.origin, piv = new THREE.Vector3(o[0] - 8, o[1], o[2] - 8), holder = new THREE.Group();
+        holder.position.copy(piv);
+        holder.rotation[el.rotation.axis] = el.rotation.angle * DEG;
+        mesh.position.copy(centre.sub(piv)); holder.add(mesh); root.add(holder);
+      } else { mesh.position.copy(centre); root.add(mesh); }
+    }
+    return root;
+  }
+  function frameModel(obj, scale) {
+    const box = new THREE.Box3().setFromObject(obj), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+    const r = Math.max(size.x, size.y, size.z) * (scale || 1);
+    floor.scale.setScalar(Math.max(size.x, size.z) * 0.9 + 4); floor.position.y = box.min.y - 0.02;
+    M.controls.target.copy(c);
+    M.camera.position.copy(c).add(new THREE.Vector3(r * 0.9, r * 0.45, r * 1.25));
+    M.camera.near = r / 50; M.camera.far = r * 60; M.camera.updateProjectionMatrix(); M.controls.update();
+  }
+  M.resize = (w, h) => { M.camera.aspect = w / h; M.camera.updateProjectionMatrix(); };
+  let modelItems = [], modelCurrent = null;
+  async function showModel(i, variantIdx) {
+    const item = modelItems[i]; modelCurrent = i;
+    [...$('modelChips').children].forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
+    if (modelRoot) M.scene.remove(modelRoot);
+    glowMats.length = 0;
+    $('mName').textContent = item.title; $('mStatus').textContent = 'Building…';
+    if (item.kind === 'entity') {
+      const e = item.data, v = e.variants[variantIdx || 0];
+      $('variantRow').hidden = e.variants.length < 2; $('animRow').hidden = false;
+      $('variant').innerHTML = e.variants.map((x, k) => `<option value="${k}"${k === (variantIdx || 0) ? ' selected' : ''}>${x.name}</option>`).join('');
+      const tex = await loadTex(v.tex), glow = v.glow ? await loadTex(v.glow) : null;
+      const built = buildGeo(e.geo, tex, glow);
+      modelRoot = built.root; modelBones = built.bones; modelAnims = e.animations;
+      const names = Object.keys(modelAnims);
+      const keep = names.includes(animName) ? animName : (names.find((n) => /^idle/.test(n)) || names[0]);
+      $('anim').innerHTML = names.map((n) => `<option${n === keep ? ' selected' : ''}>${n}</option>`).join('');
+      setAnim(keep);
+      const cubes = e.geo.bones.reduce((s, b) => s + (b.cubes ? b.cubes.length : 0), 0);
+      $('mSub').textContent = `${e.geo.bones.length} bones · ${cubes} cubes · ${names.length} animations · texture ${e.geo.description.texture_width}×${e.geo.description.texture_height}`;
+    } else {
+      $('variantRow').hidden = true; $('animRow').hidden = true;
+      const texMap = {};
+      for (const [k, src] of Object.entries(item.data.textures)) texMap[k] = await loadTex(src);
+      modelRoot = buildBlockModel(item.data, texMap); modelBones = null; modelAnims = null;
+      $('mSub').textContent = `Block model · ${item.data.elements.length} elements`;
+    }
+    M.scene.add(modelRoot);
+    modelRoot.updateMatrixWorld(true);
+    frameModel(modelRoot, item.kind === 'entity' ? 1.1 : 1.6);
+    $('mStatus').textContent = item.kind === 'entity' ? 'Animations play straight from the GeckoLib files.' : 'Hand-made model from the resource pack (Blockbench).';
+  }
+  let animCompiled = null;
+  function setAnim(name) {
+    animName = name; animT = 0;
+    const a = modelAnims[name];
+    const len = a.animation_length || 2;
+    $('animLen').textContent = len.toFixed(2) + ' s' + (a.loop ? ' · loop' : '');
+    animCompiled = { len, loop: !!a.loop, bones: Object.entries(a.bones || {}).map(([bn, ch]) => ({ bn, rot: channel(ch.rotation), pos: channel(ch.position), scale: channel(ch.scale) })) };
+  }
+  M.tick = (dt) => {
+    if (modelBones && animCompiled) {
+      if (mPlaying && !reduced) animT += dt;
+      const t = animCompiled.loop ? animT % animCompiled.len : (animT > animCompiled.len + 0.8 ? (animT = 0) : Math.min(animT, animCompiled.len));
+      for (const node of Object.values(modelBones)) { node.group.position.copy(node.base.pos); node.group.rotation.copy(node.base.rot); node.group.scale.setScalar(1); }
+      for (const b of animCompiled.bones) {
+        const node = modelBones[b.bn]; if (!node) continue;
+        if (b.rot) { const r = b.rot(t); node.group.rotation.set(node.base.rot.x - r[0] * DEG, node.base.rot.y - r[1] * DEG, node.base.rot.z + r[2] * DEG, 'ZYX'); }
+        if (b.pos) { const p = b.pos(t); node.group.position.set(node.base.pos.x - p[0], node.base.pos.y + p[1], node.base.pos.z + p[2]); }
+        if (b.scale) { const s = b.scale(t); node.group.scale.set(s[0], s[1], s[2]); }
+      }
+    }
+    if (mSpin && modelRoot && !reduced) modelRoot.rotation.y += dt * 0.4;
+  };
+  $('variant').addEventListener('change', (e) => showModel(modelCurrent, Number(e.target.value)));
+  $('anim').addEventListener('change', (e) => setAnim(e.target.value));
+  toggle($('mPlay'), (on) => { mPlaying = on; $('mPlay').textContent = on ? 'Playing' : 'Paused'; });
+  toggle($('mGlow'), (on) => { glowOn = on; glowMats.forEach((m) => { m.visible = on; }); });
+  toggle($('mSpin'), (on) => { mSpin = on; if (!on && modelRoot) modelRoot.rotation.y = 0; });
+  async function initModels() {
+    if (modelsData) return;
+    $('mStatus').textContent = 'Loading models…';
+    try { modelsData = await getJSON('data/models.json'); } catch (e) { $('mStatus').textContent = 'Could not load the models (' + e.message + ').'; return; }
+    modelItems = modelsData.entities.map((e) => ({ kind: 'entity', title: e.title, data: e, tag: 'entity' }))
+      .concat(modelsData.blocks.map((b) => ({ kind: 'block', title: b.id.replace(/_/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase()), data: b, tag: 'block' })));
+    modelItems.forEach((it, i) => {
+      const b = document.createElement('button'); b.type = 'button';
+      b.innerHTML = `<span>${it.title}</span><small>${it.tag}</small>`;
+      b.addEventListener('click', () => showModel(i)); $('modelChips').appendChild(b);
+    });
+    await showModel(1);
+  }
+
+  // ---------------------------------------------------------------- ARMOUR
+  const A = makeView(false);
+  A.scene.background = new THREE.Color(0x0e0c1a);
+  starfield(A.scene, 1500);
+  const aFloor = new THREE.Mesh(new THREE.CircleGeometry(22, 64), new THREE.MeshLambertMaterial({ color: 0x1b1830 }));
+  aFloor.rotation.x = -Math.PI / 2; A.scene.add(aFloor);
+  A.resize = (w, h) => { A.camera.aspect = w / h; A.camera.updateProjectionMatrix(); };
+  const SETS = {
+    seraph: { title: 'Seraph Plate', sub: 'Starmetal, living gear. Netherite tier; ornaments grow with awakening.', accent: '#8fefff' },
+    solar: { title: 'Solar Regalia', sub: "Sunsteel, Solenne's set. Fire resistance; strength by day.", accent: '#f2c94c' },
+    lunar: { title: 'Lunar Raiment', sub: "Moonsilver, Vael's set. Night vision and speed at night.", accent: '#c8d4ea' },
+  };
+  // java model space (y down) -> scene space (y up, x mirrored): bone pivots
+  const BONES = { HEAD: [0, 0, 0], BODY: [0, 0, 0], RIGHT_ARM: [-5, 2, 0], LEFT_ARM: [5, 2, 0], RIGHT_LEG: [-1.9, 12, 0], LEFT_LEG: [1.9, 12, 0] };
+  const SLOT_OF_BONE = { HEAD: 'HEAD', BODY: 'CHEST', RIGHT_ARM: 'CHEST', LEFT_ARM: 'CHEST', RIGHT_LEG: 'LEGS', LEFT_LEG: 'LEGS' };
+  let armorData = null, aRoot = null, aSet = 'seraph', aLevel = 2, aOrn = true, aGlow = true, aBody = true, aSpin = true;
+  const aSlots = { HEAD: true, CHEST: true, LEGS: true, FEET: true };
+  let aAnimated = [], aTime = 0;
+  function javaBox(group, box, mat, gmat, tw, th, inflate, mirror) {
+    const [x, y, z, w, h, d, u, v] = box;
+    const geom = boxUVGeometry(w, h, d, inflate || 0, [u, v], tw, th, mirror);
+    const centre = new THREE.Vector3(-(x + w) + w / 2, -(y + h) + h / 2, z + d / 2);
+    const m = new THREE.Mesh(geom, mat); m.position.copy(centre); group.add(m);
+    if (gmat) { const g = new THREE.Mesh(geom, gmat); g.position.copy(centre); g.scale.setScalar(1.004); group.add(g); }
+  }
+  function javaPart(parent, part, mat, gmat, tw, th) {
+    const g = new THREE.Group();
+    const [x, y, z, rx, ry, rz] = part.pose;
+    g.position.set(-x, -y, z); g.rotation.set(-rx, -ry, rz, 'ZYX');
+    for (const b of part.boxes) javaBox(g, b, mat, gmat, tw, th);
+    for (const c of part.children) javaPart(g, c, mat, gmat, tw, th);
+    parent.add(g);
+    return g;
+  }
+  async function buildArmor() {
+    const set = armorData[aSet], T = set.textures, meta = SETS[aSet];
+    document.documentElement.style.setProperty('--accent', meta.accent);
+    $('aName').textContent = meta.title; $('aSub').textContent = meta.sub;
+    [...$('armorChips').children].forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === aSet)));
+    $('aIcons').innerHTML = T.icons.map((s, i) => `<img src="${s}" alt="${['Helmet', 'Chestplate', 'Leggings', 'Boots'][i]} icon">`).join('');
+    $('levelRow').hidden = aSet !== 'seraph';
+    const [l1, l2, g1, g2, orn, ornG] = await Promise.all([T.layer1, T.layer2, T.glow1, T.glow2, T.ornaments, T.ornamentsGlow].map(loadTex));
+    if (aRoot) A.scene.remove(aRoot);
+    aRoot = new THREE.Group(); aAnimated = [];
+    const glowMat = (t) => { const m = new THREE.MeshBasicMaterial({ map: t, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }); m.visible = aGlow; return m; };
+    const mats = { l1: new THREE.MeshLambertMaterial({ map: l1, alphaTest: 0.1 }), l2: new THREE.MeshLambertMaterial({ map: l2, alphaTest: 0.1 }),
+      g1: glowMat(g1), g2: glowMat(g2), orn: new THREE.MeshLambertMaterial({ map: orn, alphaTest: 0.1, side: THREE.DoubleSide }), ornG: glowMat(ornG) };
+    const body = new THREE.MeshLambertMaterial({ color: 0x2c2942 });
+    const bones = {};
+    for (const [name, p] of Object.entries(BONES)) {
+      const g = new THREE.Group(); g.position.set(-p[0], 24 - p[1], p[2]); aRoot.add(g); bones[name] = g;
+    }
+    // mannequin
+    const mannequin = [['HEAD', [-4, -8, -4, 8, 8, 8]], ['BODY', [-4, 0, -2, 8, 12, 4]], ['RIGHT_ARM', [-3, -2, -2, 4, 12, 4]], ['LEFT_ARM', [-1, -2, -2, 4, 12, 4]],
+      ['RIGHT_LEG', [-2, 0, -2, 4, 12, 4]], ['LEFT_LEG', [-2, 0, -2, 4, 12, 4]]];
+    if (aBody) for (const [bn, b] of mannequin) javaBox(bones[bn], [...b, 0, 0], body, null, 64, 64, -0.02);
+    const layer = (bn, b, uv, mat, gmat, inflate, mirror) => javaBox(bones[bn], [...b, ...uv], mat, gmat, 64, 32, inflate, mirror);
+    if (aSlots.HEAD) layer('HEAD', [-4, -8, -4, 8, 8, 8], [0, 0], mats.l1, mats.g1, 1.0);
+    if (aSlots.CHEST) {
+      layer('BODY', [-4, 0, -2, 8, 12, 4], [16, 16], mats.l1, mats.g1, 1.0);
+      layer('RIGHT_ARM', [-3, -2, -2, 4, 12, 4], [40, 16], mats.l1, mats.g1, 1.0);
+      layer('LEFT_ARM', [-1, -2, -2, 4, 12, 4], [40, 16], mats.l1, mats.g1, 1.0, true);
+    }
+    if (aSlots.LEGS) {
+      layer('BODY', [-4, 0, -2, 8, 12, 4], [16, 16], mats.l2, mats.g2, 0.5);
+      layer('RIGHT_LEG', [-2, 0, -2, 4, 12, 4], [0, 16], mats.l2, mats.g2, 0.5);
+      layer('LEFT_LEG', [-2, 0, -2, 4, 12, 4], [0, 16], mats.l2, mats.g2, 0.5, true);
+    }
+    if (aSlots.FEET) {
+      layer('RIGHT_LEG', [-2, 0, -2, 4, 12, 4], [0, 16], mats.l1, mats.g1, 1.0);
+      layer('LEFT_LEG', [-2, 0, -2, 4, 12, 4], [0, 16], mats.l1, mats.g1, 1.0, true);
+    }
+    let shown = 0;
+    if (aOrn) {
+      const [tw, th] = set.atlas;
+      for (const pc of set.pieces) {
+        const slot = pc.slot === 'FEET' ? 'FEET' : pc.slot === 'LEGS' ? 'LEGS' : pc.slot === 'HEAD' ? 'HEAD' : 'CHEST';
+        if (!aSlots[slot] || (aSet === 'seraph' && pc.level > aLevel)) continue;
+        const [x, y, z, rx, ry, rz] = pc.part.pose;
+        const pivot = new THREE.Group(); pivot.position.set(-x, -y, z); pivot.rotation.set(-rx, -ry, rz, 'ZYX');
+        const anim = new THREE.Group(); pivot.add(anim);
+        const bodyPart = { name: 'body', pose: [0, 0, 0, 0, 0, 0], boxes: pc.part.boxes, children: pc.part.children };
+        javaPart(anim, bodyPart, mats.orn, mats.ornG, tw, th);
+        bones[pc.bone].add(pivot); aAnimated.push({ group: anim, anim: pc.anim }); shown++;
+      }
+    }
+    A.scene.add(aRoot);
+    $('aStatus').textContent = `${shown} ornament pieces shown · textures from gen_armor.py`;
+  }
+  A.tick = (dt) => {
+    if (!reduced) aTime += dt * 20;
+    for (const a of aAnimated) {
+      const g = a.group, t = aTime; g.position.set(0, 0, 0); g.rotation.set(0, 0, 0);
+      switch (a.anim) {
+        case 'HALO': g.position.y = -Math.sin(t * 0.08) * 0.6; g.rotation.y = -t * 0.04; break;
+        case 'HALO_REVERSE': g.position.y = -Math.sin(t * 0.08 + 1.5) * 0.6; g.rotation.y = t * 0.07; break;
+        case 'SPIN_Z': g.rotation.z = t * 0.02; break;
+        case 'SPIN_Z_SLOW': g.rotation.z = -t * 0.012; break;
+        case 'FLAP_RIGHT': g.rotation.y = -Math.sin(t * 0.09) * 0.08; break;
+        case 'FLAP_LEFT': g.rotation.y = Math.sin(t * 0.09) * 0.08; break;
+        case 'SWAY': g.rotation.x = -(0.05 + Math.sin(t * 0.06) * 0.03); break;
+        case 'BOB': g.position.y = -Math.sin(t * 0.1) * 0.5; break;
+        default: break;
+      }
+    }
+    if (aSpin && aRoot && !reduced) aRoot.rotation.y += dt * 0.35;
+  };
+  for (const id of Object.keys(SETS)) {
+    const b = document.createElement('button'); b.type = 'button'; b.dataset.id = id;
+    b.innerHTML = `<span>${SETS[id].title}</span><small>${id}</small>`;
+    b.addEventListener('click', () => { aSet = id; buildArmor(); }); $('armorChips').appendChild(b);
+  }
+  const LEVELS = ['Dormant', 'Awakened', 'Ascended'];
+  $('level').addEventListener('input', (e) => { aLevel = Number(e.target.value); $('levelVal').textContent = LEVELS[aLevel]; buildArmor(); });
+  $('levelVal').textContent = LEVELS[aLevel];
+  toggle($('aOrn'), (on) => { aOrn = on; buildArmor(); });
+  toggle($('aGlow'), (on) => { aGlow = on; buildArmor(); });
+  toggle($('aBody'), (on) => { aBody = on; buildArmor(); });
+  toggle($('aSpin'), (on) => { aSpin = on; if (!on && aRoot) aRoot.rotation.y = 0; });
+  document.querySelectorAll('[data-slot]').forEach((b) => toggle(b, (on) => { aSlots[b.dataset.slot] = on; buildArmor(); }));
+  async function initArmor() {
+    if (armorData) return;
+    $('aStatus').textContent = 'Loading armour…';
+    try { armorData = await getJSON('data/armor.json'); } catch (e) { $('aStatus').textContent = 'Could not load the armour (' + e.message + ').'; return; }
+    A.controls.target.set(0, 16, 0);
+    A.camera.position.set(-42, 34, -78);
+    A.controls.update();
+    await buildArmor();
+  }
+
+  // ---------------------------------------------------------------- TEXTURES
+  let texData = null;
+  const CAT_TITLES = { block: 'Blocks', item: 'Items', 'entity/watcher': 'Watchers', 'entity/eclipse': 'Eclipse and pylon', entity: 'Other entities',
+    'entity/armor': 'Armour ornaments and glow', 'entity/equipment': 'Armour layers', 'entity/cosmetics': 'Developer cosmetics', gui: 'Interface', models: 'Armour layers (1.21.1)' };
+  async function initTextures() {
+    if (texData) return;
+    try { texData = await getJSON('data/textures.json'); } catch (e) { $('texCats').innerHTML = '<p class="status">Could not load the textures (' + e.message + ').</p>'; return; }
+    renderGallery('');
+  }
+  function renderGallery(filter) {
+    const f = filter.trim().toLowerCase();
+    const order = ['block', 'item', 'entity/watcher', 'entity/eclipse', 'entity', 'entity/armor', 'entity/equipment', 'models', 'gui', 'entity/cosmetics'];
+    const cats = Object.keys(texData).sort((a, b) => (order.indexOf(a) + 99) % 99 - (order.indexOf(b) + 99) % 99);
+    const html = [];
+    let total = 0;
+    for (const c of cats) {
+      const items = texData[c].filter((t) => !f || t.name.toLowerCase().includes(f));
+      if (!items.length) continue;
+      total += items.length;
+      html.push(`<section class="cat"><h3>${CAT_TITLES[c] || c} · ${items.length}</h3><div class="grid">` + items.map((t) =>
+        `<button type="button" class="tex" data-cat="${c}" data-name="${t.name}"><div class="img"><img loading="lazy" src="${t.src}" alt=""></div>` +
+        `<span>${t.name.split('/').pop()}</span><small>${t.w}×${t.h}${t.animated ? ' · animated' : ''}</small></button>`).join('') + '</div></section>');
+    }
+    $('texCats').innerHTML = html.join('') || '<p class="status">No texture matches that name.</p>';
+  }
+  $('texSearch').addEventListener('input', (e) => texData && renderGallery(e.target.value));
+  $('texCats').addEventListener('click', (e) => {
+    const card = e.target.closest('.tex'); if (!card) return;
+    const t = texData[card.dataset.cat].find((x) => x.name === card.dataset.name); if (t) openLightbox(t);
+  });
+  function openLightbox(t) {
+    const box = document.createElement('div'); box.className = 'lightbox';
+    box.innerHTML = `<div class="card" role="dialog" aria-label="${t.name}"><h4>${t.name}.png · ${t.w}×${t.h}${t.animated ? ' · animated strip' : ''}</h4>
+      <canvas></canvas><div class="row"><button type="button" data-k="grid" aria-pressed="true">Pixel grid</button>
+      <button type="button" data-k="tile" aria-pressed="false">Tile 3×3</button><button type="button" data-k="close">Close</button></div></div>`;
+    document.body.appendChild(box);
+    const canvas = box.querySelector('canvas'), img = new Image();
+    let grid = true, tile = false;
+    const draw = () => {
+      const n = tile ? 3 : 1, w = t.w * n, h = Math.min(t.h, t.animated ? t.w : t.h) * n;
+      const scale = Math.max(1, Math.floor(Math.min(640, window.innerWidth - 80) / w));
+      canvas.width = w * scale; canvas.height = h * scale;
+      const ctx = canvas.getContext('2d'); ctx.imageSmoothingEnabled = false;
+      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) ctx.drawImage(img, 0, 0, t.w, h / n, i * t.w * scale, j * (h / n) * scale, t.w * scale, (h / n) * scale);
+      if (grid && scale >= 6) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 1; ctx.beginPath();
+        for (let x = 0; x <= w; x++) { ctx.moveTo(x * scale + 0.5, 0); ctx.lineTo(x * scale + 0.5, h * scale); }
+        for (let y = 0; y <= h; y++) { ctx.moveTo(0, y * scale + 0.5); ctx.lineTo(w * scale, y * scale + 0.5); }
+        ctx.stroke();
+      }
+    };
+    img.onload = draw; img.src = t.src;
+    box.addEventListener('click', (e) => {
+      const k = e.target.dataset && e.target.dataset.k;
+      if (e.target === box || k === 'close') { box.remove(); return; }
+      if (k === 'grid') { grid = !grid; e.target.setAttribute('aria-pressed', String(grid)); draw(); }
+      if (k === 'tile') { tile = !tile; e.target.setAttribute('aria-pressed', String(tile)); draw(); }
+    });
+    document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { box.remove(); document.removeEventListener('keydown', esc); } });
+  }
+
+  // ---------------------------------------------------------------- tabs + panels
+  document.querySelectorAll('.collapse').forEach((b) => b.addEventListener('click', () => {
+    const p = b.closest('.panel'), c = p.classList.toggle('collapsed'); b.textContent = c ? 'Show' : 'Hide';
+  }));
+  const VIEWS = { realms: R, models: M, armor: A };
+  function showTab(tab) {
+    if (!['realms', 'models', 'armor', 'textures'].includes(tab)) tab = 'realms';
+    document.querySelectorAll('.tabs a').forEach((a) => a.setAttribute('aria-current', a.dataset.tab === tab ? 'page' : 'false'));
+    ['realms', 'models', 'armor'].forEach((t) => { $('p-' + t).hidden = t !== tab; });
+    $('gallery').hidden = tab !== 'textures';
+    stage.hidden = tab === 'textures'; $('hint').hidden = tab === 'textures';
+    if (active) active.controls.enabled = false;
+    active = VIEWS[tab] || null;
+    if (active) { active.controls.enabled = true; resize(); }
+    if (tab === 'realms') { if (realmCurrent) document.documentElement.style.setProperty('--accent', realmCurrent.accent); else showRealm('umbral-throne'); }
+    if (tab === 'models') { document.documentElement.style.setProperty('--accent', '#f2c94c'); initModels(); }
+    if (tab === 'armor') initArmor().then(() => armorData && document.documentElement.style.setProperty('--accent', SETS[aSet].accent));
+    if (tab === 'textures') { document.documentElement.style.setProperty('--accent', '#f2c94c'); initTextures(); }
+  }
+  window.addEventListener('hashchange', () => showTab(location.hash.slice(1)));
+  resize();
+  showTab(location.hash.slice(1) || 'realms');
+  loop();
 })();
 </script>
