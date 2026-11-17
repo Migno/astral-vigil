@@ -8,6 +8,10 @@
     "minecraft:cat",
     "minecraft:glow_squid",
     "minecraft:axolotl",
-    "minecraft:drowned"
+    "minecraft:drowned",
+    "minecraft:squid",
+    "minecraft:turtle",
+    "minecraft:frog",
+    "minecraft:snow_golem"
   ]
 }

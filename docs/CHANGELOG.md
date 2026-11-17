@@ -9,6 +9,19 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
   Patchouli has no 26.2 build yet, so the Codex Caelestis only shows a hint until it does. JEI and Jade work.
   The mod icon uses `iconFile` on 26.2 (NeoForge 26.2 shows a warning screen for the old `logoFile`).
 
+- **Astrolabe lens (Thaumcraft-style).** Hold use to scan: a ring of starlight fills around the crosshair and the
+  scan completes after 1.2 s; it reaches 16 blocks (`scanRange`) and works on blocks, creatures and - pointed at the
+  open sky - the biome or structure. Held or **worn on the head**, a panel beside the crosshair names what you look
+  at, its alignments and whether you have already researched it.
+- **More to research:** every alignment gained 6-10 blocks (cactus, sandstone, froglights, coral, chorus, purpur,
+  blackstone, wither roses …), the `c:` ore tags (gold → Sol, lapis → Luna, diamond/emerald → Stella, ancient debris →
+  Void) and 2-4 creatures each (armadillo, frog, turtle, breeze, bogged, witch …).
+
+### Changed
+- Astrolabe: scanning now needs holding use instead of a single click (clicking a block no longer scans it at once).
+- Balance: `attunementThreshold` 12 → 16, because the alignment lists grew. **Upgrade note:** existing servers keep
+  their old value in `astralvigil-server.toml`; set it to 16 by hand for the new balance.
+
 ### Project
 - Third Stonecutter target `26.2-neoforge`. API differences are mostly handled by Stonecutter replacements
   (`EntityType.X` -> `EntityTypes.X`, advancement triggers package, `mainCamera()`); tag datagen goes through

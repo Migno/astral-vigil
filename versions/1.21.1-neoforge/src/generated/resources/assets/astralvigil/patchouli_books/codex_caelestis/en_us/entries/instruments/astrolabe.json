@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Use$() it towards the sky to read starlight, the moon's phase and whether the heavens can see you. It also hums towards recently fallen stars.$(br2)$(l)Use it on a block or creature$() to scan its celestial alignment. Used in the open, it reads the biome – or the structure you stand in."
+      "text": "$(l)Hold use$() to scan whatever it points at - a block or creature up to 16 blocks away; a ring of starlight fills around your sight. Pointed at the open sky it reads starlight, moon and biome - or the structure you stand in - and hums towards fallen stars.$(br2)Held or $(l)worn on the head$(), its lens names what you look at, its alignments and whether you have $(l)researched$() it yet."
     }
   ],
   "sortnum": 0

@@ -40,7 +40,12 @@ public final class AVItems {
     public static final DeferredItem<Item> ASTRAL_SHARD =
             register("astral_shard", Item::new, p -> p.rarity(Rarity.UNCOMMON));
     public static final DeferredItem<AstrolabeItem> ASTROLABE =
-            register("astrolabe", AstrolabeItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+            //? if >=26.1 {
+            register("astrolabe", AstrolabeItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON)
+                    .equippableUnswappable(net.minecraft.world.entity.EquipmentSlot.HEAD));
+            //?} else {
+            /*register("astrolabe", AstrolabeItem::new, p -> p.stacksTo(1).rarity(Rarity.UNCOMMON));
+            *///?}
     public static final DeferredItem<StarChartItem> STAR_CHART =
             register("star_chart", StarChartItem::new, p -> p.stacksTo(1));
     public static final DeferredItem<CodexItem> CODEX_CAELESTIS =

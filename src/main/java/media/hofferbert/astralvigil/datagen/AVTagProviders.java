@@ -71,20 +71,32 @@ public final class AVTagProviders {
             tag(AlignmentTags.blocks(Alignment.SOL))
                     .add(Blocks.GLOWSTONE, Blocks.SHROOMLIGHT, Blocks.SUNFLOWER, Blocks.GOLD_BLOCK, Blocks.RAW_GOLD_BLOCK,
                             Blocks.MAGMA_BLOCK, Blocks.HONEY_BLOCK, Blocks.HONEYCOMB_BLOCK, Blocks.TORCHFLOWER,
-                            Blocks.CAMPFIRE, Blocks.SAND, Blocks.RED_SAND);
+                            Blocks.CAMPFIRE, Blocks.SAND, Blocks.RED_SAND,
+                            Blocks.CACTUS, Blocks.DEAD_BUSH, Blocks.SANDSTONE, Blocks.RED_SANDSTONE, Blocks.TERRACOTTA,
+                            Blocks.BEE_NEST, Blocks.OCHRE_FROGLIGHT, Blocks.NETHER_GOLD_ORE)
+                    .addTag(Tags.Blocks.ORES_GOLD);
             tag(AlignmentTags.blocks(Alignment.LUNA))
                     .add(Blocks.SNOW_BLOCK, Blocks.SNOW, Blocks.ICE, Blocks.PACKED_ICE, Blocks.BLUE_ICE,
                             Blocks.POWDER_SNOW, Blocks.SEA_LANTERN, Blocks.PRISMARINE, Blocks.LILY_PAD,
-                            Blocks.SPORE_BLOSSOM, Blocks.WHITE_TULIP, Blocks.LILY_OF_THE_VALLEY);
+                            Blocks.SPORE_BLOSSOM, Blocks.WHITE_TULIP, Blocks.LILY_OF_THE_VALLEY,
+                            Blocks.PEARLESCENT_FROGLIGHT, Blocks.BLUE_ORCHID, Blocks.GLOW_LICHEN, Blocks.TUBE_CORAL_BLOCK,
+                            Blocks.SEA_PICKLE, Blocks.POINTED_DRIPSTONE)
+                    .addTag(Tags.Blocks.ORES_LAPIS);
             tag(AlignmentTags.blocks(Alignment.STELLA))
                     .add(Blocks.AMETHYST_BLOCK, Blocks.BUDDING_AMETHYST, Blocks.AMETHYST_CLUSTER,
                             Blocks.LARGE_AMETHYST_BUD, Blocks.END_STONE, Blocks.END_ROD, Blocks.BEACON,
-                            Blocks.LODESTONE, Blocks.CALCITE, AVBlocks.FALLEN_STAR.get(), AVBlocks.METEORIC_STONE.get());
+                            Blocks.LODESTONE, Blocks.CALCITE, AVBlocks.FALLEN_STAR.get(), AVBlocks.METEORIC_STONE.get(),
+                            Blocks.SMALL_AMETHYST_BUD, Blocks.MEDIUM_AMETHYST_BUD, Blocks.CHORUS_PLANT, Blocks.CHORUS_FLOWER,
+                            Blocks.PURPUR_BLOCK, Blocks.DRAGON_EGG)
+                    .addTag(Tags.Blocks.ORES_DIAMOND).addTag(Tags.Blocks.ORES_EMERALD);
             tag(AlignmentTags.blocks(Alignment.VOID))
                     .add(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN, Blocks.SCULK, Blocks.SCULK_CATALYST,
                             Blocks.SCULK_SHRIEKER, Blocks.SCULK_SENSOR, Blocks.REINFORCED_DEEPSLATE,
                             Blocks.END_PORTAL_FRAME, Blocks.RESPAWN_ANCHOR, Blocks.SOUL_SAND, Blocks.SOUL_SOIL,
-                            AVBlocks.VOID_CRYSTAL.get());
+                            AVBlocks.VOID_CRYSTAL.get(),
+                            Blocks.SCULK_VEIN, Blocks.WITHER_ROSE, Blocks.BLACKSTONE, Blocks.GILDED_BLACKSTONE,
+                            Blocks.WITHER_SKELETON_SKULL)
+                    .addTag(Tags.Blocks.ORES_NETHERITE_SCRAP);
         }
     }
 

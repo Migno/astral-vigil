@@ -11,6 +11,12 @@
     "minecraft:respawn_anchor",
     "minecraft:soul_sand",
     "minecraft:soul_soil",
-    "astralvigil:void_crystal"
+    "astralvigil:void_crystal",
+    "minecraft:sculk_vein",
+    "minecraft:wither_rose",
+    "minecraft:blackstone",
+    "minecraft:gilded_blackstone",
+    "minecraft:wither_skeleton_skull",
+    "#c:ores/netherite_scrap"
   ]
 }

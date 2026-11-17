@@ -10,6 +10,14 @@
     "minecraft:lodestone",
     "minecraft:calcite",
     "astralvigil:fallen_star",
-    "astralvigil:meteoric_stone"
+    "astralvigil:meteoric_stone",
+    "minecraft:small_amethyst_bud",
+    "minecraft:medium_amethyst_bud",
+    "minecraft:chorus_plant",
+    "minecraft:chorus_flower",
+    "minecraft:purpur_block",
+    "minecraft:dragon_egg",
+    "#c:ores/diamond",
+    "#c:ores/emerald"
   ]
 }

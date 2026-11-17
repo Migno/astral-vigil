@@ -374,7 +374,7 @@ public final class AVServerConfig {
                 .push("research");
         RESEARCH_ATTUNEMENT = b.comment("Knowledge points needed to become attuned to an alignment.")
                 .translation("astralvigil.configuration.research.attunement")
-                .defineInRange("attunementThreshold", 12, 1, 1000);
+                .defineInRange("attunementThreshold", 16, 1, 1000);
         RESEARCH_POINTS_BLOCK = b.comment("Knowledge for the first scan of a block type.")
                 .translation("astralvigil.configuration.research.points_block")
                 .defineInRange("pointsBlock", 1, 0, 100);

@@ -46,16 +46,20 @@ public final class AVAlignmentTags {
         @Override
         protected void addTags(HolderLookup.Provider registries) {
             tag(AlignmentTags.entities(Alignment.SOL))
-                    .add(EntityType.BLAZE, EntityType.BEE, EntityType.MAGMA_CUBE, EntityType.STRIDER, EntityType.CAMEL, EntityType.SNIFFER);
+                    .add(EntityType.BLAZE, EntityType.BEE, EntityType.MAGMA_CUBE, EntityType.STRIDER, EntityType.CAMEL, EntityType.SNIFFER,
+                            EntityType.ARMADILLO, EntityType.RABBIT, EntityType.GHAST);
             tag(AlignmentTags.entities(Alignment.LUNA))
                     .add(EntityType.WOLF, EntityType.FOX, EntityType.BAT, EntityType.PHANTOM, EntityType.POLAR_BEAR,
-                            EntityType.CAT, EntityType.GLOW_SQUID, EntityType.AXOLOTL, EntityType.DROWNED);
+                            EntityType.CAT, EntityType.GLOW_SQUID, EntityType.AXOLOTL, EntityType.DROWNED,
+                            EntityType.SQUID, EntityType.TURTLE, EntityType.FROG, EntityType.SNOW_GOLEM);
             tag(AlignmentTags.entities(Alignment.STELLA))
-                    .add(EntityType.ALLAY, EntityType.PARROT, EntityType.DOLPHIN, EntityType.SHULKER);
+                    .add(EntityType.ALLAY, EntityType.PARROT, EntityType.DOLPHIN, EntityType.SHULKER,
+                            EntityType.BREEZE, EntityType.ENDER_DRAGON);
             tag(AlignmentTags.entities(Alignment.VOID))
                     .add(EntityType.ENDERMAN, EntityType.ENDERMITE, EntityType.WARDEN, EntityType.WITHER,
                             EntityType.WITHER_SKELETON, EntityType.ZOMBIE, EntityType.SKELETON, EntityType.HUSK,
-                            EntityType.STRAY, EntityType.VEX, EntityType.EVOKER);
+                            EntityType.STRAY, EntityType.VEX, EntityType.EVOKER,
+                            EntityType.SILVERFISH, EntityType.BOGGED, EntityType.WITCH);
         }
     }
 

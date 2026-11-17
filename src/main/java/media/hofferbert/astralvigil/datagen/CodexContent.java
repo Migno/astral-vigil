@@ -164,8 +164,8 @@ public final class CodexContent {
                             "Your first instrument.",
                             "Dein erstes Instrument."),
                     new Text(
-                            "$(l)Use$() it towards the sky to read starlight, the moon's phase and whether the heavens can see you. It also hums towards recently fallen stars.$(br2)$(l)Use it on a block or creature$() to scan its celestial alignment. Used in the open, it reads the biome – or the structure you stand in.",
-                            "$(l)Benutze$() es gen Himmel, um Sternenlicht, Mondphase und freie Sicht zu lesen. Es summt zudem in Richtung kürzlich gefallener Sterne.$(br2)$(l)Benutze es an einem Block oder Geschöpf$(), um dessen himmlische Ausrichtung zu ergründen. Unter freiem Himmel liest es das Biom – oder das Bauwerk, in dem du stehst."))),
+                            "$(l)Hold use$() to scan whatever it points at - a block or creature up to 16 blocks away; a ring of starlight fills around your sight. Pointed at the open sky it reads starlight, moon and biome - or the structure you stand in - and hums towards fallen stars.$(br2)Held or $(l)worn on the head$(), its lens names what you look at, its alignments and whether you have $(l)researched$() it yet.",
+                            "$(l)Halte Benutzen gedrückt$(), um zu erforschen, worauf es weist - einen Block oder ein Geschöpf bis 16 Blöcke entfernt; ein Ring aus Sternenlicht füllt sich um deinen Blick. Gen offenen Himmel gerichtet liest es Sternenlicht, Mond und Biom - oder das Bauwerk, in dem du stehst - und summt in Richtung gefallener Sterne.$(br2)In der Hand oder $(l)auf dem Kopf getragen$() nennt dir seine Linse, was du ansiehst, dessen Ausrichtungen und ob du es schon $(l)erforscht$() hast."))),
             new Entry("star_chart", "instruments", "The Star Chart", "Die Sternkarte", "astralvigil:star_chart", 1, null, List.of(
                     new Crafting(
                             "astralvigil:star_chart",

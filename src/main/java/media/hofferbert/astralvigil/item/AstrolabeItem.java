@@ -27,61 +27,93 @@ import net.minecraft.world.level.Level;
 
 /**
  * The Astrolabe reads the sky: starlight intensity, moon phase, sky access – and it hums towards recently fallen
- * stars. Used on a block or creature it scans its celestial alignment; used into the air it also scans the
- * surrounding biome or structure.
+ * stars. Hold use to scan what it is pointed at (a block or creature within the scan range, otherwise the sky - biome
+ * or structure - above you); the scan completes after {@link #SCAN_TICKS}. Worn on the head it works like a lens: the
+ * HUD names whatever you look at, its alignments and whether you have researched it ({@code client/AstrolabeOverlay}).
  */
+//? if >=26.1 {
 public class AstrolabeItem extends Item {
+//?} else {
+/*public class AstrolabeItem extends Item implements net.minecraft.world.item.Equipable {
+*///?}
     static final String[] MOON_PHASES = {
         "full_moon", "waning_gibbous", "third_quarter", "waning_crescent",
         "new_moon", "waxing_crescent", "first_quarter", "waxing_gibbous"
     };
 
+    /** Ticks of holding use until a scan completes. */
+    public static final int SCAN_TICKS = 24;
+
     public AstrolabeItem(Properties properties) {
         super(properties);
+    }
+
+    //? if <26.1 {
+    /*@Override
+    public net.minecraft.world.entity.EquipmentSlot getEquipmentSlot() {
+        return net.minecraft.world.entity.EquipmentSlot.HEAD;
+    }
+    *///?}
+
+    /** Worn on the head or held in either hand. */
+    public static boolean active(Player player) {
+        return player.getMainHandItem().getItem() instanceof AstrolabeItem
+                || player.getOffhandItem().getItem() instanceof AstrolabeItem
+                || player.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.HEAD).getItem() instanceof AstrolabeItem;
+    }
+
+    /** What the Astrolabe points at: the nearest creature or block within the scan range (same on client and server). */
+    public static net.minecraft.world.phys.HitResult target(Player player, float partialTick) {
+        double range = AVServerConfig.RESEARCH_SCAN_RANGE.get();
+        net.minecraft.world.phys.HitResult block = player.pick(range, partialTick, false);
+        net.minecraft.world.phys.Vec3 eye = player.getEyePosition(partialTick);
+        double reach = block.getType() == net.minecraft.world.phys.HitResult.Type.MISS ? range : block.getLocation().distanceTo(eye);
+        net.minecraft.world.phys.Vec3 end = eye.add(player.getViewVector(partialTick).scale(reach));
+        net.minecraft.world.phys.AABB box = player.getBoundingBox().expandTowards(player.getViewVector(partialTick).scale(reach)).inflate(1.0);
+        net.minecraft.world.phys.EntityHitResult entity = net.minecraft.world.entity.projectile.ProjectileUtil.getEntityHitResult(
+                player, eye, end, box, e -> e instanceof LivingEntity && !e.isSpectator() && e.isPickable(), reach * reach);
+        return entity != null ? entity : block;
     }
 
     //? if >=26.1 {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (level instanceof ServerLevel serverLevel) {
-            read(serverLevel, player, stack);
-            if (player instanceof ServerPlayer sp) {
-                ResearchManager.scanSurroundings(sp);
-            }
-        }
-        return InteractionResult.SUCCESS;
+        player.startUsingItem(hand);
+        return InteractionResult.CONSUME;
     }
     //?} else {
     /*@Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (level instanceof ServerLevel serverLevel) {
-            read(serverLevel, player, stack);
-            if (player instanceof ServerPlayer sp) {
-                ResearchManager.scanSurroundings(sp);
-            }
-        }
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        player.startUsingItem(hand);
+        return InteractionResultHolder.consume(player.getItemInHand(hand));
     }
     *///?}
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
-        if (context.getPlayer() instanceof ServerPlayer player) {
-            ResearchManager.scanBlock(player, context.getClickedPos());
-            PlayerCompat.cooldown(player, context.getItemInHand(), AVServerConfig.ASTROLABE_COOLDOWN.get());
-        }
-        return InteractionResult.SUCCESS;
+    public int getUseDuration(ItemStack stack, LivingEntity user) {
+        return SCAN_TICKS;
     }
 
     @Override
-    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-        if (player instanceof ServerPlayer sp) {
-            ResearchManager.scanEntity(sp, target);
-            PlayerCompat.cooldown(player, stack, AVServerConfig.ASTROLABE_COOLDOWN.get());
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+        if (level instanceof ServerLevel serverLevel && entity instanceof ServerPlayer player) {
+            scan(serverLevel, player, stack);
         }
-        return InteractionResult.SUCCESS;
+        return stack;
+    }
+
+    /** Completes a scan: creature, block or - pointed at the open air - the sky reading plus biome/structure. */
+    static void scan(ServerLevel level, ServerPlayer player, ItemStack stack) {
+        net.minecraft.world.phys.HitResult hit = target(player, 1.0f);
+        if (hit instanceof net.minecraft.world.phys.EntityHitResult e) {
+            ResearchManager.scanEntity(player, e.getEntity());
+        } else if (hit instanceof net.minecraft.world.phys.BlockHitResult b && hit.getType() == net.minecraft.world.phys.HitResult.Type.BLOCK) {
+            ResearchManager.scanBlock(player, b.getBlockPos());
+        } else {
+            read(level, player, stack);
+            ResearchManager.scanSurroundings(player);
+        }
+        PlayerCompat.cooldown(player, stack, AVServerConfig.ASTROLABE_COOLDOWN.get());
     }
 
     /** Server side: builds and sends the reading. */

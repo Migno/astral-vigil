@@ -49,6 +49,15 @@ public final class AVLang {
                 "item.astralvigil.astrolabe.desc",
                 "Reads the heavens. Hums towards fallen stars.",
                 "Liest die Himmel. Summt in Richtung gefallener Sterne.");
+        add(
+                "item.astralvigil.astrolabe.hint",
+                "Hold use to scan · wear it on your head as a lens",
+                "Benutzen halten zum Erforschen · als Linse auf dem Kopf tragbar");
+        add("hud.astralvigil.astrolabe.known", "✦ Researched", "✦ Erforscht");
+        add("hud.astralvigil.astrolabe.unknown", "? Not yet researched", "? Noch nicht erforscht");
+        add("hud.astralvigil.astrolabe.silent", "No celestial resonance", "Keine himmlische Resonanz");
+        add("hud.astralvigil.astrolabe.sky", "Sky over %s", "Himmel über %s");
+        add("hud.astralvigil.astrolabe.no_sky", "The sky is hidden", "Der Himmel ist verborgen");
 
         // Blocks
         add("block.astralvigil.fallen_star", "Fallen Star", "Gefallener Stern");

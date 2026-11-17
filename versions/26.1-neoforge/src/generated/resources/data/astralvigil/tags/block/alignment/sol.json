@@ -11,6 +11,15 @@
     "minecraft:torchflower",
     "minecraft:campfire",
     "minecraft:sand",
-    "minecraft:red_sand"
+    "minecraft:red_sand",
+    "minecraft:cactus",
+    "minecraft:dead_bush",
+    "minecraft:sandstone",
+    "minecraft:red_sandstone",
+    "minecraft:terracotta",
+    "minecraft:bee_nest",
+    "minecraft:ochre_froglight",
+    "minecraft:nether_gold_ore",
+    "#c:ores/gold"
   ]
 }

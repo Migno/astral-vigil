@@ -11,6 +11,13 @@
     "minecraft:lily_pad",
     "minecraft:spore_blossom",
     "minecraft:white_tulip",
-    "minecraft:lily_of_the_valley"
+    "minecraft:lily_of_the_valley",
+    "minecraft:pearlescent_froglight",
+    "minecraft:blue_orchid",
+    "minecraft:glow_lichen",
+    "minecraft:tube_coral_block",
+    "minecraft:sea_pickle",
+    "minecraft:pointed_dripstone",
+    "#c:ores/lapis"
   ]
 }

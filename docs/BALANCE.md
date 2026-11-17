@@ -37,14 +37,15 @@ on purpose (it is an exploration tool).
 
 | Key | Default | Why |
 |---|---|---|
-| `attunementThreshold` | 12 | Roughly 4–8 new discoveries of one alignment (e.g. 3 biomes + 2 creatures + a few blocks) – an evening of exploring, not a grind. |
+| `attunementThreshold` | 16 | Roughly 6–10 new discoveries of one alignment (e.g. 3 biomes + 2 creatures + a few blocks) – an evening of exploring, not a grind. Raised from 12 when the alignment lists grew (~20 blocks, 8–10 creatures each): more choice, so every playstyle and pack finds its subjects, without making the first attunement faster. |
 | `pointsBlock` | 1 | Blocks are plentiful and found without travelling. |
 | `pointsEntity` | 2 | Creatures require finding and approaching. |
 | `pointsBiome` | 2 | Requires travel and open sky. |
 | `pointsStructure` | 4 | Rare, often dangerous. |
-| `scanRange` | 16 | Reserved for ranged scanning; current scans use vanilla reach. |
+| `scanRange` | 16 | Astrolabe scan reach (blocks and creatures). Long enough to scan a skittish animal or a block on a cliff; the hold-to-scan time (24 ticks) is the real cost. |
 
-Only the **first** scan of each subject counts, so research cannot be farmed. Quill (Ilyra) needs two attunements
+Only the **first** scan of each subject counts, so research cannot be farmed. Crafted Astral Vigil building blocks are
+deliberately *not* aligned – crafting twelve sunstone variants must not be a shortcut to attunement. Quill (Ilyra) needs two attunements
 (Luna + Stella) – the chronicler's sign is the reward for broad research.
 
 ## Starlight network (`[starlight]`)

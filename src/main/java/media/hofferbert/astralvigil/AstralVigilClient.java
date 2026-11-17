@@ -1,5 +1,6 @@
 package media.hofferbert.astralvigil;
 
+import media.hofferbert.astralvigil.client.AstrolabeOverlay;
 import media.hofferbert.astralvigil.client.ClientRecipes;
 import media.hofferbert.astralvigil.client.FloatingItemsRenderer;
 import media.hofferbert.astralvigil.client.GearClient;
@@ -29,6 +30,7 @@ public final class AstralVigilClient {
         modBus.addListener(AstralVigilClient::registerRenderers);
         ClientRecipes.register();
         GearClient.register(modBus);
+        AstrolabeOverlay.register(modBus);
         media.hofferbert.astralvigil.client.SeraphWings.register(modBus);
         media.hofferbert.astralvigil.client.cosmetics.CosmeticsClient.register(modBus);
         media.hofferbert.astralvigil.client.armor.ArmorOrnaments.register(modBus);
@@ -78,6 +80,10 @@ public final class AstralVigilClient {
                 || item == AVItems.HALO_OF_DAWN.get()) {
             event.getToolTip()
                     .add(1, Component.translatable(item.getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+        }
+        if (item == AVItems.ASTROLABE.get()) {
+            event.getToolTip().add(Math.min(2, event.getToolTip().size()),
+                    Component.translatable("item.astralvigil.astrolabe.hint").withStyle(ChatFormatting.DARK_AQUA));
         }
     }
 }
