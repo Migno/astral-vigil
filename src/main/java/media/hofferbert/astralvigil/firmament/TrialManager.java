@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
  * Watcher's Mark once, favour with that Watcher and costs favour with the rival (Solenne ↔ Vael, Orrin ↔ Ilyra).
  */
 public final class TrialManager {
-    public static final int TRIAL_TICKS = 20 * 60 * 10;
+    public static final int TRIAL_TICKS = 20 * 60 * 20;
     public static final int FAVOUR_TRIAL = 50;
     public static final int FAVOUR_RIVAL_LOSS = 15;
     static final String TRIAL_KEY = "astralvigil_trial";

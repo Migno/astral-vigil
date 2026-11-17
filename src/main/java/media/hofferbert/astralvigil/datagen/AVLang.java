@@ -431,9 +431,17 @@ public final class AVLang {
         add("block.astralvigil.trial_goal", "Trial Beacon", "Prüfungsleuchte");
         add("block.astralvigil.moon_target", "Moon Target", "Mondzielscheibe");
         add("item.astralvigil.ascension_key", "Ascension Key", "Aufstiegsschlüssel");
-        add("item.astralvigil.ascension_key.desc", "Use to rise into the Firmament – and to return.", "Benutzen, um ins Firmament aufzusteigen – und zurückzukehren.");
+        add("item.astralvigil.ascension_key.desc", "Set it into a finished Astral Gate frame to light the way to the Firmament.",
+                "In einen vollendeten Astraltor-Rahmen gesetzt, öffnet er den Weg ins Firmament.");
+        add("block.astralvigil.astral_gate", "Astral Gate", "Astraltor");
+        add("block.astralvigil.celestial_portal", "Celestial Portal", "Himmelsportal");
+        add("message.astralvigil.gate.hint", "The key yearns for an Astral Gate: build a closed frame of Astral Gate blocks, then set the key into it.",
+                "Der Schlüssel sehnt sich nach einem Astraltor: Baue einen geschlossenen Rahmen aus Astraltor-Blöcken und setze den Schlüssel ein.");
+        add("message.astralvigil.gate.incomplete", "The frame is not closed (opening at least 2 wide and 3 tall, at most 21).",
+                "Der Rahmen ist nicht geschlossen (Öffnung mindestens 2 breit und 3 hoch, höchstens 21).");
+        add("message.astralvigil.gate.lit", "The gate opens onto the Firmament.", "Das Tor öffnet sich zum Firmament.");
         add("dimension.astralvigil.firmament", "The Firmament", "Das Firmament");
-        add("message.astralvigil.firmament.arrive", "You rise above the clouds. The Watchers await in their sanctums.", "Du steigst über die Wolken. Die Wächter erwarten dich in ihren Heiligtümern.");
+        add("message.astralvigil.firmament.arrive", "You rise above the clouds. Four bridges lead to the Watchers' trials; the gate behind you leads home.", "Du steigst über die Wolken. Vier Brücken führen zu den Prüfungen der Wächter; das Tor hinter dir führt nach Hause.");
         add("message.astralvigil.firmament.missing", "The Firmament is closed on this server.", "Das Firmament ist auf diesem Server verschlossen.");
         add("message.astralvigil.watcher.favour", "%s regards you. Favour: %s", "%s betrachtet dich. Gunst: %s");
         add("message.astralvigil.trial.complete", "%s accepts your trial and grants you their Mark.", "%s erkennt deine Prüfung an und gewährt dir sein Zeichen.");
@@ -441,19 +449,19 @@ public final class AVLang {
         String[][] watchers = {
             {"solenne", "Solenne", "Solenne", "Mark of Solenne", "Zeichen Solennes",
                 "%s: \"Climb towards the sun, aspirant. Do not look down.\"", "%s: \"Steig der Sonne entgegen, Anwärter. Sieh nicht hinab.\"",
-                "Climb the golden steps and touch the Trial Beacon at the top.", "Erklimm die goldenen Stufen und berühre die Prüfungsleuchte an der Spitze.",
+                "Climb the Sun Spire - a hundred blocks of single steps - and touch the Trial Beacon on its crown. Gold pads are checkpoints; magma pads burn.", "Erklimm die Sonnenspitze - hundert Blöcke einzelner Stufen - und berühre die Prüfungsleuchte auf ihrer Krone. Goldene Stufen sind Rastpunkte, Magmastufen brennen.",
                 "Trial of Ascent", "Prüfung des Aufstiegs", "Reach the top of Solenne's sanctum", "Erreiche die Spitze von Solennes Heiligtum"},
             {"vael", "Vael", "Vael", "Mark of Vael", "Zeichen Vaels",
-                "%s: \"Six moons. One breath each.\"", "%s: \"Sechs Monde. Ein Atemzug für jeden.\"",
-                "Light all six Moon Targets with your arrows.", "Entzünde alle sechs Mondzielscheiben mit deinen Pfeilen.",
-                "Trial of the Hunt", "Prüfung der Jagd", "Strike every Moon Target in Vael's sanctum", "Triff jede Mondzielscheibe in Vaels Heiligtum"},
+                "%s: \"Ten moons. The shadows will not wait for you.\"", "%s: \"Zehn Monde. Die Schatten werden nicht auf dich warten.\"",
+                "Light all ten Moon Targets with your arrows - four float on far islets - while Eclipse Echoes rise against you.", "Entzünde alle zehn Mondzielscheiben mit deinen Pfeilen - vier schweben auf fernen Inselchen - während Finsternis-Echos gegen dich aufsteigen.",
+                "Trial of the Hunt", "Prüfung der Jagd", "Strike all ten Moon Targets of Vael's arena", "Triff alle zehn Mondzielscheiben in Vaels Arena"},
             {"orrin", "Orrin", "Orrin", "Mark of Orrin", "Zeichen Orrins",
                 "%s: \"Light is metal that has not yet been bent. Bend it.\"", "%s: \"Licht ist Metall, das noch nicht gebogen wurde. Biege es.\"",
-                "Turn the mirrors so that Stella light from the prism reaches the Trial Receptor.", "Drehe die Spiegel so, dass Stella-Licht aus dem Prisma den Prüfungsempfänger erreicht.",
-                "Trial of the Forge", "Prüfung der Schmiede", "Guide Stella light to Orrin's receptor", "Leite Stella-Licht zu Orrins Empfänger"},
+                "Three bays, three receptors: turn the mirrors (right-click, sneak to turn back) until Stella light reaches all three Trial Receptors at once.", "Drei Hallen, drei Empfänger: Drehe die Spiegel (Rechtsklick, schleichend zurück), bis Stella-Licht alle drei Prüfungsempfänger zugleich erreicht.",
+                "Trial of the Forge", "Prüfung der Schmiede", "Light all three receptors of Orrin's observatory", "Entzünde alle drei Empfänger in Orrins Observatorium"},
             {"ilyra", "Ilyra", "Ilyra", "Mark of Ilyra", "Zeichen Ilyras",
                 "%s: \"Every library is a labyrinth. Find the page I hid.\"", "%s: \"Jede Bibliothek ist ein Labyrinth. Finde die Seite, die ich versteckt habe.\"",
-                "Find the Trial Beacon in the heart of the library maze.", "Finde die Prüfungsleuchte im Herzen des Bibliothekslabyrinths.",
+                "Find the Trial Beacon in the reading room at the heart of the Endless Library - a dark, roofed maze.", "Finde die Prüfungsleuchte im Lesesaal im Herzen der Endlosen Bibliothek - einem dunklen, überdachten Labyrinth.",
                 "Trial of Memory", "Prüfung der Erinnerung", "Find the heart of Ilyra's library", "Finde das Herz von Ilyras Bibliothek"}
         };
         for (String[] w : watchers) {
@@ -480,7 +488,7 @@ public final class AVLang {
         add("item.astralvigil.seraph_feather.desc", "Use to bind Seraph Wings to yourself; use again to show or hide them.", "Benutzen, um dir Seraphsflügel zu binden; erneut benutzen, um sie zu zeigen oder zu verbergen.");
         add("item.astralvigil.halo_of_dawn", "Halo of Dawn", "Heiligenschein der Morgenröte");
         add("item.astralvigil.halo_of_dawn.desc", "Carried: abilities cost less starlight and the Eclipse's gaze slides off you.", "Getragen: Fähigkeiten kosten weniger Sternenlicht und der Blick der Finsternis gleitet an dir ab.");
-        add("message.astralvigil.umbral.not_here", "The sigil is cold. Only in the Firmament can the Eclipse be called.", "Das Siegel bleibt kalt. Nur im Firmament lässt sich die Finsternis rufen.");
+        add("message.astralvigil.umbral.not_here", "The sigil is cold. Only on the Umbral Throne, far west of the Firmament's hub beyond Vael's arena, can the Eclipse be called.", "Das Siegel bleibt kalt. Nur auf dem Umbralthron, weit westlich der Firmamentmitte hinter Vaels Arena, lässt sich die Finsternis rufen.");
         add("message.astralvigil.umbral.marks", "The sigil needs all four Watchers' Marks to answer.", "Das Siegel antwortet nur mit den Zeichen aller vier Wächter.");
         add("message.astralvigil.umbral.peaceful", "The Eclipse does not answer in a peaceful world.", "In einer friedlichen Welt antwortet die Finsternis nicht.");
         add("message.astralvigil.umbral.present", "The Eclipse is already here.", "Die Finsternis ist bereits hier.");

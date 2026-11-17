@@ -56,6 +56,7 @@ public final class AVWorldgen {
                 .add(Registries.TEMPLATE_POOL, AVWorldgen::pools)
                 .add(Registries.STRUCTURE, AVWorldgen::structures)
                 .add(Registries.STRUCTURE_SET, AVWorldgen::sets)
+                .add(Registries.DIMENSION_TYPE, AVWorldgen::dimensionTypes)
                 .add(Registries.LEVEL_STEM, AVWorldgen::dimensions);
     }
 
@@ -94,13 +95,51 @@ public final class AVWorldgen {
     public static final ResourceKey<LevelStem> FIRMAMENT_STEM =
             ResourceKey.create(Registries.LEVEL_STEM, AstralVigil.id("firmament"));
 
+    public static final ResourceKey<net.minecraft.world.level.dimension.DimensionType> FIRMAMENT_TYPE =
+            ResourceKey.create(Registries.DIMENSION_TYPE, AstralVigil.id("firmament"));
+    /** Build ceiling of the Firmament (the overworld's 320 is too low for the Sun Spire above the hub at y 290). */
+    public static final int FIRMAMENT_TOP = 448;
+
+    /** The overworld dimension type with a higher build limit (y -64 .. 447); everything else unchanged. */
+    static void dimensionTypes(BootstrapContext<net.minecraft.world.level.dimension.DimensionType> ctx) {
+        // vanilla registry values are unbound during datagen: run vanilla's own bootstrap and keep its overworld entry
+        net.minecraft.world.level.dimension.DimensionType[] captured = new net.minecraft.world.level.dimension.DimensionType[1];
+        net.minecraft.data.worldgen.DimensionTypes.bootstrap(new BootstrapContext<>() {
+            @Override
+            public net.minecraft.core.Holder.Reference<net.minecraft.world.level.dimension.DimensionType> register(
+                    ResourceKey<net.minecraft.world.level.dimension.DimensionType> key, net.minecraft.world.level.dimension.DimensionType value,
+                    com.mojang.serialization.Lifecycle lifecycle) {
+                if (key == BuiltinDimensionTypes.OVERWORLD) {
+                    captured[0] = value;
+                }
+                return null;
+            }
+
+            @Override
+            public <S> net.minecraft.core.HolderGetter<S> lookup(ResourceKey<? extends net.minecraft.core.Registry<? extends S>> key) {
+                return ctx.lookup(key);
+            }
+        });
+        var o = captured[0];
+        int height = FIRMAMENT_TOP - o.minY();
+        //? if >=26.1 {
+        ctx.register(FIRMAMENT_TYPE, new net.minecraft.world.level.dimension.DimensionType(o.hasFixedTime(), o.hasSkyLight(), o.hasCeiling(),
+                o.hasEnderDragonFight(), o.coordinateScale(), o.minY(), height, height, o.infiniburn(), o.ambientLight(), o.monsterSettings(),
+                o.skybox(), o.cardinalLightType(), o.attributes(), o.timelines(), o.defaultClock()));
+        //?} else {
+        /*ctx.register(FIRMAMENT_TYPE, new net.minecraft.world.level.dimension.DimensionType(o.fixedTime(), o.hasSkyLight(), o.hasCeiling(),
+                o.ultraWarm(), o.natural(), o.coordinateScale(), o.bedWorks(), o.respawnAnchorWorks(), o.minY(), height, height,
+                o.infiniburn(), o.effectsLocation(), o.ambientLight(), o.monsterSettings()));
+        *///?}
+    }
+
     /**
-     * The Firmament: vanilla floating-islands terrain under the overworld sky (stars at night), a single meadow biome.
-     * Reusing vanilla dimension type + noise settings keeps it identical on both targets.
+     * The Firmament: vanilla floating-islands terrain under the overworld sky (stars at night), a single meadow biome,
+     * and its own dimension type (overworld copy with a build ceiling at {@link #FIRMAMENT_TOP}).
      */
     static void dimensions(BootstrapContext<LevelStem> ctx) {
         ctx.register(FIRMAMENT_STEM, new LevelStem(
-                ctx.lookup(Registries.DIMENSION_TYPE).getOrThrow(BuiltinDimensionTypes.OVERWORLD),
+                ctx.lookup(Registries.DIMENSION_TYPE).getOrThrow(FIRMAMENT_TYPE),
                 new NoiseBasedChunkGenerator(
                         new FixedBiomeSource(ctx.lookup(Registries.BIOME).getOrThrow(Biomes.MEADOW)),
                         ctx.lookup(Registries.NOISE_SETTINGS).getOrThrow(NoiseGeneratorSettings.FLOATING_ISLANDS))));

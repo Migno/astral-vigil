@@ -59,6 +59,7 @@ public final class AVGameTests {
             new Def("echo_expires", PLATFORM, 60, true, AVGameTests::echoExpires),
             new Def("eclipse_awards_advancement", PLATFORM, 40, false, AVGameTests::eclipseAwardsAdvancement),
             new Def("cosmetics_apply_sanitizes", PLATFORM, 40, false, AVGameTests::cosmeticsApplySanitizes),
+            new Def("astral_gate_lights_and_collapses", PLATFORM, 40, false, AVGameTests::astralGateLightsAndCollapses),
             new Def("fallen_star_drops_shards", PLATFORM, 40, false, AVGameTests::fallenStarDropsShards),
             new Def("no_starlight_under_roof", PLATFORM, 40, false, AVGameTests::noStarlightUnderRoof),
             new Def("starfall_crater", CRATER_FIELD, 40, true, AVGameTests::starfallCrater),
@@ -137,16 +138,18 @@ public final class AVGameTests {
         var manager = helper.getLevel().getStructureManager();
         var settings = new net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings();
         java.util.Map<String, net.minecraft.world.level.block.Block> key = java.util.Map.of(
-                "landing", media.hofferbert.astralvigil.registry.AVBlocks.STARLIGHT_FONT.get(),
+                "landing", media.hofferbert.astralvigil.registry.AVBlocks.CELESTIAL_PORTAL.get(),
                 "solenne", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(),
                 "vael", media.hofferbert.astralvigil.registry.AVBlocks.MOON_TARGET.get(),
                 "orrin", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_RECEPTOR.get(),
-                "ilyra", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get());
+                "ilyra", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(),
+                "throne", media.hofferbert.astralvigil.registry.AVBlocks.ECLIPSE_SEAL.get());
+        java.util.Map<String, Integer> counts = java.util.Map.of("landing", 12, "vael", 10, "orrin", 3);
         for (var e : key.entrySet()) {
             var template = manager.get(AstralVigil.id("firmament/" + e.getKey()));
             GT.check(helper, template.isPresent(), "missing template " + e.getKey());
             int found = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, e.getValue()).size();
-            int expected = e.getKey().equals("vael") ? 6 : 1;
+            int expected = counts.getOrDefault(e.getKey(), 1);
             GT.check(helper, found == expected, e.getKey() + ": expected " + expected + " key blocks, found " + found);
         }
         helper.succeed();
@@ -431,6 +434,33 @@ public final class AVGameTests {
         media.hofferbert.astralvigil.cosmetics.CosmeticsManager.refresh(player);
         GT.check(helper, player.getData(AVAttachments.COSMETIC_ACCESS), "access flag not set");
         helper.succeed();
+    }
+
+    static void astralGateLightsAndCollapses(GameTestHelper helper) {
+        var gate = media.hofferbert.astralvigil.registry.AVBlocks.ASTRAL_GATE.get();
+        var portal = media.hofferbert.astralvigil.registry.AVBlocks.CELESTIAL_PORTAL.get();
+        // 2 x 3 opening in the X plane at z = 4: frame columns x = 2 and 5, rows y = 1 and 5 (cleared first)
+        for (int x = 1; x <= 6; x++) {
+            for (int y = 1; y <= 6; y++) {
+                helper.setBlock(GT.pos(x, y, 4), net.minecraft.world.level.block.Blocks.AIR);
+            }
+        }
+        for (int y = 2; y <= 4; y++) {
+            helper.setBlock(GT.pos(2, y, 4), gate);
+            helper.setBlock(GT.pos(5, y, 4), gate);
+        }
+        for (int x = 3; x <= 4; x++) {
+            helper.setBlock(GT.pos(x, 1, 4), gate);
+            helper.setBlock(GT.pos(x, 5, 4), gate);
+        }
+        int lit = media.hofferbert.astralvigil.item.AscensionKeyItem.ignite(helper.getLevel(), helper.absolutePos(GT.pos(2, 3, 4)));
+        GT.check(helper, lit == 6, "expected 6 portal blocks, lit " + lit);
+        helper.assertBlockPresent(portal, GT.pos(3, 2, 4));
+        helper.setBlock(GT.pos(5, 3, 4), net.minecraft.world.level.block.Blocks.AIR);
+        helper.succeedWhen(() -> {
+            helper.assertBlockNotPresent(portal, GT.pos(4, 3, 4));
+            helper.assertBlockNotPresent(portal, GT.pos(3, 2, 4));
+        });
     }
 
     static void modLoaded(GameTestHelper helper) {

@@ -4,6 +4,20 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Firmament: built gate, large-scale trials, Umbral Throne
+- **Astral Gate:** the Ascension Key no longer teleports. Build an upright, closed frame of **Astral Gate** blocks
+  (crafted from Starmetal, Astral Shards and Meteoric Stone; opening 2×3 up to 21×21) and set the key into it to
+  light a **Celestial Portal**. Stand in it for 3 seconds to ascend; the return gate stands on the hub.
+- **The Firmament gets its own dimension type** (build limit y 448) for the larger structures.
+- **Trial islands 240 blocks out**, each a long challenge:
+  - **Solenne – Sun Spire:** a 100-block spire with 64 single pads, magma pads that burn, and gold checkpoint pads.
+  - **Vael – Moon Arena:** 10 Moon Targets, 4 of them on far floating islets, while Eclipse Echoes keep rising.
+  - **Orrin – Prism Observatory:** three bays, mirrors start wrongly turned, all three receptors must glow at once.
+  - **Ilyra – Endless Library:** a dark, roofed 70×70 bookshelf maze with the reading room at its heart.
+- **The Umbral Throne:** the Eclipse can only be summoned on its own dark arena island 520 blocks west (bridge through
+  Vael's arena), with obsidian cover pillars against the Umbral Nova. The Eclipse now has 600 HP and 14 armour.
+- Trials last 20 minutes; the sky's safety net sets falling players down at the nearest island.
+
 ### Watchers reworked
 - The four Watchers are now towering, floating seraphs (≈ 5 blocks): six layered wings, a sun-disc nimbus behind the
   head, a spinning halo, a sunburst crown, faceless helm with glowing eyes, glowing chest core, gold stole, a flared

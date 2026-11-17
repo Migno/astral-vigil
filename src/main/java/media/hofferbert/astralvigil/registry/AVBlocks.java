@@ -65,6 +65,19 @@ public final class AVBlocks {
             .mapColor(MapColor.SNOW).strength(-1.0f, 3_600_000.0f).noLootTable()
             .lightLevel(s -> s.getValue(TrialBlocks.MoonTarget.LIT) ? 12 : 3).sound(SoundType.AMETHYST));
 
+    // Firmament gate (built by players, lit with the Ascension Key)
+    public static final DeferredBlock<Block> ASTRAL_GATE = register("astral_gate", Block::new, p -> p
+            .mapColor(MapColor.QUARTZ).strength(5.0f, 1200.0f).requiresCorrectToolForDrops().lightLevel(s -> 5).sound(SoundType.AMETHYST));
+    public static final DeferredBlock<media.hofferbert.astralvigil.block.CelestialPortalBlock> CELESTIAL_PORTAL = register(
+            "celestial_portal", media.hofferbert.astralvigil.block.CelestialPortalBlock::new, p -> p
+                    //? if >=26.1 {
+                    .noCollision()
+                    //?} else {
+                    /*.noCollission()
+                    *///?}
+                    .strength(-1.0f).noLootTable().sound(SoundType.GLASS).lightLevel(s -> 12)
+                    .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK));
+
     // Phase 8
     public static final DeferredBlock<Block> ECLIPSE_SEAL = register("eclipse_seal", Block::new, p -> p
             .mapColor(MapColor.COLOR_PURPLE).strength(3.0f, 9.0f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE_TILES)

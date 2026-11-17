@@ -50,6 +50,7 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.VOID_CRYSTAL.get());
                 output.accept(AVItems.VOID_SHARD.get());
                 output.accept(AVItems.FIRMAMENT_STONE.get());
+                output.accept(AVItems.ASTRAL_GATE.get());
                 output.accept(AVItems.ASCENSION_KEY.get());
                 AVItems.MARKS.values().forEach(m -> output.accept(m.get()));
                 output.accept(AVItems.UMBRAL_SIGIL.get());

@@ -60,6 +60,15 @@ public class AVRecipeProvider extends RecipeProvider {
                 .pattern("MMM")
                 .unlockedBy("has_astral_shard", has(AVTags.Items.ASTRAL_SHARDS))
                 .save(output);
+        shaped(RecipeCategory.MISC, AVItems.ASTRAL_GATE.get(), 4)
+                .define('S', AVTags.Items.ASTRAL_SHARDS)
+                .define('I', AVTags.Items.INGOTS_STARMETAL)
+                .define('M', AVTags.Items.METEORIC_STONES)
+                .pattern("MSM")
+                .pattern("SIS")
+                .pattern("MSM")
+                .unlockedBy("has_starmetal", has(AVTags.Items.INGOTS_STARMETAL))
+                .save(output);
         shaped(RecipeCategory.MISC, AVItems.PEDESTAL.get(), 2)
                 .define('G', Tags.Items.INGOTS_GOLD)
                 .define('M', AVTags.Items.METEORIC_STONES)

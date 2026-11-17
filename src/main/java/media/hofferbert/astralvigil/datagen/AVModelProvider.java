@@ -42,9 +42,15 @@ public class AVModelProvider extends ModelProvider {
         blockModels.createTrivialCube(AVBlocks.CONSTELLATION_LOCK.get());
         blockModels.createTrivialCube(AVBlocks.VOID_CRYSTAL.get());
         for (Block b : new Block[] {AVBlocks.FIRMAMENT_STONE.get(), AVBlocks.STARLIGHT_FONT.get(), AVBlocks.TRIAL_RECEPTOR.get(),
-            AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get(), AVBlocks.ECLIPSE_SEAL.get()}) {
+            AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get(), AVBlocks.ECLIPSE_SEAL.get(), AVBlocks.ASTRAL_GATE.get()}) {
             blockModels.createTrivialCube(b);
         }
+
+        // Celestial Portal: hand-made pane models (vanilla nether portal shape), one per axis
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(AVBlocks.CELESTIAL_PORTAL.get())
+                .with(PropertyDispatch.initial(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_AXIS)
+                        .select(net.minecraft.core.Direction.Axis.X, BlockModelGenerators.plainVariant(media.hofferbert.astralvigil.AstralVigil.id("block/celestial_portal_ns")))
+                        .select(net.minecraft.core.Direction.Axis.Z, BlockModelGenerators.plainVariant(media.hofferbert.astralvigil.AstralVigil.id("block/celestial_portal_ew")))));
 
         // Device models are hand-built in Blockbench (art/bbmodel/block); only the block states are generated.
         facing(blockModels, AVBlocks.LENS.get(), BlockModelGenerators.ROTATION_FACING);
@@ -116,9 +122,15 @@ public class AVModelProvider extends ModelProvider {
             simpleBlockWithItem(AVBlocks.CONSTELLATION_LOCK.get(), cubeAll(AVBlocks.CONSTELLATION_LOCK.get()));
             simpleBlockWithItem(AVBlocks.VOID_CRYSTAL.get(), cubeAll(AVBlocks.VOID_CRYSTAL.get()));
             for (Block b : new Block[] {AVBlocks.FIRMAMENT_STONE.get(), AVBlocks.STARLIGHT_FONT.get(), AVBlocks.TRIAL_RECEPTOR.get(),
-                AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get(), AVBlocks.ECLIPSE_SEAL.get()}) {
+                AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get(), AVBlocks.ECLIPSE_SEAL.get(), AVBlocks.ASTRAL_GATE.get()}) {
                 simpleBlockWithItem(b, cubeAll(b));
             }
+
+            getVariantBuilder(AVBlocks.CELESTIAL_PORTAL.get())
+                    .partialState().with(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_AXIS, net.minecraft.core.Direction.Axis.X)
+                    .modelForState().modelFile(models().getExistingFile(modLoc("block/celestial_portal_ns"))).addModel()
+                    .partialState().with(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_AXIS, net.minecraft.core.Direction.Axis.Z)
+                    .modelForState().modelFile(models().getExistingFile(modLoc("block/celestial_portal_ew"))).addModel();
 
             // Device models are hand-built in Blockbench; only block states + item parents are generated.
             facingAll(AVBlocks.LENS.get());

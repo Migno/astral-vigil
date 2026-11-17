@@ -6,11 +6,16 @@
     {
       "type": "patchouli:spotlight",
       "item": "astralvigil:ascension_key",
-      "text": "Am Konvergenzaltar geschmiedet: ein Astralkern als Katalysator; Sternenstahl, Sonnenstahl, Mondsilber, ein Leerensplitter und zwei Federn als Gaben; 2000 reines Sternenlicht. Benutze ihn, um ins Firmament aufzusteigen, und erneut, um zurückzukehren."
+      "text": "Am Konvergenzaltar geschmiedet: ein Astralkern als Katalysator; Sternenstahl, Sonnenstahl, Mondsilber, ein Leerensplitter und zwei Federn als Gaben; 2000 reines Sternenlicht. Der Schlüssel allein trägt niemanden - er entzündet ein Astraltor."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_gate",
+      "text": "Baue einen geschlossenen, aufrecht stehenden Rahmen aus $(item)Astraltor$()-Blöcken, wie eine Tür: die Öffnung mindestens 2 breit und 3 hoch (Ecken sind freiwillig). Setze den Aufstiegsschlüssel in den Rahmen und tritt für einige Herzschläge ins Licht."
     },
     {
       "type": "patchouli:text",
-      "text": "Das Firmament ist leicht: Du fällst langsam und landest sanft. Stürzt du von den Inseln, fängt dich der Himmel auf und bringt dich zum Landeplatz zurück."
+      "text": "Das Firmament ist leicht: Du fällst langsam und landest sanft. Stürzt du von den Inseln, fängt dich der Himmel auf und setzt dich an der nächsten Insel ab. Das Tor hinter dem Landeplatz führt nach Hause."
     }
   ],
   "sortnum": 0

@@ -46,6 +46,7 @@ public class AVLootProvider extends BlockLootSubProvider {
         dropSelf(AVBlocks.ASTRAL_FORGE.get());
         dropSelf(AVBlocks.STAR_ANCHOR.get());
         dropSelf(AVBlocks.FIRMAMENT_STONE.get());
+        dropSelf(AVBlocks.ASTRAL_GATE.get());
         dropSelf(AVBlocks.ECLIPSE_SEAL.get());
         add(AVBlocks.VOID_CRYSTAL.get(), block -> createSilkTouchDispatchTable(
                 block,
@@ -61,7 +62,8 @@ public class AVLootProvider extends BlockLootSubProvider {
                         && b != AVBlocks.STARLIGHT_FONT.get()
                         && b != AVBlocks.TRIAL_RECEPTOR.get()
                         && b != AVBlocks.TRIAL_GOAL.get()
-                        && b != AVBlocks.MOON_TARGET.get())
+                        && b != AVBlocks.MOON_TARGET.get()
+                        && b != AVBlocks.CELESTIAL_PORTAL.get())
                 .toList();
     }
 }

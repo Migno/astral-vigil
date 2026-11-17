@@ -6,11 +6,16 @@
     {
       "type": "patchouli:spotlight",
       "item": "astralvigil:ascension_key",
-      "text": "Forged at the Convergence Altar: an Astral Core as catalyst; Starmetal, Sunsteel and Moonsilver, a Void Shard and two feathers as offerings; 2000 pure starlight. Use it to rise into the Firmament and again to return."
+      "text": "Forged at the Convergence Altar: an Astral Core as catalyst; Starmetal, Sunsteel and Moonsilver, a Void Shard and two feathers as offerings; 2000 pure starlight. The key alone carries no one - it lights an Astral Gate."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_gate",
+      "text": "Build a closed frame of $(item)Astral Gate$() blocks standing upright, like a door: the opening at least 2 wide and 3 tall (corners are optional). Set the Ascension Key into the frame and step into the light for a few heartbeats."
     },
     {
       "type": "patchouli:text",
-      "text": "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and returns you to the landing."
+      "text": "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and sets you down at the nearest island. The gate behind the landing leads home."
     }
   ],
   "sortnum": 0

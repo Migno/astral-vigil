@@ -197,15 +197,44 @@ public final class Devices {
             return tint == Tint.STELLA;
         }
 
+        /** Game time until which this receptor counts as lit (fonts push light once per second). */
+        private long litUntil;
+
+        public boolean isLit() {
+            return level != null && level.getGameTime() <= litUntil;
+        }
+
         @Override
         public int receive(Tint tint, int amount, Direction travel) {
             int taken = super.receive(tint, amount, travel);
             if (taken > 0 && level instanceof ServerLevel server) {
-                media.hofferbert.astralvigil.firmament.TrialManager.completeNear(
-                        server, worldPosition, media.hofferbert.astralvigil.firmament.Watcher.ORRIN, 24);
+                litUntil = server.getGameTime() + 50;
                 buffer.extract(Tint.STELLA, buffer.get(Tint.STELLA), false);
+                if (allNearbyLit(server)) {
+                    media.hofferbert.astralvigil.firmament.TrialManager.completeNear(
+                            server, worldPosition, media.hofferbert.astralvigil.firmament.Watcher.ORRIN, 40);
+                }
             }
             return taken;
+        }
+
+        /** Orrin's trial needs every receptor of the observatory (chunks within 32 blocks) glowing at the same time. */
+        private boolean allNearbyLit(ServerLevel server) {
+            int cx = worldPosition.getX() >> 4;
+            int cz = worldPosition.getZ() >> 4;
+            for (int x = cx - 2; x <= cx + 2; x++) {
+                for (int z = cz - 2; z <= cz + 2; z++) {
+                    if (!server.hasChunk(x, z)) {
+                        continue;
+                    }
+                    for (var be : server.getChunk(x, z).getBlockEntities().values()) {
+                        if (be instanceof Receptor r && !r.isLit()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
     }
 

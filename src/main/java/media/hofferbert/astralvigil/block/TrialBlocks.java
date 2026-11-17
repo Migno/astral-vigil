@@ -83,6 +83,15 @@ public final class TrialBlocks {
         public static final BooleanProperty LIT = BooleanProperty.create("lit");
         public static final int RADIUS = 16;
 
+        /** Every block of the Moon Arena (Vael's sanctum incl. its far islets); falls back to a box around the target. */
+        static Iterable<BlockPos> arena(BlockPos hit) {
+            BlockPos centre = media.hofferbert.astralvigil.firmament.SanctumBuilder.centre(Watcher.VAEL);
+            if (hit.distSqr(centre) > 60 * 60) {
+                return BlockPos.betweenClosed(hit.offset(-RADIUS * 2, -8, -RADIUS * 2), hit.offset(RADIUS * 2, 8, RADIUS * 2));
+            }
+            return BlockPos.betweenClosed(centre.offset(-40, 0, -40), centre.offset(40, 30, 40));
+        }
+
         public MoonTarget(Properties properties) {
             super(properties);
             registerDefaultState(stateDefinition.any().setValue(LIT, false));
@@ -104,7 +113,7 @@ public final class TrialBlocks {
             server.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.5f, 1.5f);
             int total = 0;
             int lit = 0;
-            for (BlockPos p : BlockPos.betweenClosed(pos.offset(-RADIUS * 2, -8, -RADIUS * 2), pos.offset(RADIUS * 2, 8, RADIUS * 2))) {
+            for (BlockPos p : arena(pos)) {
                 BlockState s = server.getBlockState(p);
                 if (s.getBlock() instanceof MoonTarget) {
                     total++;
@@ -114,7 +123,7 @@ public final class TrialBlocks {
                 }
             }
             if (total > 0 && lit >= total && TrialManager.complete(player, Watcher.VAEL)) {
-                for (BlockPos p : BlockPos.betweenClosed(pos.offset(-RADIUS * 2, -8, -RADIUS * 2), pos.offset(RADIUS * 2, 8, RADIUS * 2))) {
+                for (BlockPos p : arena(pos)) {
                     BlockState s = server.getBlockState(p);
                     if (s.getBlock() instanceof MoonTarget) {
                         server.setBlock(p.immutable(), s.setValue(LIT, false), Block.UPDATE_ALL);

@@ -214,6 +214,17 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - **Glow:** vanilla `eyes` render type layer (GeckoLib 5 `TextureLayerGeoLayer`, GeckoLib 4 custom `GeoRenderLayer`),
   no GeckoLib emissive shader. Renderer scale 1.4, hitbox 1.8 × 5.6.
 
+## 2026-11-17 – Built gate and large-scale Firmament
+
+- **Gate uses the vanilla `Portal` interface** (transition time, cooldown, confusion overlay, portal ticket) – no
+  custom teleport code. Shape detection is a pure flood fill (`GateShape`, JUnit-tested); any closed frame works.
+- **Own dimension type** (overworld copy, y -64..447): the 26.1 and 1.21.1 records differ, so datagen runs vanilla's
+  dimension-type bootstrap into a capturing context and copies the overworld entry (vanilla values are unbound in
+  datagen). Worlds that visited the old Firmament keep their old islands; a fresh Firmament is built on first arrival.
+- **Hard, not lethal:** the safety net returns fallers to the nearest island, Solenne's gold pads are checkpoints;
+  difficulty comes from length, precision, archery under pressure and a dark maze.
+- **The Eclipse is bound to the Umbral Throne** (summoned onto its dais) so the fight always has cover pillars.
+
 ## Open (owner)
 
 - **Developer UUIDs.** Add the team's Mojang account UUIDs to `CosmeticsManager.TEAM` (or the server config list) –

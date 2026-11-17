@@ -93,8 +93,8 @@ public class EclipseEntity extends Monster implements GeoEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 400.0)
-                .add(Attributes.ARMOR, 10.0)
+                .add(Attributes.MAX_HEALTH, 600.0)
+                .add(Attributes.ARMOR, 14.0)
                 .add(Attributes.ATTACK_DAMAGE, 12.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.FOLLOW_RANGE, 48.0)
