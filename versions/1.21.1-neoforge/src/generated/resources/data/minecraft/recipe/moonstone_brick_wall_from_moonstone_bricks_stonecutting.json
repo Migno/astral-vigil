@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "astralvigil:moonstone_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "astralvigil:moonstone_brick_wall"
+  }
+}

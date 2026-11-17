@@ -50,6 +50,9 @@ public final class AVTagProviders {
             AVBlocks.GATES.values().forEach(g -> tag(AVTags.Blocks.STARFALL_IMMUNE).add(g.get()));
             AVBlocks.PORTALS.values().forEach(g -> tag(AVTags.Blocks.STARFALL_IMMUNE).add(g.get()));
             tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.VOID_CRYSTAL.get());
+            for (var e : media.hofferbert.astralvigil.registry.AVBuilding.ALL) {
+                media.hofferbert.astralvigil.registry.AVBuilding.blockTags(e).forEach(t -> tag(t).add(e.block().get()));
+            }
             tag(AVTags.Blocks.BEAM_TRANSPARENT).addTag(Tags.Blocks.GLASS_BLOCKS).addTag(Tags.Blocks.GLASS_PANES);
             tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.FALLEN_STAR.get());
             tag(BlockTags.NEEDS_STONE_TOOL).add(AVBlocks.METEORIC_STONE.get());
@@ -122,6 +125,9 @@ public final class AVTagProviders {
             tag(Tags.Items.TOOLS_CROSSBOW).add(AVItems.TIDECALLER.get());
             tag(AVTags.Items.CHART_PAPER).add(net.minecraft.world.item.Items.PAPER);
             tag(AVTags.Items.CODEX_BOOKS).add(net.minecraft.world.item.Items.BOOK);
+            for (var e : media.hofferbert.astralvigil.registry.AVBuilding.ALL) {
+                media.hofferbert.astralvigil.registry.AVBuilding.itemTags(e).forEach(t -> tag(t).add(e.item().get()));
+            }
         }
     }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "astralvigil:block/celestial_pillar_top",
+    "side": "astralvigil:block/celestial_pillar"
+  }
+}

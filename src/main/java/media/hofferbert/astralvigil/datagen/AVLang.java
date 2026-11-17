@@ -33,6 +33,10 @@ public final class AVLang {
     static {
         // Creative tab
         add("itemGroup.astralvigil", "Astral Vigil", "Astral Vigil");
+        add("itemGroup.astralvigil.building", "Astral Vigil – Celestial Masonry", "Astral Vigil – Himmlisches Mauerwerk");
+        for (var e : media.hofferbert.astralvigil.registry.AVBuilding.ALL) {
+            add("block.astralvigil." + e.id(), e.en(), e.de());
+        }
 
         // Items
         add("item.astralvigil.astral_shard", "Astral Shard", "Astralsplitter");

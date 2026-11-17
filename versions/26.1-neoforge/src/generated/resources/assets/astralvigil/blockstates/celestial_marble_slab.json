@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "astralvigil:block/celestial_marble_slab"
+    },
+    "type=double": {
+      "model": "astralvigil:block/celestial_marble"
+    },
+    "type=top": {
+      "model": "astralvigil:block/celestial_marble_slab_top"
+    }
+  }
+}

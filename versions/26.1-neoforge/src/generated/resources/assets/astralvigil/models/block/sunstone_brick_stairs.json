@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "astralvigil:block/sunstone_bricks",
+    "side": "astralvigil:block/sunstone_bricks",
+    "top": "astralvigil:block/sunstone_bricks"
+  }
+}

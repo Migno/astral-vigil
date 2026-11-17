@@ -66,5 +66,13 @@ public final class AVCreativeTabs {
             })
             .build());
 
+    /** Celestial building blocks (Starwood, Celestial Marble, Sunstone, Moonstone, Umbral Stone, lights). */
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> BUILDING = TABS.register("building", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.astralvigil.building"))
+            .withTabsBefore(MAIN.getKey())
+            .icon(() -> AVBuilding.CHISELED_CELESTIAL_MARBLE.get().asItem().getDefaultInstance())
+            .displayItems((params, output) -> AVBuilding.ALL.forEach(e -> output.accept(e.item().get())))
+            .build());
+
     private AVCreativeTabs() {}
 }

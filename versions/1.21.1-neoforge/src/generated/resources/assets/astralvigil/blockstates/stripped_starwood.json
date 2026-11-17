@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "astralvigil:block/stripped_starwood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "astralvigil:block/stripped_starwood"
+    },
+    "axis=z": {
+      "model": "astralvigil:block/stripped_starwood_horizontal",
+      "x": 90
+    }
+  }
+}

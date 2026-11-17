@@ -1,5 +1,8 @@
 package media.hofferbert.astralvigil.datagen;
 
+import media.hofferbert.astralvigil.registry.AVBuilding;
+import net.minecraft.world.level.ItemLike;
+
 import java.util.concurrent.CompletableFuture;
 import media.hofferbert.astralvigil.registry.AVItems;
 import media.hofferbert.astralvigil.registry.AVTags;
@@ -65,6 +68,7 @@ public class AVRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
+        buildingRecipes(output);
         shaped(RecipeCategory.MISC, AVItems.STAR_ANCHOR.get(), 2)
                 .define('S', AVTags.Items.ASTRAL_SHARDS)
                 .define('G', Tags.Items.INGOTS_GOLD)
@@ -210,6 +214,7 @@ public class AVRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
+        buildingRecipes(output);
         // Gate frames: same pattern; centre and corners are themed after where the gate leads
         gate(output, media.hofferbert.astralvigil.firmament.GateKind.ASTRAL, AVTags.Items.INGOTS_STARMETAL, AVTags.Items.METEORIC_STONES);
         gate(output, media.hofferbert.astralvigil.firmament.GateKind.SOLAR, AVTags.Items.INGOTS_SUNSTEEL, Tags.Items.STORAGE_BLOCKS_GOLD);
@@ -331,6 +336,88 @@ public class AVRecipeProvider extends RecipeProvider {
                 .save(output);
     }
     *///?}
+
+    // ------------------------------------------------------------------ celestial building blocks
+
+    //? if >=26.1 {
+    private net.minecraft.data.recipes.ShapedRecipeBuilder sh(ItemLike result, int count) {
+        return shaped(RecipeCategory.BUILDING_BLOCKS, result, count);
+    }
+
+    private void cut(RecipeOutput output, ItemLike result, ItemLike base, int count) {
+        stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, result, base, count);
+    }
+
+    private void woodRecipes(RecipeOutput output) {
+        planksFromLog(AVBuilding.STARWOOD_PLANKS.get(), AVBuilding.STARWOOD_LOGS, 4);
+        woodFromLogs(AVBuilding.STARWOOD.get(), AVBuilding.STARWOOD_LOG.get());
+        woodFromLogs(AVBuilding.STRIPPED_STARWOOD.get(), AVBuilding.STRIPPED_STARWOOD_LOG.get());
+        AVBuildingModels.families().forEach(f -> generateRecipes(f, net.minecraft.world.flag.FeatureFlags.VANILLA_SET));
+    }
+    //?} else {
+    /*private net.minecraft.data.recipes.ShapedRecipeBuilder sh(ItemLike result, int count) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result, count);
+    }
+
+    private void cut(RecipeOutput output, ItemLike result, ItemLike base, int count) {
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, result, base, count);
+    }
+
+    private void woodRecipes(RecipeOutput output) {
+        planksFromLog(output, AVBuilding.STARWOOD_PLANKS.get(), AVBuilding.STARWOOD_LOGS, 4);
+        woodFromLogs(output, AVBuilding.STARWOOD.get(), AVBuilding.STARWOOD_LOG.get());
+        woodFromLogs(output, AVBuilding.STRIPPED_STARWOOD.get(), AVBuilding.STRIPPED_STARWOOD_LOG.get());
+        AVBuildingModels.families().forEach(f -> generateRecipes(output, f, net.minecraft.world.flag.FeatureFlags.VANILLA_SET));
+    }
+    *///?}
+
+    private void ring(RecipeOutput output, ItemLike result, int count, ItemLike around, TagKey<Item> centre) {
+        sh(result, count).define('A', around).define('C', centre).pattern("AAA").pattern("ACA").pattern("AAA")
+                .unlockedBy("has_centre", has(centre)).save(output);
+    }
+
+    private void bricks(RecipeOutput output, ItemLike result, ItemLike base) {
+        sh(result, 4).define('B', base).pattern("BB").pattern("BB").unlockedBy("has_base", has(base)).save(output);
+        cut(output, result, base, 1);
+    }
+
+    private void lamp(RecipeOutput output, ItemLike result, ItemLike stone) {
+        sh(result, 4).define('S', stone).define('L', Items.GLOWSTONE).pattern(" S ").pattern("SLS").pattern(" S ")
+                .unlockedBy("has_stone", has(stone)).save(output);
+    }
+
+    private void buildingRecipes(RecipeOutput output) {
+        woodRecipes(output);
+        ring(output, AVBuilding.CELESTIAL_MARBLE.get(), 8, Items.CALCITE, AVTags.Items.ASTRAL_SHARDS);
+        ring(output, AVBuilding.SUNSTONE.get(), 8, Items.SMOOTH_SANDSTONE, AVTags.Items.INGOTS_SUNSTEEL);
+        ring(output, AVBuilding.MOONSTONE.get(), 8, Items.DIORITE, AVTags.Items.INGOTS_MOONSILVER);
+        ring(output, AVBuilding.UMBRAL_STONE.get(), 8, Items.COBBLED_DEEPSLATE, AVTags.Items.ASTRAL_SHARDS);
+        ring(output, AVBuilding.GILDED_STARWOOD.get(), 8, AVBuilding.STARWOOD_PLANKS.get(), Tags.Items.INGOTS_GOLD);
+        ring(output, AVBuilding.GILDED_CELESTIAL_BRICKS.get(), 8, AVBuilding.CELESTIAL_BRICKS.get(), Tags.Items.INGOTS_GOLD);
+        ring(output, AVBuilding.CONSTELLATION_TILES.get(), 8, Items.DEEPSLATE_TILES, AVTags.Items.ASTRAL_SHARDS);
+        ring(output, AVBuilding.HALO_GLASS.get(), 8, Items.GLASS, Tags.Items.INGOTS_GOLD);
+        ring(output, AVBuilding.NEBULA_GLASS.get(), 8, Items.GLASS, Tags.Items.GEMS_AMETHYST);
+        ring(output, AVBuilding.STAR_LANTERN.get(), 1, Items.GOLD_NUGGET, AVTags.Items.ASTRAL_SHARDS);
+        bricks(output, AVBuilding.CELESTIAL_BRICKS.get(), AVBuilding.CELESTIAL_MARBLE.get());
+        bricks(output, AVBuilding.SUNSTONE_BRICKS.get(), AVBuilding.SUNSTONE.get());
+        bricks(output, AVBuilding.MOONSTONE_BRICKS.get(), AVBuilding.MOONSTONE.get());
+        bricks(output, AVBuilding.UMBRAL_BRICKS.get(), AVBuilding.UMBRAL_STONE.get());
+        ItemLike marble = AVBuilding.CELESTIAL_MARBLE.get();
+        sh(AVBuilding.CELESTIAL_PILLAR.get(), 2).define('M', marble).pattern("M").pattern("M")
+                .unlockedBy("has_marble", has(marble)).save(output);
+        cut(output, AVBuilding.CELESTIAL_PILLAR.get(), marble, 1);
+        lamp(output, AVBuilding.ASTRAL_LAMP.get(), marble);
+        lamp(output, AVBuilding.SUNSTONE_LAMP.get(), AVBuilding.SUNSTONE.get());
+        lamp(output, AVBuilding.MOONSTONE_LAMP.get(), AVBuilding.MOONSTONE.get());
+        lamp(output, AVBuilding.UMBRAL_LAMP.get(), AVBuilding.UMBRAL_STONE.get());
+        // stonecutting: every stone variant from its family base
+        for (var f : AVBuildingModels.families()) {
+            if (f.getBaseBlock() != AVBuilding.STARWOOD_PLANKS.get()) {
+                f.getVariants().forEach((variant, block) -> cut(output, block, f.getBaseBlock(),
+                        variant == net.minecraft.data.BlockFamily.Variant.SLAB ? 2 : 1));
+            }
+        }
+    }
 
     // ------------------------------------------------------------------ starlight recipes (custom types)
 

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "astralvigil:celestial_marble",
+  "result": {
+    "id": "astralvigil:chiseled_celestial_marble"
+  }
+}

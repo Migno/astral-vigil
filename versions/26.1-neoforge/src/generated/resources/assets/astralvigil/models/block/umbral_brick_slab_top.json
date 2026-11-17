@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "astralvigil:block/umbral_bricks",
+    "side": "astralvigil:block/umbral_bricks",
+    "top": "astralvigil:block/umbral_bricks"
+  }
+}

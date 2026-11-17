@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "astralvigil:block/moonstone_bricks",
+    "side": "astralvigil:block/moonstone_bricks",
+    "top": "astralvigil:block/moonstone_bricks"
+  }
+}

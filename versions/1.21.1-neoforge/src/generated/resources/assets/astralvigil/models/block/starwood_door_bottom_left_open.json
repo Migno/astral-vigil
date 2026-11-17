@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "astralvigil:block/starwood_door_bottom",
+    "top": "astralvigil:block/starwood_door_top"
+  }
+}

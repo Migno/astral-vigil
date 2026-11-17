@@ -40,6 +40,7 @@ public final class AstralVigil {
         container.registerConfig(ModConfig.Type.SERVER, AVServerConfig.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, AVClientConfig.SPEC);
 
+        media.hofferbert.astralvigil.registry.AVBuilding.init();
         AVBlocks.BLOCKS.register(modBus);
         AVItems.ITEMS.register(modBus);
         AVCreativeTabs.TABS.register(modBus);

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_marble": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:celestial_marble"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "astralvigil:celestial_marble_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_marble"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "astralvigil:celestial_marble_slab"
+    ]
+  }
+}

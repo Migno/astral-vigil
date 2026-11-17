@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "astralvigil:celestial_marble",
+  "result": {
+    "count": 2,
+    "id": "astralvigil:celestial_marble_slab"
+  }
+}

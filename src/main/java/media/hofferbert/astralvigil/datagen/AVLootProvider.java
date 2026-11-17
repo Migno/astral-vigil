@@ -48,6 +48,17 @@ public class AVLootProvider extends BlockLootSubProvider {
         dropSelf(AVBlocks.FIRMAMENT_STONE.get());
         AVBlocks.GATES.values().forEach(g -> dropSelf(g.get()));
         dropSelf(AVBlocks.ECLIPSE_SEAL.get());
+        // celestial building blocks
+        for (var e : media.hofferbert.astralvigil.registry.AVBuilding.ALL) {
+            Block b = e.block().get();
+            switch (e.shape()) {
+                case SLAB -> add(b, this::createSlabItemTable);
+                case DOOR -> add(b, this::createDoorTable);
+                case LEAVES -> add(b, x -> createLeavesDrops(x, media.hofferbert.astralvigil.registry.AVBuilding.STARWOOD_SAPLING.get(),
+                        NORMAL_LEAVES_SAPLING_CHANCES));
+                default -> dropSelf(b);
+            }
+        }
         add(AVBlocks.VOID_CRYSTAL.get(), block -> createSilkTouchDispatchTable(
                 block,
                 applyExplosionDecay(block, LootItem.lootTableItem(AVItems.VOID_SHARD.get())

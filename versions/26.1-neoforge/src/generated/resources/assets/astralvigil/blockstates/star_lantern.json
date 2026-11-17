@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "astralvigil:block/star_lantern"
+    },
+    "hanging=true": {
+      "model": "astralvigil:block/star_lantern_hanging"
+    }
+  }
+}

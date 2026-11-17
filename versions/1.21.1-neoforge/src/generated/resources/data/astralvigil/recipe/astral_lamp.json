@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "minecraft:glowstone"
+    },
+    "S": {
+      "item": "astralvigil:celestial_marble"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SLS",
+    " S "
+  ],
+  "result": {
+    "count": 4,
+    "id": "astralvigil:astral_lamp"
+  }
+}

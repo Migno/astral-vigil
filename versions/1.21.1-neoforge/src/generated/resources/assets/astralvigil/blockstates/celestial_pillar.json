@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "astralvigil:block/celestial_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "astralvigil:block/celestial_pillar"
+    },
+    "axis=z": {
+      "model": "astralvigil:block/celestial_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

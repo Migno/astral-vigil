@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "astralvigil:chiseled_umbral_bricks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_umbral_brick_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:umbral_brick_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_umbral_brick_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "astralvigil:chiseled_umbral_bricks"
+    ]
+  }
+}

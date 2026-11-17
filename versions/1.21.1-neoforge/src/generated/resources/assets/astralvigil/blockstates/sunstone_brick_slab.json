@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "astralvigil:block/sunstone_brick_slab"
+    },
+    "type=double": {
+      "model": "astralvigil:block/sunstone_bricks"
+    },
+    "type=top": {
+      "model": "astralvigil:block/sunstone_brick_slab_top"
+    }
+  }
+}

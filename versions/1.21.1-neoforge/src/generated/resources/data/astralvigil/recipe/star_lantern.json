@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "minecraft:gold_nugget"
+    },
+    "C": {
+      "tag": "astralvigil:astral_shards"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ACA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:star_lantern"
+  }
+}

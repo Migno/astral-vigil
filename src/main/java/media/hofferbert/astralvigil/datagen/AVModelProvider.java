@@ -37,6 +37,7 @@ public class AVModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+        AVBuildingModels.generate(blockModels, itemModels);
         blockModels.createTrivialCube(AVBlocks.FALLEN_STAR.get());
         blockModels.createTrivialCube(AVBlocks.METEORIC_STONE.get());
         blockModels.createTrivialCube(AVBlocks.CONSTELLATION_LOCK.get());
@@ -118,6 +119,7 @@ public class AVModelProvider extends ModelProvider {
 
         @Override
         protected void registerStatesAndModels() {
+            AVBuildingModels.blockStates(this);
             simpleBlockWithItem(AVBlocks.FALLEN_STAR.get(), cubeAll(AVBlocks.FALLEN_STAR.get()));
             simpleBlockWithItem(AVBlocks.METEORIC_STONE.get(), cubeAll(AVBlocks.METEORIC_STONE.get()));
             simpleBlockWithItem(AVBlocks.CONSTELLATION_LOCK.get(), cubeAll(AVBlocks.CONSTELLATION_LOCK.get()));

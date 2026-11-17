@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "astralvigil:block/starwood_log",
+    "side": "astralvigil:block/starwood_log"
+  }
+}
