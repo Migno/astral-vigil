@@ -11,7 +11,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "astralvigil:astral_gate",
-      "text": "Build a closed frame standing upright, like a door: the opening at least 2 wide and 3 tall (corners are optional). Set the Ascension Key into the frame and step into the light for a few heartbeats.$(br2)The frame decides where you arrive. An $(item)Astral Gate$() leads to the hub; each Watcher has a gate of its own."
+      "text": "Build a closed frame standing upright, like a door: the opening at least 2 wide and 3 tall (corners are optional). Set the Ascension Key into the frame and step into the light for a few heartbeats.$(br2)The frame decides where you arrive. An $(item)Astral Gate$() opens onto the wild Firmament, where starwood grows; each Watcher has a gate of its own, and every gate leads to a realm of its own."
     },
     {
       "type": "patchouli:text",
@@ -19,7 +19,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The Firmament is light: you fall slowly and land softly. Fall off the islands and the sky catches you and sets you down at the nearest arrival platform. Every platform has a gate that leads home."
+      "text": "The Firmament is light: you fall slowly and land softly. Fall from a realm and its sky catches you and sets you down on the arrival shrine - and so it does with anything you drop. Every shrine has a gate that leads home, and no one can break it. The trial realms are sacred: nothing can be dug or built there, and ender pearls fizzle."
     }
   ],
   "sortnum": 0

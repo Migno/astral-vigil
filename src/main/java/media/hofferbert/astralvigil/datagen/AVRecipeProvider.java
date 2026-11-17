@@ -348,6 +348,10 @@ public class AVRecipeProvider extends RecipeProvider {
         stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, result, base, count);
     }
 
+    private void crack(RecipeOutput output, ItemLike result, ItemLike base) {
+        smeltingResultFromBase(result, base);
+    }
+
     private void woodRecipes(RecipeOutput output) {
         planksFromLog(AVBuilding.STARWOOD_PLANKS.get(), AVBuilding.STARWOOD_LOGS, 4);
         woodFromLogs(AVBuilding.STARWOOD.get(), AVBuilding.STARWOOD_LOG.get());
@@ -361,6 +365,10 @@ public class AVRecipeProvider extends RecipeProvider {
 
     private void cut(RecipeOutput output, ItemLike result, ItemLike base, int count) {
         stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, result, base, count);
+    }
+
+    private void crack(RecipeOutput output, ItemLike result, ItemLike base) {
+        smeltingResultFromBase(output, result, base);
     }
 
     private void woodRecipes(RecipeOutput output) {
@@ -406,6 +414,13 @@ public class AVRecipeProvider extends RecipeProvider {
         sh(AVBuilding.CELESTIAL_PILLAR.get(), 2).define('M', marble).pattern("M").pattern("M")
                 .unlockedBy("has_marble", has(marble)).save(output);
         cut(output, AVBuilding.CELESTIAL_PILLAR.get(), marble, 1);
+        ring(output, AVBuilding.ECLIPSE_GLASS.get(), 8, Items.GLASS, Tags.Items.OBSIDIANS_CRYING);
+        ItemLike umbralBricks = AVBuilding.UMBRAL_BRICKS.get();
+        sh(AVBuilding.UMBRAL_PILLAR.get(), 2).define('M', umbralBricks).pattern("M").pattern("M")
+                .unlockedBy("has_umbral_bricks", has(umbralBricks)).save(output);
+        cut(output, AVBuilding.UMBRAL_PILLAR.get(), umbralBricks, 1);
+        crack(output, AVBuilding.CRACKED_UMBRAL_BRICKS.get(), umbralBricks);
+        crack(output, AVBuilding.CRACKED_CELESTIAL_BRICKS.get(), AVBuilding.CELESTIAL_BRICKS.get());
         lamp(output, AVBuilding.ASTRAL_LAMP.get(), marble);
         lamp(output, AVBuilding.SUNSTONE_LAMP.get(), AVBuilding.SUNSTONE.get());
         lamp(output, AVBuilding.MOONSTONE_LAMP.get(), AVBuilding.MOONSTONE.get());

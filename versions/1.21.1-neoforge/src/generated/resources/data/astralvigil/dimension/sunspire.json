@@ -1,0 +1,12 @@
+{
+  "type": "astralvigil:sunspire",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "astralvigil:sunspire",
+      "features": false,
+      "lakes": false,
+      "layers": []
+    }
+  }
+}

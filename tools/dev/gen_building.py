@@ -459,6 +459,64 @@ def lantern_item():
     return t
 
 
+def cracked(t, seed, dark):
+    t = [row[:] for row in t]
+    rnd = random.Random(seed)
+    for _ in range(4):
+        x, y = rnd.randrange(16), rnd.randrange(16)
+        for _ in range(rnd.randrange(3, 7)):
+            t[y % 16][x % 16] = dark
+            x += rnd.choice((-1, 0, 1))
+            y += 1
+    return t
+
+
+def umbral_pillar_side():
+    t = img()
+    for y in range(16):
+        for x in range(16):
+            t[y][x] = (UMBRA[3], UMBRA[2], UMBRA[2], UMBRA[1])[x % 4] if x not in (0, 15) else UMBRA[0]
+    for x in range(16):
+        t[0][x] = UMBRA[0]
+        t[1][x] = VIOLET
+        t[14][x] = VIOLET
+        t[15][x] = UMBRA[0]
+    for y in (5, 10):
+        t[y][7] = t[y][8] = C("B57CFF")
+    return t
+
+
+def umbral_pillar_top():
+    t = stone(UMBRA, 191)
+    for y in range(16):
+        for x in range(16):
+            r = math.hypot(x - 7.5, y - 7.5)
+            if x in (0, 15) or y in (0, 15):
+                t[y][x] = UMBRA[0]
+            elif 5.2 < r < 6.4:
+                t[y][x] = VIOLET
+            elif r < 1.5:
+                t[y][x] = C("B57CFF")
+    return t
+
+
+def eclipse_glass():
+    t = img()
+    for y in range(16):
+        for x in range(16):
+            r = math.hypot(x - 7.5, y - 7.5)
+            if x in (0, 15) or y in (0, 15):
+                t[y][x] = C("1E1A2E", 230)
+            elif abs(r - 5.5) < 0.6 or x in (7, 8) or y in (7, 8):
+                t[y][x] = C("3A2560", 220)
+            elif r < 3:
+                t[y][x] = C("B57CFF", 150)
+            else:
+                t[y][x] = C("5B2A86", 130)
+    t[7][7] = t[7][8] = t[8][7] = t[8][8] = C("E0C8FF", 230)
+    return t
+
+
 def main():
     marble = stone(MARBLE, 131, veins=3, vein_col=MARBLE[0])
     sun = stone(SUN, 141, veins=2, vein_col=C("FFF4C0"))
@@ -489,6 +547,11 @@ def main():
         "umbral_stone": umbra,
         "umbral_bricks": bricks(stone(UMBRA, 162), UMBRA[0], VIOLET),
         "chiseled_umbral_bricks": chiseled_umbral(),
+        "cracked_umbral_bricks": cracked(bricks(stone(UMBRA, 163), UMBRA[0], VIOLET), 164, UMBRA[0]),
+        "umbral_pillar": umbral_pillar_side(),
+        "umbral_pillar_top": umbral_pillar_top(),
+        "cracked_celestial_bricks": cracked(bricks(stone(MARBLE, 134), MARBLE[0], MARBLE[3]), 135, C("8F89A6")),
+        "eclipse_glass": eclipse_glass(),
         "astral_lamp": lamp(GOLD_DD, GOLD, CYAN, WHITE, CYAN_D, 171),
         "sunstone_lamp": lamp(SUN[0], SUN[2], C("FFE08A"), WHITE, SUN[3], 172),
         "moonstone_lamp": lamp(MOON[0], MOON[2], C("E6EEFA"), WHITE, C("B9F6FF"), 173),

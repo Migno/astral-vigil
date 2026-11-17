@@ -450,7 +450,7 @@ public final class AVLang {
         add("block.astralvigil.archive_portal", "Archive Portal", "Archivportal");
         add("block.astralvigil.umbral_gate", "Umbral Gate", "Umbraltor");
         add("block.astralvigil.umbral_portal", "Umbral Portal", "Umbralportal");
-        add("message.astralvigil.gate.lit.astral", "The Astral Gate opens onto the Firmament's hub.", "Das Astraltor öffnet sich zur Mitte des Firmaments.");
+        add("message.astralvigil.gate.lit.astral", "The Astral Gate opens onto the wild Firmament, where the starwood grows.", "Das Astraltor öffnet sich zum wilden Firmament, wo das Sternholz wächst.");
         add("message.astralvigil.gate.lit.solar", "The Solar Gate opens at the foot of Solenne's Sun Spire.", "Das Sonnentor öffnet sich am Fuß von Solennes Sonnenspitze.");
         add("message.astralvigil.gate.lit.lunar", "The Lunar Gate opens onto Vael's Moon Arena.", "Das Mondtor öffnet sich zu Vaels Mondarena.");
         add("message.astralvigil.gate.lit.prism", "The Prism Gate opens before Orrin's Prism Observatory.", "Das Prismentor öffnet sich vor Orrins Prismenobservatorium.");
@@ -462,6 +462,21 @@ public final class AVLang {
         add("message.astralvigil.gate.incomplete", "The frame is not closed (opening at least 2 wide and 3 tall, at most 21).",
                 "Der Rahmen ist nicht geschlossen (Öffnung mindestens 2 breit und 3 hoch, höchstens 21).");
         add("dimension.astralvigil.firmament", "The Firmament", "Das Firmament");
+        add("realm.astralvigil.firmament", "The Firmament", "Das Firmament");
+        add("realm.astralvigil.firmament.subtitle", "Starwood groves above the clouds", "Sternholzhaine über den Wolken");
+        add("realm.astralvigil.sunspire", "The Sunspire", "Die Sonnenspitze");
+        add("realm.astralvigil.sunspire.subtitle", "Solenne's eternal dawn", "Solennes ewige Morgenröte");
+        add("realm.astralvigil.moonwell", "The Moonwell", "Der Mondbrunnen");
+        add("realm.astralvigil.moonwell.subtitle", "Vael's silver midnight", "Vaels silberne Mitternacht");
+        add("realm.astralvigil.starforge", "The Starforge", "Die Sternenschmiede");
+        add("realm.astralvigil.starforge.subtitle", "Where Orrin bends the light", "Wo Orrin das Licht beugt");
+        add("realm.astralvigil.archive", "The Endless Archive", "Das Endlose Archiv");
+        add("realm.astralvigil.archive.subtitle", "Ilyra remembers everything", "Ilyra erinnert sich an alles");
+        add("realm.astralvigil.umbral_throne", "The Umbral Cathedral", "Die Umbrale Kathedrale");
+        add("realm.astralvigil.umbral_throne.subtitle", "The fallen Watcher's broken sanctuary", "Das zerbrochene Heiligtum des gefallenen Wächters");
+        add("message.astralvigil.firmament.sacred", "This ground is sacred to the Watchers.", "Dieser Boden ist den Wächtern heilig.");
+        add("message.astralvigil.trial.checkpoint", "Solenne's light marks your climb (%s of 4).", "Solennes Licht zeichnet deinen Aufstieg (%s von 4).");
+        add("message.astralvigil.trial.skipped", "The crown stays cold: you passed only %s of %s gold pads.", "Die Krone bleibt kalt: Du hast nur %s von %s goldenen Stufen erreicht.");
         add("message.astralvigil.firmament.arrive", "You rise above the clouds. The gate behind you leads home.", "Du steigst über die Wolken. Das Tor hinter dir führt nach Hause.");
         add("message.astralvigil.firmament.missing", "The Firmament is closed on this server.", "Das Firmament ist auf diesem Server verschlossen.");
         add("message.astralvigil.watcher.favour", "%s regards you. Favour: %s", "%s betrachtet dich. Gunst: %s");

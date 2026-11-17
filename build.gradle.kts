@@ -76,6 +76,7 @@ dependencies {
 
 neoForge {
     version = sc.properties["deps.neoforge"]
+    accessTransformers.from(rootProject.file("src/main/resources/META-INF/accesstransformer.cfg"))
 
     if (!is26) {
         parchment {

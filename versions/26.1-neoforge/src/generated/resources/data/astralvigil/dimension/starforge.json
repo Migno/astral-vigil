@@ -1,0 +1,12 @@
+{
+  "type": "astralvigil:starforge",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "astralvigil:starforge",
+      "features": false,
+      "lakes": false,
+      "layers": []
+    }
+  }
+}

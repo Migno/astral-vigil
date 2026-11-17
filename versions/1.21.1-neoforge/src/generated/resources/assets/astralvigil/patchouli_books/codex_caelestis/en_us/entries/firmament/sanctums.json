@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Four trial islands float far apart, each a day's labour and each reached only through its own gate: Solenne's Sun Spire, Vael's Moon Arena, Orrin's Prism Observatory and Ilyra's Endless Library. Each Watcher waits beside its arrival platform - speak to it to begin its trial.$(br2)Each completed trial grants that Watcher's $(l)Mark$() and its $(l)favour$() – but rival Watchers grow cooler: Solenne and Vael, Orrin and Ilyra."
+      "text": "Four trials lie in four realms of their own, each a day's labour and each reached only through its own gate: Solenne's Sun Spire in eternal dawn, Vael's Moon Arena under a full moon, Orrin's Prism Observatory in deep space and Ilyra's Endless Library in the dark of the archive. Each Watcher floats beside the way in - speak to it to begin its trial. On the Sun Spire only a climber who passed every gold pad may touch the crown.$(br2)Each completed trial grants that Watcher's $(l)Mark$() and its $(l)favour$() – but rival Watchers grow cooler: Solenne and Vael, Orrin and Ilyra."
     }
   ],
   "sortnum": 1

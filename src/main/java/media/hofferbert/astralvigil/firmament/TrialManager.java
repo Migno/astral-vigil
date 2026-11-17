@@ -89,6 +89,7 @@ public final class TrialManager {
             return false;
         }
         player.getPersistentData().putString(TRIAL_KEY, w.id());
+        Firmament.resetCheckpoints(player);
         player.getPersistentData().putLong(TRIAL_UNTIL, player.level().getGameTime() + TRIAL_TICKS);
         player.sendSystemMessage(Component.translatable("trial.astralvigil." + w.id() + ".intro", name).withStyle(ChatFormatting.GOLD));
         player.sendSystemMessage(Component.translatable("trial.astralvigil." + w.id() + ".hint").withStyle(ChatFormatting.AQUA));

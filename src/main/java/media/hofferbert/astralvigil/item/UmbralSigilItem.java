@@ -28,14 +28,16 @@ public class UmbralSigilItem extends Item {
 
     /** The Eclipse can only be called on the Umbral Throne (its arena island). */
     public static boolean atThrone(net.minecraft.core.BlockPos pos) {
-        var throne = media.hofferbert.astralvigil.firmament.SanctumBuilder.THRONE;
+        var realm = media.hofferbert.astralvigil.firmament.Realm.UMBRAL_THRONE;
+        var throne = realm.trialCentre();
         return pos.distSqr(new net.minecraft.core.BlockPos(throne.getX(), pos.getY(), throne.getZ()))
-                <= (double) media.hofferbert.astralvigil.firmament.SanctumBuilder.THRONE_RADIUS * media.hofferbert.astralvigil.firmament.SanctumBuilder.THRONE_RADIUS;
+                <= (double) realm.trialRadius() * realm.trialRadius();
     }
 
     /** @return true if the Eclipse was summoned */
     public static boolean trySummon(ServerPlayer player, ItemStack stack) {
-        if (!Firmament.isFirmament(player.level()) || !atThrone(player.blockPosition())) {
+        if (media.hofferbert.astralvigil.firmament.Realm.of(player.level()) != media.hofferbert.astralvigil.firmament.Realm.UMBRAL_THRONE
+                || !atThrone(player.blockPosition())) {
             player.sendSystemMessage(Component.translatable("message.astralvigil.umbral.not_here").withStyle(ChatFormatting.DARK_PURPLE));
             return false;
         }
@@ -54,7 +56,7 @@ public class UmbralSigilItem extends Item {
             player.sendSystemMessage(Component.translatable("message.astralvigil.umbral.present").withStyle(ChatFormatting.DARK_PURPLE));
             return false;
         }
-        EclipseEntity.summon(level, Vec3.atBottomCenterOf(media.hofferbert.astralvigil.firmament.SanctumBuilder.THRONE).add(0, 4, 0));
+        EclipseEntity.summon(level, Vec3.atBottomCenterOf(media.hofferbert.astralvigil.firmament.Realm.UMBRAL_THRONE.trialCentre()).add(0, 4, 0));
         if (!player.getAbilities().instabuild) {
             stack.shrink(1);
         }

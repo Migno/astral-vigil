@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_centre": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:obsidians/crying"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "astralvigil:eclipse_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_centre"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "astralvigil:eclipse_glass"
+    ]
+  }
+}

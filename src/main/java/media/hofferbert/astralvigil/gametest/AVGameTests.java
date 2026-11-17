@@ -137,21 +137,27 @@ public final class AVGameTests {
     static void firmamentTemplates(GameTestHelper helper) {
         var manager = helper.getLevel().getStructureManager();
         var settings = new net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings();
-        java.util.Map<String, net.minecraft.world.level.block.Block> key = java.util.Map.of(
-                "landing", media.hofferbert.astralvigil.registry.AVBlocks.CELESTIAL_PORTAL.get(),
-                "arrival", net.minecraft.world.level.block.Blocks.LANTERN,
-                "solenne", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(),
-                "vael", media.hofferbert.astralvigil.registry.AVBlocks.MOON_TARGET.get(),
-                "orrin", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_RECEPTOR.get(),
-                "ilyra", media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(),
-                "throne", media.hofferbert.astralvigil.registry.AVBlocks.ECLIPSE_SEAL.get());
-        java.util.Map<String, Integer> counts = java.util.Map.of("landing", 12, "arrival", 4, "vael", 10, "orrin", 3);
-        for (var e : key.entrySet()) {
-            var template = manager.get(AstralVigil.id("firmament/" + e.getKey()));
-            GT.check(helper, template.isPresent(), "missing template " + e.getKey());
-            int found = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, e.getValue()).size();
-            int expected = counts.getOrDefault(e.getKey(), 1);
-            GT.check(helper, found == expected, e.getKey() + ": expected " + expected + " key blocks, found " + found);
+        java.util.Map<media.hofferbert.astralvigil.firmament.Realm, java.util.Map.Entry<net.minecraft.world.level.block.Block, Integer>> key = java.util.Map.of(
+                media.hofferbert.astralvigil.firmament.Realm.SUNSPIRE, java.util.Map.entry(media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(), 1),
+                media.hofferbert.astralvigil.firmament.Realm.MOONWELL, java.util.Map.entry(media.hofferbert.astralvigil.registry.AVBlocks.MOON_TARGET.get(), 10),
+                media.hofferbert.astralvigil.firmament.Realm.STARFORGE, java.util.Map.entry(media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_RECEPTOR.get(), 3),
+                media.hofferbert.astralvigil.firmament.Realm.ARCHIVE, java.util.Map.entry(media.hofferbert.astralvigil.registry.AVBlocks.TRIAL_GOAL.get(), 1),
+                media.hofferbert.astralvigil.firmament.Realm.UMBRAL_THRONE, java.util.Map.entry(media.hofferbert.astralvigil.registry.AVBlocks.ECLIPSE_SEAL.get(), 1));
+        var anchor = new net.minecraft.core.BlockPos(media.hofferbert.astralvigil.firmament.Realm.ANCHOR, media.hofferbert.astralvigil.firmament.Realm.FLOOR_Y,
+                media.hofferbert.astralvigil.firmament.Realm.ANCHOR);
+        for (var realm : media.hofferbert.astralvigil.firmament.Realm.values()) {
+            var template = manager.get(AstralVigil.id("realm/" + realm.id()));
+            GT.check(helper, template.isPresent(), "missing template " + realm.id());
+            var fonts = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, media.hofferbert.astralvigil.registry.AVBlocks.STARLIGHT_FONT.get());
+            GT.check(helper, fonts.stream().anyMatch(i -> i.pos().equals(anchor)), realm.id() + ": no Starlight Font on the anchor");
+            int portals = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings,
+                    media.hofferbert.astralvigil.registry.AVBlocks.PORTALS.get(realm.gate()).get()).size();
+            GT.check(helper, portals == 6, realm.id() + ": expected a lit 2x3 return gate, found " + portals + " portal blocks");
+            var k = key.get(realm);
+            if (k != null) {
+                int found = template.get().filterBlocks(net.minecraft.core.BlockPos.ZERO, settings, k.getKey()).size();
+                GT.check(helper, found == k.getValue(), realm.id() + ": expected " + k.getValue() + " key blocks, found " + found);
+            }
         }
         helper.succeed();
     }

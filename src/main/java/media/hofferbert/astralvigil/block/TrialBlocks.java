@@ -45,6 +45,8 @@ public final class TrialBlocks {
     /** Goal of the parkour (Solenne) and maze (Ilyra) trials: touch or step on it while the trial runs. */
     public static class Goal extends Block {
         public static final EnumProperty<WatcherProp> WATCHER = EnumProperty.create("watcher", WatcherProp.class);
+        /** Gold pads on the Sun Spire (one every 16 steps, see gen_realms.py). */
+        public static final int SUN_CHECKPOINTS = 4;
 
         public Goal(Properties properties) {
             super(properties);
@@ -71,6 +73,15 @@ public final class TrialBlocks {
         }
 
         static void reach(BlockState state, Level level, BlockPos pos, Player player) {
+            if (state.getValue(WATCHER) == WatcherProp.SOLENNE && player instanceof ServerPlayer sp0
+                    && "solenne".equals(TrialManager.activeTrial(sp0))
+                    && media.hofferbert.astralvigil.firmament.Firmament.checkpointsReached(player) < SUN_CHECKPOINTS) {
+                // the crown only counts for a climber who passed every gold pad on the way up
+                media.hofferbert.astralvigil.firmament.Firmament.actionBar(player, net.minecraft.network.chat.Component.translatable("message.astralvigil.trial.skipped",
+                        media.hofferbert.astralvigil.firmament.Firmament.checkpointsReached(player), SUN_CHECKPOINTS)
+                        .withStyle(net.minecraft.ChatFormatting.GOLD));
+                return;
+            }
             if (level instanceof ServerLevel server && player instanceof ServerPlayer sp
                     && TrialManager.complete(sp, state.getValue(WATCHER).watcher())) {
                 server.sendParticles(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, 60, 0.4, 1.5, 0.4, 0.08);
@@ -85,7 +96,7 @@ public final class TrialBlocks {
 
         /** Every block of the Moon Arena (Vael's sanctum incl. its far islets); falls back to a box around the target. */
         static Iterable<BlockPos> arena(BlockPos hit) {
-            BlockPos centre = media.hofferbert.astralvigil.firmament.SanctumBuilder.centre(Watcher.VAEL);
+            BlockPos centre = media.hofferbert.astralvigil.firmament.Realm.MOONWELL.trialCentre();
             if (hit.distSqr(centre) > 60 * 60) {
                 return BlockPos.betweenClosed(hit.offset(-RADIUS * 2, -8, -RADIUS * 2), hit.offset(RADIUS * 2, 8, RADIUS * 2));
             }

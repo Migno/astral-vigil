@@ -36,3 +36,6 @@ replay_*.log
 /astral-vigil-claude-code-prompt.md
 .claude/settings.local.json
 __pycache__/
+
+# agent worktrees
+.claude/worktrees/

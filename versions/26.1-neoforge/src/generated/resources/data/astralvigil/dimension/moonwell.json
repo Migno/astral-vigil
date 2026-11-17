@@ -1,0 +1,12 @@
+{
+  "type": "astralvigil:moonwell",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "astralvigil:moonwell",
+      "features": false,
+      "lakes": false,
+      "layers": []
+    }
+  }
+}

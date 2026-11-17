@@ -1,0 +1,12 @@
+{
+  "type": "astralvigil:archive",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "astralvigil:archive",
+      "features": false,
+      "lakes": false,
+      "layers": []
+    }
+  }
+}

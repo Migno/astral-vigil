@@ -3,6 +3,9 @@ loaderVersion = "[1,)"
 license = "${license}"
 issueTrackerURL = "https://github.com/Migno/astral-vigil/issues"
 
+[[accessTransformers]]
+file = "META-INF/accesstransformer.cfg"
+
 [[mods]]
 modId = "${id}"
 version = "${version}"

@@ -1,0 +1,44 @@
+{
+  "ambient_light": 0.08,
+  "attributes": {
+    "minecraft:gameplay/bed_rule": {
+      "can_set_spawn": "always",
+      "can_sleep": "when_dark",
+      "error_message": {
+        "translate": "block.minecraft.bed.no_sleep"
+      }
+    },
+    "minecraft:gameplay/respawn_anchor_works": false,
+    "minecraft:gameplay/sky_light_level": 4.0,
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:enchant"
+        },
+        "probability": 0.006
+      }
+    ],
+    "minecraft:visual/cloud_color": "#00ffffff",
+    "minecraft:visual/cloud_height": 120.0,
+    "minecraft:visual/fog_color": "#1b1426",
+    "minecraft:visual/moon_angle": 360.0,
+    "minecraft:visual/moon_phase": "new_moon",
+    "minecraft:visual/sky_color": "#07060f",
+    "minecraft:visual/sky_light_factor": 0.24,
+    "minecraft:visual/star_angle": 180.0,
+    "minecraft:visual/star_brightness": 0.5,
+    "minecraft:visual/sun_angle": 180.0,
+    "minecraft:visual/sunrise_sunset_color": "#00000000"
+  },
+  "coordinate_scale": 1.0,
+  "has_ceiling": false,
+  "has_ender_dragon_fight": false,
+  "has_fixed_time": true,
+  "has_skylight": true,
+  "height": 448,
+  "infiniburn": "#minecraft:infiniburn_overworld",
+  "logical_height": 448,
+  "min_y": 0,
+  "monster_spawn_block_light_limit": 0,
+  "monster_spawn_light_level": 0
+}

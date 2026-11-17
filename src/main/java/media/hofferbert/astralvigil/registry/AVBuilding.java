@@ -160,6 +160,12 @@ public final class AVBuilding {
     public static final DeferredBlock<WallBlock> UMBRAL_BRICK_WALL = wall("umbral_brick_wall", UMBRAL_BRICKS, "Umbral Brick Wall", "Umbralziegelmauer");
     public static final DeferredBlock<Block> CHISELED_UMBRAL_BRICKS = add("chiseled_umbral_bricks", Shape.CUBE, Material.STONE, null,
             "Chiseled Umbral Bricks", "Gemeißelte Umbralziegel", Block::new, p -> stone(p, MapColor.COLOR_PURPLE, SoundType.DEEPSLATE_BRICKS).lightLevel(s -> 5));
+    public static final DeferredBlock<Block> CRACKED_UMBRAL_BRICKS = add("cracked_umbral_bricks", Shape.CUBE, Material.STONE, null,
+            "Cracked Umbral Bricks", "Rissige Umbralziegel", Block::new, p -> stone(p, MapColor.COLOR_PURPLE, SoundType.DEEPSLATE_BRICKS));
+    public static final DeferredBlock<RotatedPillarBlock> UMBRAL_PILLAR = add("umbral_pillar", Shape.PILLAR, Material.STONE, null,
+            "Umbral Pillar", "Umbralsäule", RotatedPillarBlock::new, p -> stone(p, MapColor.COLOR_PURPLE, SoundType.DEEPSLATE_BRICKS));
+    public static final DeferredBlock<Block> CRACKED_CELESTIAL_BRICKS = add("cracked_celestial_bricks", Shape.CUBE, Material.STONE, null,
+            "Cracked Celestial Bricks", "Rissige Himmelsziegel", Block::new, p -> stone(p, MapColor.SNOW, SoundType.CALCITE));
 
     // ------------------------------------------------------------------ lights and glass
     public static final DeferredBlock<Block> ASTRAL_LAMP = add("astral_lamp", Shape.CUBE, Material.LIGHT, null,
@@ -179,6 +185,8 @@ public final class AVBuilding {
             "Halo Glass", "Heiligenscheinglas", TransparentBlock::new, AVBuilding::glass);
     public static final DeferredBlock<TransparentBlock> NEBULA_GLASS = add("nebula_glass", Shape.GLASS, Material.GLASS, null,
             "Nebula Glass", "Nebelglas", TransparentBlock::new, p -> glass(p).lightLevel(s -> 2));
+    public static final DeferredBlock<TransparentBlock> ECLIPSE_GLASS = add("eclipse_glass", Shape.GLASS, Material.GLASS, null,
+            "Eclipse Glass", "Finsternisglas", TransparentBlock::new, p -> glass(p).lightLevel(s -> 4));
 
     public static final net.minecraft.tags.TagKey<Block> STARWOOD_LOGS_BLOCKS =
             net.minecraft.tags.TagKey.create(Registries.BLOCK, AstralVigil.id("starwood_logs"));

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "astralvigil:umbral_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "astralvigil:umbral_pillar"
+  }
+}
