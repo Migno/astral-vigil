@@ -6,14 +6,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -28,7 +25,6 @@ public final class GearEvents {
         NeoForge.EVENT_BUS.addListener(GearEvents::onDamage);
         NeoForge.EVENT_BUS.addListener(GearEvents::onShieldBlock);
         NeoForge.EVENT_BUS.addListener(GearEvents::onPlayerTick);
-        NeoForge.EVENT_BUS.addListener(GearEvents::onFall);
         NeoForge.EVENT_BUS.addListener(GearEvents::onRightClickItem);
         NeoForge.EVENT_BUS.addListener(GearEvents::onRightClickBlock);
     }
@@ -70,17 +66,7 @@ public final class GearEvents {
         if (player.tickCount % 40 == 0) {
             GearManager.recharge(player);
         }
-        // Seraph Plate, awakened: glide (slow falling) while sneaking in the air
-        if (player.isShiftKeyDown() && !player.onGround() && player.getDeltaMovement().y < -0.1
-                && GearManager.armorLevel(player) >= 1) {
-            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 10, 0, false, false));
-        }
-    }
-
-    private static void onFall(LivingFallEvent event) {
-        if (event.getEntity() instanceof Player player && GearManager.armorLevel(player) >= 2) {
-            event.setDamageMultiplier(0f);
-        }
+        // Seraph Plate glide / featherfall: see armor.SetBonusEvents
     }
 
     /** Sneak + use gear with a sigil in the off hand → socket it. */

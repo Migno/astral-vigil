@@ -28,10 +28,13 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
  * Gear materials. Top tier ≈ Netherite (see docs/BALANCE.md): Sunsteel weapons match Netherite damage with less
- * durability; Seraph Plate matches Netherite defence with slightly better enchantability.
+ * durability; Seraph Plate matches Netherite defence with slightly better enchantability. The mid-tier Solar Regalia
+ * (Sunsteel) and Lunar Raiment (Moonsilver) stay below diamond in raw defence and earn their keep with set bonuses.
  */
 public final class AVMaterials {
     public static final int SERAPH_DURABILITY_FACTOR = 35; // netherite: 37
+    public static final int SOLAR_DURABILITY_FACTOR = 30; // diamond: 33
+    public static final int LUNAR_DURABILITY_FACTOR = 28;
 
     private AVMaterials() {}
 
@@ -49,6 +52,28 @@ public final class AVMaterials {
             0.1f,
             AVTags.Items.INGOTS_STARMETAL,
             SERAPH_ASSET);
+    public static final ResourceKey<EquipmentAsset> SOLAR_ASSET =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, AstralVigil.id("solar"));
+    public static final ArmorMaterial SOLAR = new ArmorMaterial(
+            SOLAR_DURABILITY_FACTOR,
+            Map.of(ArmorType.BOOTS, 2, ArmorType.LEGGINGS, 6, ArmorType.CHESTPLATE, 7, ArmorType.HELMET, 3, ArmorType.BODY, 9),
+            22,
+            SoundEvents.ARMOR_EQUIP_GOLD,
+            2.0f,
+            0.0f,
+            AVTags.Items.INGOTS_SUNSTEEL,
+            SOLAR_ASSET);
+    public static final ResourceKey<EquipmentAsset> LUNAR_ASSET =
+            ResourceKey.create(EquipmentAssets.ROOT_ID, AstralVigil.id("lunar"));
+    public static final ArmorMaterial LUNAR = new ArmorMaterial(
+            LUNAR_DURABILITY_FACTOR,
+            Map.of(ArmorType.BOOTS, 3, ArmorType.LEGGINGS, 5, ArmorType.CHESTPLATE, 6, ArmorType.HELMET, 3, ArmorType.BODY, 8),
+            25,
+            SoundEvents.ARMOR_EQUIP_CHAIN,
+            1.5f,
+            0.0f,
+            AVTags.Items.INGOTS_MOONSILVER,
+            LUNAR_ASSET);
     //?} else {
     /*public static final Tier SUNSTEEL = new SimpleTier(
             BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 1800, 9.0f, 4.0f, 18, () -> Ingredient.of(AVTags.Items.INGOTS_SUNSTEEL));
@@ -71,5 +96,22 @@ public final class AVMaterials {
                 3.0f,
                 0.1f);
     });
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> SOLAR = ARMOR_MATERIALS.register("solar",
+            () -> material("solar", 2, 6, 7, 3, 9, 22, SoundEvents.ARMOR_EQUIP_GOLD, AVTags.Items.INGOTS_SUNSTEEL, 2.0f));
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> LUNAR = ARMOR_MATERIALS.register("lunar",
+            () -> material("lunar", 3, 5, 6, 3, 8, 25, SoundEvents.ARMOR_EQUIP_CHAIN, AVTags.Items.INGOTS_MOONSILVER, 1.5f));
+
+    private static ArmorMaterial material(String name, int boots, int legs, int chest, int helmet, int body, int enchant,
+            Holder<net.minecraft.sounds.SoundEvent> sound, net.minecraft.tags.TagKey<net.minecraft.world.item.Item> repair,
+            float toughness) {
+        EnumMap<ArmorItem.Type, Integer> defense = new EnumMap<>(ArmorItem.Type.class);
+        defense.put(ArmorItem.Type.BOOTS, boots);
+        defense.put(ArmorItem.Type.LEGGINGS, legs);
+        defense.put(ArmorItem.Type.CHESTPLATE, chest);
+        defense.put(ArmorItem.Type.HELMET, helmet);
+        defense.put(ArmorItem.Type.BODY, body);
+        return new ArmorMaterial(defense, enchant, sound, () -> Ingredient.of(repair),
+                List.of(new ArmorMaterial.Layer(AstralVigil.id(name))), toughness, 0.0f);
+    }
     *///?}
 }

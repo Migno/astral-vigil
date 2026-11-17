@@ -22,6 +22,7 @@ import media.hofferbert.astralvigil.research.Alignment;
 import media.hofferbert.astralvigil.starlight.Tint;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -476,6 +477,31 @@ public class AVRecipeProvider extends RecipeProvider {
         gear(output, "seraph_boots", AVItems.SERAPH_BOOTS.get(), Items.DIAMOND_BOOTS, Tint.STELLA, 700, Alignment.STELLA,
                 ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_STARMETAL),
                 ing(AVTags.Items.ASTRAL_SHARDS), ing(AVTags.Items.ASTRAL_SHARDS));
+        // Solar Regalia (Sunsteel, Sol light) and Lunar Raiment (Moonsilver, Luna light): mid tier, iron armour as catalyst
+        gear(output, "solar_helmet", AVItems.SOLAR_HELMET.get(), Items.IRON_HELMET, Tint.SOL, 500, Alignment.SOL,
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL),
+                ing(Tags.Items.DUSTS_GLOWSTONE), ing(Tags.Items.DUSTS_GLOWSTONE));
+        gear(output, "solar_chestplate", AVItems.SOLAR_CHESTPLATE.get(), Items.IRON_CHESTPLATE, Tint.SOL, 800, Alignment.SOL,
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL),
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(Tags.Items.RODS_BLAZE), ing(Tags.Items.RODS_BLAZE));
+        gear(output, "solar_leggings", AVItems.SOLAR_LEGGINGS.get(), Items.IRON_LEGGINGS, Tint.SOL, 700, Alignment.SOL,
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL),
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(Tags.Items.DUSTS_GLOWSTONE), ing(Tags.Items.DUSTS_GLOWSTONE));
+        gear(output, "solar_boots", AVItems.SOLAR_BOOTS.get(), Items.IRON_BOOTS, Tint.SOL, 500, Alignment.SOL,
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL),
+                ing(Tags.Items.RODS_BLAZE), ing(Tags.Items.RODS_BLAZE));
+        gear(output, "lunar_helmet", AVItems.LUNAR_HELMET.get(), Items.IRON_HELMET, Tint.LUNA, 500, Alignment.LUNA,
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER),
+                ing(ItemTags.WOOL), ing(ItemTags.WOOL));
+        gear(output, "lunar_chestplate", AVItems.LUNAR_CHESTPLATE.get(), Items.IRON_CHESTPLATE, Tint.LUNA, 800, Alignment.LUNA,
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER),
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(ItemTags.WOOL), Ingredient.of(Items.PHANTOM_MEMBRANE));
+        gear(output, "lunar_leggings", AVItems.LUNAR_LEGGINGS.get(), Items.IRON_LEGGINGS, Tint.LUNA, 700, Alignment.LUNA,
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER),
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(ItemTags.WOOL), ing(ItemTags.WOOL));
+        gear(output, "lunar_boots", AVItems.LUNAR_BOOTS.get(), Items.IRON_BOOTS, Tint.LUNA, 500, Alignment.LUNA,
+                ing(AVTags.Items.INGOTS_MOONSILVER), ing(AVTags.Items.INGOTS_MOONSILVER),
+                Ingredient.of(Items.PHANTOM_MEMBRANE), ing(Tags.Items.FEATHERS));
 
         sigil(output, Sigil.WHIRL, Tint.SOL, ing(Tags.Items.FEATHERS), ing(Tags.Items.FEATHERS),
                 ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL));

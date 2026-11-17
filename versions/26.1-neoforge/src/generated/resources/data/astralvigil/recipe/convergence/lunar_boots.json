@@ -1,0 +1,17 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "luna",
+  "center": "minecraft:iron_boots",
+  "ingredients": [
+    "#c:ingots/moonsilver",
+    "#c:ingots/moonsilver",
+    "minecraft:phantom_membrane",
+    "#c:feathers"
+  ],
+  "result": {
+    "id": "astralvigil:lunar_boots"
+  },
+  "starlight": 500,
+  "time": 200,
+  "tint": "luna"
+}

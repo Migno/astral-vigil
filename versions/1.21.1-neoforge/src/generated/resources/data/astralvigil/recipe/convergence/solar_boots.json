@@ -1,0 +1,28 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "sol",
+  "center": {
+    "item": "minecraft:iron_boots"
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/sunsteel"
+    },
+    {
+      "tag": "c:ingots/sunsteel"
+    },
+    {
+      "tag": "c:rods/blaze"
+    },
+    {
+      "tag": "c:rods/blaze"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:solar_boots"
+  },
+  "starlight": 500,
+  "time": 200,
+  "tint": "sol"
+}

@@ -84,7 +84,8 @@ public final class AVGameTests {
             new Def("whirl_hits_nearby_mobs", CRATER_FIELD, 40, true, AVGameTests::whirlHits),
             new Def("anchor_ritual_eases_gaze", CRATER_FIELD, 40, true, AVGameTests::anchorRitual),
             new Def("constellation_lock_needs_sign", PLATFORM, 40, false, AVGameTests::constellationLock),
-            new Def("observatory_templates_load", PLATFORM, 40, false, AVGameTests::observatoryTemplates));
+            new Def("observatory_templates_load", PLATFORM, 40, false, AVGameTests::observatoryTemplates),
+            new Def("solar_set_wards_fire", PLATFORM, 40, false, AVGameTests::solarSetWardsFire));
 
     static void anchorRitual(GameTestHelper helper) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();
@@ -602,6 +603,27 @@ public final class AVGameTests {
         StarfallManager.start(level, helper.absolutePos(GT.pos(6, 4, 6)), level.getRandom());
         helper.succeedWhen(() -> GT.check(
                 helper, countInField(helper, AVBlocks.FALLEN_STAR.get()) == 1, "fallen star has not landed yet"));
+    }
+
+    /** Full Solar Regalia grants a hidden Fire Resistance; losing a piece takes it away again (potions stay). */
+    static void solarSetWardsFire(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        for (var slot : media.hofferbert.astralvigil.armor.ArmorSets.SLOTS) {
+            player.setItemSlot(slot, new ItemStack(media.hofferbert.astralvigil.armor.ArmorSets.piece(
+                    media.hofferbert.astralvigil.armor.ArmorSet.SOLAR, slot)));
+        }
+        var active = media.hofferbert.astralvigil.armor.SetBonusEvents.tickForTest(player);
+        GT.check(helper, active.contains(media.hofferbert.astralvigil.armor.SetBonuses.Bonus.FIRE_WARD), "fire ward not active: " + active);
+        var fire = net.minecraft.world.effect.MobEffects.FIRE_RESISTANCE;
+        GT.check(helper, player.hasEffect(fire), "no fire resistance with the full set");
+        GT.check(helper, !player.getEffect(fire).isVisible(), "set bonus effect should hide its particles");
+        player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, ItemStack.EMPTY);
+        media.hofferbert.astralvigil.armor.SetBonusEvents.tickForTest(player);
+        GT.check(helper, !player.hasEffect(fire), "fire resistance kept after taking off the diadem");
+        player.addEffect(new net.minecraft.world.effect.MobEffectInstance(fire, 600));
+        media.hofferbert.astralvigil.armor.SetBonusEvents.tickForTest(player);
+        GT.check(helper, player.hasEffect(fire), "a brewed potion must not be stripped");
+        helper.succeed();
     }
 
     private static int countInField(GameTestHelper helper, Block block) {

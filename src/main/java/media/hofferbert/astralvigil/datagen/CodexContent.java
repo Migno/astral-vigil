@@ -270,11 +270,25 @@ public final class CodexContent {
                             "Eine Mondsilber-Armbrust. Katalysator: eine Armbrust; Gaben: zwei Mondsilberbarren und zwei Prismarinkristalle; 900 Luna-Licht."))),
             new Entry("orrin_gear", "living_gear", "Orrin's Plate", "Orrins Rüstung", "astralvigil:seraph_chestplate", 3, null, List.of(
                     new Spotlight("astralvigil:seraph_chestplate",
-                            "Seraph Plate, forged from diamond armour and Starmetal under Stella light. Awakened, the full set lets you glide while sneaking; ascended, you no longer fear falls.",
-                            "Seraphenrüstung, aus Diamantrüstung und Sternenstahl unter Stella-Licht geschmiedet. Erwacht lässt dich der volle Satz schleichend gleiten; aufgestiegen fürchtest du keinen Sturz mehr."),
+                            "Seraph Plate, forged from diamond armour and Starmetal under Stella light. Its halo and light-wings grow with every awakening. The full set mends you under the night sky; awakened, it glides while you sneak and flings you forward as the glide begins; ascended, you no longer fear falls.",
+                            "Seraphenrüstung, aus Diamantrüstung und Sternenstahl unter Stella-Licht geschmiedet. Heiligenschein und Lichtschwingen wachsen mit jedem Erwachen. Der volle Satz heilt dich unter dem Nachthimmel; erwacht gleitest du schleichend und wirst zu Beginn des Fluges vorangeschleudert; aufgestiegen fürchtest du keinen Sturz mehr."),
                     new Spotlight("astralvigil:starlight_aegis",
                             "The Starlight Aegis, a Starmetal shield. Every blocked blow brings it closer to waking.",
                             "Die Sternenlicht-Ägis, ein Schild aus Sternenstahl. Jeder abgewehrte Hieb bringt sie dem Erwachen näher."))),
+            new Entry("solar_regalia", "living_gear", "Solar Regalia", "Sonnenornat", "astralvigil:solar_helmet", 5, null, List.of(
+                    new Text(
+                            "Solenne's own panoply: flame-gold Sunsteel, a crown of rays and a slowly turning sun disc upon the back.$(br2)Worn whole, it wards you against $(l)fire and lava$() and lends you $(l)Strength$() while the sun is up. Forge each piece at the Convergence Altar under Sol light, with an iron piece as catalyst.",
+                            "Solennes eigene Rüstung: flammengoldener Sonnenstahl, eine Strahlenkrone und eine langsam kreisende Sonnenscheibe auf dem Rücken.$(br2)Vollständig getragen schützt sie dich vor $(l)Feuer und Lava$() und verleiht dir $(l)Stärke$(), solange die Sonne steht. Jedes Teil entsteht am Konvergenzaltar unter Sol-Licht, mit einem Eisenteil als Katalysator."),
+                    new Spotlight("astralvigil:solar_chestplate",
+                            "Solar Cuirass. Catalyst: an iron chestplate; offerings: four Sunsteel ingots and two blaze rods; 800 Sol light. The diadem and sabatons want glowstone and blaze rods, the tassets glowstone.",
+                            "Sonnenküraß. Katalysator: ein Eisenbrustpanzer; Gaben: vier Sonnenstahlbarren und zwei Lohenruten; 800 Sol-Licht. Diadem und Stiefel verlangen Glowstone und Lohenruten, die Schöße Glowstone."))),
+            new Entry("lunar_raiment", "living_gear", "Lunar Raiment", "Mondgewandung", "astralvigil:lunar_helmet", 6, null, List.of(
+                    new Text(
+                            "Vael's raiment of midnight cloth and Moonsilver: a crescent circlet, a mantle embroidered with stars and three small moons that circle behind you.$(br2)Worn whole, it grants $(l)Night Vision$() and $(l)Speed$() after dusk, and halves the bite of every fall.",
+                            "Vaels Gewand aus Mitternachtstuch und Mondsilber: ein Sichelreif, ein mit Sternen bestickter Mantel und drei kleine Monde, die hinter dir kreisen.$(br2)Vollständig getragen schenkt es nach der Dämmerung $(l)Nachtsicht$() und $(l)Tempo$() und halbiert den Biss jedes Sturzes."),
+                    new Spotlight("astralvigil:lunar_chestplate",
+                            "Lunar Mantle. Catalyst: an iron chestplate; offerings: four Moonsilver ingots, wool and a phantom membrane; 800 Luna light. The other pieces ask for wool, phantom membranes and feathers.",
+                            "Mondmantel. Katalysator: ein Eisenbrustpanzer; Gaben: vier Mondsilberbarren, Wolle und eine Phantomhaut; 800 Luna-Licht. Die übrigen Teile verlangen Wolle, Phantomhäute und Federn."))),
             new Entry("sigils", "living_gear", "Sigils", "Siegel", "astralvigil:sigil_flash", 4, null, List.of(
                     new Text(
                             "Sigils are cut from $(item)Sigil Blanks$() at the altar. $(l)Whirl$() and $(l)Shieldbreaker$() suit the axe, $(l)Dawn$() and $(l)Flash$() the sword, $(l)Precision$() and $(l)Undertow$() the bows, $(l)Aegis$() the shield and the Seraph Plate.",

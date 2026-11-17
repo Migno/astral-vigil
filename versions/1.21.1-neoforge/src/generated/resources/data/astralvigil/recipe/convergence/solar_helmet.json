@@ -1,0 +1,28 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "sol",
+  "center": {
+    "item": "minecraft:iron_helmet"
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/sunsteel"
+    },
+    {
+      "tag": "c:ingots/sunsteel"
+    },
+    {
+      "tag": "c:dusts/glowstone"
+    },
+    {
+      "tag": "c:dusts/glowstone"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:solar_helmet"
+  },
+  "starlight": 500,
+  "time": 200,
+  "tint": "sol"
+}

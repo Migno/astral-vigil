@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:living_gear",
+  "icon": "astralvigil:solar_helmet",
+  "name": "Solar Regalia",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Solenne's own panoply: flame-gold Sunsteel, a crown of rays and a slowly turning sun disc upon the back.$(br2)Worn whole, it wards you against $(l)fire and lava$() and lends you $(l)Strength$() while the sun is up. Forge each piece at the Convergence Altar under Sol light, with an iron piece as catalyst."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:solar_chestplate",
+      "text": "Solar Cuirass. Catalyst: an iron chestplate; offerings: four Sunsteel ingots and two blaze rods; 800 Sol light. The diadem and sabatons want glowstone and blaze rods, the tassets glowstone."
+    }
+  ],
+  "sortnum": 5
+}

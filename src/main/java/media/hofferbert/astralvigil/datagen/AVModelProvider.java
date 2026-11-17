@@ -92,6 +92,10 @@ public class AVModelProvider extends ModelProvider {
         itemModels.generateFlatItem(AVItems.SERAPH_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.SERAPH_LEGGINGS.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.SERAPH_BOOTS.get(), ModelTemplates.FLAT_ITEM);
+        for (var set : new media.hofferbert.astralvigil.armor.ArmorSet[] {
+                media.hofferbert.astralvigil.armor.ArmorSet.SOLAR, media.hofferbert.astralvigil.armor.ArmorSet.LUNAR}) {
+            media.hofferbert.astralvigil.armor.ArmorSets.pieces(set).forEach(i -> itemModels.generateFlatItem(i.get(), ModelTemplates.FLAT_ITEM));
+        }
         AVItems.SIGILS.values().forEach(s -> itemModels.generateFlatItem(s.get(), ModelTemplates.FLAT_ITEM));
         itemModels.generateFlatItem(AVItems.LORE_FRAGMENT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.VOID_SHARD.get(), ModelTemplates.FLAT_ITEM);
@@ -197,6 +201,10 @@ public class AVModelProvider extends ModelProvider {
             basicItem(AVItems.SERAPH_CHESTPLATE.get());
             basicItem(AVItems.SERAPH_LEGGINGS.get());
             basicItem(AVItems.SERAPH_BOOTS.get());
+            for (var set : new media.hofferbert.astralvigil.armor.ArmorSet[] {
+                    media.hofferbert.astralvigil.armor.ArmorSet.SOLAR, media.hofferbert.astralvigil.armor.ArmorSet.LUNAR}) {
+                media.hofferbert.astralvigil.armor.ArmorSets.pieces(set).forEach(i -> basicItem(i.get()));
+            }
             AVItems.SIGILS.values().forEach(s -> basicItem(s.get()));
             basicItem(AVItems.LORE_FRAGMENT.get());
             basicItem(AVItems.VOID_SHARD.get());

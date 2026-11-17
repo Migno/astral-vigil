@@ -59,6 +59,18 @@ public final class AVServerConfig {
     public static final ModConfigSpec.DoubleValue ABILITY_COST_MULTIPLIER;
     public static final ModConfigSpec.DoubleValue ABILITY_COOLDOWN_MULTIPLIER;
 
+    // Armour set bonuses
+    public static final ModConfigSpec.BooleanValue SOLAR_FIRE_WARD;
+    public static final ModConfigSpec.IntValue SOLAR_STRENGTH;
+    public static final ModConfigSpec.BooleanValue LUNAR_NIGHT_VISION;
+    public static final ModConfigSpec.IntValue LUNAR_SPEED;
+    public static final ModConfigSpec.DoubleValue LUNAR_FALL_REDUCTION;
+    public static final ModConfigSpec.DoubleValue SERAPH_MENDING_AMOUNT;
+    public static final ModConfigSpec.IntValue SERAPH_MENDING_COST;
+    public static final ModConfigSpec.IntValue SERAPH_BURST_COST;
+    public static final ModConfigSpec.IntValue SERAPH_BURST_COOLDOWN;
+    public static final ModConfigSpec.DoubleValue SERAPH_BURST_STRENGTH;
+
     // Eclipse Gaze + rituals
     public static final ModConfigSpec.BooleanValue GAZE_ENABLED;
     public static final ModConfigSpec.IntValue GAZE_MAX;
@@ -263,6 +275,41 @@ public final class AVServerConfig {
         ABILITY_COOLDOWN_MULTIPLIER = b.comment("Multiplier for every ability's cooldown.")
                 .translation("astralvigil.configuration.gear.cooldown_multiplier")
                 .defineInRange("abilityCooldownMultiplier", 1.0, 0.0, 100.0);
+        b.pop();
+
+        b.comment("Full-set bonuses of the celestial armour (Solar Regalia, Lunar Raiment, Seraph Plate).")
+                .translation("astralvigil.configuration.armor")
+                .push("armor");
+        SOLAR_FIRE_WARD = b.comment("Solar Regalia: the full set grants Fire Resistance.")
+                .translation("astralvigil.configuration.armor.solar_fire_ward")
+                .define("solarFireWard", true);
+        SOLAR_STRENGTH = b.comment("Solar Regalia: Strength level by day under a sky with a day cycle (0 = off).")
+                .translation("astralvigil.configuration.armor.solar_strength")
+                .defineInRange("solarStrength", 1, 0, 2);
+        LUNAR_NIGHT_VISION = b.comment("Lunar Raiment: the full set grants Night Vision at night.")
+                .translation("astralvigil.configuration.armor.lunar_night_vision")
+                .define("lunarNightVision", true);
+        LUNAR_SPEED = b.comment("Lunar Raiment: Speed level at night (0 = off).")
+                .translation("astralvigil.configuration.armor.lunar_speed")
+                .defineInRange("lunarSpeed", 1, 0, 2);
+        LUNAR_FALL_REDUCTION = b.comment("Lunar Raiment: fraction of fall damage prevented.")
+                .translation("astralvigil.configuration.armor.lunar_fall_reduction")
+                .defineInRange("lunarFallReduction", 0.5, 0.0, 1.0);
+        SERAPH_MENDING_AMOUNT = b.comment("Seraph Plate: health restored every 2 seconds under the open night sky (0 = off).")
+                .translation("astralvigil.configuration.armor.seraph_mending_amount")
+                .defineInRange("seraphMendingAmount", 1.0, 0.0, 20.0);
+        SERAPH_MENDING_COST = b.comment("Seraph Plate: chestplate charge spent per mending pulse.")
+                .translation("astralvigil.configuration.armor.seraph_mending_cost")
+                .defineInRange("seraphMendingCost", 2, 0, 10_000);
+        SERAPH_BURST_COST = b.comment("Seraph Plate (Awakened): charge spent by a glide burst.")
+                .translation("astralvigil.configuration.armor.seraph_burst_cost")
+                .defineInRange("seraphBurstCost", 25, 0, 10_000);
+        SERAPH_BURST_COOLDOWN = b.comment("Seraph Plate (Awakened): ticks between two glide bursts.")
+                .translation("astralvigil.configuration.armor.seraph_burst_cooldown")
+                .defineInRange("seraphBurstCooldown", 160, 0, 72_000);
+        SERAPH_BURST_STRENGTH = b.comment("Seraph Plate (Awakened): horizontal speed of a glide burst (blocks/tick).")
+                .translation("astralvigil.configuration.armor.seraph_burst_strength")
+                .defineInRange("seraphBurstStrength", 1.3, 0.0, 4.0);
         b.pop();
 
         b.comment("Convergence Altar and Astral Forge.")
