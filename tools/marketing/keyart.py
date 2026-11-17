@@ -487,7 +487,7 @@ def setup_world():
     bg.inputs['Strength'].default_value = 1.0
     vol = nt.nodes.new('ShaderNodeVolumePrincipled')
     vol.inputs['Color'].default_value = (0.55, 0.42, 0.85, 1)
-    vol.inputs['Density'].default_value = 0.006
+    vol.inputs['Density'].default_value = 0.0035
     vol.inputs['Anisotropy'].default_value = 0.35
     nt.links.new(vol.outputs['Volume'], nt.nodes['World Output'].inputs['Volume'])
 
