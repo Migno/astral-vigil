@@ -2,6 +2,11 @@
 
 All notable changes. Format based on [Keep a Changelog](https://keepachangelog.com/), versions follow SemVer.
 
+## [0.0.2-alpha] - 2026-11-17
+
+### Project
+- Versioning rule: every push and release raises the version (`0.0.N-alpha`).
+
 ## [0.0.1-alpha] - 2026-11-17
 
 First public alpha for multiplayer testing. Everything below is part of it.
