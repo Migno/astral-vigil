@@ -84,6 +84,22 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - **Blockbench assets without plugin file access.** Models are read back via `execute_script`
   (`Codecs.java_block.compile()`) and written by script; the owner answered Blockbench's file-permission prompt.
 
+## 2026-11-17 – Phase 4
+
+- **Real recipe types** (`StarlightRecipe`, one record for both types) instead of a custom JSON format: works with
+  datapacks, `/reload`, KubeJS `event.custom`, recipe viewers. All inputs are `Ingredient`s – the shipped recipes use
+  tags only. On 26.1 the result is an `ItemStackTemplate` (ItemStacks cannot be built during datagen), on 1.21.1 an
+  `ItemStack`; 26.1 clients get the recipes via `OnDatapackSyncEvent#sendRecipes` + `RecipesReceivedEvent`.
+- **Altar and forge are starlight receivers**, not reservoir-scanners: light arrives by beam or from a touching
+  reservoir, so the Phase 3 network stays the single source of energy.
+- **Stability is recomputed every second** during a ritual (cheap: ≤ 9×3×9 + 7×4×7 lookups) – players can fix a ritual
+  while it runs.
+- **In-world items instead of GUIs** for pedestal/altar/forge (no menus, no cross-version screen code); items float
+  via a block entity renderer.
+- **Empty-hand actions require an empty main hand** – otherwise the off-hand pass after inserting an item would take it
+  straight back out.
+- **EMI only on 1.21.1** (no 26.1 build exists yet); JEI on both. Compat ids pinned in `stonecutter.properties.toml`.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best

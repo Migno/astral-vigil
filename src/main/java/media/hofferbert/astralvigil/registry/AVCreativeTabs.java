@@ -28,6 +28,14 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.MIRROR.get());
                 output.accept(AVItems.PRISM.get());
                 output.accept(AVItems.STARLIGHT_RESERVOIR.get());
+                output.accept(AVItems.PEDESTAL.get());
+                output.accept(AVItems.CONVERGENCE_ALTAR.get());
+                output.accept(AVItems.ASTRAL_FORGE.get());
+                output.accept(AVItems.STARMETAL_INGOT.get());
+                output.accept(AVItems.SUNSTEEL_INGOT.get());
+                output.accept(AVItems.MOONSILVER_INGOT.get());
+                output.accept(AVItems.ASTRAL_CORE.get());
+                output.accept(AVItems.SIGIL_BLANK.get());
             })
             .build());
 

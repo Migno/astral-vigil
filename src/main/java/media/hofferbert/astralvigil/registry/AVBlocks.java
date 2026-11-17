@@ -4,6 +4,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import media.hofferbert.astralvigil.AstralVigil;
 import media.hofferbert.astralvigil.block.FallenStarBlock;
+import media.hofferbert.astralvigil.block.RitualBlock;
 import media.hofferbert.astralvigil.block.StarlightDeviceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -37,7 +38,16 @@ public final class AVBlocks {
     public static final DeferredBlock<StarlightDeviceBlock> PRISM = register("prism", StarlightDeviceBlock::prism, p -> device(p).lightLevel(s -> 6));
     public static final DeferredBlock<StarlightDeviceBlock> STARLIGHT_RESERVOIR = register("starlight_reservoir", StarlightDeviceBlock::reservoir, p -> device(p).lightLevel(s -> 9));
 
+    // Phase 4 – crafting
+    public static final DeferredBlock<RitualBlock> PEDESTAL = register("pedestal", RitualBlock::pedestal, p -> ritual(p));
+    public static final DeferredBlock<RitualBlock> CONVERGENCE_ALTAR = register("convergence_altar", RitualBlock::altar, p -> ritual(p).lightLevel(s -> 10));
+    public static final DeferredBlock<RitualBlock> ASTRAL_FORGE = register("astral_forge", RitualBlock::forge, p -> ritual(p).lightLevel(s -> 8));
+
     private AVBlocks() {}
+
+    private static BlockBehaviour.Properties ritual(BlockBehaviour.Properties p) {
+        return p.mapColor(MapColor.COLOR_BLACK).strength(3.0f, 9.0f).sound(SoundType.DEEPSLATE).noOcclusion().requiresCorrectToolForDrops();
+    }
 
     private static BlockBehaviour.Properties device(BlockBehaviour.Properties p) {
         return p.mapColor(MapColor.GOLD).strength(2.5f, 6.0f).sound(SoundType.AMETHYST).noOcclusion().requiresCorrectToolForDrops();

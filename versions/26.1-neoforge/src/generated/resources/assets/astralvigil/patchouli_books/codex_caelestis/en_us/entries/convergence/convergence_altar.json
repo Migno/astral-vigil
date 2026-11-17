@@ -1,0 +1,26 @@
+{
+  "category": "astralvigil:convergence",
+  "icon": "astralvigil:convergence_altar",
+  "name": "The Convergence Altar",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Set the catalyst on the $(item)Convergence Altar$() and the offerings on $(item)Pedestals$() within four blocks. Fill the altar with starlight, then touch it with an empty hand to begin. Sneak to take the result."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Stability$() decides whether the ritual holds. Every pedestal needs a mirrored partner across the altar. Blocks of the recipe's alignment nearby steady it; Void blocks and a hidden sky unsettle it.$(br2)An unstable ritual may fling an offering away – or open a door for something hungry."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:convergence_altar",
+      "text": ""
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:pedestal",
+      "text": ""
+    }
+  ],
+  "sortnum": 1
+}

@@ -7,6 +7,9 @@ import java.util.Arrays;
 import media.hofferbert.astralvigil.AstralVigil;
 import media.hofferbert.astralvigil.research.Alignment;
 import media.hofferbert.astralvigil.research.ResearchManager;
+import media.hofferbert.astralvigil.starlight.Tint;
+import media.hofferbert.astralvigil.starlight.network.StarlightBlockEntity;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.server.level.ServerPlayer;
 import media.hofferbert.astralvigil.starfall.StarfallManager;
@@ -37,6 +40,17 @@ public final class AVCommands {
                 .then(Commands.literal("starfall")
                         .executes(ctx -> starfallNear(ctx.getSource()))
                         .then(Commands.literal("here").executes(ctx -> starfallHere(ctx.getSource()))))
+                .then(Commands.literal("starlight")
+                        .then(Commands.argument("pos", BlockPosArgument.blockPos())
+                                .then(Commands.argument("tint", StringArgumentType.word())
+                                        .suggests((ctx, b) -> SharedSuggestionProvider.suggest(
+                                                Arrays.stream(Tint.values()).map(Tint::id), b))
+                                        .then(Commands.argument("amount", IntegerArgumentType.integer(1, 1_000_000))
+                                                .executes(ctx -> fillStarlight(
+                                                        ctx.getSource(),
+                                                        BlockPosArgument.getLoadedBlockPos(ctx, "pos"),
+                                                        StringArgumentType.getString(ctx, "tint"),
+                                                        IntegerArgumentType.getInteger(ctx, "amount")))))))
                 .then(Commands.literal("research")
                         .then(Commands.literal("reset").executes(ctx -> {
                             ServerPlayer player = ctx.getSource().getPlayerOrException();
@@ -66,6 +80,18 @@ public final class AVCommands {
                                                     true);
                                             return 1;
                                         })))));
+    }
+
+    private static int fillStarlight(CommandSourceStack source, BlockPos pos, String tintId, int amount) {
+        Tint tint = Arrays.stream(Tint.values()).filter(t -> t.id().equals(tintId)).findFirst().orElse(null);
+        if (tint == null || !(source.getLevel().getBlockEntity(pos) instanceof StarlightBlockEntity be)) {
+            source.sendFailure(Component.translatable("commands.astralvigil.starlight.failed"));
+            return 0;
+        }
+        int stored = be.buffer().insert(tint, amount, false);
+        be.syncNow();
+        source.sendSuccess(() -> Component.translatable("commands.astralvigil.starlight.filled", stored), true);
+        return stored;
     }
 
     private static int starfallNear(CommandSourceStack source) {

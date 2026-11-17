@@ -85,13 +85,21 @@ public final class CodexContent {
                     "astralvigil:starlight_collector",
                     2),
             new Category(
+                    "convergence",
+                    "Convergence",
+                    "Konvergenz",
+                    "Where starlight binds matter together.",
+                    "Wo Sternenlicht Materie aneinanderbindet.",
+                    "astralvigil:convergence_altar",
+                    3),
+            new Category(
                     "constellations",
                     "Constellations",
                     "Sternbilder",
                     "The Watchers' signs, written in stars.",
                     "Die Zeichen der Wächter, in Sterne geschrieben.",
                     "astralvigil:star_chart",
-                    4));
+                    5));
 
     public static final List<Entry> ENTRIES = List.of(
             // ---------------------------------------------------------------- the rift
@@ -179,6 +187,30 @@ public final class CodexContent {
                             "A $(item)Starlight Reservoir$() keeps every hue apart and safe until it is needed. A comparator reads how full it is.",
                             "Ein $(item)Sternenlichtspeicher$() hält jede Färbung getrennt und sicher, bis sie gebraucht wird. Ein Komparator liest seinen Füllstand."),
                     new Crafting("astralvigil:starlight_reservoir", "", ""))),
+            // ---------------------------------------------------------------- convergence
+            new Entry("astral_forge", "convergence", "The Astral Forge", "Die Astralschmiede", "astralvigil:astral_forge", 0, null, List.of(
+                    new Text(
+                            "Place up to four items into the $(item)Astral Forge$() one at a time; take them back with an empty hand. Feed it starlight of the right hue – a beam, or a $(item)Starlight Reservoir$() touching it – and it forges on its own.$(br2)$(l)Sunsteel$() wants Sol, $(l)Moonsilver$() Luna, $(l)Starmetal$() Stella light.",
+                            "Lege bis zu vier Gegenstände einzeln in die $(item)Astralschmiede$(); mit leerer Hand nimmst du sie zurück. Speise sie mit Sternenlicht der richtigen Färbung – über einen Strahl oder einen berührenden $(item)Sternenlichtspeicher$() – und sie schmiedet von selbst.$(br2)$(l)Sonnenstahl$() verlangt Sol-, $(l)Mondsilber$() Luna-, $(l)Sternenstahl$() Stella-Licht."),
+                    new Crafting("astralvigil:astral_forge", "", ""))),
+            new Entry("convergence_altar", "convergence", "The Convergence Altar", "Der Konvergenzaltar", "astralvigil:convergence_altar", 1, null, List.of(
+                    new Text(
+                            "Set the catalyst on the $(item)Convergence Altar$() and the offerings on $(item)Pedestals$() within four blocks. Fill the altar with starlight, then touch it with an empty hand to begin. Sneak to take the result.",
+                            "Lege den Katalysator auf den $(item)Konvergenzaltar$() und die Gaben auf $(item)Podeste$() im Umkreis von vier Blöcken. Fülle den Altar mit Sternenlicht und berühre ihn dann mit leerer Hand, um zu beginnen. Schleichend nimmst du das Ergebnis."),
+                    new Text(
+                            "$(l)Stability$() decides whether the ritual holds. Every pedestal needs a mirrored partner across the altar. Blocks of the recipe's alignment nearby steady it; Void blocks and a hidden sky unsettle it.$(br2)An unstable ritual may fling an offering away – or open a door for something hungry.",
+                            "$(l)Stabilität$() entscheidet, ob das Ritual hält. Jedes Podest braucht einen gespiegelten Partner jenseits des Altars. Blöcke der Ausrichtung des Rezepts stützen es; Blöcke der Leere und ein verborgener Himmel bringen es ins Wanken.$(br2)Ein instabiles Ritual kann eine Gabe fortschleudern – oder eine Tür öffnen für etwas Hungriges."),
+                    new Crafting("astralvigil:convergence_altar", "", ""),
+                    new Crafting("astralvigil:pedestal", "", ""))),
+            new Entry("astral_core", "convergence", "Astral Core", "Astralkern", "astralvigil:astral_core", 2, null, List.of(
+                    new Spotlight(
+                            "astralvigil:astral_core",
+                            "Catalyst: a diamond. Offerings: one ingot each of Starmetal, Sunsteel and Moonsilver, and an Astral Shard. 1000 pure starlight. Stella blocks steady it.",
+                            "Katalysator: ein Diamant. Gaben: je ein Barren Sternenstahl, Sonnenstahl und Mondsilber sowie ein Astralsplitter. 1000 reines Sternenlicht. Stella-Blöcke stützen es."),
+                    new Spotlight(
+                            "astralvigil:sigil_blank",
+                            "Catalyst: a Starmetal Ingot. Offerings: two gold nuggets and two amethyst shards. 400 Stella starlight. Yields two blanks – the Watchers' sigils will be cut from them.",
+                            "Katalysator: ein Sternenstahlbarren. Gaben: zwei Goldklumpen und zwei Amethystsplitter. 400 Stella-Sternenlicht. Ergibt zwei Rohlinge – aus ihnen werden die Siegel der Wächter geschnitten."))),
             // ---------------------------------------------------------------- constellations
             new Entry("constellations", "constellations", "Signs in the Sky", "Zeichen am Himmel", "astralvigil:star_chart", 0, null, List.of(
                     new Text(

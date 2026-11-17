@@ -1,5 +1,7 @@
 package media.hofferbert.astralvigil;
 
+import media.hofferbert.astralvigil.client.ClientRecipes;
+import media.hofferbert.astralvigil.client.FloatingItemsRenderer;
 import media.hofferbert.astralvigil.client.StarlightBeamRenderer;
 import media.hofferbert.astralvigil.datagen.AVDataGen;
 import media.hofferbert.astralvigil.registry.AVBlockEntities;
@@ -24,6 +26,7 @@ public final class AstralVigilClient {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modBus.addListener(AVDataGen::gather);
         modBus.addListener(AstralVigilClient::registerRenderers);
+        ClientRecipes.register();
         NeoForge.EVENT_BUS.addListener(AstralVigilClient::onTooltip);
     }
 
@@ -32,6 +35,9 @@ public final class AstralVigilClient {
         event.registerBlockEntityRenderer(AVBlockEntities.LENS.get(), ctx -> new StarlightBeamRenderer());
         event.registerBlockEntityRenderer(AVBlockEntities.MIRROR.get(), ctx -> new StarlightBeamRenderer());
         event.registerBlockEntityRenderer(AVBlockEntities.PRISM.get(), ctx -> new StarlightBeamRenderer());
+        event.registerBlockEntityRenderer(AVBlockEntities.PEDESTAL.get(), FloatingItemsRenderer::new);
+        event.registerBlockEntityRenderer(AVBlockEntities.CONVERGENCE_ALTAR.get(), FloatingItemsRenderer::new);
+        event.registerBlockEntityRenderer(AVBlockEntities.ASTRAL_FORGE.get(), FloatingItemsRenderer::new);
     }
 
     /** Flavour line under every Astral Vigil item that has a {@code <descriptionId>.desc} key. */
@@ -46,7 +52,10 @@ public final class AstralVigilClient {
                 || item == AVItems.LENS.get()
                 || item == AVItems.MIRROR.get()
                 || item == AVItems.PRISM.get()
-                || item == AVItems.STARLIGHT_RESERVOIR.get()) {
+                || item == AVItems.STARLIGHT_RESERVOIR.get()
+                || item == AVItems.PEDESTAL.get()
+                || item == AVItems.CONVERGENCE_ALTAR.get()
+                || item == AVItems.ASTRAL_FORGE.get()) {
             event.getToolTip()
                     .add(1, Component.translatable(item.getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }

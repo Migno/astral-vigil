@@ -1,7 +1,11 @@
 package media.hofferbert.astralvigil.compat.jade;
 
 import media.hofferbert.astralvigil.AstralVigil;
+import media.hofferbert.astralvigil.block.RitualBlock;
 import media.hofferbert.astralvigil.block.StarlightDeviceBlock;
+import media.hofferbert.astralvigil.crafting.AstralForgeBlockEntity;
+import media.hofferbert.astralvigil.crafting.ConvergenceAltarBlockEntity;
+import media.hofferbert.astralvigil.crafting.PedestalBlockEntity;
 import media.hofferbert.astralvigil.starlight.Tint;
 import media.hofferbert.astralvigil.starlight.network.Devices;
 import media.hofferbert.astralvigil.starlight.network.StarlightBlockEntity;
@@ -27,6 +31,41 @@ public class AVJadePlugin implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(StarlightProvider.INSTANCE, StarlightDeviceBlock.class);
+        registration.registerBlockComponent(StarlightProvider.INSTANCE, RitualBlock.class);
+        registration.registerBlockComponent(RitualProvider.INSTANCE, RitualBlock.class);
+    }
+
+    public static final Identifier RITUAL = AstralVigil.id("ritual");
+
+    /** Altar stability/progress, forge progress, held items. */
+    public enum RitualProvider implements IBlockComponentProvider {
+        INSTANCE;
+
+        @Override
+        public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+            if (accessor.getBlockEntity() instanceof ConvergenceAltarBlockEntity altar) {
+                int s = altar.stability();
+                ChatFormatting color = s >= 100 ? ChatFormatting.GREEN : s >= 70 ? ChatFormatting.YELLOW : ChatFormatting.RED;
+                tooltip.add(Component.translatable("jade.astralvigil.stability", s).withStyle(color));
+                if (altar.isCrafting() && altar.duration() > 0) {
+                    tooltip.add(Component.translatable("jade.astralvigil.progress", 100 * altar.progress() / altar.duration()));
+                }
+                if (!altar.catalyst().isEmpty()) {
+                    tooltip.add(Component.translatable("jade.astralvigil.holding", altar.catalyst().getHoverName()));
+                }
+            } else if (accessor.getBlockEntity() instanceof AstralForgeBlockEntity forge) {
+                if (forge.isCrafting() && forge.duration() > 0) {
+                    tooltip.add(Component.translatable("jade.astralvigil.progress", 100 * forge.progress() / forge.duration()));
+                }
+            } else if (accessor.getBlockEntity() instanceof PedestalBlockEntity pedestal && !pedestal.item().isEmpty()) {
+                tooltip.add(Component.translatable("jade.astralvigil.holding", pedestal.item().getHoverName()));
+            }
+        }
+
+        @Override
+        public Identifier getUid() {
+            return RITUAL;
+        }
     }
 
     public enum StarlightProvider implements IBlockComponentProvider {

@@ -41,7 +41,8 @@ public final class AVTagProviders {
         protected void addTags(HolderLookup.Provider registries) {
             tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                     AVBlocks.FALLEN_STAR.get(), AVBlocks.METEORIC_STONE.get(), AVBlocks.STARLIGHT_COLLECTOR.get(),
-                    AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get());
+                    AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get(),
+                    AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get());
             tag(AVTags.Blocks.BEAM_TRANSPARENT).addTag(Tags.Blocks.GLASS_BLOCKS).addTag(Tags.Blocks.GLASS_PANES);
             tag(BlockTags.NEEDS_IRON_TOOL).add(AVBlocks.FALLEN_STAR.get());
             tag(BlockTags.NEEDS_STONE_TOOL).add(AVBlocks.METEORIC_STONE.get());
@@ -88,6 +89,13 @@ public final class AVTagProviders {
             tag(AVTags.Items.GEMS_ASTRAL).add(AVItems.ASTRAL_SHARD.get());
             tag(Tags.Items.GEMS).addTag(AVTags.Items.GEMS_ASTRAL);
             tag(AVTags.Items.METEORIC_STONES).add(AVItems.METEORIC_STONE.get());
+            tag(AVTags.Items.INGOTS_STARMETAL).add(AVItems.STARMETAL_INGOT.get());
+            tag(AVTags.Items.INGOTS_SUNSTEEL).add(AVItems.SUNSTEEL_INGOT.get());
+            tag(AVTags.Items.INGOTS_MOONSILVER).add(AVItems.MOONSILVER_INGOT.get());
+            tag(Tags.Items.INGOTS)
+                    .addTag(AVTags.Items.INGOTS_STARMETAL)
+                    .addTag(AVTags.Items.INGOTS_SUNSTEEL)
+                    .addTag(AVTags.Items.INGOTS_MOONSILVER);
             tag(AVTags.Items.CHART_PAPER).add(net.minecraft.world.item.Items.PAPER);
             tag(AVTags.Items.CODEX_BOOKS).add(net.minecraft.world.item.Items.BOOK);
         }

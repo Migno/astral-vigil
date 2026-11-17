@@ -68,6 +68,9 @@ public final class AVLang {
         add("commands.astralvigil.research.granted", "Granted %s %s knowledge.", "%s %s-Wissen gewährt.");
         add("commands.astralvigil.research.reset", "Research reset.", "Forschung zurückgesetzt.");
 
+        add("commands.astralvigil.starlight.filled", "Stored %s starlight.", "%s Sternenlicht gespeichert.");
+        add("commands.astralvigil.starlight.failed", "No starlight device there.", "Dort ist kein Sternenlicht-Gerät.");
+
         // Directions (used in "falls to the %s" / "im %s")
         add("direction.astralvigil.north", "north", "Norden");
         add("direction.astralvigil.northeast", "northeast", "Nordosten");
@@ -222,6 +225,7 @@ public final class AVLang {
         add("jade.astralvigil.gathering", "Gathering: %s/s", "Sammelt: %s/s");
         add("jade.astralvigil.aim", "Aimed: %s", "Ausrichtung: %s");
         add("config.jade.plugin_astralvigil.starlight", "Astral Vigil Starlight", "Astral Vigil Sternenlicht");
+        add("config.jade.plugin_astralvigil.ritual", "Astral Vigil Rituals", "Astral Vigil Rituale");
         add("direction.astralvigil.up", "up", "oben");
         add("direction.astralvigil.down", "down", "unten");
         add("astralvigil.configuration.starlight", "Starlight Network", "Sternenlicht-Netz");
@@ -233,6 +237,48 @@ public final class AVLang {
         add("astralvigil.configuration.starlight.beam_throughput", "Beam Throughput", "Strahldurchsatz");
         add("astralvigil.configuration.starlight.mirror_loss", "Mirror Loss", "Spiegelverlust");
         add("astralvigil.configuration.starlight.prism_loss", "Prism Loss", "Prismenverlust");
+
+        // Phase 4 – crafting
+        add("block.astralvigil.pedestal", "Pedestal", "Podest");
+        add("block.astralvigil.pedestal.desc", "Holds one offering for the Convergence Altar.", "Trägt eine Gabe für den Konvergenzaltar.");
+        add("block.astralvigil.convergence_altar", "Convergence Altar", "Konvergenzaltar");
+        add("block.astralvigil.convergence_altar.desc", "Binds the offerings of its pedestals with starlight.", "Bindet die Gaben seiner Podeste mit Sternenlicht.");
+        add("block.astralvigil.astral_forge", "Astral Forge", "Astralschmiede");
+        add("block.astralvigil.astral_forge.desc", "Smelts metal with starlight of a single hue.", "Schmilzt Metall mit Sternenlicht einer einzigen Färbung.");
+        add("item.astralvigil.starmetal_ingot", "Starmetal Ingot", "Sternenstahlbarren");
+        add("item.astralvigil.sunsteel_ingot", "Sunsteel Ingot", "Sonnenstahlbarren");
+        add("item.astralvigil.moonsilver_ingot", "Moonsilver Ingot", "Mondsilberbarren");
+        add("item.astralvigil.astral_core", "Astral Core", "Astralkern");
+        add("item.astralvigil.sigil_blank", "Sigil Blank", "Siegelrohling");
+        add("message.astralvigil.altar.busy", "The ritual is underway.", "Das Ritual ist im Gange.");
+        add("jade.astralvigil.stability", "Stability: %s%%", "Stabilität: %s%%");
+        add("jade.astralvigil.progress", "Progress: %s%%", "Fortschritt: %s%%");
+        add("jade.astralvigil.holding", "Holding: %s", "Hält: %s");
+        add("recipe.astralvigil.convergence", "Convergence", "Konvergenz");
+        add("recipe.astralvigil.astral_forge", "Astral Forge", "Astralschmiede");
+        add("recipe.astralvigil.starlight", "%s %s starlight", "%s %s-Sternenlicht");
+        add("recipe.astralvigil.time", "%s s", "%s s");
+        add("recipe.astralvigil.alignment", "Stabilised by %s", "Stabilisiert durch %s");
+        add("emi.category.astralvigil.convergence", "Convergence", "Konvergenz");
+        add("emi.category.astralvigil.astral_forge", "Astral Forge", "Astralschmiede");
+        add("tag.item.astralvigil.astral_shards", "Astral Shards", "Astralsplitter");
+        add("tag.item.astralvigil.chart_paper", "Chart Paper", "Kartenpapier");
+        add("tag.item.astralvigil.codex_books", "Codex Books", "Codex-Bücher");
+        add("tag.item.astralvigil.meteoric_stones", "Meteoric Stones", "Meteorgesteine");
+        add("tag.item.c.gems.astral", "Astral Gems", "Astral-Edelsteine");
+        add("tag.item.c.ingots.starmetal", "Starmetal Ingots", "Sternenstahlbarren");
+        add("tag.item.c.ingots.sunsteel", "Sunsteel Ingots", "Sonnenstahlbarren");
+        add("tag.item.c.ingots.moonsilver", "Moonsilver Ingots", "Mondsilberbarren");
+        add("astralvigil.configuration.crafting", "Crafting", "Herstellung");
+        add("astralvigil.configuration.crafting.altar_capacity", "Altar Capacity", "Altar-Kapazität");
+        add("astralvigil.configuration.crafting.forge_capacity", "Forge Capacity", "Schmiede-Kapazität");
+        add("astralvigil.configuration.crafting.altar_radius", "Pedestal Radius", "Podest-Radius");
+        add("astralvigil.configuration.crafting.stability_base", "Base Stability", "Grundstabilität");
+        add("astralvigil.configuration.crafting.asymmetry_penalty", "Asymmetry Penalty", "Asymmetrie-Abzug");
+        add("astralvigil.configuration.crafting.aligned_bonus", "Aligned Block Bonus", "Bonus ausgerichteter Blöcke");
+        add("astralvigil.configuration.crafting.aligned_max", "Aligned Bonus Cap", "Obergrenze Ausrichtungsbonus");
+        add("astralvigil.configuration.crafting.instability_factor", "Instability Factor", "Instabilitätsfaktor");
+        add("astralvigil.configuration.crafting.instability_mobs", "Instability Creatures", "Instabilitäts-Kreaturen");
 
         // Config screen
         add("astralvigil.configuration.title", "Astral Vigil Configuration", "Astral Vigil – Einstellungen");

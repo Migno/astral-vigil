@@ -8,7 +8,7 @@ Every phase ends with: build of both targets ✅ · GameTests ✅ · in-game scr
 | 1 – Foundation | Registries, creative tab, Astral Shard, Astrolabe, Starfall event, lang en/de, first textures via Blockbench MCP, GameTests | ✅ done |
 | 2 – Research | Alignment system (Sol/Luna/Stella/Void), scans, Codex Caelestis (Patchouli), star-chart screen | ✅ done |
 | 3 – Energy | Starlight storage, lenses/mirrors/prisms, beam renderer, Jade plugin | ✅ done |
-| 4 – Crafting | Convergence Altar + Astral Forge, EMI/JEI plugins, tag-based recipes | – |
+| 4 – Crafting | Convergence Altar + Astral Forge, EMI/JEI plugins, tag-based recipes | ✅ done |
 | 5 – Gear | Weapons, bows, armour incl. wing cosmetic, sigils/stances, living-gear progression, animations + particles | – |
 | 6 – World | Fallen Observatories, constellations/Star Anchors, Eclipse Gaze + events | – |
 | 7 – Firmament | Dimension, four sanctums + Watcher entities, favour system | – |

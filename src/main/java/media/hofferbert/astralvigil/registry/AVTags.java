@@ -29,6 +29,14 @@ public final class AVTags {
 
         public static final TagKey<Item> METEORIC_STONES = TagKey.create(Registries.ITEM, AstralVigil.id("meteoric_stones"));
 
+        public static final TagKey<Item> INGOTS_STARMETAL = c("ingots/starmetal");
+        public static final TagKey<Item> INGOTS_SUNSTEEL = c("ingots/sunsteel");
+        public static final TagKey<Item> INGOTS_MOONSILVER = c("ingots/moonsilver");
+
+        private static TagKey<Item> c(String path) {
+            return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", path));
+        }
+
         public static final TagKey<Item> GEMS_ASTRAL = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", "gems/astral"));
 
         private Items() {}

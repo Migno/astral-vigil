@@ -42,8 +42,51 @@ public final class AVServerConfig {
     public static final ModConfigSpec.DoubleValue MIRROR_LOSS;
     public static final ModConfigSpec.DoubleValue PRISM_LOSS;
 
+    // Crafting
+    public static final ModConfigSpec.IntValue ALTAR_CAPACITY;
+    public static final ModConfigSpec.IntValue FORGE_CAPACITY;
+    public static final ModConfigSpec.IntValue ALTAR_RADIUS;
+    public static final ModConfigSpec.IntValue STABILITY_BASE;
+    public static final ModConfigSpec.IntValue STABILITY_ASYMMETRY_PENALTY;
+    public static final ModConfigSpec.IntValue STABILITY_ALIGNED_BONUS;
+    public static final ModConfigSpec.IntValue STABILITY_ALIGNED_MAX;
+    public static final ModConfigSpec.DoubleValue INSTABILITY_EVENT_FACTOR;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> INSTABILITY_MOBS;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
+
+        b.comment("Convergence Altar and Astral Forge.")
+                .translation("astralvigil.configuration.crafting")
+                .push("crafting");
+        ALTAR_CAPACITY = b.comment("Starlight the Convergence Altar can hold.")
+                .translation("astralvigil.configuration.crafting.altar_capacity")
+                .defineInRange("altarCapacity", 4000, 1, 10_000_000);
+        FORGE_CAPACITY = b.comment("Starlight the Astral Forge can hold.")
+                .translation("astralvigil.configuration.crafting.forge_capacity")
+                .defineInRange("forgeCapacity", 2000, 1, 10_000_000);
+        ALTAR_RADIUS = b.comment("Horizontal radius in which pedestals belong to an altar.")
+                .translation("astralvigil.configuration.crafting.altar_radius")
+                .defineInRange("altarRadius", 4, 1, 8);
+        STABILITY_BASE = b.comment("Stability of a perfectly symmetric altar before alignment bonuses (100 = no instability).")
+                .translation("astralvigil.configuration.crafting.stability_base")
+                .defineInRange("stabilityBase", 80, 0, 100);
+        STABILITY_ASYMMETRY_PENALTY = b.comment("Stability lost per pedestal without a mirrored partner.")
+                .translation("astralvigil.configuration.crafting.asymmetry_penalty")
+                .defineInRange("asymmetryPenalty", 15, 0, 100);
+        STABILITY_ALIGNED_BONUS = b.comment("Stability gained per nearby block of the recipe's alignment (Void blocks subtract it).")
+                .translation("astralvigil.configuration.crafting.aligned_bonus")
+                .defineInRange("alignedBonus", 3, 0, 100);
+        STABILITY_ALIGNED_MAX = b.comment("Maximum stability gained from aligned blocks.")
+                .translation("astralvigil.configuration.crafting.aligned_max")
+                .defineInRange("alignedMax", 30, 0, 100);
+        INSTABILITY_EVENT_FACTOR = b.comment("Chance per second of an instability event = (100 - stability) / 100 * factor.")
+                .translation("astralvigil.configuration.crafting.instability_factor")
+                .defineInRange("instabilityFactor", 0.25, 0.0, 1.0);
+        INSTABILITY_MOBS = b.comment("Creatures that may tear through an unstable ritual.")
+                .translation("astralvigil.configuration.crafting.instability_mobs")
+                .defineListAllowEmpty("instabilityMobs", List.of("minecraft:vex"), () -> "minecraft:vex", o -> o instanceof String);
+        b.pop();
 
         b.comment("Starlight network: collectors, lenses, mirrors, prisms and reservoirs.")
                 .translation("astralvigil.configuration.starlight")

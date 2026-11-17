@@ -41,6 +41,9 @@ public class AVLootProvider extends BlockLootSubProvider {
         dropSelf(AVBlocks.MIRROR.get());
         dropSelf(AVBlocks.PRISM.get());
         dropSelf(AVBlocks.STARLIGHT_RESERVOIR.get());
+        dropSelf(AVBlocks.PEDESTAL.get());
+        dropSelf(AVBlocks.CONVERGENCE_ALTAR.get());
+        dropSelf(AVBlocks.ASTRAL_FORGE.get());
     }
 
     @Override

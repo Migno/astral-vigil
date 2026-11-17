@@ -1,0 +1,26 @@
+{
+  "category": "astralvigil:convergence",
+  "icon": "astralvigil:convergence_altar",
+  "name": "Der Konvergenzaltar",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Lege den Katalysator auf den $(item)Konvergenzaltar$() und die Gaben auf $(item)Podeste$() im Umkreis von vier Blöcken. Fülle den Altar mit Sternenlicht und berühre ihn dann mit leerer Hand, um zu beginnen. Schleichend nimmst du das Ergebnis."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Stabilität$() entscheidet, ob das Ritual hält. Jedes Podest braucht einen gespiegelten Partner jenseits des Altars. Blöcke der Ausrichtung des Rezepts stützen es; Blöcke der Leere und ein verborgener Himmel bringen es ins Wanken.$(br2)Ein instabiles Ritual kann eine Gabe fortschleudern – oder eine Tür öffnen für etwas Hungriges."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:convergence_altar",
+      "text": ""
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:pedestal",
+      "text": ""
+    }
+  ],
+  "sortnum": 1
+}

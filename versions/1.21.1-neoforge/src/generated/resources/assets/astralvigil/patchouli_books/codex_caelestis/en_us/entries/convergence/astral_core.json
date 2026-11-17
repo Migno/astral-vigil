@@ -1,0 +1,18 @@
+{
+  "category": "astralvigil:convergence",
+  "icon": "astralvigil:astral_core",
+  "name": "Astral Core",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:astral_core",
+      "text": "Catalyst: a diamond. Offerings: one ingot each of Starmetal, Sunsteel and Moonsilver, and an Astral Shard. 1000 pure starlight. Stella blocks steady it."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:sigil_blank",
+      "text": "Catalyst: a Starmetal Ingot. Offerings: two gold nuggets and two amethyst shards. 400 Stella starlight. Yields two blanks – the Watchers' sigils will be cut from them."
+    }
+  ],
+  "sortnum": 2
+}

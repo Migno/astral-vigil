@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:convergence",
+  "icon": "astralvigil:astral_forge",
+  "name": "Die Astralschmiede",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Lege bis zu vier Gegenstände einzeln in die $(item)Astralschmiede$(); mit leerer Hand nimmst du sie zurück. Speise sie mit Sternenlicht der richtigen Färbung – über einen Strahl oder einen berührenden $(item)Sternenlichtspeicher$() – und sie schmiedet von selbst.$(br2)$(l)Sonnenstahl$() verlangt Sol-, $(l)Mondsilber$() Luna-, $(l)Sternenstahl$() Stella-Licht."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:astral_forge",
+      "text": ""
+    }
+  ],
+  "sortnum": 0
+}

@@ -2,6 +2,9 @@ package media.hofferbert.astralvigil.registry;
 
 import java.util.function.Supplier;
 import media.hofferbert.astralvigil.AstralVigil;
+import media.hofferbert.astralvigil.crafting.AstralForgeBlockEntity;
+import media.hofferbert.astralvigil.crafting.ConvergenceAltarBlockEntity;
+import media.hofferbert.astralvigil.crafting.PedestalBlockEntity;
 import media.hofferbert.astralvigil.starlight.network.Devices;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +23,13 @@ public final class AVBlockEntities {
     public static final Supplier<BlockEntityType<Devices.Prism>> PRISM = register("prism", Devices.Prism::new, AVBlocks.PRISM);
     public static final Supplier<BlockEntityType<Devices.Reservoir>> RESERVOIR =
             register("starlight_reservoir", Devices.Reservoir::new, AVBlocks.STARLIGHT_RESERVOIR);
+
+    public static final Supplier<BlockEntityType<PedestalBlockEntity>> PEDESTAL =
+            register("pedestal", PedestalBlockEntity::new, AVBlocks.PEDESTAL);
+    public static final Supplier<BlockEntityType<ConvergenceAltarBlockEntity>> CONVERGENCE_ALTAR =
+            register("convergence_altar", ConvergenceAltarBlockEntity::new, AVBlocks.CONVERGENCE_ALTAR);
+    public static final Supplier<BlockEntityType<AstralForgeBlockEntity>> ASTRAL_FORGE =
+            register("astral_forge", AstralForgeBlockEntity::new, AVBlocks.ASTRAL_FORGE);
 
     private AVBlockEntities() {}
 

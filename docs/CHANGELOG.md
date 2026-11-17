@@ -4,6 +4,21 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 4 – Crafting
+- **Convergence Altar + Pedestals:** infusion ritual (catalyst + up to 12 offerings), powered by starlight beamed in or
+  fed by a touching reservoir. **Stability** from pedestal symmetry, nearby aligned blocks (recipe alignment), Void
+  blocks and sky access; instability flings offerings or summons configurable creatures.
+- **Astral Forge:** up to four items + starlight of one tint → Sunsteel (Sol), Moonsilver (Luna), Starmetal (Stella).
+- New recipe types `astralvigil:convergence` and `astralvigil:astral_forge` (vanilla recipe system, tag inputs,
+  KubeJS/datapack friendly); 26.1 syncs them to clients explicitly.
+- New materials: Starmetal/Sunsteel/Moonsilver ingots (`c:ingots/*`), Astral Core, Sigil Blank.
+- Floating item renderer for pedestals, altar and forge (both render pipelines).
+- **JEI** plugin (both targets) and **EMI** plugin (1.21.1; no EMI build for 26.1 yet), Jade: stability, progress,
+  held items.
+- `/astralvigil starlight <pos> <tint> <amount>` admin command.
+- Blockbench models (altar, pedestal, forge) + five item textures; codex category "Convergence" (en/de).
+- GameTests: forge crafting, symmetric ritual, asymmetry lowers stability.
+
 ### Phase 3 – Energy
 - **Starlight network:** Starlight Collector (gathers under the open sky, scaled by the starlight formula), Lens
   (lossless straight relay), Mirror (turns beams from any side, small loss), Prism (splits pure light into Stella /

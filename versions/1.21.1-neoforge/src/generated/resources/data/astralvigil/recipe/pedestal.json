@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "M": {
+      "tag": "astralvigil:meteoric_stones"
+    }
+  },
+  "pattern": [
+    " G ",
+    " M ",
+    "MMM"
+  ],
+  "result": {
+    "count": 2,
+    "id": "astralvigil:pedestal"
+  }
+}

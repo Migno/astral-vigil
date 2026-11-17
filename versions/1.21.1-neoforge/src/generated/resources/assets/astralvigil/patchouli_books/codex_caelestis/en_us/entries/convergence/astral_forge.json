@@ -1,0 +1,17 @@
+{
+  "category": "astralvigil:convergence",
+  "icon": "astralvigil:astral_forge",
+  "name": "The Astral Forge",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Place up to four items into the $(item)Astral Forge$() one at a time; take them back with an empty hand. Feed it starlight of the right hue – a beam, or a $(item)Starlight Reservoir$() touching it – and it forges on its own.$(br2)$(l)Sunsteel$() wants Sol, $(l)Moonsilver$() Luna, $(l)Starmetal$() Stella light."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "astralvigil:astral_forge",
+      "text": ""
+    }
+  ],
+  "sortnum": 0
+}

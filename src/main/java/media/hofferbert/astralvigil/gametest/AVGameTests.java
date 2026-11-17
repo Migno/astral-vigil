@@ -11,7 +11,11 @@ import media.hofferbert.astralvigil.research.Alignment;
 import media.hofferbert.astralvigil.research.AlignmentTags;
 import media.hofferbert.astralvigil.research.ResearchData;
 import media.hofferbert.astralvigil.research.ResearchManager;
+import media.hofferbert.astralvigil.crafting.AstralForgeBlockEntity;
+import media.hofferbert.astralvigil.crafting.ConvergenceAltarBlockEntity;
+import media.hofferbert.astralvigil.crafting.PedestalBlockEntity;
 import media.hofferbert.astralvigil.starlight.Tint;
+import net.minecraft.world.item.Item;
 import media.hofferbert.astralvigil.starlight.network.Devices;
 import media.hofferbert.astralvigil.starlight.network.StarlightBlockEntity;
 import net.minecraft.core.Direction;
@@ -56,7 +60,62 @@ public final class AVGameTests {
             new Def("beam_blocked_by_stone", CRATER_FIELD, 80, true, h -> beamThrough(h, Blocks.STONE, false)),
             new Def("beam_passes_glass", CRATER_FIELD, 120, true, h -> beamThrough(h, Blocks.GLASS, true)),
             new Def("prism_splits_light", CRATER_FIELD, 160, true, AVGameTests::prismSplitsLight),
-            new Def("reservoir_feeds_lens", CRATER_FIELD, 140, true, AVGameTests::reservoirFeedsLens));
+            new Def("reservoir_feeds_lens", CRATER_FIELD, 140, true, AVGameTests::reservoirFeedsLens),
+            new Def("forge_makes_starmetal", CRATER_FIELD, 200, true, AVGameTests::forgeMakesStarmetal),
+            new Def("altar_symmetric_ritual", CRATER_FIELD, 300, true, AVGameTests::altarSymmetricRitual),
+            new Def("altar_asymmetry_lowers_stability", CRATER_FIELD, 60, true, AVGameTests::altarAsymmetry));
+
+    static void forgeMakesStarmetal(GameTestHelper helper) {
+        AstralForgeBlockEntity forge = (AstralForgeBlockEntity) placeBe(helper, GT.pos(6, 4, 6), AVBlocks.ASTRAL_FORGE.get());
+        forge.insert(new ItemStack(Items.IRON_INGOT));
+        forge.insert(new ItemStack(AVItems.ASTRAL_SHARD.get()));
+        forge.insert(new ItemStack(AVItems.ASTRAL_SHARD.get()));
+        forge.buffer().insert(Tint.STELLA, 500, false);
+        helper.succeedWhen(() -> GT.check(
+                helper,
+                forge.items().size() == 1 && forge.items().get(0).is(AVItems.STARMETAL_INGOT.get()),
+                "forge holds " + forge.items()));
+    }
+
+    private static ConvergenceAltarBlockEntity altarWithPedestals(GameTestHelper helper, int cx, int cz, boolean symmetric) {
+        ConvergenceAltarBlockEntity altar =
+                (ConvergenceAltarBlockEntity) placeBe(helper, GT.pos(cx, 4, cz), AVBlocks.CONVERGENCE_ALTAR.get());
+        int[][] spots = symmetric
+                ? new int[][] {{-2, 0}, {2, 0}, {0, -2}, {0, 2}}
+                : new int[][] {{-2, 0}, {2, 0}, {0, -2}, {-1, 2}};
+        Item[] offerings = {Items.GOLD_NUGGET, Items.GOLD_NUGGET, Items.AMETHYST_SHARD, Items.AMETHYST_SHARD};
+        for (int i = 0; i < spots.length; i++) {
+            PedestalBlockEntity p = (PedestalBlockEntity)
+                    placeBe(helper, GT.pos(cx + spots[i][0], 4, cz + spots[i][1]), AVBlocks.PEDESTAL.get());
+            p.setItem(new ItemStack(offerings[i]));
+        }
+        altar.setCatalyst(new ItemStack(AVItems.STARMETAL_INGOT.get()));
+        altar.buffer().insert(Tint.STELLA, 1000, false);
+        return altar;
+    }
+
+    static void altarSymmetricRitual(GameTestHelper helper) {
+        ConvergenceAltarBlockEntity altar = altarWithPedestals(helper, 6, 6, true);
+        GT.check(helper, altar.tryStart(helper.getLevel()), "ritual did not start");
+        helper.succeedWhen(() -> GT.check(
+                helper,
+                altar.catalyst().is(AVItems.SIGIL_BLANK.get()) && altar.catalyst().getCount() == 2,
+                "altar holds " + altar.catalyst()));
+    }
+
+    static void altarAsymmetry(GameTestHelper helper) {
+        int sym = altarWithPedestals(helper, 3, 3, true)
+                .computeStability(helper.getLevel(), java.util.Optional.of(Alignment.STELLA));
+        int asym = altarWithPedestals(helper, 9, 9, false)
+                .computeStability(helper.getLevel(), java.util.Optional.of(Alignment.STELLA));
+        GT.check(helper, asym < sym, "asymmetric " + asym + " should be below symmetric " + sym);
+        helper.succeed();
+    }
+
+    private static net.minecraft.world.level.block.entity.BlockEntity placeBe(GameTestHelper helper, BlockPos rel, Block block) {
+        helper.setBlock(rel, block);
+        return helper.getLevel().getBlockEntity(helper.absolutePos(rel));
+    }
 
     static void reservoirFeedsLens(GameTestHelper helper) {
         Devices.Reservoir source = device(helper, GT.pos(1, 4, 6), AVBlocks.STARLIGHT_RESERVOIR.get(), Direction.NORTH);

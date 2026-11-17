@@ -6,6 +6,9 @@
     "astralvigil:lens",
     "astralvigil:mirror",
     "astralvigil:prism",
-    "astralvigil:starlight_reservoir"
+    "astralvigil:starlight_reservoir",
+    "astralvigil:pedestal",
+    "astralvigil:convergence_altar",
+    "astralvigil:astral_forge"
   ]
 }

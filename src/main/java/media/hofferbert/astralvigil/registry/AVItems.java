@@ -32,6 +32,16 @@ public final class AVItems {
     public static final DeferredItem<BlockItem> PRISM = ITEMS.registerSimpleBlockItem(AVBlocks.PRISM);
     public static final DeferredItem<BlockItem> STARLIGHT_RESERVOIR = ITEMS.registerSimpleBlockItem(AVBlocks.STARLIGHT_RESERVOIR);
 
+    // Phase 4 – materials
+    public static final DeferredItem<Item> STARMETAL_INGOT = register("starmetal_ingot", Item::new, p -> p);
+    public static final DeferredItem<Item> SUNSTEEL_INGOT = register("sunsteel_ingot", Item::new, p -> p);
+    public static final DeferredItem<Item> MOONSILVER_INGOT = register("moonsilver_ingot", Item::new, p -> p);
+    public static final DeferredItem<Item> ASTRAL_CORE = register("astral_core", Item::new, p -> p.rarity(Rarity.RARE));
+    public static final DeferredItem<Item> SIGIL_BLANK = register("sigil_blank", Item::new, p -> p.stacksTo(16));
+    public static final DeferredItem<BlockItem> PEDESTAL = ITEMS.registerSimpleBlockItem(AVBlocks.PEDESTAL);
+    public static final DeferredItem<BlockItem> CONVERGENCE_ALTAR = ITEMS.registerSimpleBlockItem(AVBlocks.CONVERGENCE_ALTAR);
+    public static final DeferredItem<BlockItem> ASTRAL_FORGE = ITEMS.registerSimpleBlockItem(AVBlocks.ASTRAL_FORGE);
+
     private AVItems() {}
 
     static <I extends Item> DeferredItem<I> register(

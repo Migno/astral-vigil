@@ -62,6 +62,28 @@ Only the **first** scan of each subject counts, so research cannot be farmed. Qu
 
 Devices work once per second (not every tick), so even large networks stay cheap.
 
+## Crafting (`[crafting]`)
+
+| Key | Default | Why |
+|---|---|---|
+| `altarCapacity` / `forgeCapacity` | 4000 / 2000 | Enough for the most expensive current recipe plus headroom. |
+| `altarRadius` | 4 | Room for an 8-pedestal ring with walkways. |
+| `stabilityBase` | 80 | A symmetric altar alone is *not* perfectly safe – decorating with aligned blocks is part of the ritual. |
+| `asymmetryPenalty` | 15 | Two unpaired pedestals already make a ritual risky. |
+| `alignedBonus` / `alignedMax` | 3 / 30 | ~7 aligned blocks make a ritual fully stable; Void blocks subtract the same. |
+| `instabilityFactor` | 0.25 | At 50 % stability ≈ one event every 8 s. |
+| `instabilityMobs` | `minecraft:vex` | Placeholder until the Hollow creature (Phase 7). |
+
+| Recipe | Inputs | Starlight | Time |
+|---|---|---|---|
+| Sunsteel Ingot (forge) | gold ingot + 2 astral shards | 120 Sol | 5 s |
+| Moonsilver Ingot (forge) | iron ingot + astral shard + quartz | 120 Luna | 5 s |
+| Starmetal Ingot (forge) | iron ingot + 2 astral shards | 120 Stella | 5 s |
+| Sigil Blank ×2 (altar) | starmetal + 2 gold nuggets + 2 amethyst | 400 Stella | 6 s |
+| Astral Core (altar) | diamond + starmetal + sunsteel + moonsilver + shard | 1000 pure | 10 s |
+
+Ingot cost ≈ one collector-night of aligned light – metals are a mid-game step, not a grind wall.
+
 ## Starlight formula
 
 `intensity = night(t) × moon(phase) × weather`, 0 without sky access.

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "#c:ingots/gold",
+    "I": "#c:ingots/iron",
+    "M": "#astralvigil:meteoric_stones",
+    "S": "#astralvigil:astral_shards"
+  },
+  "pattern": [
+    "ISI",
+    "MGM",
+    "MMM"
+  ],
+  "result": {
+    "id": "astralvigil:astral_forge"
+  }
+}

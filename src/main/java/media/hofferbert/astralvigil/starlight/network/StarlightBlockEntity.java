@@ -2,6 +2,7 @@ package media.hofferbert.astralvigil.starlight.network;
 
 import java.util.ArrayList;
 import java.util.List;
+import media.hofferbert.astralvigil.compat.DataIO;
 import media.hofferbert.astralvigil.config.AVServerConfig;
 import media.hofferbert.astralvigil.starlight.StarlightBuffer;
 import media.hofferbert.astralvigil.starlight.Tint;
@@ -166,6 +167,19 @@ public abstract class StarlightBlockEntity extends BlockEntity {
 
     // ------------------------------------------------------------------ persistence + sync
 
+    /** Subclass state (items, progress …), saved with the block entity and synced to clients. */
+    protected void writeExtra(DataIO.Writer out) {}
+
+    protected void readExtra(DataIO.Reader in) {}
+
+    /** Pushes the current state to clients (items, progress) outside the once-per-second work cycle. */
+    public void syncNow() {
+        setChanged();
+        if (level != null && !level.isClientSide()) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+        }
+    }
+
     private int[] beamArray() {
         int[] out = new int[beams.size() * 3];
         for (int i = 0; i < beams.size(); i++) {
@@ -191,6 +205,7 @@ public abstract class StarlightBlockEntity extends BlockEntity {
         super.saveAdditional(output);
         output.putIntArray("starlight", buffer.toArray());
         output.putIntArray("beams", beamArray());
+        writeExtra(DataIO.writer(output));
     }
 
     @Override
@@ -198,6 +213,7 @@ public abstract class StarlightBlockEntity extends BlockEntity {
         super.loadAdditional(input);
         input.getIntArray("starlight").ifPresent(buffer::fromArray);
         input.getIntArray("beams").ifPresent(this::readBeams);
+        readExtra(DataIO.reader(input));
     }
     //?} else {
     /*@Override
@@ -205,6 +221,7 @@ public abstract class StarlightBlockEntity extends BlockEntity {
         super.saveAdditional(tag, registries);
         tag.putIntArray("starlight", buffer.toArray());
         tag.putIntArray("beams", beamArray());
+        writeExtra(DataIO.writer(tag, registries));
     }
 
     @Override
@@ -212,6 +229,7 @@ public abstract class StarlightBlockEntity extends BlockEntity {
         super.loadAdditional(tag, registries);
         buffer.fromArray(tag.getIntArray("starlight"));
         readBeams(tag.getIntArray("beams"));
+        readExtra(DataIO.reader(tag, registries));
     }
     *///?}
 
@@ -224,4 +242,14 @@ public abstract class StarlightBlockEntity extends BlockEntity {
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
+    //? if >=26.1 {
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        if (level != null) {
+            media.hofferbert.astralvigil.block.RitualBlock.dropContents(level, pos, this);
+        }
+    }
+    //?}
 }

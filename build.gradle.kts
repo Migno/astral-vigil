@@ -53,6 +53,8 @@ dependencies {
 
     // Optional integrations: compile against the API, never shipped or required
     compileOnly("maven.modrinth:jade:${sc.properties["deps.jade"]}")
+    compileOnly("maven.modrinth:jei:${sc.properties["deps.jei"]}")
+    sc.properties["deps.emi"].takeIf { it.isNotEmpty() }?.let { compileOnly("maven.modrinth:emi:$it") }
 
     sc.properties["compat.mods"].split(',').map(String::trim).filter(String::isNotEmpty).forEach {
         val (slug, ver) = it.split(':', limit = 2)

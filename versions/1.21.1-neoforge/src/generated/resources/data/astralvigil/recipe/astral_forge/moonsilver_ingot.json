@@ -1,0 +1,20 @@
+{
+  "type": "astralvigil:astral_forge",
+  "ingredients": [
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "astralvigil:astral_shards"
+    },
+    {
+      "tag": "c:gems/quartz"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "astralvigil:moonsilver_ingot"
+  },
+  "starlight": 120,
+  "tint": "luna"
+}

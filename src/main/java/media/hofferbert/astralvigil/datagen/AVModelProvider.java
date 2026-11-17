@@ -43,14 +43,22 @@ public class AVModelProvider extends ModelProvider {
         facing(blockModels, AVBlocks.MIRROR.get(), BlockModelGenerators.ROTATION_FACING);
         facing(blockModels, AVBlocks.STARLIGHT_COLLECTOR.get(), BlockModelGenerators.ROTATION_HORIZONTAL_FACING);
         facing(blockModels, AVBlocks.PRISM.get(), BlockModelGenerators.ROTATION_HORIZONTAL_FACING);
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
-                AVBlocks.STARLIGHT_RESERVOIR.get(),
-                BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(AVBlocks.STARLIGHT_RESERVOIR.get()))));
+        for (Block b : new Block[] {
+            AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get()
+        }) {
+            blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
+                    b, BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(b))));
+        }
 
         itemModels.generateFlatItem(AVItems.ASTRAL_SHARD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.ASTROLABE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.STAR_CHART.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.CODEX_CAELESTIS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.STARMETAL_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.SUNSTEEL_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.MOONSILVER_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.ASTRAL_CORE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(AVItems.SIGIL_BLANK.get(), ModelTemplates.FLAT_ITEM);
     }
 
     private static void facing(BlockModelGenerators blockModels, Block block, PropertyDispatch<VariantMutator> rotation) {
@@ -78,8 +86,10 @@ public class AVModelProvider extends ModelProvider {
             facingAll(AVBlocks.MIRROR.get());
             horizontalBlock(AVBlocks.STARLIGHT_COLLECTOR.get(), existing(AVBlocks.STARLIGHT_COLLECTOR.get()));
             horizontalBlock(AVBlocks.PRISM.get(), existing(AVBlocks.PRISM.get()));
-            simpleBlock(AVBlocks.STARLIGHT_RESERVOIR.get(), existing(AVBlocks.STARLIGHT_RESERVOIR.get()));
-            for (Block b : new Block[] {AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.STARLIGHT_COLLECTOR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get()}) {
+            for (Block b : new Block[] {AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get()}) {
+                simpleBlock(b, existing(b));
+            }
+            for (Block b : new Block[] {AVBlocks.LENS.get(), AVBlocks.MIRROR.get(), AVBlocks.STARLIGHT_COLLECTOR.get(), AVBlocks.PRISM.get(), AVBlocks.STARLIGHT_RESERVOIR.get(), AVBlocks.PEDESTAL.get(), AVBlocks.CONVERGENCE_ALTAR.get(), AVBlocks.ASTRAL_FORGE.get()}) {
                 simpleBlockItem(b, existing(b));
             }
         }
@@ -116,6 +126,11 @@ public class AVModelProvider extends ModelProvider {
             basicItem(AVItems.ASTROLABE.get());
             basicItem(AVItems.STAR_CHART.get());
             basicItem(AVItems.CODEX_CAELESTIS.get());
+            basicItem(AVItems.STARMETAL_INGOT.get());
+            basicItem(AVItems.SUNSTEEL_INGOT.get());
+            basicItem(AVItems.MOONSILVER_INGOT.get());
+            basicItem(AVItems.ASTRAL_CORE.get());
+            basicItem(AVItems.SIGIL_BLANK.get());
         }
     }
 }
