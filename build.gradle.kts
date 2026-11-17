@@ -59,9 +59,13 @@ dependencies {
     compileOnly("maven.modrinth:jei:${sc.properties["deps.jei"]}")
     sc.properties["deps.emi"].takeIf { it.isNotEmpty() }?.let { compileOnly("maven.modrinth:emi:$it") }
 
+    // -Pav.compatOnly=sodium,iris limits the compat instance to these slugs (bisecting compat issues)
+    val compatOnly = providers.gradleProperty("av.compatOnly").orNull?.split(',')?.map(String::trim)?.toSet()
     sc.properties["compat.mods"].split(',').map(String::trim).filter(String::isNotEmpty).forEach {
         val (slug, ver) = it.split(':', limit = 2)
-        compatMods("maven.modrinth:$slug:$ver")
+        if (compatOnly == null || slug in compatOnly) {
+            compatMods("maven.modrinth:$slug:$ver")
+        }
     }
 
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
@@ -106,6 +110,9 @@ neoForge {
         register("compatClient") {
             client()
             gameDirectory = runRoot.dir("compat").asFile
+            // Behave like a normal (production) install: vanilla's dev-only GL validation trips over Iris' shader
+            // overrides ("Missing sampler Sampler1", Iris #3347) although players never run it.
+            systemProperty("neoforge.disableGlValidation", "true")
             if (providers.gradleProperty("av.autojoin").map(String::toBoolean).getOrElse(false)) {
                 systemProperty("blockpilot.autojoin", "astralvigil-compat")
                 systemProperty("blockpilot.autocreate", "flat")

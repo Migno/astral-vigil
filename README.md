@@ -43,11 +43,13 @@ the Eclipse.
 | | |
 |---|---|
 | ![Six gates, six destinations](docs/screenshots/shaders/26.1-neoforge-01-six-gates.png) | ![An Astral Gate, lit](docs/screenshots/shaders/26.1-neoforge-02-astral-gate-closeup.png) |
+| ![Vael, Watcher of the Moon](docs/screenshots/shaders/26.1-neoforge-12-watcher-vael.png) | ![Orrin, Watcher of the Forge](docs/screenshots/shaders/26.1-neoforge-13-watcher-orrin.png) |
 | ![Arriving at the Sun Spire](docs/screenshots/shaders/26.1-neoforge-04-solar-arrival.png) | ![Vael's Moon Arena](docs/screenshots/shaders/26.1-neoforge-06-moon-arena.png) |
-| ![Orrin's Prism Observatory](docs/screenshots/shaders/26.1-neoforge-07-prism-observatory.png) | ![The Umbral Throne](docs/screenshots/shaders/26.1-neoforge-10-umbral-throne.png) |
-| ![The Firmament hub](docs/screenshots/shaders/26.1-neoforge-16-firmament-hub.png) | ![Vael, Watcher of the Moon](docs/screenshots/suite/26.1-neoforge-13-watcher-vael-night.png) |
-| ![A starlight network](docs/screenshots/suite/26.1-neoforge-04-starlight-network.png) | ![A convergence ritual](docs/screenshots/suite/26.1-neoforge-05-convergence-ritual.png) |
-| ![The Seraph armoury](docs/screenshots/suite/26.1-neoforge-07-seraph-armory.png) | ![A Fallen Observatory](docs/screenshots/suite/26.1-neoforge-08-fallen-observatory.png) |
+| ![Orrin's Prism Observatory](docs/screenshots/shaders/26.1-neoforge-07-prism-observatory.png) | ![Ilyra's Endless Library](docs/screenshots/shaders/26.1-neoforge-08-endless-library.png) |
+| ![Inside the Endless Library](docs/screenshots/shaders/26.1-neoforge-09-library-inside.png) | ![The Umbral Throne](docs/screenshots/shaders/26.1-neoforge-10-umbral-throne.png) |
+| ![A starlight network](docs/screenshots/shaders/26.1-neoforge-17-starlight-network.png) | ![A convergence ritual](docs/screenshots/shaders/26.1-neoforge-18-convergence-ritual.png) |
+| ![A Fallen Observatory](docs/screenshots/shaders/26.1-neoforge-19-fallen-observatory.png) | ![Seraph gear](docs/screenshots/shaders/26.1-neoforge-20-seraph-armory.png) |
+| ![The Firmament hub](docs/screenshots/shaders/26.1-neoforge-16-firmament-hub.png) | ![Ilyra, Watcher of Memory](docs/screenshots/shaders/26.1-neoforge-14-watcher-ilyra.png) |
 
 More in [`docs/screenshots/`](docs/screenshots/).
 
