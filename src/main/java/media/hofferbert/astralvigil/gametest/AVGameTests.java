@@ -153,7 +153,23 @@ public final class AVGameTests {
 
     private static net.minecraft.world.level.block.entity.BlockEntity placeBe(GameTestHelper helper, BlockPos rel, Block block) {
         helper.setBlock(rel, block);
-        return helper.getLevel().getBlockEntity(helper.absolutePos(rel));
+        var be = helper.getLevel().getBlockEntity(helper.absolutePos(rel));
+        if (be instanceof StarlightBlockEntity device) {
+            drive(helper, device);
+        }
+        return be;
+    }
+
+    /**
+     * Ticks a device every test tick. GameTest chunks are not always block-ticking (seen on 1.21.1), so tests drive
+     * their devices themselves; a device that also ticks naturally simply works twice as fast.
+     */
+    private static void drive(GameTestHelper helper, StarlightBlockEntity be) {
+        helper.onEachTick(() -> {
+            if (!be.isRemoved()) {
+                StarlightBlockEntity.serverTick(helper.getLevel(), be.getBlockPos(), be.getBlockState(), be);
+            }
+        });
     }
 
     static void reservoirFeedsLens(GameTestHelper helper) {
@@ -177,6 +193,7 @@ public final class AVGameTests {
         @SuppressWarnings("unchecked")
         T be = (T) helper.getLevel().getBlockEntity(helper.absolutePos(rel));
         GT.check(helper, be != null, "no block entity at " + rel);
+        drive(helper, be);
         return be;
     }
 

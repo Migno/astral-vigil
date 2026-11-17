@@ -114,6 +114,8 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   arrows are tagged at creation (`customArrow`) and scaled on impact – identical on both targets.
 - **Starlight Aegis uses a flat item model** (no block-entity-without-level renderer): blocking works on both targets
   (1.21.1 `ShieldItem`, 26.1 `BLOCKS_ATTACKS` component), and the art stays vanilla-style pixel art.
+- **GameTests drive starlight devices explicitly** (`helper.onEachTick`): GameTest chunks are not always
+  block-ticking on 1.21.1, which made beam/forge tests flaky.
 - **Gear recipes upgrade vanilla gear** at the Convergence Altar (diamond sword → Halo Edge …): keeps enchanting
   progression meaningful and makes recipes easy to override with KubeJS.
 
