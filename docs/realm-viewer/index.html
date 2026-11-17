@@ -591,6 +591,29 @@ select.small { width: auto; padding: 4px 6px; font-size: 0.74rem; }
     const f = exprCache.get(key);
     return (t) => { const r = f(t, Mo); return Number.isFinite(r) ? r : 0; };
   }
+  // GeckoLib keyframe easings (the easing of a keyframe shapes the transition INTO it)
+  const EASE = (() => {
+    const c1 = 1.70158, c3 = c1 + 1, c4 = (2 * Math.PI) / 3;
+    const bounceOut = (x) => {
+      const n = 7.5625, d = 2.75;
+      if (x < 1 / d) return n * x * x;
+      if (x < 2 / d) return n * (x -= 1.5 / d) * x + 0.75;
+      if (x < 2.5 / d) return n * (x -= 2.25 / d) * x + 0.9375;
+      return n * (x -= 2.625 / d) * x + 0.984375;
+    };
+    const inOut = (f) => (x) => (x < 0.5 ? f(2 * x) / 2 : 1 - f(2 - 2 * x) / 2);
+    const out = (f) => (x) => 1 - f(1 - x);
+    const base = {
+      Sine: (x) => 1 - Math.cos((x * Math.PI) / 2), Quad: (x) => x * x, Cubic: (x) => x ** 3, Quart: (x) => x ** 4, Quint: (x) => x ** 5,
+      Expo: (x) => (x === 0 ? 0 : 2 ** (10 * x - 10)), Circ: (x) => 1 - Math.sqrt(1 - x * x),
+      Back: (x) => c3 * x ** 3 - c1 * x * x,
+      Elastic: (x) => (x === 0 || x === 1 ? x : -(2 ** (10 * x - 10)) * Math.sin((x * 10 - 10.75) * c4)),
+      Bounce: (x) => 1 - bounceOut(1 - x),
+    };
+    const e = { linear: (x) => x, step: (x) => (x < 1 ? 0 : 1) };
+    for (const [k, f] of Object.entries(base)) { e['easeIn' + k] = f; e['easeOut' + k] = out(f); e['easeInOut' + k] = inOut(f); }
+    return e;
+  })();
   function channel(spec) {
     if (spec == null) return null;
     const vecFns = (arr) => (Array.isArray(arr) ? arr : [arr, arr, arr]).map(molang);
@@ -598,18 +621,31 @@ select.small { width: auto; padding: 4px 6px; font-size: 0.74rem; }
       const f = vecFns(spec.vector || spec);
       return (t) => f.map((g) => g(t));
     }
-    const keys = Object.keys(spec).map((k) => [parseFloat(k), spec[k]]).sort((a, b) => a[0] - b[0])
-      .map(([time, val]) => {
-        const v = val && !Array.isArray(val) && typeof val === 'object' ? (val.post || val.vector || val.pre) : val;
-        return [time, vecFns(v)];
-      });
+    const keys = Object.keys(spec).map((k) => [parseFloat(k), spec[k]]).sort((a, b) => a[0] - b[0]).map(([time, val]) => {
+      const obj = val && !Array.isArray(val) && typeof val === 'object';
+      const pre = obj ? (val.pre || val.vector || val.post) : val;
+      const post = obj ? (val.post || val.vector || val.pre) : val;
+      return { t: time, pre: vecFns(pre), post: vecFns(post), ease: obj && val.easing ? val.easing : null,
+        cat: obj && val.lerp_mode === 'catmullrom' };
+    });
+    const ev = (fns, t) => fns.map((g) => g(t));
     return (t) => {
-      if (t <= keys[0][0]) return keys[0][1].map((g) => g(t));
+      if (t <= keys[0].t) return ev(keys[0].pre, t);
       for (let i = 0; i < keys.length - 1; i++) {
-        const [t0, a] = keys[i], [t1, b] = keys[i + 1];
-        if (t <= t1) { const s = (t - t0) / Math.max(t1 - t0, 1e-6); return a.map((g, j) => g(t) + (b[j](t) - g(t)) * s); }
+        const k0 = keys[i], k1 = keys[i + 1];
+        if (t > k1.t) continue;
+        const s = (t - k0.t) / Math.max(k1.t - k0.t, 1e-6);
+        const a = ev(k0.post, t), b = ev(k1.pre, t);
+        if (k1.cat || k0.cat) {
+          const p0 = ev((keys[i - 1] || k0).post, t), p3 = ev((keys[i + 2] || k1).pre, t);
+          const s2 = s * s, s3 = s2 * s;
+          return a.map((p1, j) => 0.5 * ((2 * p1) + (-p0[j] + b[j]) * s + (2 * p0[j] - 5 * p1 + 4 * b[j] - p3[j]) * s2 + (-p0[j] + 3 * p1 - 3 * b[j] + p3[j]) * s3));
+        }
+        const f = (k1.ease && EASE[k1.ease]) || EASE.linear;
+        const e = f(s);
+        return a.map((v, j) => v + (b[j] - v) * e);
       }
-      return keys[keys.length - 1][1].map((g) => g(t));
+      return ev(keys[keys.length - 1].post, t);
     };
   }
   function buildGeo(geo, tex, glow) {
