@@ -24,14 +24,25 @@ import com.geckolib.animatable.manager.AnimatableManager;
 
 /**
  * A Watcher in its Firmament sanctum: floating, invulnerable, talks to players and starts their trial. Rendered with
- * GeckoLib (idle loop, triggerable "cast").
+ * GeckoLib: a looping idle plus triggerable clips - "cast" (a trial starts), "talk" (any other conversation),
+ * "greet" (a player arrives nearby) and "bless" (a trial of this Watcher was completed, see {@link TrialManager}).
  */
 public class WatcherEntity extends PathfinderMob implements GeoEntity {
     static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     static final RawAnimation CAST = RawAnimation.begin().thenPlay("cast");
+    static final RawAnimation TALK = RawAnimation.begin().thenPlay("talk");
+    static final RawAnimation GREET = RawAnimation.begin().thenPlay("greet");
+    static final RawAnimation BLESS = RawAnimation.begin().thenPlay("bless");
+    /** A player closer than this greets the Watcher; it has to leave beyond {@link #LEAVE_RANGE} to be greeted again. */
+    static final double GREET_RANGE = 10.0;
+    static final double LEAVE_RANGE = 16.0;
+    static final int GREET_COOLDOWN = 200;
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final Watcher watcher;
+    private boolean playerNear;
+    private long nextGreet;
+    private long busyUntil;
 
     public WatcherEntity(EntityType<? extends PathfinderMob> type, Level level, Watcher watcher) {
         super(type, level);
@@ -71,11 +82,35 @@ public class WatcherEntity extends PathfinderMob implements GeoEntity {
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (hand == InteractionHand.MAIN_HAND && player instanceof ServerPlayer sp) {
-            if (TrialManager.interact(sp, this)) {
-                triggerAnim("main", "cast");
-            }
+            play(TrialManager.interact(sp, this) ? "cast" : "talk", 40);
         }
         return InteractionResult.SUCCESS;
+    }
+
+    /** Trial completed: wings flare, the gathered light is presented. */
+    public void bless() {
+        play("bless", 72);
+    }
+
+    private void play(String anim, int ticks) {
+        triggerAnim("main", anim);
+        busyUntil = level().getGameTime() + ticks;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (level().isClientSide() || tickCount % 10 != 0) {
+            return;
+        }
+        long now = level().getGameTime();
+        Player near = level().getNearestPlayer(this, playerNear ? LEAVE_RANGE : GREET_RANGE);
+        boolean arrived = near != null && !near.isSpectator() && !playerNear;
+        playerNear = near != null && !near.isSpectator();
+        if (arrived && now >= nextGreet && now >= busyUntil) {
+            nextGreet = now + GREET_COOLDOWN;
+            play("greet", 52);
+        }
     }
 
     // ------------------------------------------------------------------ GeckoLib
@@ -84,10 +119,12 @@ public class WatcherEntity extends PathfinderMob implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         //? if >=26.1 {
         controllers.add(new AnimationController<WatcherEntity>("main", 5, test -> test.setAndContinue(IDLE))
-                .triggerableAnim("cast", CAST));
+                .triggerableAnim("cast", CAST).triggerableAnim("talk", TALK)
+                .triggerableAnim("greet", GREET).triggerableAnim("bless", BLESS));
         //?} else {
         /*controllers.add(new AnimationController<>(this, "main", 5, state -> state.setAndContinue(IDLE))
-                .triggerableAnim("cast", CAST));
+                .triggerableAnim("cast", CAST).triggerableAnim("talk", TALK)
+                .triggerableAnim("greet", GREET).triggerableAnim("bless", BLESS));
         *///?}
     }
 

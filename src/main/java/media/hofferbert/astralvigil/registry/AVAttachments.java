@@ -69,6 +69,15 @@ public final class AVAttachments {
                             net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
                     .build());
 
+    /** Game time of the player's last Seraph Glide Burst (0 = never); transient, synced to every client so the
+     * Seraph Wings play their burst clip. */
+    public static final Supplier<AttachmentType<Long>> WING_BURST = ATTACHMENTS.register(
+            "wing_burst",
+            () -> AttachmentType.builder(() -> 0L)
+                    .sync((holder, to) -> to.connection != null && to.connection.hasChannel(SyncAttachmentsPayload.TYPE),
+                            net.minecraft.network.codec.ByteBufCodecs.VAR_LONG)
+                    .build());
+
     /** Developer cosmetics the player wears. Survives death; synced to every client (it is visible). */
     public static final Supplier<AttachmentType<media.hofferbert.astralvigil.cosmetics.Loadout>> COSMETICS = ATTACHMENTS.register(
             "cosmetics",

@@ -253,8 +253,9 @@ def eclipse_cape():
 
 # ------------------------------------------------------------------ wing recolours (from seraph_wings.png)
 
-WING_SRC = {"cyan": (143, 239, 255, 255), "shade": (185, 179, 204, 255), "light": (236, 232, 244, 255),
-            "trim": (242, 201, 76, 255), "white": (255, 255, 255, 255)}
+import gen_seraph_wings  # noqa: E402  (the wing texture's colour keys)
+
+WING_SRC = {k: png.hexc(v) for k, v in gen_seraph_wings.PALETTE.items()}
 
 
 def wings(mapping, glow_keys):
@@ -326,10 +327,12 @@ def main():
     img, glow = eclipse_cape()
     save("eclipse_cape", img)
     save("eclipse_cape_glow", glow)
-    img, glow = wings({"white": WHITE, "light": GOLD_L, "shade": GOLD, "trim": CYAN, "cyan": WHITE}, {"trim", "cyan"})
+    img, glow = wings({"outline": GOLD_DD, "deep": GOLD_D, "shade": GOLD, "light": GOLD_L, "white": WHITE,
+                       "trim_dark": CYAN_D, "trim": CYAN, "cyan": WHITE}, {"trim", "cyan"})
     save("radiant_wings", img)
     save("radiant_wings_glow", glow)
-    img, glow = wings({"white": VIOLET, "light": C("3A2560"), "shade": NAVY, "trim": VIOLET_G, "cyan": VIOLET_W}, {"trim", "cyan"})
+    img, glow = wings({"outline": C("0E0B18"), "deep": NAVY, "shade": C("3A2560"), "light": VIOLET, "white": VIOLET_L,
+                       "trim_dark": VIOLET, "trim": VIOLET_G, "cyan": VIOLET_W}, {"trim", "cyan"})
     save("eclipse_wings", img)
     save("eclipse_wings_glow", glow)
     java([solar, eclipse, hal])

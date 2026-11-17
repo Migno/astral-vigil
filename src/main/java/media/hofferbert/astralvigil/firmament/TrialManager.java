@@ -22,6 +22,8 @@ public final class TrialManager {
     public static final int TRIAL_TICKS = 20 * 60 * 20;
     public static final int FAVOUR_TRIAL = 50;
     public static final int FAVOUR_RIVAL_LOSS = 15;
+    /** The completing Watcher plays its bless animation if it floats within this many blocks of the player. */
+    static final double BLESS_RADIUS = 96.0;
     static final String TRIAL_KEY = "astralvigil_trial";
     static final String TRIAL_UNTIL = "astralvigil_trial_until";
 
@@ -113,6 +115,10 @@ public final class TrialManager {
                         "message.astralvigil.trial.complete", Component.translatable(w.translationKey()))
                 .withStyle(ChatFormatting.GOLD));
         player.level().playSound(null, player.blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 1.0f, 1.0f);
+        for (WatcherEntity e : player.level().getEntitiesOfClass(WatcherEntity.class, player.getBoundingBox().inflate(BLESS_RADIUS),
+                e -> e.watcher() == w)) {
+            e.bless();
+        }
         return true;
     }
 

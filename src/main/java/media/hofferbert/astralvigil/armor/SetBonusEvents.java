@@ -169,6 +169,8 @@ public final class SetBonusEvents {
         player.setDeltaMovement(flat.x, 0.45, flat.z);
         player.hurtMarked = true;
         player.fallDistance = 0;
+        player.setData(media.hofferbert.astralvigil.registry.AVAttachments.WING_BURST, now); // Seraph Wings burst clip
+        player.syncData(media.hofferbert.astralvigil.registry.AVAttachments.WING_BURST);
         ServerLevel server = (ServerLevel) player.level();
         server.sendParticles(ParticleTypes.END_ROD, player.getX(), player.getY() + 1.0, player.getZ(), 30, 0.6, 0.4, 0.6, 0.05);
         server.playSound(null, player.blockPosition(), SoundEvents.PHANTOM_FLAP, SoundSource.PLAYERS, 1.0f, 1.3f);
