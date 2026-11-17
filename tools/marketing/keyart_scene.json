@@ -1,8 +1,8 @@
 {
   "_comment": "Blender coordinates (z up). The Umbral Cathedral nave runs along +y (doors ~y 23, throne ~y 79); floor top at z 1. Models face +y at yaw 0.",
   "eclipse": {
-    "anim": "nova_windup",
-    "time": 2.0,
+    "anim": "sweep_windup",
+    "time": 0.85,
     "location": [
       0,
       68,
