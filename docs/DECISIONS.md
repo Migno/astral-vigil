@@ -263,3 +263,17 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
   deferred 26.1 renderer and without GeckoLib emissives). Mid-tier sets are crafted at the Convergence Altar.
   `art/bbmodel/armor/seraph_layer_*` are stale; the assets now come from `gen_armor.py`.
 - **Marks count by advancement** for the Umbral Gate and the summon, so a lost Mark cannot soft-lock the endgame.
+
+## Models and animation pass (2026-11-17)
+
+- **`docs/ART_GUIDE.md` is the bar** for every model and animation (silhouette, player-anchored proportions,
+  one texel density, joint chains, keyframed easing with anticipation/contact hold/follow-through).
+- **Colour limit:** the ≤ 8 colours rule applies to 16×16 block and item textures. Large entity textures (Watchers,
+  Eclipse) use 4-tone ramps per material with hue shift and may use ~20 colours.
+- **Eclipse weapons** are hidden bones (scale 0) summoned per move during the wind-up and dissolved in the recovery;
+  their timing table lives in `EclipseWeapon` and a JUnit test keeps it in sync with the animation file. Consecutive
+  stages of one move blend over 1 tick (was 3) so strikes stay snappy.
+- **Per-Watcher props** share one geo; the props of the other three Watchers are transparent on each texture.
+- **Seraph Wings** stay a vanilla model layer, now generated (`gen_seraph_wings.py` → `SeraphWingsRig`) and animated
+  by a small keyframe player (`client/anim/Keyframes`) with GeckoLib's easing formulas; `art/bbmodel/entity/seraph_wings.bbmodel`
+  is stale.

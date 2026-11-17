@@ -4,6 +4,21 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Models and animations, AAA pass (`docs/ART_GUIDE.md`)
+- **The Eclipse**: rebuilt to player-anchored proportions (no more spaghetti fingers), jointed arms, wings and
+  tendrils, 275 cubes / 63 bones; every one of its 39 animations re-keyed with anticipation, contact holds and
+  follow-through. It now **summons a weapon for each attack** that flares in with a glow during the wind-up and shatters
+  in the recovery: Umbral Scythe (Sweep), Void Lance, Starfall Scepter, Echo Orb, Eclipse Claws (Shadow Dive),
+  Eclipse Focus (Ray and Nova), Umbral Chain (Grasp), with particle bursts and sounds.
+- **Eclipse Echo** and **Umbral Pylon** rebuilt the same way (the Echo gains a glow layer).
+- **The Watchers**: rebuilt seven heads tall with six jointed wings, cloth and ribbons; each Watcher carries its own
+  attribute (Solenne's sun crown and disc, Vael's crescent, Orrin's hammer and anvil sigil, Ilyra's tome, quill and
+  rune tablets). New animations: a living idle, cast, talk, **greet** (when you approach) and **bless** (when you
+  complete their trial).
+- **Seraph Wings**: regenerated rig with folding idle, gliding spread and a **burst** stroke for the Glide Burst.
+- Tools: `gen_eclipse.py`, `gen_watcher.py`, `gen_seraph_wings.py`, `geckorig.py`, previews; the web atlas plays
+  GeckoLib easings and Catmull-Rom; Blender key-art pipeline (`tools/marketing/keyart.py`).
+
 ### The realms of the Firmament (no more hub)
 - Every gate now opens onto a **realm of its own** – a separate dimension with a fixed sky, fog, ambient particles
   and a handcrafted template (`tools/dev/gen_realms.py`), built on the first visit:
