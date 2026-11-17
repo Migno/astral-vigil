@@ -202,6 +202,10 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - **Particles are client-only** and follow the particle-density setting; your own aura is hidden while the camera is
   in your head.
 - `/astralvigil showcase <scene>` builds film-ready scenes for screenshots (op only).
+- **Wardrobe key is J**, not K: Iris binds K to "toggle shaders" by default.
+- **Known external bug (Iris 1.11.4+26.1, Complementary Reimagined r5.9.3, compat instance):** the client crashes with
+  `Missing sampler Sampler1` as soon as dropped items are on screen. A vanilla diamond triggers it as well, so it is
+  not an Astral Vigil bug; shader screenshots of item-heavy scenes (network, rituals) are pending an Iris fix.
 
 ## Open (owner)
 

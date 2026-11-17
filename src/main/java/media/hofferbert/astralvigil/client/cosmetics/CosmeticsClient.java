@@ -24,13 +24,13 @@ import net.neoforged.neoforge.common.NeoForge;
 import org.lwjgl.glfw.GLFW;
 
 /**
- * Client glue for developer cosmetics: the Cosmetics key (K), render layers and the particle auras - orbiting
+ * Client glue for developer cosmetics: the Cosmetics key (J; K is Iris' shader toggle), render layers and the particle auras - orbiting
  * starlight motes, rising solar embers and a crackling void storm that throws small lightning arcs.
  * Particles are purely client-side and scale with the client particle-density setting.
  */
 public final class CosmeticsClient {
     static final KeyMapping OPEN =
-            new KeyMapping("key.astralvigil.cosmetics", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, GearClient.CATEGORY);
+            new KeyMapping("key.astralvigil.cosmetics", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, GearClient.CATEGORY);
     private static final double RANGE_SQR = 48 * 48;
 
     private CosmeticsClient() {}

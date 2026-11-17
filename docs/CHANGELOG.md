@@ -5,7 +5,7 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 ## [Unreleased]
 
 ### Developer cosmetics
-- **Celestial Wardrobe** (key **K**): one cosmetic per slot with a turning live preview of your own player.
+- **Celestial Wardrobe** (key **J**): one cosmetic per slot with a turning live preview of your own player.
   Head: **Solar Crown**, **Eclipse Crown** (crackles), **Seraph Halo** (floating, spinning). Cape: **Seraph Cape**,
   **Starfield Cape** (twinkling stars), **Eclipse Cape**. Wings: **Radiant Wings**, **Eclipse Wings**. Aura:
   **Starlight Motes**, **Solar Embers**, **Void Storm** (forked lightning arcs).

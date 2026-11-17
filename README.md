@@ -44,7 +44,7 @@ Firmament dimension, guarded by four Watchers – and their fallen fifth sibling
 
 More screenshots: [`docs/screenshots/suite/`](docs/screenshots/suite/).
 
-**Developer cosmetics.** Members of the Astral Vigil team open the *Celestial Wardrobe* with **K**: crowns, a floating
+**Developer cosmetics.** Members of the Astral Vigil team open the *Celestial Wardrobe* with **J**: crowns, a floating
 halo, capes, glowing wings and particle auras (including a lightning storm), visible to every player. Server owners
 can grant them to staff via `[cosmetics] developers` or switch them off with `[cosmetics] enabled = false`.
 
