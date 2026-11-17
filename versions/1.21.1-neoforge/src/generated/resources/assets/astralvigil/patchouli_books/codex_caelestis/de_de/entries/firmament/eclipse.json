@@ -1,0 +1,22 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:umbral_sigil",
+  "name": "Die Finsternis",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:umbral_sigil",
+      "text": "Am Konvergenzaltar aus einem Leerensplitter, einem Astralkern, Leerenkristallen, Obsidian und einer Echoscherbe mit 3000 Stella-Licht geschmiedet. Benutze es im Firmament, während du alle vier Zeichen trägst, um die Finsternis herabzurufen."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Der gefallene fünfte Wächter kämpft in drei Phasen. $(l)Erstens$(): weite Hiebe und die Leerenlanze – hebt sie die Arme, weiche seitlich aus. $(l)Zweitens$(): sie zersplittert in Echos der Finsternis. $(l)Drittens$(): sie springt neben dich und sammelt eine Umbrale Nova; unterbrich die Sichtlinie hinter festen Blöcken."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:halo_of_dawn",
+      "text": "Aus dem Herz der Finsternis, Sonnenstahl, Mondsilber, Sternenstahl und Seraphsfedern: der Heiligenschein der Morgenröte. Getragen senkt er die Sternenlichtkosten von Fähigkeiten und lässt den Blick der Finsternis an dir abgleiten. Seraphsfedern allein binden dir Seraphsflügel."
+    }
+  ],
+  "sortnum": 2
+}

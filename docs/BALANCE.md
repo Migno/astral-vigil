@@ -139,6 +139,21 @@ Stella research – late-midgame, after the first gear. Trials: 10 min to finish
 completed trial, −15 for the rival Watcher, clamped to −100 … 1000 (used by Phase 8). Low gravity: −50 % gravity,
 +7 safe fall distance – generous so the parkour trial is about route-finding, not fall damage.
 
+## Endgame (Phase 8)
+
+| | Eclipse | Wither (ref.) | Warden (ref.) |
+|---|---|---|---|
+| Health / armour | 400 / 10 | 300 / 4 | 500 / 0 |
+| Melee | 12, 1.5 s | – | 30 |
+| Ranged | Void Lance 14 + Wither I (telegraphed 1 s) | skulls 8 + Wither | sonic boom 10 |
+| Area | Umbral Nova 18 (phase 3, blocked by cover) | explosion | – |
+
+Tuned for a group or a single player in full Seraph Plate (≈ netherite) with Sunsteel/Moonsilver gear: every heavy hit
+is telegraphed and avoidable, so a skilled solo player can win without potions. Echoes: 14 HP, 4 damage, max 6 alive,
+waves of 3 every 11 s from phase 2. Rewards: Eclipse Heart + 3–5 Seraph Feathers per kill; the Umbral Sigil (3000
+Stella light, Void materials, echo shard) keeps repeat kills a real investment. Halo of Dawn: −25 % ability cost,
+−50 % Gaze gain – convenience, never extra damage.
+
 ## Starlight formula
 
 `intensity = night(t) × moon(phase) × weather`, 0 without sky access.

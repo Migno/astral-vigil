@@ -42,7 +42,7 @@ public class AVModelProvider extends ModelProvider {
         blockModels.createTrivialCube(AVBlocks.CONSTELLATION_LOCK.get());
         blockModels.createTrivialCube(AVBlocks.VOID_CRYSTAL.get());
         for (Block b : new Block[] {AVBlocks.FIRMAMENT_STONE.get(), AVBlocks.STARLIGHT_FONT.get(), AVBlocks.TRIAL_RECEPTOR.get(),
-            AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get()}) {
+            AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get(), AVBlocks.ECLIPSE_SEAL.get()}) {
             blockModels.createTrivialCube(b);
         }
 
@@ -89,6 +89,9 @@ public class AVModelProvider extends ModelProvider {
         itemModels.generateFlatItem(AVItems.VOID_SHARD.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(AVItems.ASCENSION_KEY.get(), ModelTemplates.FLAT_ITEM);
         AVItems.MARKS.values().forEach(m -> itemModels.generateFlatItem(m.get(), ModelTemplates.FLAT_ITEM));
+        for (net.minecraft.world.item.Item i : new net.minecraft.world.item.Item[] {AVItems.UMBRAL_SIGIL.get(), AVItems.ECLIPSE_HEART.get(), AVItems.SERAPH_FEATHER.get(), AVItems.HALO_OF_DAWN.get()}) {
+            itemModels.generateFlatItem(i, ModelTemplates.FLAT_ITEM);
+        }
     }
 
     private static void facing(BlockModelGenerators blockModels, Block block, PropertyDispatch<VariantMutator> rotation) {
@@ -113,7 +116,7 @@ public class AVModelProvider extends ModelProvider {
             simpleBlockWithItem(AVBlocks.CONSTELLATION_LOCK.get(), cubeAll(AVBlocks.CONSTELLATION_LOCK.get()));
             simpleBlockWithItem(AVBlocks.VOID_CRYSTAL.get(), cubeAll(AVBlocks.VOID_CRYSTAL.get()));
             for (Block b : new Block[] {AVBlocks.FIRMAMENT_STONE.get(), AVBlocks.STARLIGHT_FONT.get(), AVBlocks.TRIAL_RECEPTOR.get(),
-                AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get()}) {
+                AVBlocks.TRIAL_GOAL.get(), AVBlocks.MOON_TARGET.get(), AVBlocks.ECLIPSE_SEAL.get()}) {
                 simpleBlockWithItem(b, cubeAll(b));
             }
 
@@ -183,6 +186,9 @@ public class AVModelProvider extends ModelProvider {
             basicItem(AVItems.VOID_SHARD.get());
             basicItem(AVItems.ASCENSION_KEY.get());
             AVItems.MARKS.values().forEach(m -> basicItem(m.get()));
+            for (net.minecraft.world.item.Item i : new net.minecraft.world.item.Item[] {AVItems.UMBRAL_SIGIL.get(), AVItems.ECLIPSE_HEART.get(), AVItems.SERAPH_FEATHER.get(), AVItems.HALO_OF_DAWN.get()}) {
+                basicItem(i);
+            }
         }
 
         private String name(Item item) {

@@ -46,6 +46,7 @@ public class AVLootProvider extends BlockLootSubProvider {
         dropSelf(AVBlocks.ASTRAL_FORGE.get());
         dropSelf(AVBlocks.STAR_ANCHOR.get());
         dropSelf(AVBlocks.FIRMAMENT_STONE.get());
+        dropSelf(AVBlocks.ECLIPSE_SEAL.get());
         add(AVBlocks.VOID_CRYSTAL.get(), block -> createSilkTouchDispatchTable(
                 block,
                 applyExplosionDecay(block, LootItem.lootTableItem(AVItems.VOID_SHARD.get())

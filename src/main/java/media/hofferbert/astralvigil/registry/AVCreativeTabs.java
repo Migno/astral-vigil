@@ -52,6 +52,11 @@ public final class AVCreativeTabs {
                 output.accept(AVItems.FIRMAMENT_STONE.get());
                 output.accept(AVItems.ASCENSION_KEY.get());
                 AVItems.MARKS.values().forEach(m -> output.accept(m.get()));
+                output.accept(AVItems.UMBRAL_SIGIL.get());
+                output.accept(AVItems.ECLIPSE_HEART.get());
+                output.accept(AVItems.SERAPH_FEATHER.get());
+                output.accept(AVItems.HALO_OF_DAWN.get());
+                output.accept(AVItems.ECLIPSE_SEAL.get());
                 for (int i = 1; i <= 24; i++) {
                     var page = new net.minecraft.world.item.ItemStack(AVItems.LORE_FRAGMENT.get());
                     page.set(AVComponents.FRAGMENT.get(), i);

@@ -65,6 +65,11 @@ public final class AVBlocks {
             .mapColor(MapColor.SNOW).strength(-1.0f, 3_600_000.0f).noLootTable()
             .lightLevel(s -> s.getValue(TrialBlocks.MoonTarget.LIT) ? 12 : 3).sound(SoundType.AMETHYST));
 
+    // Phase 8
+    public static final DeferredBlock<Block> ECLIPSE_SEAL = register("eclipse_seal", Block::new, p -> p
+            .mapColor(MapColor.COLOR_PURPLE).strength(3.0f, 9.0f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE_TILES)
+            .lightLevel(s -> 4));
+
     private AVBlocks() {}
 
     private static BlockBehaviour.Properties ritual(BlockBehaviour.Properties p) {

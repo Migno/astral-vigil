@@ -70,9 +70,38 @@ public final class AVServerConfig {
     public static final ModConfigSpec.IntValue RITUAL_GAZE_RELIEF;
     public static final ModConfigSpec.IntValue RITUAL_BASE_SECONDS;
     public static final ModConfigSpec.IntValue RITUAL_COOLDOWN;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_LANCE_DAMAGE;
+    public static final ModConfigSpec.DoubleValue ECLIPSE_NOVA_DAMAGE;
+    public static final ModConfigSpec.IntValue ECLIPSE_ECHOES_PER_WAVE;
+    public static final ModConfigSpec.IntValue ECLIPSE_FEATHERS;
+    public static final ModConfigSpec.DoubleValue HALO_COST_REDUCTION;
+    public static final ModConfigSpec.DoubleValue HALO_GAZE_REDUCTION;
 
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
+
+        b.comment("The Eclipse boss and its rewards.")
+                .translation("astralvigil.configuration.eclipse")
+                .push("eclipse");
+        ECLIPSE_LANCE_DAMAGE = b.comment("Damage of a Void Lance (telegraphed beam).")
+                .translation("astralvigil.configuration.eclipse.lance_damage")
+                .defineInRange("lanceDamage", 14.0, 0.0, 1000.0);
+        ECLIPSE_NOVA_DAMAGE = b.comment("Damage of an Umbral Nova (phase 3; blocked by cover).")
+                .translation("astralvigil.configuration.eclipse.nova_damage")
+                .defineInRange("novaDamage", 18.0, 0.0, 1000.0);
+        ECLIPSE_ECHOES_PER_WAVE = b.comment("Eclipse Echoes summoned per wave (phase 2+, at most 6 alive).")
+                .translation("astralvigil.configuration.eclipse.echoes")
+                .defineInRange("echoesPerWave", 3, 0, 6);
+        ECLIPSE_FEATHERS = b.comment("Minimum Seraph Feathers dropped (plus 0-2).")
+                .translation("astralvigil.configuration.eclipse.feathers")
+                .defineInRange("feathers", 3, 0, 64);
+        HALO_COST_REDUCTION = b.comment("Halo of Dawn in the inventory: fraction of ability starlight cost saved.")
+                .translation("astralvigil.configuration.eclipse.halo_cost")
+                .defineInRange("haloCostReduction", 0.25, 0.0, 1.0);
+        HALO_GAZE_REDUCTION = b.comment("Halo of Dawn in the inventory: fraction of Eclipse Gaze gain prevented.")
+                .translation("astralvigil.configuration.eclipse.halo_gaze")
+                .defineInRange("haloGazeReduction", 0.5, 0.0, 1.0);
+        b.pop();
 
         b.comment("Eclipse Gaze: heavy use of celestial power draws the Eclipse's attention.")
                 .translation("astralvigil.configuration.gaze")

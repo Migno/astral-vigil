@@ -342,7 +342,6 @@ public final class AVLang {
         add("item.astralvigil.void_shard", "Void Shard", "Leerensplitter");
         add("item.astralvigil.lore_fragment", "Lore Fragment", "Chronikfragment");
         add("item.astralvigil.lore_fragment.numbered", "Lore Fragment %s/24", "Chronikfragment %s/24");
-        add("entity.astralvigil.eclipse_echo", "Eclipse Echo", "Echo der Finsternis");
         add("message.astralvigil.lock.sealed", "The lock does not yield. It bears the sign of %s.", "Das Schloss gibt nicht nach. Es trägt das Zeichen %s.");
         add("message.astralvigil.lock.opened", "You trace %s – the seal dissolves into light.", "Du ziehst %s nach – das Siegel löst sich in Licht auf.");
         add("message.astralvigil.ritual.no_pattern", "These anchors form no constellation you have learned.", "Diese Anker bilden kein Sternbild, das du erlernt hast.");
@@ -422,6 +421,44 @@ public final class AVLang {
         }
         add("advancements.astralvigil.ascension.title", "Ascension", "Aufstieg");
         add("advancements.astralvigil.ascension.description", "Forge an Ascension Key", "Schmiede einen Aufstiegsschlüssel");
+
+        // Phase 8 – Endgame
+        add("entity.astralvigil.eclipse", "The Eclipse", "Die Finsternis");
+        add("entity.astralvigil.eclipse_echo", "Eclipse Echo", "Echo der Finsternis");
+        add("block.astralvigil.eclipse_seal", "Eclipse Seal", "Siegel der Finsternis");
+        add("item.astralvigil.umbral_sigil", "Umbral Sigil", "Umbrales Siegel");
+        add("item.astralvigil.umbral_sigil.desc", "In the Firmament, bearing all four Marks: call down the Eclipse.", "Im Firmament, mit allen vier Zeichen: Ruf die Finsternis herab.");
+        add("item.astralvigil.eclipse_heart", "Eclipse Heart", "Herz der Finsternis");
+        add("item.astralvigil.eclipse_heart.desc", "Still warm with stolen light.", "Noch warm von gestohlenem Licht.");
+        add("item.astralvigil.seraph_feather", "Seraph Feather", "Seraphsfeder");
+        add("item.astralvigil.seraph_feather.desc", "Use to bind Seraph Wings to yourself; use again to show or hide them.", "Benutzen, um dir Seraphsflügel zu binden; erneut benutzen, um sie zu zeigen oder zu verbergen.");
+        add("item.astralvigil.halo_of_dawn", "Halo of Dawn", "Heiligenschein der Morgenröte");
+        add("item.astralvigil.halo_of_dawn.desc", "Carried: abilities cost less starlight and the Eclipse's gaze slides off you.", "Getragen: Fähigkeiten kosten weniger Sternenlicht und der Blick der Finsternis gleitet an dir ab.");
+        add("message.astralvigil.umbral.not_here", "The sigil is cold. Only in the Firmament can the Eclipse be called.", "Das Siegel bleibt kalt. Nur im Firmament lässt sich die Finsternis rufen.");
+        add("message.astralvigil.umbral.marks", "The sigil needs all four Watchers' Marks to answer.", "Das Siegel antwortet nur mit den Zeichen aller vier Wächter.");
+        add("message.astralvigil.umbral.peaceful", "The Eclipse does not answer in a peaceful world.", "In einer friedlichen Welt antwortet die Finsternis nicht.");
+        add("message.astralvigil.umbral.present", "The Eclipse is already here.", "Die Finsternis ist bereits hier.");
+        add("message.astralvigil.eclipse.phase2", "The Eclipse splinters – its echoes join the fight!", "Die Finsternis zersplittert – ihre Echos greifen ein!");
+        add("message.astralvigil.eclipse.phase3", "The broken halo flares. Find cover from the Umbral Nova!", "Der zerbrochene Heiligenschein lodert. Such Deckung vor der Umbralen Nova!");
+        add("message.astralvigil.eclipse.nova", "The Eclipse gathers darkness – hide!", "Die Finsternis sammelt Dunkelheit – versteck dich!");
+        add("message.astralvigil.eclipse.defeated", "The Eclipse falls. For a moment, every star burns brighter.", "Die Finsternis fällt. Für einen Augenblick brennt jeder Stern heller.");
+        add("message.astralvigil.wings.shown", "Seraph Wings unfurl.", "Seraphsflügel entfalten sich.");
+        add("message.astralvigil.wings.hidden", "Seraph Wings fold away.", "Seraphsflügel falten sich zusammen.");
+        add("advancements.astralvigil.umbral_sigil.title", "Umbral Invitation", "Umbrale Einladung");
+        add("advancements.astralvigil.umbral_sigil.description", "Forge an Umbral Sigil", "Schmiede ein Umbrales Siegel");
+        add("advancements.astralvigil.eclipse_defeated.title", "Dawn After Eclipse", "Morgen nach der Finsternis");
+        add("advancements.astralvigil.eclipse_defeated.description", "Defeat the Eclipse", "Besiege die Finsternis");
+        add("advancements.astralvigil.halo_of_dawn.title", "Halo Restored", "Der Schein kehrt zurück");
+        add("advancements.astralvigil.halo_of_dawn.description", "Forge the Halo of Dawn from the Eclipse Heart", "Schmiede aus dem Herz der Finsternis den Heiligenschein der Morgenröte");
+        add("advancements.astralvigil.seraph_wings.title", "Feathers of the Fallen", "Federn der Gefallenen");
+        add("advancements.astralvigil.seraph_wings.description", "Obtain a Seraph Feather", "Erhalte eine Seraphsfeder");
+        add("astralvigil.configuration.eclipse", "The Eclipse", "Die Finsternis");
+        add("astralvigil.configuration.eclipse.lance_damage", "Void Lance Damage", "Schaden der Leerenlanze");
+        add("astralvigil.configuration.eclipse.nova_damage", "Umbral Nova Damage", "Schaden der Umbralen Nova");
+        add("astralvigil.configuration.eclipse.echoes", "Echoes per Wave", "Echos pro Welle");
+        add("astralvigil.configuration.eclipse.feathers", "Seraph Feathers Dropped", "Fallengelassene Seraphsfedern");
+        add("astralvigil.configuration.eclipse.halo_cost", "Halo: Ability Cost Saved", "Heiligenschein: gesparte Fähigkeitskosten");
+        add("astralvigil.configuration.eclipse.halo_gaze", "Halo: Gaze Prevented", "Heiligenschein: verhinderter Blick");
 
         // Config screen
         add("astralvigil.configuration.title", "Astral Vigil Configuration", "Astral Vigil – Einstellungen");

@@ -120,11 +120,24 @@ public final class Firmament {
         boolean inside = isFirmament(player.level());
         apply(player.getAttribute(Attributes.GRAVITY), GRAVITY_ID, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, inside);
         apply(player.getAttribute(Attributes.SAFE_FALL_DISTANCE), FALL_ID, 7.0, AttributeModifier.Operation.ADD_VALUE, inside);
-        if (inside && player.getY() < -32) {
-            // falling off the islands returns you to the landing instead of the void
+        if (inside && shouldCatch(player.getX(), player.getY(), player.getZ(), player.getAbilities().flying)) {
+            // the sky beneath the sanctums (and the void) catches falling players and returns them to the landing
             teleport(player, (ServerLevel) player.level(), Vec3.atBottomCenterOf(LANDING.above()));
             player.fallDistance = 0;
+            player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOW_FALLING, 100, 0, false, false));
         }
+    }
+
+    /** Radius around the hub inside which falling below the sanctums returns you to the landing. */
+    public static final int CATCH_RADIUS = 160;
+    public static final int CATCH_DEPTH = 24;
+
+    /** Pure: is a player at this position falling out of the hub (or into the void)? */
+    public static boolean shouldCatch(double x, double y, double z, boolean flying) {
+        if (y < -32) {
+            return true;
+        }
+        return !flying && y < LANDING.getY() - CATCH_DEPTH && x * x + z * z < (double) CATCH_RADIUS * CATCH_RADIUS;
     }
 
     private static void apply(AttributeInstance attribute, Identifier id, double amount, AttributeModifier.Operation op, boolean on) {

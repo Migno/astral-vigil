@@ -353,6 +353,15 @@ public class AVRecipeProvider extends RecipeProvider {
                 ing(AVTags.Items.INGOTS_STARMETAL), ing(AVTags.Items.INGOTS_SUNSTEEL),
                 ing(AVTags.Items.INGOTS_MOONSILVER), Ingredient.of(AVItems.VOID_SHARD.get()),
                 ing(Tags.Items.FEATHERS), ing(Tags.Items.FEATHERS));
+        convergence(output, "umbral_sigil", res(AVItems.UMBRAL_SIGIL.get(), 1), Ingredient.of(AVItems.VOID_SHARD.get()),
+                Tint.STELLA, 3000, 400, Optional.empty(),
+                Ingredient.of(AVItems.ASTRAL_CORE.get()), Ingredient.of(media.hofferbert.astralvigil.registry.AVBlocks.VOID_CRYSTAL.get()),
+                Ingredient.of(media.hofferbert.astralvigil.registry.AVBlocks.VOID_CRYSTAL.get()), ing(Tags.Items.OBSIDIANS), ing(Tags.Items.OBSIDIANS),
+                Ingredient.of(Items.ECHO_SHARD));
+        convergence(output, "halo_of_dawn", res(AVItems.HALO_OF_DAWN.get(), 1), Ingredient.of(AVItems.ECLIPSE_HEART.get()),
+                Tint.PURE, 5000, 600, Optional.of(Alignment.SOL),
+                ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_SUNSTEEL), ing(AVTags.Items.INGOTS_MOONSILVER),
+                ing(AVTags.Items.INGOTS_STARMETAL), Ingredient.of(AVItems.SERAPH_FEATHER.get()), Ingredient.of(AVItems.SERAPH_FEATHER.get()));
         convergence(output, "sigil_blank", res(AVItems.SIGIL_BLANK.get(), 2), ing(AVTags.Items.INGOTS_STARMETAL),
                 Tint.STELLA, 400, 120, Optional.of(Alignment.STELLA),
                 ing(Tags.Items.NUGGETS_GOLD), ing(Tags.Items.NUGGETS_GOLD),

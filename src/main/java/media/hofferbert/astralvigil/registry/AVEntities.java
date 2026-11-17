@@ -23,6 +23,29 @@ public final class AVEntities {
     /** One entity type per Watcher (own texture/model id), same class. */
     public static final Map<Watcher, Supplier<EntityType<WatcherEntity>>> WATCHERS = watchers();
 
+    public static final Supplier<EntityType<media.hofferbert.astralvigil.eclipse.EclipseEntity>> ECLIPSE = ENTITY_TYPES.register(
+            "eclipse", () -> EntityType.Builder.<media.hofferbert.astralvigil.eclipse.EclipseEntity>of(
+                            media.hofferbert.astralvigil.eclipse.EclipseEntity::new, MobCategory.MONSTER)
+                    .sized(1.6f, 4.0f)
+                    .clientTrackingRange(12)
+                    .fireImmune()
+                    //? if >=26.1 {
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, AstralVigil.id("eclipse"))));
+                    //?} else {
+                    /*.build("eclipse"));
+                    *///?}
+    public static final Supplier<EntityType<media.hofferbert.astralvigil.eclipse.EclipseEcho>> ECLIPSE_ECHO = ENTITY_TYPES.register(
+            "eclipse_echo", () -> EntityType.Builder.<media.hofferbert.astralvigil.eclipse.EclipseEcho>of(
+                            media.hofferbert.astralvigil.eclipse.EclipseEcho::new, MobCategory.MONSTER)
+                    .sized(0.7f, 1.5f)
+                    .clientTrackingRange(8)
+                    .fireImmune()
+                    //? if >=26.1 {
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, AstralVigil.id("eclipse_echo"))));
+                    //?} else {
+                    /*.build("eclipse_echo"));
+                    *///?}
+
     private AVEntities() {}
 
     private static Map<Watcher, Supplier<EntityType<WatcherEntity>>> watchers() {
@@ -45,6 +68,10 @@ public final class AVEntities {
     public static void register(IEventBus modBus) {
         ENTITY_TYPES.register(modBus);
         modBus.addListener((EntityAttributeCreationEvent e) ->
-                WATCHERS.values().forEach(t -> e.put(t.get(), WatcherEntity.createAttributes().build())));
+        {
+            WATCHERS.values().forEach(t -> e.put(t.get(), WatcherEntity.createAttributes().build()));
+            e.put(ECLIPSE.get(), media.hofferbert.astralvigil.eclipse.EclipseEntity.createAttributes().build());
+            e.put(ECLIPSE_ECHO.get(), media.hofferbert.astralvigil.eclipse.EclipseEcho.createAttributes().build());
+        });
     }
 }

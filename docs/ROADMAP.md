@@ -12,7 +12,7 @@ Every phase ends with: build of both targets ✅ · GameTests ✅ · in-game scr
 | 5 – Gear | Weapons, bows, armour, sigils/stances, living-gear progression, ability particles (wing cosmetic moved to Phase 7 with GeckoLib) | ✅ done |
 | 6 – World | Fallen Observatories, constellations/Star Anchors, Eclipse Gaze + events | ✅ done |
 | 7 – Firmament | Dimension, four sanctums + Watcher entities, favour system, GeckoLib setup (Seraph wing cosmetic moved to Phase 8) | ✅ done |
-| 8 – Endgame | Eclipse boss (3 phases), final advancements, balance pass | – |
+| 8 – Endgame | Eclipse boss (3 phases), Eclipse Echoes, Seraph wing cosmetic, final advancements, balance pass | ✅ done |
 | 9 – Release readiness | Compat instances + ATM10/ATM11 smoke tests, profiling, README en/de, Modrinth/CurseForge drafts (not published) | – |
 
 ## Game concept (short)

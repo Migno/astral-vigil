@@ -151,6 +151,15 @@ public final class AVItems {
         return map;
     }
 
+    // Phase 8 – Endgame
+    public static final DeferredItem<Item> UMBRAL_SIGIL = AVItems.<Item>register(
+            "umbral_sigil", media.hofferbert.astralvigil.item.UmbralSigilItem::new, p -> p.stacksTo(16).rarity(Rarity.EPIC));
+    public static final DeferredItem<Item> ECLIPSE_HEART = register("eclipse_heart", Item::new, p -> p.stacksTo(16).rarity(Rarity.EPIC).fireResistant());
+    public static final DeferredItem<Item> SERAPH_FEATHER = AVItems.<Item>register(
+            "seraph_feather", media.hofferbert.astralvigil.item.SeraphFeatherItem::new, p -> p.stacksTo(64).rarity(Rarity.RARE));
+    public static final DeferredItem<Item> HALO_OF_DAWN = register("halo_of_dawn", Item::new, p -> p.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+    public static final DeferredItem<BlockItem> ECLIPSE_SEAL = ITEMS.registerSimpleBlockItem(AVBlocks.ECLIPSE_SEAL);
+
     private AVItems() {}
 
     static <I extends Item> DeferredItem<I> register(

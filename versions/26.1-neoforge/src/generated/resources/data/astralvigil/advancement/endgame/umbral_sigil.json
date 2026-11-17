@@ -1,0 +1,33 @@
+{
+  "parent": "astralvigil:firmament/ascension",
+  "criteria": {
+    "has_sigil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:umbral_sigil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.umbral_sigil.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "astralvigil:umbral_sigil"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.umbral_sigil.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_sigil"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

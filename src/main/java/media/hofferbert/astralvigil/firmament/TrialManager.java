@@ -133,14 +133,16 @@ public final class TrialManager {
         return adv != null && player.getAdvancements().getOrStartProgress(adv).isDone();
     }
 
-    static void award(ServerPlayer player, String path) {
+    public static void award(ServerPlayer player, String path) {
         var server = player.level().getServer();
         if (server == null) {
             return;
         }
         AdvancementHolder adv = server.getAdvancements().get(AstralVigil.id(path));
         if (adv != null) {
-            player.getAdvancements().award(adv, "trial");
+            for (String criterion : player.getAdvancements().getOrStartProgress(adv).getRemainingCriteria()) {
+                player.getAdvancements().award(adv, criterion);
+            }
         }
     }
 }

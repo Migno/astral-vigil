@@ -4,6 +4,20 @@ All notable changes. Format based on [Keep a Changelog](https://keepachangelog.c
 
 ## [Unreleased]
 
+### Phase 8 – Endgame
+- **The Eclipse:** a three-phase GeckoLib boss (idle / attack / cast / phase transition / death animations) with a
+  purple boss bar and darkened sky. Phase 1: sweeps and telegraphed Void Lances. Phase 2: Eclipse Echo waves.
+  Phase 3: blinks and Umbral Novas – take cover behind blocks. Summoned with the **Umbral Sigil** in the Firmament
+  while carrying all four Marks.
+- **Rewards:** Eclipse Heart → **Halo of Dawn** (cheaper abilities, less Eclipse Gaze), **Seraph Feathers** → toggleable
+  **Seraph Wings** cosmetic visible to everyone (spread when falling).
+- **Eclipse Echoes** are real creatures now (GeckoLib), also summoned by high Eclipse Gaze.
+- Endgame advancements (Umbral Invitation, Dawn After Eclipse, Halo Restored, Feathers of the Fallen), codex entry,
+  Eclipse Seal block, `[eclipse]` server config section.
+- The sky beneath the Firmament hub catches falling players and returns them to the landing.
+- Fixed: impossible-criterion advancements granted from code now award whatever criteria they have.
+- JUnit for the phase formula; GameTests for phase transition, drops, echo lifetime and the kill advancement.
+
 ### Phase 7 – Firmament
 - **GeckoLib integration** on both targets (4.9.3 on 1.21.1, 5.5.2 on 26.1) – required dependency.
 - **The Firmament:** a sky dimension of floating islands with low gravity and soft landings, reached with the

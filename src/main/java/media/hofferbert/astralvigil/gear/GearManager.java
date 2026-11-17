@@ -118,6 +118,11 @@ public final class GearManager {
         return fullSeraph(player) ? data(player.getItemBySlot(EquipmentSlot.CHEST)).level() : -1;
     }
 
+    /** Halo of Dawn anywhere in the inventory. */
+    public static boolean hasHalo(net.minecraft.world.entity.player.Player player) {
+        return player.getInventory().contains(new ItemStack(media.hofferbert.astralvigil.registry.AVItems.HALO_OF_DAWN.get()));
+    }
+
     // ------------------------------------------------------------------ charge
 
     /** Passive recharge under the night sky; called every 40 ticks per player. */
@@ -221,7 +226,8 @@ public final class GearManager {
                     .withStyle(ChatFormatting.GRAY));
             return;
         }
-        int cost = GearProgress.scaled(sigil.baseCost(), AVServerConfig.ABILITY_COST_MULTIPLIER.get());
+        int cost = GearProgress.scaled(sigil.baseCost(), AVServerConfig.ABILITY_COST_MULTIPLIER.get()
+                * (hasHalo(player) ? 1.0 - AVServerConfig.HALO_COST_REDUCTION.get() : 1.0));
         if (d.charge() < cost) {
             PlayerCompat.actionBar(player, Component.translatable("message.astralvigil.gear.no_charge", cost)
                     .withStyle(ChatFormatting.GRAY));

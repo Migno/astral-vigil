@@ -29,6 +29,7 @@ public final class AstralVigilClient {
         modBus.addListener(AstralVigilClient::registerRenderers);
         ClientRecipes.register();
         GearClient.register(modBus);
+        media.hofferbert.astralvigil.client.SeraphWings.register(modBus);
         NeoForge.EVENT_BUS.addListener(AstralVigilClient::onTooltip);
     }
 
@@ -47,6 +48,13 @@ public final class AstralVigilClient {
                         ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.firmament.WatcherEntity>(
                                 media.hofferbert.astralvigil.AstralVigil.id("watcher"))
                                 .withAltTexture(media.hofferbert.astralvigil.AstralVigil.id("watcher/" + w.id())))));
+        event.registerEntityRenderer(media.hofferbert.astralvigil.registry.AVEntities.ECLIPSE.get(), ctx -> new com.geckolib.renderer.GeoEntityRenderer<>(
+                ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.eclipse.EclipseEntity>(
+                                media.hofferbert.astralvigil.AstralVigil.id("eclipse"))
+                        .withAltTexture(media.hofferbert.astralvigil.AstralVigil.id("eclipse/eclipse"))));
+        event.registerEntityRenderer(media.hofferbert.astralvigil.registry.AVEntities.ECLIPSE_ECHO.get(), ctx -> new com.geckolib.renderer.GeoEntityRenderer<>(
+                ctx, new com.geckolib.model.DefaultedEntityGeoModel<media.hofferbert.astralvigil.eclipse.EclipseEcho>(
+                        media.hofferbert.astralvigil.AstralVigil.id("eclipse_echo"))));
     }
 
     /** Flavour line under every Astral Vigil item that has a {@code <descriptionId>.desc} key. */
@@ -66,7 +74,11 @@ public final class AstralVigilClient {
                 || item == AVItems.CONVERGENCE_ALTAR.get()
                 || item == AVItems.ASTRAL_FORGE.get()
                 || item == AVItems.STAR_ANCHOR.get()
-                || item == AVItems.ASCENSION_KEY.get()) {
+                || item == AVItems.ASCENSION_KEY.get()
+                || item == AVItems.UMBRAL_SIGIL.get()
+                || item == AVItems.ECLIPSE_HEART.get()
+                || item == AVItems.SERAPH_FEATHER.get()
+                || item == AVItems.HALO_OF_DAWN.get()) {
             event.getToolTip()
                     .add(1, Component.translatable(item.getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }

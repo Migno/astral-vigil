@@ -18,14 +18,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-//? if >=26.1 {
-import net.minecraft.world.entity.EntitySpawnReason;
-//?}
 
 /**
  * Eclipse Gaze: rises with heavy use of celestial power (abilities, rituals), falls only through Star Anchor rituals.
@@ -59,6 +54,9 @@ public final class GazeManager {
 
     public static void add(ServerPlayer player, int amount) {
         if (AVServerConfig.GAZE_ENABLED.get() && amount != 0) {
+            if (amount > 0 && media.hofferbert.astralvigil.gear.GearManager.hasHalo(player)) {
+                amount = (int) Math.round(amount * (1.0 - AVServerConfig.HALO_GAZE_REDUCTION.get()));
+            }
             set(player, get(player) + amount);
         }
     }
@@ -105,27 +103,17 @@ public final class GazeManager {
         player.level().playSound(null, player.blockPosition(), SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.AMBIENT, 0.3f, 0.5f);
     }
 
-    /** An Eclipse Echo: a short-lived, named Vex (placeholder until the Eclipse creatures arrive in Phase 7/8). */
+    /** An Eclipse Echo that hunts the player for 30 seconds (night only; whispers by day). */
     static void echo(ServerLevel level, ServerPlayer player, RandomSource random) {
         if (!StarlightMath.isNight(Celestial.dayTime(level))) {
             whisper(player, random);
             return;
         }
-        //? if >=26.1 {
-        Vex vex = EntityType.VEX.create(level, EntitySpawnReason.EVENT);
-        //?} else {
-        /*Vex vex = EntityType.VEX.create(level);
-        *///?}
-        if (vex == null) {
-            return;
-        }
         BlockPos at = player.blockPosition().offset(random.nextInt(9) - 4, 2, random.nextInt(9) - 4);
-        vex.setPos(at.getX() + 0.5, at.getY(), at.getZ() + 0.5);
-        vex.setCustomName(Component.translatable("entity.astralvigil.eclipse_echo"));
-        vex.setLimitedLife(20 * 30);
-        vex.setTarget(player);
-        level.addFreshEntity(vex);
-        level.sendParticles(ParticleTypes.REVERSE_PORTAL, at.getX() + 0.5, at.getY(), at.getZ() + 0.5, 40, 0.5, 0.8, 0.5, 0.05);
+        EclipseEcho echo = EclipseEcho.spawn(level, net.minecraft.world.phys.Vec3.atBottomCenterOf(at), 20 * 30);
+        if (echo != null) {
+            echo.setTarget(player);
+        }
     }
 
     static void crystallize(ServerLevel level, ServerPlayer player, RandomSource random) {

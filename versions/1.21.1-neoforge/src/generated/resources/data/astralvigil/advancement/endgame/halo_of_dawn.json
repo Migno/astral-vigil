@@ -1,0 +1,34 @@
+{
+  "parent": "astralvigil:endgame/eclipse_defeated",
+  "criteria": {
+    "has_halo": {
+      "conditions": {
+        "items": [
+          {
+            "items": "astralvigil:halo_of_dawn"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.astralvigil.halo_of_dawn.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "astralvigil:halo_of_dawn"
+    },
+    "title": {
+      "translate": "advancements.astralvigil.halo_of_dawn.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_halo"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

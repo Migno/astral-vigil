@@ -93,6 +93,29 @@ public class AVAdvancements implements AdvancementSubProvider {
                     .addCriterion("trial", CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
                     .save(out, "astralvigil:firmament/trial_" + w.id());
         }
+        AdvancementHolder umbral = Advancement.Builder.advancement()
+                .parent(ascend)
+                .display(AVItems.UMBRAL_SIGIL.get(), title("umbral_sigil"), description("umbral_sigil"), null, AdvancementType.GOAL, true, true, false)
+                .addCriterion("has_sigil", InventoryChangeTrigger.TriggerInstance.hasItems(AVItems.UMBRAL_SIGIL.get()))
+                .save(out, "astralvigil:endgame/umbral_sigil");
+        AdvancementHolder defeated = Advancement.Builder.advancement()
+                .parent(umbral)
+                .display(AVItems.ECLIPSE_HEART.get(), title("eclipse_defeated"), description("eclipse_defeated"), null,
+                        AdvancementType.CHALLENGE, true, true, false)
+                .addCriterion("defeated", CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
+                .save(out, "astralvigil:endgame/eclipse_defeated");
+        Advancement.Builder.advancement()
+                .parent(defeated)
+                .display(AVItems.HALO_OF_DAWN.get(), title("halo_of_dawn"), description("halo_of_dawn"), null,
+                        AdvancementType.CHALLENGE, true, true, false)
+                .addCriterion("has_halo", InventoryChangeTrigger.TriggerInstance.hasItems(AVItems.HALO_OF_DAWN.get()))
+                .save(out, "astralvigil:endgame/halo_of_dawn");
+        Advancement.Builder.advancement()
+                .parent(defeated)
+                .display(AVItems.SERAPH_FEATHER.get(), title("seraph_wings"), description("seraph_wings"), null,
+                        AdvancementType.TASK, true, true, false)
+                .addCriterion("has_feather", InventoryChangeTrigger.TriggerInstance.hasItems(AVItems.SERAPH_FEATHER.get()))
+                .save(out, "astralvigil:endgame/seraph_wings");
         ItemLike[] icons = {Items.SUNFLOWER, Items.SNOW_BLOCK, Items.AMETHYST_CLUSTER, Items.CRYING_OBSIDIAN};
         for (Alignment a : Alignment.values()) {
             research(out, firstScan, "attuned_" + a.id(), icons[a.ordinal()], AdvancementType.GOAL);

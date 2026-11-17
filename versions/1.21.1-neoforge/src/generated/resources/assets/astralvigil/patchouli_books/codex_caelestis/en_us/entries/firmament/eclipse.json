@@ -1,0 +1,22 @@
+{
+  "category": "astralvigil:firmament",
+  "icon": "astralvigil:umbral_sigil",
+  "name": "The Eclipse",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:umbral_sigil",
+      "text": "Forged at the Convergence Altar from a Void Shard, an Astral Core, Void Crystals, obsidian and an echo shard with 3000 Stella light. Use it in the Firmament while carrying all four Marks to call down the Eclipse."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The fallen fifth Watcher fights in three phases. $(l)First$(): sweeping blows and the Void Lance – when it raises its arms, step sideways. $(l)Second$(): it splinters into Eclipse Echoes. $(l)Third$(): it blinks beside you and gathers an Umbral Nova; break its line of sight behind solid blocks."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "astralvigil:halo_of_dawn",
+      "text": "From the Eclipse Heart, Sunsteel, Moonsilver, Starmetal and Seraph Feathers: the Halo of Dawn. Carried, it lowers the starlight cost of abilities and lets the Eclipse's gaze slide off you. Seraph Feathers alone bind Seraph Wings to you."
+    }
+  ],
+  "sortnum": 2
+}

@@ -55,6 +55,20 @@ public final class AVAttachments {
                             net.minecraft.network.codec.ByteBufCodecs.VAR_INT).map(java.util.Map::copyOf, java.util.HashMap::new))
                     .build());
 
+    /** Seraph Wings cosmetic: 0 unbound, 1 hidden, 2 shown. Survives death; synced to every client (it is visible). */
+    public static final Supplier<AttachmentType<Integer>> WINGS = ATTACHMENTS.register(
+            "wings",
+            () -> AttachmentType.builder(() -> 0)
+                    //? if >=26.1 {
+                    .serialize(com.mojang.serialization.Codec.INT.fieldOf("wings"))
+                    //?} else {
+                    /*.serialize(com.mojang.serialization.Codec.INT)
+                    *///?}
+                    .copyOnDeath()
+                    .sync((holder, to) -> to.connection != null && to.connection.hasChannel(SyncAttachmentsPayload.TYPE),
+                            net.minecraft.network.codec.ByteBufCodecs.VAR_INT)
+                    .build());
+
     private AVAttachments() {}
 
     /** Only the owner needs their research; skip players without a negotiated channel (GameTest mock players). */

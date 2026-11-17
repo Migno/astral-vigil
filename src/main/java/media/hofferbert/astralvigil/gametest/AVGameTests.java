@@ -54,6 +54,10 @@ public final class AVGameTests {
             new Def("mod_loaded", PLATFORM, 40, false, AVGameTests::modLoaded),
             new Def("firmament_templates", PLATFORM, 40, false, AVGameTests::firmamentTemplates),
             new Def("trial_grants_mark_and_favour", PLATFORM, 40, false, AVGameTests::trialGrantsMarkAndFavour),
+            new Def("eclipse_phase_transition", PLATFORM, 60, true, AVGameTests::eclipsePhaseTransition),
+            new Def("eclipse_drops_heart", PLATFORM, 40, true, AVGameTests::eclipseDropsHeart),
+            new Def("echo_expires", PLATFORM, 60, true, AVGameTests::echoExpires),
+            new Def("eclipse_awards_advancement", PLATFORM, 40, false, AVGameTests::eclipseAwardsAdvancement),
             new Def("fallen_star_drops_shards", PLATFORM, 40, false, AVGameTests::fallenStarDropsShards),
             new Def("no_starlight_under_roof", PLATFORM, 40, false, AVGameTests::noStarlightUnderRoof),
             new Def("starfall_crater", CRATER_FIELD, 40, true, AVGameTests::starfallCrater),
@@ -159,6 +163,51 @@ public final class AVGameTests {
         GT.check(helper, media.hofferbert.astralvigil.firmament.TrialManager.favour(player, w.rival()) == -15, "rival favour");
         GT.check(helper, media.hofferbert.astralvigil.firmament.TrialManager.activeTrial(player).isEmpty(), "trial not cleared");
         helper.succeed();
+    }
+
+    private static media.hofferbert.astralvigil.eclipse.EclipseEntity eclipse(GameTestHelper helper) {
+        var e = media.hofferbert.astralvigil.eclipse.EclipseEntity.summon(helper.getLevel(),
+                net.minecraft.world.phys.Vec3.atBottomCenterOf(helper.absolutePos(GT.pos(4, 6, 4))));
+        GT.check(helper, e != null, "eclipse not summoned");
+        return e;
+    }
+
+    static void eclipsePhaseTransition(GameTestHelper helper) {
+        var e = eclipse(helper);
+        GT.check(helper, e.phase() == 1, "starts in phase " + e.phase());
+        helper.runAfterDelay(5, () -> e.setHealth(e.getMaxHealth() * 0.5f));
+        helper.succeedWhen(() -> GT.check(helper, e.phase() == 2 && e.inTransition() && e.isInvulnerable(),
+                "phase " + e.phase() + " transition " + e.inTransition()));
+    }
+
+    static void eclipseDropsHeart(GameTestHelper helper) {
+        var e = eclipse(helper);
+        e.kill(
+                //? if >=26.1 {
+                helper.getLevel()
+                //?}
+        );
+        helper.succeedWhen(() -> GT.check(helper, !helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+                        e.getBoundingBox().inflate(8), i -> i.getItem().is(AVItems.ECLIPSE_HEART.get())).isEmpty(),
+                "no Eclipse Heart dropped"));
+    }
+
+    static void eclipseAwardsAdvancement(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        media.hofferbert.astralvigil.firmament.TrialManager.award(player, "endgame/eclipse_defeated");
+        var adv = helper.getLevel().getServer().getAdvancements().get(AstralVigil.id("endgame/eclipse_defeated"));
+        GT.check(helper, adv != null && player.getAdvancements().getOrStartProgress(adv).isDone(), "advancement not granted");
+        helper.succeed();
+    }
+
+    static void echoExpires(GameTestHelper helper) {
+        var echo = media.hofferbert.astralvigil.eclipse.EclipseEcho.spawn(helper.getLevel(),
+                net.minecraft.world.phys.Vec3.atBottomCenterOf(helper.absolutePos(GT.pos(4, 5, 4))), 20);
+        GT.check(helper, echo != null, "echo not spawned");
+        helper.runAfterDelay(40, () -> {
+            GT.check(helper, echo.isRemoved(), "echo still alive");
+            helper.succeed();
+        });
     }
 
     static void sigilSockets(GameTestHelper helper) {

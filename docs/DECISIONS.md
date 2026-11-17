@@ -157,6 +157,28 @@ Format: date · decision · reason. Decisions that are hard to reverse are marke
 - **Seraph wing cosmetic moved to Phase 8:** it needs a GeckoLib player render layer, which Phase 8 builds anyway for
   the Eclipse; doing it once keeps the version-specific layer code in one place.
 
+## 2026-11-17 – Phase 8
+
+- **Eclipse phases are derived from health** (> ⅔, > ⅓, rest) – nothing to persist, survives reloads; each phase
+  change is a 2.5 s invulnerable transition with a short shockwave.
+- **Readable attacks over raw stats:** telegraphed Void Lance (wind-up, dodge sideways), Echo waves (max 6 alive),
+  Umbral Nova that cover blocks. Damage values are config options.
+- **Summoning:** Umbral Sigil (Convergence Altar), only in the Firmament, only with all four Marks, never on Peaceful
+  (the sigil would be wasted). Marks are kept, so the fight is repeatable for more feathers / hearts.
+- **Boss loot in code** (Eclipse Heart + 3–5 Seraph Feathers, counts in config), like the Wither's Nether Star; the
+  kill advancement is granted to every player within 48 blocks so groups all get credit.
+- **Low gravity + knockback threw players off the islands**, so the sky beneath the hub now catches you: falling more
+  than 24 blocks below the landing within 160 blocks of it returns you to the landing with Slow Falling. Islands
+  further out stay explorable; knockback values were reduced too.
+- **Seraph Wings are a vanilla model layer, not GeckoLib.** The rig was authored in Blockbench and converted to a
+  `LayerDefinition`; a vanilla layer works with every player renderer, skin-layer mod and shader pack, and needs no
+  GeckoLib player hacks. Toggle via Seraph Feather (binding consumes one), state is a player attachment synced to all
+  tracking clients.
+- **Eclipse Echoes** replace the Phase 6 Vex placeholder (GeckoLib, 30 s life when summoned by Gaze).
+- **Halo of Dawn** is utility, not damage: −25 % ability cost, −50 % Gaze gain while carried (config).
+- No spawn eggs: 26.1 spawn eggs need the entity type at item registration time (registered after items) and their
+  own textures; `/summon` covers testing.
+
 ## Open (owner)
 
 - **License.** Placeholder "All Rights Reserved" until decided. Proposal: code under **MIT** (best

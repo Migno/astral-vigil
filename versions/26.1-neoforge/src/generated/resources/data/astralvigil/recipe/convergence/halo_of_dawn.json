@@ -1,0 +1,18 @@
+{
+  "type": "astralvigil:convergence",
+  "alignment": "sol",
+  "center": "astralvigil:eclipse_heart",
+  "ingredients": [
+    "#c:ingots/sunsteel",
+    "#c:ingots/sunsteel",
+    "#c:ingots/moonsilver",
+    "#c:ingots/starmetal",
+    "astralvigil:seraph_feather",
+    "astralvigil:seraph_feather"
+  ],
+  "result": {
+    "id": "astralvigil:halo_of_dawn"
+  },
+  "starlight": 5000,
+  "time": 600
+}

@@ -305,6 +305,16 @@ public final class CodexContent {
                     new Text(
                             "Four bridges lead from the landing to the four sanctums. Speak to a Watcher to begin its trial: Solenne's climb (east), Vael's hunt (west), Orrin's forge of light (south) and Ilyra's library (north).$(br2)Each completed trial grants that Watcher's $(l)Mark$() and its $(l)favour$() – but rival Watchers grow cooler: Solenne and Vael, Orrin and Ilyra.",
                             "Vier Brücken führen vom Landeplatz zu den vier Heiligtümern. Sprich mit einem Wächter, um seine Prüfung zu beginnen: Solennes Aufstieg (Osten), Vaels Jagd (Westen), Orrins Schmiede des Lichts (Süden) und Ilyras Bibliothek (Norden).$(br2)Jede bestandene Prüfung gewährt das $(l)Zeichen$() des Wächters und seine $(l)Gunst$() – doch rivalisierende Wächter kühlen ab: Solenne und Vael, Orrin und Ilyra."))),
+            new Entry("eclipse", "firmament", "The Eclipse", "Die Finsternis", "astralvigil:umbral_sigil", 2, null, List.of(
+                    new Spotlight("astralvigil:umbral_sigil",
+                            "Forged at the Convergence Altar from a Void Shard, an Astral Core, Void Crystals, obsidian and an echo shard with 3000 Stella light. Use it in the Firmament while carrying all four Marks to call down the Eclipse.",
+                            "Am Konvergenzaltar aus einem Leerensplitter, einem Astralkern, Leerenkristallen, Obsidian und einer Echoscherbe mit 3000 Stella-Licht geschmiedet. Benutze es im Firmament, während du alle vier Zeichen trägst, um die Finsternis herabzurufen."),
+                    new Text(
+                            "The fallen fifth Watcher fights in three phases. $(l)First$(): sweeping blows and the Void Lance – when it raises its arms, step sideways. $(l)Second$(): it splinters into Eclipse Echoes. $(l)Third$(): it blinks beside you and gathers an Umbral Nova; break its line of sight behind solid blocks.",
+                            "Der gefallene fünfte Wächter kämpft in drei Phasen. $(l)Erstens$(): weite Hiebe und die Leerenlanze – hebt sie die Arme, weiche seitlich aus. $(l)Zweitens$(): sie zersplittert in Echos der Finsternis. $(l)Drittens$(): sie springt neben dich und sammelt eine Umbrale Nova; unterbrich die Sichtlinie hinter festen Blöcken."),
+                    new Spotlight("astralvigil:halo_of_dawn",
+                            "From the Eclipse Heart, Sunsteel, Moonsilver, Starmetal and Seraph Feathers: the Halo of Dawn. Carried, it lowers the starlight cost of abilities and lets the Eclipse's gaze slide off you. Seraph Feathers alone bind Seraph Wings to you.",
+                            "Aus dem Herz der Finsternis, Sonnenstahl, Mondsilber, Sternenstahl und Seraphsfedern: der Heiligenschein der Morgenröte. Getragen senkt er die Sternenlichtkosten von Fähigkeiten und lässt den Blick der Finsternis an dir abgleiten. Seraphsfedern allein binden dir Seraphsflügel."))),
             // ---------------------------------------------------------------- constellations
             new Entry("constellations", "constellations", "Signs in the Sky", "Zeichen am Himmel", "astralvigil:star_chart", 0, null, List.of(
                     new Text(
