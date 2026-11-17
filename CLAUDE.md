@@ -79,9 +79,11 @@ Run dirs: `run/<target>/{client,server,gametest,data,compat}` (git-ignored).
   (never edit the generated Java). Access: only `CosmeticsManager.TEAM` (UUIDs in code; server admins can only disable via `[cosmetics] enabled`).
 - Normal (non-flat) test world: `-Pav.autojoin=true -Pav.worldtype=normal`.
 - Commits: Conventional Commits, no AI attribution lines.
-- **Versioning (owner rule): every push to `main` and every release bumps `mod.version` in `stonecutter.properties.toml`.**
-  Alpha scheme `0.0.N-alpha`: N+1 for each pushed change set; the matching `docs/CHANGELOG.md` section is titled with the
-  new version and date. Releases: tag `v<version>`, GitHub pre-release with both jars (`gh release create … --prerelease`).
+- **Versioning (owner rule): the version goes up once per release, not per push.** Between releases `main` carries the
+  upcoming version (`mod.version` in `stonecutter.properties.toml`, alpha scheme `0.0.N-alpha`) and `docs/CHANGELOG.md`
+  collects changes under `## [Unreleased]`. On release: rename that section to `## [<version>] - <date>`, write a
+  detailed changelog (what changed, why, upgrade notes, known issues), tag `v<version>`, publish a GitHub pre-release
+  with both jars and the changelog as notes, then raise `mod.version` to the next version.
 
 ## Art rules
 

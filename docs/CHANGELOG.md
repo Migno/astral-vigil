@@ -2,10 +2,10 @@
 
 All notable changes. Format based on [Keep a Changelog](https://keepachangelog.com/), versions follow SemVer.
 
-## [0.0.2-alpha] - 2026-11-17
+## [Unreleased]
 
 ### Project
-- Versioning rule: every push and release raises the version (`0.0.N-alpha`).
+- Versioning rule: the version goes up once per release; every release gets a detailed changelog.
 
 ## [0.0.1-alpha] - 2026-11-17
 
